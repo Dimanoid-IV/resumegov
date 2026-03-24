@@ -37,7 +37,7 @@ export default function StartPage() {
     setLoading(true);
     const supabase = createClient();
 
-    const productionUrl = 'https://resumegov.vercel.app';
+    const productionUrl = 'https://resumegov.com';
     const currentOrigin = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
       ? window.location.origin
       : productionUrl;
