@@ -25,6 +25,11 @@ type Analysis = {
   compliance_score: number | null;
   achievement_score: number | null;
   word_count: number | null;
+  word_count_original: number | null;
+  word_count_final: number | null;
+  coverage_original: number | null;
+  coverage_final: number | null;
+  risk_level: string | null;
   feedback_json: FeedbackJson | null;
   created_at: string;
 };
@@ -168,6 +173,7 @@ export default async function ResultsPage({
   const coScore = analysis.compliance_score ?? 0;   // stored 0-20
   const aeScore = analysis.achievement_score ?? 0;  // stored 0-10
   const wordCount = analysis.word_count ?? 0;
+  const riskLevel = (analysis.risk_level as 'Low' | 'Moderate' | 'High') ?? 'Moderate';
 
   const feedback = analysis.feedback_json ?? {};
   const missing: string[] = Array.isArray(feedback.missing_elements)
@@ -206,8 +212,8 @@ export default async function ResultsPage({
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
             <span className="inline-flex items-center gap-1.5 border border-slate-200 bg-white rounded px-2.5 py-1 text-xs font-mono text-slate-500">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              Free Analysis
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              Structured Rule-Based Evaluation
             </span>
             <span className="text-xs text-slate-400">
               {new Date(analysis.created_at).toLocaleDateString('en-US', {
@@ -279,6 +285,29 @@ export default async function ResultsPage({
               <p className="text-xs text-slate-400 mt-2">
                 Target: 950–1,050 words · Hard limit: 1,100
               </p>
+            </div>
+
+            {/* Risk Level */}
+            <div className="bg-white border border-slate-200 rounded-xl p-5">
+              <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
+                Risk Assessment
+              </h2>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-2xl font-bold text-slate-900">{riskLevel}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Overall risk level</p>
+                </div>
+                <div
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold ${
+                    riskLevel === 'Low' ? 'bg-green-50 text-green-700 border border-green-200' :
+                    riskLevel === 'Moderate' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
+                    'bg-red-50 text-red-700 border border-red-200'
+                  }`}
+                >
+                  {riskLevel === 'Low' ? '✓' : riskLevel === 'Moderate' ? '⚠' : '✕'}
+                  {riskLevel} Risk
+                </div>
+              </div>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { parseJobPosting } from '@/lib/ai/jobParser';
 import { analyzeResume } from '@/lib/ai/resumeAnalyzer';
+import { validatePreAI, validatePostAI } from '@/lib/ruleEngine';
 
 // ─── Regulatory constants ─────────────────────────────────────────────────────
 const FREE_LIMIT = 3;
@@ -154,6 +155,19 @@ export async function POST(request: NextRequest) {
 
     const storedJobPostId = (jobRecord as { id: string } | null)?.id ?? null;
 
+    // ── PRE-AI VALIDATION (Rule Engine) ───────────────────────────────────────
+    const preValidation = validatePreAI(safeResume, safeJob);
+    
+    if (!preValidation.valid) {
+      return NextResponse.json(
+        { 
+          error: 'Resume structure validation failed',
+          details: preValidation.errors,
+        },
+        { status: 422 }
+      );
+    }
+
     // ── Run analysis ──────────────────────────────────────────────────────────
     const analysisResult = await analyzeResume({
       resumeText: safeResume,
@@ -174,7 +188,15 @@ export async function POST(request: NextRequest) {
 
     const aiData = analysisResult.data;
 
-    // Weighted scoring formula
+    // ── POST-AI VALIDATION (Rule Engine) ─────────────────────────────────────
+    const postValidation = validatePostAI({
+      originalText: safeResume,
+      compressedText: safeResume, // Using original for free analysis
+      specializedExperienceStatements: parsedJob.specialized_experience || [],
+      extractedKeywords: parsedJob.keywords || [],
+    });
+
+    // Weighted scoring formula (deterministic)
     const keywordScore = Math.min(40, aiData.keyword_score * KW_WEIGHT);
     const specializedScore = Math.min(30, aiData.specialized_score * SE_WEIGHT);
     const complianceScore = Math.min(20, aiData.compliance_score * CO_WEIGHT);
@@ -199,9 +221,15 @@ export async function POST(request: NextRequest) {
         compliance_score: Math.round(complianceScore * 10) / 10,
         achievement_score: Math.round(achievementScore * 10) / 10,
         word_count: wordCount,
+        word_count_original: postValidation.wordCount.original,
+        word_count_final: postValidation.wordCount.final,
+        coverage_original: postValidation.coverage.percentage,
+        coverage_final: postValidation.coverage.percentage,
+        risk_level: postValidation.riskLevel,
         feedback_json: {
           missing_elements: aiData.feedback?.qualification_gaps || [],
           weak_bullets: aiData.feedback?.improvements || [],
+          rule_engine_warnings: postValidation.warnings,
         },
       })
       .select('id')

@@ -102,6 +102,11 @@ export interface Database {
           compliance_score: number | null;
           achievement_score: number | null;
           word_count: number | null;
+          word_count_original: number | null;
+          word_count_final: number | null;
+          coverage_original: number | null;
+          coverage_final: number | null;
+          risk_level: string | null;
           feedback_json: Json;
           created_at: string;
         };
@@ -116,6 +121,11 @@ export interface Database {
           compliance_score?: number | null;
           achievement_score?: number | null;
           word_count?: number | null;
+          word_count_original?: number | null;
+          word_count_final?: number | null;
+          coverage_original?: number | null;
+          coverage_final?: number | null;
+          risk_level?: string | null;
           feedback_json?: Json;
           created_at?: string;
         };
@@ -130,6 +140,11 @@ export interface Database {
           compliance_score?: number | null;
           achievement_score?: number | null;
           word_count?: number | null;
+          word_count_original?: number | null;
+          word_count_final?: number | null;
+          coverage_original?: number | null;
+          coverage_final?: number | null;
+          risk_level?: string | null;
           feedback_json?: Json;
           created_at?: string;
         };
