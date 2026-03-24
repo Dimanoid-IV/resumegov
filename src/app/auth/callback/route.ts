@@ -3,6 +3,8 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { Database } from '@/types/database';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /auth/callback
  * Exchanges a magic link / OAuth code for a Supabase session.
