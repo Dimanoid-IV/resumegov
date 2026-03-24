@@ -37,10 +37,15 @@ export default function StartPage() {
     setLoading(true);
     const supabase = createClient();
 
+    const productionUrl = 'https://resumegov.vercel.app';
+    const currentOrigin = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+      ? window.location.origin
+      : productionUrl;
+
     const { error } = await supabase.auth.signInWithOtp({
       email: trimmed,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/upload`,
+        emailRedirectTo: `${currentOrigin}/auth/callback?next=/upload`,
         shouldCreateUser: true,
       },
     });
