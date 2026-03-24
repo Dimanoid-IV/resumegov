@@ -93,7 +93,7 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="font-bold text-white tracking-tight text-lg">Resume<span className="text-blue-400">Gov</span></span>
-          <span className="hidden sm:inline-block px-1.5 py-0.5 bg-blue-900 text-blue-300 text-xs font-mono rounded">OPM 2025</span>
+          <span className="hidden sm:inline-block px-1.5 py-0.5 bg-blue-900 text-blue-300 text-xs font-mono rounded" aria-label="United States Federal Resume Compliance">🇺🇸</span>
         </Link>
         <div className="flex items-center gap-6">
           <Link href="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">Guides</Link>
