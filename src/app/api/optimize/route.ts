@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { compressResume, compressResumeIterative } from '@/lib/ai';
+import { event } from '@/lib/gtag';
 
 // Constants for federal resume compliance
 const TARGET_MIN = 950;
@@ -150,6 +151,14 @@ export async function POST(request: NextRequest) {
       final_word_count: result.data.final_word_count,
       qualification_coverage_percent: result.data.qualification_coverage_percent,
     };
+
+    // Track GA4 event
+    event({
+      eventName: 'optimization_run',
+      value: compressionPass,
+      optimization_passes: compressionPass,
+      word_count_reduction: initialWordCount - output.final_word_count,
+    });
 
     // Store optimization result if analysisId provided
     if (analysisId) {

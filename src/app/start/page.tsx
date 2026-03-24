@@ -34,6 +34,14 @@ export default function StartPage() {
       return;
     }
 
+    // Track GA4 event
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'resume_analysis_started', {
+        event_category: 'engagement',
+        non_interaction: false,
+      });
+    }
+
     setLoading(true);
     const supabase = createClient();
 
