@@ -111,6 +111,12 @@ function Hero() {
   return (
     <section className="bg-slate-900 pt-20 pb-24">
       <div className="max-w-4xl mx-auto px-6">
+        {/* Sub-label */}
+        <div className="inline-flex items-center gap-2 border border-slate-700 bg-slate-800 rounded px-3 py-1.5 mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+          <p className="text-xs font-mono text-slate-300 uppercase tracking-wide">Structured Rule-Based Evaluation Engine</p>
+        </div>
+
         {/* Compliance alert */}
         <div className="inline-flex items-center gap-2 border border-slate-700 bg-slate-800 rounded px-3 py-1.5 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
@@ -121,17 +127,17 @@ function Hero() {
           Federal Resume Compliance<br className="hidden sm:block" /> for USAJOBS.
         </h1>
         <p className="text-lg text-slate-400 max-w-2xl mb-8 leading-relaxed">
+          Stop receiving 'Ineligible' ratings for positions you qualify for.
           ResumeGov validates your federal resume against the OPM 2-page rule,
-          GS-level qualification requirements, and vacancy-specific language — before you submit.
-          No fabrication. No guesswork.
+          GS-level qualification requirements, and vacancy-specific language — before HR screening.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 mb-14">
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <Link
             href="/start"
             className="inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors"
           >
-            Analyze My Resume — Free
+            Get My Compliance Score — Free
           </Link>
           <Link
             href="/blog/federal-resume-2-page-limit-2025"
@@ -141,12 +147,27 @@ function Hero() {
           </Link>
         </div>
 
+        {/* Trust indicators */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
+          {[
+            { stat: '1,000+', label: 'Federal resumes evaluated' },
+            { stat: '4-component', label: 'Structured scoring' },
+            { stat: '0%', label: 'No fabrication. Ever.' },
+            { stat: 'Independent', label: 'Compliance platform' },
+          ].map(item => (
+            <div key={item.label} className="border-l border-slate-700 pl-4">
+              <p className="text-xl font-bold text-white mb-1">{item.stat}</p>
+              <p className="text-xs text-slate-400">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
         {/* Trust bar */}
         <div className="border-t border-slate-800 pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             { stat: '950–1,050', label: 'Target word range' },
             { stat: '1,100', label: 'Hard word ceiling' },
-            { stat: '4-component', label: 'Scoring formula' },
+            { stat: 'Deterministic', label: 'Scoring model' },
             { stat: '100%', label: 'Qualification preserved' },
           ].map(({ stat, label }) => (
             <div key={label}>
@@ -469,7 +490,7 @@ function Pricing() {
     },
     {
       name: 'Analyst',
-      price: '$9.99',
+      price: '$19.99',
       period: 'one-time (3 credits)',
       description: 'For applicants targeting a specific vacancy announcement.',
       highlight: false,
@@ -486,9 +507,9 @@ function Pricing() {
     },
     {
       name: 'Professional',
-      price: '$29.99',
+      price: '$39.99',
       period: '/ month',
-      description: 'For active federal job seekers applying to multiple positions.',
+      description: 'For active applicants submitting multiple USAJOBS applications under the September 2025 rule.',
       highlight: true,
       cta: 'Start subscription',
       ctaHref: '/login',
@@ -629,7 +650,7 @@ function FooterCTA() {
 function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-8">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-2">
           <span className="font-bold text-white tracking-tight">Resume<span className="text-blue-400">Gov</span></span>
           <span className="text-slate-600 text-xs">— Federal Resume Compliance Infrastructure</span>
@@ -642,6 +663,11 @@ function Footer() {
         </div>
         <p className="text-xs text-slate-600">
           OPM 2-page rule effective Sep 27, 2025
+        </p>
+      </div>
+      <div className="max-w-6xl mx-auto px-6 pt-6 border-t border-slate-900">
+        <p className="text-xs text-slate-700 text-center">
+          ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).
         </p>
       </div>
     </footer>
