@@ -45,7 +45,7 @@ export default function StartPage() {
     setLoading(true);
     const supabase = createClient();
 
-    const productionUrl = 'https://resumegov.com';
+    const productionUrl = 'https://www.resumegov.com';
     const currentOrigin = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
       ? window.location.origin
       : productionUrl;
