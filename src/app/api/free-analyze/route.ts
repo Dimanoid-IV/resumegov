@@ -29,13 +29,24 @@ function countWords(text: string): number {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Debug: Log environment status (without exposing secrets)
+    console.log('[free-analyze] Environment check:', {
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      hasOpenAIKey: !!process.env.OPENAI_API_KEY,
+    });
+
     // ── Auth ─────────────────────────────────────────────────────────────────
     const supabase = await createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
     if (authError || !user) {
+      console.error('[free-analyze] Auth error:', authError);
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    console.log('[free-analyze] User authenticated:', user.id);
 
     // ── Parse body ────────────────────────────────────────────────────────────
     let body: { resumeText?: string; jobText?: string };
@@ -148,9 +159,12 @@ export async function POST(request: NextRequest) {
     const safeJob = jobText.slice(0, 40_000).replace(/\0/g, '');
 
     // ── Parse job posting ─────────────────────────────────────────────────────
+    console.log('[free-analyze] Starting job parsing...');
     const parseResult = await parseJobPosting(safeJob);
+    console.log('[free-analyze] Job parsing result:', { success: parseResult.success, error: parseResult.error });
 
     if (!parseResult.success || !parseResult.data) {
+      console.error('[free-analyze] Job parsing failed:', parseResult.error);
       return NextResponse.json(
         { error: 'Failed to parse vacancy announcement. Verify the job text is a complete USAJOBS posting.' },
         { status: 422 }
@@ -158,14 +172,22 @@ export async function POST(request: NextRequest) {
     }
 
     const parsedJob = parseResult.data;
+    console.log('[free-analyze] Job parsed successfully, gs_level:', parsedJob.gs_level);
 
     // ── Store resume ──────────────────────────────────────────────────────────
+    console.log('[free-analyze] Storing resume...');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: resumeRecord } = await (supabase as any)
+    const { data: resumeRecord, error: resumeError } = await (supabase as any)
       .from('resumes')
       .insert({ user_id: user.id, original_text: safeResume })
       .select('id')
       .single();
+    
+    if (resumeError) {
+      console.error('[free-analyze] Resume insert error:', resumeError);
+      return NextResponse.json({ error: 'Failed to save resume' }, { status: 500 });
+    }
+    console.log('[free-analyze] Resume stored:', resumeRecord?.id);
 
     const storedResumeId = (resumeRecord as { id: string } | null)?.id ?? null;
 
