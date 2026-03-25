@@ -54,7 +54,6 @@ export default function StartPage() {
       email: trimmed,
       options: {
         emailRedirectTo: `${currentOrigin}/auth/callback?next=/upload`,
-        shouldCreateUser: true,
       },
     });
 
