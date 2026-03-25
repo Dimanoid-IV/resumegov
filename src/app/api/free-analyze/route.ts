@@ -72,17 +72,46 @@ export async function POST(request: NextRequest) {
     }
 
     // ── Fetch user profile (rate limit + free count check) ────────────────────
-    const { data: profileData } = await supabase
+    let profile: {
+      free_analysis_count: number;
+      last_free_analysis_at: string | null;
+      plan_type: string;
+    } | null = null;
+
+    const { data: profileData, error: profileError } = await supabase
       .from('users')
       .select('free_analysis_count, last_free_analysis_at, plan_type')
       .eq('id', user.id)
       .single();
 
-    const profile = profileData as {
-      free_analysis_count: number;
-      last_free_analysis_at: string | null;
-      plan_type: string;
-    } | null;
+    // If profile doesn't exist, create it
+    if (profileError || !profileData) {
+      // Create user profile with defaults
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: newProfile, error: createError } = await (supabase as any)
+        .from('users')
+        .insert({
+          id: user.id,
+          email: user.email,
+          plan_type: 'free',
+          free_analysis_count: 0,
+          credits_remaining: 3,
+        })
+        .select('free_analysis_count, last_free_analysis_at, plan_type')
+        .single();
+      
+      if (createError || !newProfile) {
+        console.error('Failed to create user profile:', createError);
+        return NextResponse.json(
+          { error: 'Failed to initialize user profile' },
+          { status: 500 }
+        );
+      }
+      
+      profile = newProfile;
+    } else {
+      profile = profileData;
+    }
 
     const freeCount = profile?.free_analysis_count ?? 0;
     const planType = profile?.plan_type ?? 'free';
