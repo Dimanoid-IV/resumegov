@@ -5,6 +5,15 @@ import { parseJobPosting } from '@/lib/ai/jobParser';
 import { analyzeResume } from '@/lib/ai/resumeAnalyzer';
 import { validatePreAI, validatePostAI } from '@/lib/ruleEngine';
 
+// ─── Debug: Log environment on import ──────────────────────────────────────────
+console.log('[free-analyze] Module loaded, env vars:', {
+  nodeEnv: process.env.NODE_ENV,
+  hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+  hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+  openAIKeyStarts: process.env.OPENAI_API_KEY?.slice(0, 10) ?? 'NOT FOUND',
+});
+
 // ─── Regulatory constants ─────────────────────────────────────────────────────
 const FREE_LIMIT = 3;
 const RATE_LIMIT_SECONDS = 30;        // Min seconds between analyses
@@ -318,7 +327,19 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Free analyze error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    // Comprehensive error logging
+    console.error('[free-analyze] FATAL ERROR:', error);
+    console.error('[free-analyze] Error type:', typeof error);
+    console.error('[free-analyze] Error message:', error instanceof Error ? error.message : String(error));
+    console.error('[free-analyze] Error stack:', error instanceof Error ? error.stack : 'No stack');
+    
+    return NextResponse.json(
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      }, 
+      { status: 500 }
+    );
   }
 }
