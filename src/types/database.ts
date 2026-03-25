@@ -178,6 +178,38 @@ export interface Database {
           created_at?: string;
         };
       };
+      ai_usage_logs: {
+        Row: {
+          id: string;
+          user_id: string;
+          model: string;
+          tokens_used: number | null;
+          latency_ms: number | null;
+          success: boolean;
+          error_message: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          model: string;
+          tokens_used?: number | null;
+          latency_ms?: number | null;
+          success: boolean;
+          error_message?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          model?: string;
+          tokens_used?: number | null;
+          latency_ms?: number | null;
+          success?: boolean;
+          error_message?: string | null;
+          created_at?: string;
+        };
+      };
       payments: {
         Row: {
           id: string;
