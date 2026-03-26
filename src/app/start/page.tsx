@@ -8,6 +8,10 @@ type Stage = 'input' | 'sent' | 'error';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function isValidEmail(value: string): boolean {
+  return EMAIL_RE.test(value.trim().toLowerCase());
+}
+
 export default function StartPage() {
   const [email, setEmail] = useState('');
   const [stage, setStage] = useState<Stage>('input');
@@ -29,7 +33,7 @@ export default function StartPage() {
     setErrorMsg('');
 
     const trimmed = email.trim().toLowerCase();
-    if (!EMAIL_RE.test(trimmed)) {
+    if (!isValidEmail(trimmed)) {
       setErrorMsg('Enter a valid email address.');
       return;
     }
@@ -146,9 +150,12 @@ export default function StartPage() {
                     </label>
                     <input
                       id="email"
-                      type="email"
+                      type="text"
+                      inputMode="email"
                       autoComplete="email"
-                      required
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       placeholder="you@agency.gov"
