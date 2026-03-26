@@ -3,6 +3,10 @@ export const dynamic = 'force-dynamic';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Database } from '@/types/database';
+import ProUpgradeCard from '@/components/ProUpgradeCard';
+import SuccessBanner from '@/components/SuccessBanner';
+import ImproveResume from '@/components/ImproveResume';
+import AnalysisCard from '@/components/AnalysisCard';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 type ResumeRow = Database['public']['Tables']['resumes']['Row'];
@@ -11,9 +15,15 @@ type AnalysisRow = Database['public']['Tables']['analyses']['Row'];
 type OptimizationRow = Database['public']['Tables']['optimizations']['Row'];
 type PaymentRow = Database['public']['Tables']['payments']['Row'];
 
-export default async function DashboardPage() {
+interface DashboardPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const supabase = await createClient();
-  
+  const params = await searchParams;
+  const upgraded = params.upgraded === 'true';
+
   const { data: { user } } = await supabase.auth.getUser();
   
   if (!user) {
@@ -87,11 +97,29 @@ export default async function DashboardPage() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
       
+      {upgraded && <SuccessBanner show={upgraded} />}
+      
       {/* Credits & Plan */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-lg font-semibold text-gray-600">Plan</h2>
-          <p className="text-2xl font-bold capitalize">{userProfile?.plan_type || 'free'}</p>
+          <div className="flex items-center justify-between mt-2">
+            <p className="text-2xl font-bold capitalize">
+              {userProfile?.plan_type || 'free'}
+            </p>
+            {userProfile?.plan_type === 'free' ? (
+              <a
+                href="/api/checkout?plan=analyst"
+                className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Перейти на Pro →
+              </a>
+            ) : userProfile?.plan_type === 'pro' || userProfile?.plan_type === 'basic' ? (
+              <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">
+                PRO Active
+              </span>
+            ) : null}
+          </div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-lg font-semibold text-gray-600">Credits Balance</h2>
@@ -111,11 +139,25 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      {/* Pro Upgrade Card */}
+      <div className="mb-8">
+        <ProUpgradeCard 
+          currentPlan={userProfile?.plan_type || 'free'} 
+          wordCount={currentWordCount}
+        />
+      </div>
+
+      {/* Improve Resume Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <ImproveResume 
+          currentPlan={userProfile?.plan_type || 'free'}
+          wordCount={currentWordCount}
+          creditsRemaining={userProfile?.credits_remaining}
+        />
+
         {/* Word Count Stats */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Word Count History</h2>
+          <h2 className="text-xl font-semibold mb-4">Word Count Stats</h2>
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Current Resume</span>
@@ -137,9 +179,31 @@ export default async function DashboardPage() {
               ) : currentWordCount <= 1100 ? (
                 <span className="text-yellow-600">⚠ Borderline - consider optimization</span>
               ) : (
-                <span className="text-red-600">❌ Exceeds limit - run optimization</span>
+                <span className="text-red-600">❌ Превышен лимит — выполните оптимизацию</span>
               )}
             </div>
+            
+            {/* CTA Button for Free Users */}
+            {currentWordCount > 1050 && (!userProfile?.plan_type || userProfile.plan_type === 'free') && (
+              <div className="mt-4 space-y-3">
+                <button
+                  onClick={() => window.location.href = '/api/checkout?plan=analyst'}
+                  className="w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm"
+                >
+                  Оптимизировать резюме до 2 страниц — $19
+                </button>
+                
+                <div className="text-xs text-slate-600 space-y-1">
+                  <p className="font-medium">Оптимизация включает:</p>
+                  <ul className="list-disc list-inside space-y-1 ml-1">
+                    <li>Двухпроходную AI-компрессию</li>
+                    <li>Сохранение квалификационного языка</li>
+                    <li>Проверку соответствия требованиям OPM</li>
+                    <li>Финальный compliance score</li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -167,7 +231,7 @@ export default async function DashboardPage() {
 
       {/* Optimization History */}
       <div className="grid grid-cols-1 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-white p-6 rounded-lg shadow relative">
           <h2 className="text-xl font-semibold mb-4">Optimization History</h2>
           {allOptimizations.length > 0 ? (
             <div className="overflow-x-auto">
@@ -201,7 +265,25 @@ export default async function DashboardPage() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-500">No optimizations yet. Upgrade to Pro to optimize your resume.</p>
+            <p className="text-gray-500">No optimizations yet.</p>
+          )}
+          
+          {/* Overlay for free users */}
+          {(!userProfile?.plan_type || userProfile.plan_type === 'free') && (
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center rounded-lg">
+              <div className="text-center p-6">
+                <svg className="w-12 h-12 text-slate-400 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                </svg>
+                <p className="text-slate-700 font-medium mb-2">Доступно в версии Pro</p>
+                <a
+                  href="/api/checkout?plan=analyst"
+                  className="inline-block bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors"
+                >
+                  Перейти на Pro
+                </a>
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -213,40 +295,12 @@ export default async function DashboardPage() {
           {analyses.length > 0 ? (
             <ul className="space-y-2">
               {analyses.slice(0, 5).map((analysis) => (
-                <li key={analysis.id} className="bg-white p-4 rounded-lg shadow">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-sm text-gray-500">
-                        {new Date(analysis.created_at).toLocaleDateString()}
-                      </p>
-                      <p className="text-xs text-gray-400">{analysis.word_count} words</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">
-                        {analysis.compatibility_score}%
-                      </p>
-                      <p className="text-xs text-gray-500">match</p>
-                    </div>
-                  </div>
-                  <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
-                    <div className="text-center">
-                      <p className="font-medium">{analysis.keyword_score}</p>
-                      <p className="text-gray-500">Keyword</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-medium">{analysis.specialized_score}</p>
-                      <p className="text-gray-500">Specialized</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-medium">{analysis.compliance_score}</p>
-                      <p className="text-gray-500">Compliance</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-medium">{analysis.achievement_score}</p>
-                      <p className="text-gray-500">Achievement</p>
-                    </div>
-                  </div>
-                </li>
+                <AnalysisCard
+                  key={analysis.id}
+                  analysis={analysis}
+                  userPlan={userProfile?.plan_type || 'free'}
+                  creditsRemaining={userProfile?.credits_remaining}
+                />
               ))}
             </ul>
           ) : (
@@ -260,12 +314,30 @@ export default async function DashboardPage() {
             <ul className="space-y-2">
               {resumes.slice(0, 5).map((resume) => (
                 <li key={resume.id} className="bg-white p-4 rounded-lg shadow">
-                  <p className="text-sm text-gray-500">
-                    Created: {new Date(resume.created_at).toLocaleDateString()}
-                  </p>
-                  <p className="text-xs text-gray-400">
-                    {resume.original_text?.trim().split(/\s+/).filter(w => w.length > 0).length || 0} words
-                  </p>
+                  <div className="flex justify-between items-center mb-3">
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Created: {new Date(resume.created_at).toLocaleDateString()}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        {resume.original_text?.trim().split(/\s+/).filter(w => w.length > 0).length || 0} words
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => window.location.href = `/upload?resumeId=${resume.id}`}
+                      className="flex-1 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                    >
+                      View
+                    </button>
+                    <button
+                      onClick={() => window.location.href = `/upload?resumeId=${resume.id}`}
+                      className="flex-1 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-800 transition-colors"
+                    >
+                      Analyze
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

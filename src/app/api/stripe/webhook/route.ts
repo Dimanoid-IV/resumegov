@@ -40,8 +40,7 @@ export async function POST(request: NextRequest) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
         const userId = session.metadata?.userId;
-        const credits = parseInt(session.metadata?.credits || '1', 10);
-        const planId = session.metadata?.planId || 'single';
+        const plan = session.metadata?.plan || 'analyst';
         
         if (userId) {
           // Record payment
@@ -53,37 +52,29 @@ export async function POST(request: NextRequest) {
             status: 'completed',
           });
 
-          // Determine new credits and plan type
-          let newCredits: number;
-          let newPlanType: 'free' | 'basic' | 'pro' | 'enterprise' = 'free';
+          // Update user plan and credits based on purchased tier
+          let newPlanType: 'free' | 'basic' | 'pro' | 'enterprise' = 'basic';
+          let newCredits: number = 1; // Default for analyst
 
-          if (planId === 'subscription') {
-            newCredits = -1; // Unlimited
+          if (plan === 'professional') {
             newPlanType = 'pro';
-          } else {
-            // Get current credits
-            const { data: userData } = await supabase
-              .from('users')
-              .select('credits_remaining')
-              .eq('id', userId)
-              .single();
-            
-            const currentCredits = userData ? (userData as { credits_remaining?: number }).credits_remaining || 0 : 0;
-            newCredits = planId === 'pack3' ? currentCredits + 3 : currentCredits + 1;
+            newCredits = -1; // Unlimited for professional
+          } else if (plan === 'analyst') {
             newPlanType = 'basic';
+            newCredits = 1; // 1 credit for analyst
           }
 
-          // Update user credits and plan
+          // Update user plan and credits
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           await (supabase as any)
             .from('users')
             .update({
-              credits_remaining: newCredits,
               plan_type: newPlanType,
+              credits_remaining: newCredits,
             })
             .eq('id', userId);
 
-          console.log(`Checkout completed for user ${userId}: +${credits} credits, plan: ${newPlanType}`);
+          console.log(`Checkout completed for user ${userId}: plan ${plan}, new type: ${newPlanType}, credits: ${newCredits}`);
         }
         break;
       }

@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { Database } from '@/types/database';
 import { compressResume, compressResumeIterative } from '@/lib/ai';
 import { event } from '@/lib/gtag';
+
+type UserRow = Database['public']['Tables']['users']['Row'];
 
 // Constants for federal resume compliance
 const TARGET_MIN = 950;
@@ -28,6 +31,32 @@ export async function POST(request: NextRequest) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Check user credits and plan
+    const { data: userProfileData, error: userError } = await supabase
+      .from('users')
+      .select('plan_type, credits_remaining')
+      .eq('id', user.id)
+      .single();
+
+    if (userError || !userProfileData) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    const userProfile = userProfileData as Pick<UserRow, 'plan_type' | 'credits_remaining'>;
+    const userPlan = userProfile.plan_type;
+    const creditsRemaining = userProfile.credits_remaining;
+
+    // Check if user has access
+    const isPro = userPlan === 'pro' || userPlan === 'basic' || userPlan === 'enterprise';
+    const hasCredits = creditsRemaining === -1 || (creditsRemaining !== undefined && creditsRemaining > 0);
+
+    if (!isPro || !hasCredits) {
+      return NextResponse.json(
+        { error: 'No credits remaining. Please upgrade your plan.' },
+        { status: 403 }
+      );
     }
 
     const body = await request.json();
@@ -172,6 +201,17 @@ export async function POST(request: NextRequest) {
           final_word_count: output.final_word_count,
           ksa_text: '', // KSA generation is separate endpoint
         });
+    }
+
+    // Decrement credits if not unlimited
+    if (creditsRemaining > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase as any)
+        .from('users')
+        .update({
+          credits_remaining: creditsRemaining - 1,
+        })
+        .eq('id', user.id);
     }
 
     return NextResponse.json({
