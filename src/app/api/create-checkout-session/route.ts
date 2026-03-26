@@ -5,8 +5,7 @@ import { getStripe } from '@/lib/stripe';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
-const ANALYST_PRICE_ID = process.env.STRIPE_PRICE_ANALYST || 'price_analyst';
-const PROFESSIONAL_PRICE_ID = process.env.STRIPE_PRICE_PROFESSIONAL || 'price_professional';
+// Price IDs resolved per-request to ensure env vars are available in serverless context
 
 /**
  * POST /api/create-checkout-session
@@ -15,6 +14,16 @@ const PROFESSIONAL_PRICE_ID = process.env.STRIPE_PRICE_PROFESSIONAL || 'price_pr
  */
 export async function POST(request: NextRequest) {
   try {
+    // Resolve env vars inside handler to ensure availability in serverless context
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
+    const analystPriceId = process.env.STRIPE_PRICE_ANALYST;
+    const professionalPriceId = process.env.STRIPE_PRICE_PROFESSIONAL;
+
+    if (!stripeKey) {
+      console.error('Missing STRIPE_SECRET_KEY');
+      return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
+    }
+
     const supabase = await createClient();
     
     // Verify authentication
@@ -32,11 +41,18 @@ export async function POST(request: NextRequest) {
     let planType: string;
     
     if (plan === 'professional') {
-      priceId = PROFESSIONAL_PRICE_ID;
+      if (!professionalPriceId) {
+        console.error('Missing STRIPE_PRICE_PROFESSIONAL');
+        return NextResponse.json({ error: 'Professional plan not configured' }, { status: 500 });
+      }
+      priceId = professionalPriceId;
       planType = 'professional';
     } else {
-      // Default to analyst
-      priceId = ANALYST_PRICE_ID;
+      if (!analystPriceId) {
+        console.error('Missing STRIPE_PRICE_ANALYST');
+        return NextResponse.json({ error: 'Analyst plan not configured' }, { status: 500 });
+      }
+      priceId = analystPriceId;
       planType = 'analyst';
     }
 
@@ -102,9 +118,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: session.url }, { status: 200 });
   } catch (error) {
-    console.error('Stripe checkout error:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('Stripe checkout error:', message, error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', detail: message },
       { status: 500 }
     );
   }
