@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import SiteNav from '@/components/SiteNav';
+import SiteFooter from '@/components/SiteFooter';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://resumegov.app';
 
@@ -86,24 +88,10 @@ function FAQSchema() {
 }
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
+// Shared component — see src/components/SiteNav.tsx
 
-function Nav() {
-  return (
-    <nav className="bg-slate-900 border-b border-slate-800">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-white tracking-tight text-lg">Resume<span className="text-blue-400">Gov</span></span>
-          <span className="hidden sm:inline-block px-1.5 py-0.5 bg-blue-900 text-blue-300 text-xs font-mono rounded" aria-label="United States Federal Resume Compliance">🇺🇸</span>
-        </Link>
-        <div className="flex items-center gap-6">
-          <Link href="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">Guides</Link>
-          <Link href="#pricing" className="text-sm text-slate-400 hover:text-white transition-colors">Pricing</Link>
-          <Link href="/login" className="text-sm px-4 py-1.5 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors">Sign in</Link>
-        </div>
-      </div>
-    </nav>
-  );
-}
+// ─── Footer ───────────────────────────────────────────────────────────────────
+// Shared component — see src/components/SiteFooter.tsx
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
@@ -646,33 +634,7 @@ function FooterCTA() {
 }
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
-
-function Footer() {
-  return (
-    <footer className="bg-slate-950 border-t border-slate-800 py-8">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-white tracking-tight">Resume<span className="text-blue-400">Gov</span></span>
-          <span className="text-slate-600 text-xs">— Federal Resume Compliance Infrastructure</span>
-        </div>
-        <div className="flex items-center gap-6 text-xs text-slate-500">
-          <Link href="/blog" className="hover:text-slate-300 transition-colors">Guides</Link>
-          <Link href="#pricing" className="hover:text-slate-300 transition-colors">Pricing</Link>
-          <Link href="/login" className="hover:text-slate-300 transition-colors">Sign in</Link>
-          <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Dashboard</Link>
-        </div>
-        <p className="text-xs text-slate-600">
-          OPM 2-page rule effective Sep 27, 2025
-        </p>
-      </div>
-      <div className="max-w-6xl mx-auto px-6 pt-6 border-t border-slate-900">
-        <p className="text-xs text-slate-700 text-center">
-          ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).
-        </p>
-      </div>
-    </footer>
-  );
-}
+// Shared component — see src/components/SiteFooter.tsx
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -680,7 +642,7 @@ export default function Home() {
   return (
     <>
       <FAQSchema />
-      <Nav />
+      <SiteNav />
       <Hero />
       <Problem />
       <TwoPageRule />
@@ -690,7 +652,7 @@ export default function Home() {
       <Pricing />
       <FAQ />
       <FooterCTA />
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

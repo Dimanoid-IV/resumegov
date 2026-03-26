@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog/posts';
+import SiteNav from '@/components/SiteNav';
+import SiteFooter from '@/components/SiteFooter';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://federalresumeai.gov';
 
@@ -65,12 +67,13 @@ export default function BlogPage() {
   return (
     <>
       <BlogListSchema posts={posts} />
+      <SiteNav />
 
       <div className="min-h-screen bg-gray-50">
-        {/* ── Header ── */}
+        {/* ── Page Header ── */}
         <header className="bg-white border-b">
           <div className="container mx-auto px-4 py-10">
-            <nav className="text-sm text-gray-500 mb-4">
+            <nav className="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
               <span className="text-gray-900">Blog</span>
@@ -145,23 +148,25 @@ export default function BlogPage() {
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-12 bg-blue-600 rounded-2xl p-8 text-center text-white">
+          <div className="mt-12 bg-slate-900 rounded-2xl p-8 text-center text-white">
             <h2 className="text-2xl font-bold mb-2">Ready to optimize your federal resume?</h2>
-            <p className="text-blue-100 mb-6 max-w-lg mx-auto">
+            <p className="text-slate-400 mb-6 max-w-lg mx-auto">
               Our AI checks word count compliance, qualification language, and GS-level compatibility against your specific vacancy announcement.
             </p>
-            <a
+            <Link
               href="/"
-              className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-slate-900 font-semibold px-6 py-3 rounded hover:bg-slate-100 transition-colors"
             >
               Analyze My Resume — Free
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         </main>
       </div>
+
+      <SiteFooter />
     </>
   );
 }

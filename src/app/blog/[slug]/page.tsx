@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPost, getRelatedPosts } from '@/lib/blog/posts';
 import BlogCTA from '../BlogCTA';
+import SiteNav from '@/components/SiteNav';
+import SiteFooter from '@/components/SiteFooter';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://federalresumeai.gov';
 const PUBLISHER_NAME = 'Federal Resume AI';
@@ -208,9 +210,10 @@ export default async function BlogArticlePage({
   return (
     <>
       <ArticleSchema post={post} />
+      <SiteNav />
 
       <div className="min-h-screen bg-white">
-        {/* ── Breadcrumb + Header ── */}
+        {/* ── Article Header ── */}
         <header className="bg-gray-50 border-b">
           <div className="container mx-auto px-4 py-8 max-w-3xl">
             {/* Breadcrumb */}
@@ -332,6 +335,8 @@ export default async function BlogArticlePage({
           <RelatedArticles slugs={post.relatedSlugs} />
         </main>
       </div>
+
+      <SiteFooter />
     </>
   );
 }
