@@ -60,6 +60,12 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  // Recovery flow: redirect to /reset-password to set new password
+  const type = searchParams.get('type');
+  if (type === 'recovery') {
+    return NextResponse.redirect(`${origin}/reset-password?recovered=1`);
+  }
+
   // Redirect to intended destination (default: /upload)
   const safeNext = next.startsWith('/') ? next : '/upload';
   return NextResponse.redirect(`${origin}${safeNext}`);
