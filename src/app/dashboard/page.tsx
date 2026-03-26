@@ -186,12 +186,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             {/* CTA Button for Free Users */}
             {currentWordCount > 1050 && (!userProfile?.plan_type || userProfile.plan_type === 'free') && (
               <div className="mt-4 space-y-3">
-                <button
-                  onClick={() => window.location.href = '/api/checkout?plan=analyst'}
-                  className="w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm"
+                <a
+                  href="/api/checkout?plan=analyst"
+                  className="block w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm text-center"
                 >
                   Оптимизировать резюме до 2 страниц — $19
-                </button>
+                </a>
                 
                 <div className="text-xs text-slate-600 space-y-1">
                   <p className="font-medium">Оптимизация включает:</p>
@@ -325,18 +325,18 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button
-                      onClick={() => window.location.href = `/upload?resumeId=${resume.id}`}
-                      className="flex-1 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                    <a
+                      href={`/upload?resumeId=${resume.id}`}
+                      className="flex-1 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
                     >
                       View
-                    </button>
-                    <button
-                      onClick={() => window.location.href = `/upload?resumeId=${resume.id}`}
-                      className="flex-1 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-800 transition-colors"
+                    </a>
+                    <a
+                      href={`/upload?resumeId=${resume.id}`}
+                      className="flex-1 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-800 transition-colors text-center"
                     >
                       Analyze
-                    </button>
+                    </a>
                   </div>
                 </li>
               ))}
