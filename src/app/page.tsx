@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://resumegov.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com';
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 

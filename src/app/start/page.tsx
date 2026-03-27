@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 type Stage = 'input' | 'sent' | 'error';
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function isValidEmail(value: string): boolean {
   return EMAIL_RE.test(value.trim().toLowerCase());

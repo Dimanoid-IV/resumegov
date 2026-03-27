@@ -4,7 +4,7 @@ import { getAllPosts } from '@/lib/blog/posts';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://federalresumeai.gov';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com';
 
 export const metadata: Metadata = {
   title: 'Federal Resume Blog — USAJOBS Compliance & Career Guides',

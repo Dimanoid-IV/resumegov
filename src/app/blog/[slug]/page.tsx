@@ -6,8 +6,8 @@ import BlogCTA from '../BlogCTA';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://federalresumeai.gov';
-const PUBLISHER_NAME = 'Federal Resume AI';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com';
+const PUBLISHER_NAME = 'ResumeGov';
 
 // ─── Static Params ────────────────────────────────────────────────────────────
 

@@ -10,9 +10,11 @@ export default function robots(): MetadataRoute.Robots {
           '/admin/',
           '/set-password/',
           '/auth/callback',
+          '/dashboard',
+          '/results/',
         ],
       },
     ],
-    sitemap: 'https://resumegov.com/sitemap.xml',
+    sitemap: 'https://www.resumegov.com/sitemap.xml',
   };
 }
