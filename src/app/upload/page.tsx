@@ -211,8 +211,8 @@ export default function UploadPage() {
           <>
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-2xl font-bold text-slate-900 mb-1">Analyze My Resume</h1>
-              <p className="text-slate-500 text-sm">
+              <h1 className="text-3xl font-bold text-slate-900 mb-1">Analyze My Resume</h1>
+              <p className="text-slate-500 text-base">
                 Paste your resume and the USAJOBS vacancy announcement to receive your compatibility score.
               </p>
               <div className="mt-3">
@@ -234,14 +234,14 @@ export default function UploadPage() {
               {/* Resume */}
               <div className="bg-white border border-slate-200 rounded-xl p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-sm font-semibold text-slate-900">
+                  <label className="text-base font-semibold text-slate-900">
                     Your Federal Resume
                   </label>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-sm text-blue-600 hover:underline"
                     >
                       Upload .txt file
                     </button>
@@ -260,9 +260,9 @@ export default function UploadPage() {
                   onChange={e => setResumeText(e.target.value)}
                   rows={14}
                   placeholder="Paste your full resume text here. For PDF or Word documents, open the file and copy-paste the content."
-                  className="w-full text-sm text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
+                  className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
                 />
-                <div className="flex justify-between mt-2 text-xs text-slate-400">
+                <div className="flex justify-between mt-2 text-sm text-slate-400">
                   <span>
                     Target: 950–1,050 words · Hard limit: 1,100
                   </span>
@@ -280,13 +280,13 @@ export default function UploadPage() {
 
               {/* Job Announcement */}
               <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <label className="block text-sm font-semibold text-slate-900 mb-3">
+                <label className="block text-base font-semibold text-slate-900 mb-3">
                   USAJOBS Vacancy Announcement
                 </label>
 
                 {/* Optional URL field */}
                 <div className="mb-3">
-                  <label className="block text-xs font-medium text-slate-500 mb-1">
+                  <label className="block text-sm font-medium text-slate-500 mb-1">
                     Vacancy URL
                     <span className="ml-1 font-normal text-slate-400">(optional)</span>
                   </label>
@@ -295,7 +295,7 @@ export default function UploadPage() {
                     value={jobUrl}
                     onChange={e => setJobUrl(e.target.value)}
                     placeholder="https://www.usajobs.gov/job/..."
-                    className="w-full text-sm text-slate-700 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-300"
+                    className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-300"
                   />
                 </div>
 
@@ -305,9 +305,9 @@ export default function UploadPage() {
                   onChange={e => setJobText(e.target.value)}
                   rows={10}
                   placeholder="Paste the full vacancy announcement text from USAJOBS. Include the qualifications, specialized experience, and required elements sections."
-                  className="w-full text-sm text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
+                  className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
                 />
-                <p className="mt-2 text-xs text-slate-400">
+                <p className="mt-2 text-sm text-slate-400">
                   Include the &quot;Qualifications&quot; and &quot;Specialized Experience&quot; sections for accurate scoring.
                 </p>
               </div>
@@ -329,7 +329,7 @@ export default function UploadPage() {
                 ) : 'Analyze My Resume'}
               </button>
 
-              <p className="text-center text-xs text-slate-400">
+              <p className="text-center text-sm text-slate-400">
                 Analysis does not modify your resume. No data is shared externally.
               </p>
             </form>
