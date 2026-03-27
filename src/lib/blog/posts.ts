@@ -537,6 +537,136 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+
+  // ── Article: Federal Time-in-Grade Rules ─────────────────────────────────
+  {
+    slug: 'federal-time-in-grade-rules',
+    title: 'Federal Time-in-Grade Rules Explained (52-Week Requirement Guide)',
+    description:
+      'Understand the 52-week federal time-in-grade requirement, GS promotion rules, and how HR verifies eligibility on USAJOBS.',
+    date: '2026-01-20',
+    readingTime: 8,
+    author: 'ResumeGov Editorial Team',
+    tags: ['time-in-grade', 'GS promotion', 'competitive service', 'USAJOBS', '52-week rule'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'federal-resume-2-page-limit-2025',
+      'how-to-target-gs-pay-grades',
+    ],
+    faqs: [
+      {
+        question: 'What is the 52-week rule in federal jobs?',
+        answer:
+          'The 52-week time-in-grade rule requires that competitive service federal employees must have served at least 52 weeks at the next lower grade level before they are eligible for promotion to the next higher grade. For example, an employee at GS-9 must have completed 52 weeks in a GS-9 or higher position before being eligible for a GS-11 promotion. This requirement applies to non-temporary appointments in the competitive service.',
+      },
+      {
+        question: 'Does time-in-grade apply to excepted service employees?',
+        answer:
+          'Time-in-grade restrictions generally do not apply to positions in the excepted service. However, when excepted service employees apply for competitive service positions, their prior excepted service time may or may not count toward time-in-grade depending on the nature of the position, the pay plan, and whether the excepted service appointment was equivalent in grade to a General Schedule position. HR specialists make this determination on a case-by-case basis.',
+      },
+      {
+        question: 'Can you skip from GS-7 to GS-11?',
+        answer:
+          'Under standard competitive service promotion rules, skipping two or more grade intervals is not permitted without serving the required time at each intervening grade. A GS-7 employee must typically serve 52 weeks at GS-9 before being eligible for GS-11. However, two-grade interval positions — such as GS-5/7/9/11 career ladders — are an exception: they allow progression through defined grade intervals without additional time-in-grade waiting periods beyond what the career ladder specifies.',
+      },
+      {
+        question: 'Does military service count toward time-in-grade?',
+        answer:
+          'Active duty military service does not directly count toward civilian federal time-in-grade requirements. Time-in-grade is calculated based on service in a General Schedule or equivalent civilian position. However, veterans may receive preference in hiring and may qualify for non-competitive appointment authorities that bypass certain competitive service eligibility requirements. OPM regulations and the specific vacancy announcement govern how prior military service is treated for each position.',
+      },
+      {
+        question: 'What happens if I apply for a federal position before meeting the 52-week requirement?',
+        answer:
+          'If an applicant does not meet the time-in-grade requirement at the time the application closes, HR will rate the application Ineligible during the qualification determination phase. The applicant will not be referred to the selecting official regardless of the quality of their resume or self-assessment responses. Some announcements specify a future effective date for the requirement, allowing applicants who will satisfy the 52-week threshold by a defined date to be considered — but this is explicitly stated in the vacancy announcement when applicable.',
+      },
+    ],
+    content: `
+<h2>What Is the 52-Week Time-in-Grade Requirement?</h2>
+<p>Time-in-grade is a federal civilian employment regulation that restricts how quickly a General Schedule (GS) employee can advance to a higher grade level. Under 5 CFR Part 300, Subpart F, most competitive service employees must serve a minimum of 52 weeks (one year) at the next lower grade before becoming eligible for promotion to the next higher grade.</p>
+<p>This requirement exists to ensure that employees have adequate time to develop the knowledge, skills, and abilities associated with their current grade level before assuming the responsibilities of a higher grade. It is a structural constraint embedded in the federal competitive service framework, not a policy that individual agencies can waive at will.</p>
+<p>The 52-week clock runs from the effective date of the employee\'s last qualifying appointment or promotion, not from the date of any particular job offer or announcement application. An employee who was promoted to GS-9 on March 1, 2025 becomes time-in-grade eligible for GS-11 on March 1, 2026.</p>
+
+<h2>Who Must Meet Time-in-Grade Requirements?</h2>
+<p>Time-in-grade requirements apply specifically to competitive service employees appointed to non-temporary GS positions at GS-2 and above. The requirement does not apply uniformly across all federal employment categories.</p>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:0.875rem">
+  <thead>
+    <tr style="background:#0f172a;color:#fff">
+      <th style="padding:10px 14px;text-align:left">Characteristic</th>
+      <th style="padding:10px 14px;text-align:left">Competitive Service</th>
+      <th style="padding:10px 14px;text-align:left">Excepted Service</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Time-in-grade applies</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Yes — 52 weeks required</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Generally no</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Examples</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Most GS positions at civilian agencies</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Intelligence agencies, SES, some Schedule A</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Promotion restrictions</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Subject to OPM 52-week rule</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Agency-specific rules apply</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Prior time counts when moving to competitive service</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">N/A</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e2e8f0">Case-by-case — HR determination required</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 14px">Hiring authority</td>
+      <td style="padding:10px 14px">Open competitive examination</td>
+      <td style="padding:10px 14px">Direct hire, Schedule A, special authorities</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Temporary appointments, term appointments shorter than one year, and excepted service positions are generally not subject to time-in-grade restrictions. Veterans appointed under Veterans\' Recruitment Appointment (VRA) or 30% or more disabled veteran authorities may also be exempt from certain time-in-grade requirements depending on the specific announcement.</p>
+
+<h2>How HR Verifies Time-in-Grade Eligibility</h2>
+<p>During the qualification determination review, HR specialists verify time-in-grade by examining two primary documents: the resume and, for current federal employees, the SF-50 (Notification of Personnel Action) forms included in the application package.</p>
+<p>The resume must list employment dates in MM/YYYY format for every position held. Year-only dates are insufficient for this calculation. If a resume states that an applicant worked as a GS-9 Analyst from "2023 to 2025," HR cannot determine whether the full 52-week threshold was met. The application will be rated Ineligible on time-in-grade grounds regardless of actual service duration.</p>
+<p>SF-50 forms serve as the authoritative record of grade, step, and effective dates for federal employees. Applicants are typically required to submit their most recent SF-50, plus a second SF-50 from one year prior, to document continuous service at the qualifying grade. An SF-50 reflecting a within-grade increase at the current grade is often more useful than a promotion SF-50 for establishing time-in-grade starting dates.</p>
+<p>For a complete overview of how HR conducts this and other stages of the eligibility review, see our guide on <a href="/blog/how-hr-screens-federal-resumes">how HR reviews federal resumes</a> on USAJOBS.</p>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
+  <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Verify Your Time-in-Grade Compliance</p>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">Confirm that your resume contains the date format and employment documentation required for time-in-grade verification before HR reviews your application.</p>
+  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Run Compliance Check — Free</a>
+</div>
+
+<h2>What Happens If You Don\'t Meet the 52-Week Requirement?</h2>
+<p>An applicant who does not satisfy the time-in-grade requirement at the time the vacancy announcement closes will receive an Ineligible rating during the initial qualification determination phase. This outcome is non-negotiable: the HR specialist applies the standard and issues the determination without discretion.</p>
+<p>The Ineligible rating is issued before any evaluation of the quality of the application. A well-written resume, high self-assessment scores, and strong specialized experience language cannot compensate for a time-in-grade deficiency. The application is effectively removed from consideration at the first screening gate.</p>
+<p>In some cases, a vacancy announcement will specify that applicants must meet time-in-grade requirements by a future date rather than the closing date of the announcement. When this exception is included, it will be explicitly stated in the "Qualifications" section of the vacancy announcement. Applicants should not assume this exception applies unless it is specifically documented.</p>
+<p>If an application is rated Ineligible due to time-in-grade, the applicant will typically receive notification through the USAJOBS application status tracker. Some agencies provide reason codes; others provide only the Ineligible status without elaboration.</p>
+
+<h2>Can You Skip GS Grades?</h2>
+<p>Grade skipping — advancing from GS-7 to GS-11 without serving time at GS-9, for example — is not permitted under standard competitive service promotion rules. Each grade interval requires the full 52-week service period.</p>
+<p>However, there are two legitimate pathways that applicants sometimes confuse with grade skipping:</p>
+<p><strong>Two-grade interval career ladders.</strong> Many federal positions are established with structured career ladders that span two grades per interval: GS-5/7, GS-7/9, GS-9/11, and GS-11/13. An employee hired at the GS-5 level and promoted through the career ladder to GS-7 then GS-9 is not skipping grades — they are advancing through the defined intervals. Non-competitive promotions within a career ladder do not bypass time-in-grade; the 52-week requirement still applies at each level.</p>
+<p><strong>Applying to a higher-graded position from outside the agency.</strong> An applicant who is currently at GS-9 and applies to a GS-12 position at a different agency is not subject to the same step-by-step promotion restriction that applies to internal promotions. However, the applicant must have served 52 weeks at GS-11 or equivalent, or demonstrate qualifying experience that meets the OPM qualification standard for the GS-12 level. The distinction is between promotion (internal, subject to 52-week rule) and competitive appointment (open to all, governed by minimum qualification standards and specialized experience).</p>
+<p>A common error is applying for competitive service positions two or three grades above the current grade and assuming that civilian-equivalent work experience substitutes for time-in-grade service. It does not. The OPM qualification standard and the time-in-grade requirement are separate gates that must both be satisfied.</p>
+
+<h2>Common Time-in-Grade Mistakes on Federal Resumes</h2>
+<p>The following resume documentation errors prevent HR from verifying time-in-grade and result in Ineligible ratings:</p>
+<ul>
+  <li><strong>Year-only employment dates.</strong> Listing "2022–2024" instead of "01/2022–06/2024" makes precise 52-week calculation impossible. HR cannot infer or approximate dates not explicitly documented.</li>
+  <li><strong>Missing GS grade or pay plan information.</strong> Resumes that list federal positions without specifying the GS grade or equivalent pay plan prevent HR from establishing the starting grade for time-in-grade calculations.</li>
+  <li><strong>Omitting SF-50 when required.</strong> Many federal vacancy announcements require current and recent federal employees to submit SF-50 forms. The SF-50 is the authoritative record of grade and effective dates. Submitting a resume without the required SF-50 documentation often results in an Ineligible determination.</li>
+  <li><strong>Using a promotion SF-50 as the sole time-in-grade document.</strong> A promotion SF-50 establishes the start date at the new grade. To document time already served at that grade, a within-grade increase SF-50 or a second SF-50 from one year prior is typically needed.</li>
+  <li><strong>Part-time experience without hours-per-week documentation.</strong> Part-time service may or may not satisfy time-in-grade depending on the specific OPM standard and the nature of the position. Without documented hours-per-week, HR cannot make this determination.</li>
+</ul>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
