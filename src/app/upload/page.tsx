@@ -40,6 +40,7 @@ export default function UploadPage() {
 
   const [resumeText, setResumeText] = useState('');
   const [jobText, setJobText] = useState('');
+  const [jobUrl, setJobUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -115,7 +116,11 @@ export default function UploadPage() {
     const res = await fetch('/api/free-analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ resumeText: resumeText.trim(), jobText: jobText.trim() }),
+      body: JSON.stringify({
+        resumeText: resumeText.trim(),
+        jobText: jobText.trim(),
+        jobUrl: jobUrl.trim() || undefined,
+      }),
     });
 
     const data = await res.json() as { analysisId?: string; error?: string; remaining?: number };
@@ -278,6 +283,22 @@ export default function UploadPage() {
                 <label className="block text-sm font-semibold text-slate-900 mb-3">
                   USAJOBS Vacancy Announcement
                 </label>
+
+                {/* Optional URL field */}
+                <div className="mb-3">
+                  <label className="block text-xs font-medium text-slate-500 mb-1">
+                    Vacancy URL
+                    <span className="ml-1 font-normal text-slate-400">(optional)</span>
+                  </label>
+                  <input
+                    type="url"
+                    value={jobUrl}
+                    onChange={e => setJobUrl(e.target.value)}
+                    placeholder="https://www.usajobs.gov/job/..."
+                    className="w-full text-sm text-slate-700 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-300"
+                  />
+                </div>
+
                 <textarea
                   required
                   value={jobText}

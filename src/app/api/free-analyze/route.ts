@@ -58,14 +58,14 @@ export async function POST(request: NextRequest) {
     console.log('[free-analyze] User authenticated:', user.id);
 
     // ── Parse body ────────────────────────────────────────────────────────────
-    let body: { resumeText?: string; jobText?: string };
+    let body: { resumeText?: string; jobText?: string; jobUrl?: string };
     try {
       body = await request.json();
     } catch {
       return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
-    const { resumeText, jobText } = body;
+    const { resumeText, jobText, jobUrl } = body;
 
     if (!resumeText || typeof resumeText !== 'string' || !resumeText.trim()) {
       return NextResponse.json({ error: 'Missing resumeText' }, { status: 400 });
@@ -73,6 +73,11 @@ export async function POST(request: NextRequest) {
     if (!jobText || typeof jobText !== 'string' || !jobText.trim()) {
       return NextResponse.json({ error: 'Missing jobText' }, { status: 400 });
     }
+
+    // Validate optional jobUrl
+    const safeJobUrl = (typeof jobUrl === 'string' && jobUrl.trim())
+      ? jobUrl.trim().slice(0, 2048)
+      : null;
 
     // ── Input size limits (security) ─────────────────────────────────────────
     const resumeWords = countWords(resumeText);
@@ -209,6 +214,7 @@ export async function POST(request: NextRequest) {
         original_text: safeJob,
         parsed_json: parsedJob,
         gs_level: parsedJob.gs_level ?? null,
+        job_url: safeJobUrl,
       })
       .select('id')
       .single();
