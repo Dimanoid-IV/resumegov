@@ -667,6 +667,145 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+
+  // ── Article: Specialized Experience Examples ───────────────────────────
+  {
+    slug: 'specialized-experience-examples-federal-resume',
+    title: 'Specialized Experience Examples for GS-7, GS-9, and GS-12 Federal Resumes',
+    description:
+      'See real examples of specialized experience for GS-7, GS-9, and GS-12 roles and learn how HR evaluates qualification language.',
+    date: '2026-01-25',
+    readingTime: 9,
+    author: 'ResumeGov Editorial Team',
+    tags: ['specialized experience', 'GS-7', 'GS-9', 'GS-12', 'federal resume examples', 'OPM qualifications'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'federal-time-in-grade-rules',
+      'how-to-target-gs-pay-grades',
+    ],
+    faqs: [
+      {
+        question: 'What qualifies as specialized experience for a federal position?',
+        answer:
+          'Specialized experience is paid or unpaid work that has equipped the applicant with the specific knowledge, skills, and abilities to perform successfully in the duties of the target position at the required grade level. It must be described in the resume at a level of detail that allows HR to verify it meets the vacancy announcement\'s qualification requirements. General experience, academic coursework, and volunteer work may count depending on the position, but must be documented with the same specificity as paid employment.',
+      },
+      {
+        question: 'How detailed should specialized experience descriptions be on a federal resume?',
+        answer:
+          'Federal resume specialized experience descriptions must be specific enough that HR can independently verify the nature, complexity, and duration of the work performed. Each position entry should include the exact start and end dates in MM/YYYY format, average hours per week, a description of duties that mirrors the competency language in the target vacancy announcement, and quantified outcomes where available. Generic statements such as \'managed projects\' or \'analyzed data\' are insufficient — the description must document what type of projects, at what scale, using what methods, and with what results.',
+      },
+      {
+        question: 'Do I need to copy the exact language from the vacancy announcement?',
+        answer:
+          'You do not need to reproduce the vacancy announcement verbatim, but your resume must contain language that is traceable to the required competencies. HR specialists match the resume against the qualification requirements using keyword-level alignment. If the announcement requires \'experience coordinating interagency working groups\' and your resume states only that you \'worked with multiple stakeholders,\' the connection may not be recognized. Use the announcement\'s terminology as a guide and document your experience using equivalent or identical phrasing.',
+      },
+      {
+        question: 'What if I don\'t meet every requirement listed in the vacancy announcement?',
+        answer:
+          'Vacancy announcements distinguish between required qualifications and preferred qualifications (often labeled \'Selective Placement Factors\' or \'Highly Desirable\'). Failure to meet a required qualification results in an Ineligible rating. Failure to meet a preferred qualification may reduce your competitive standing but does not disqualify you. Read the announcement carefully to identify which requirements are mandatory and which are desirable, then tailor your resume accordingly.',
+      },
+      {
+        question: 'Can education substitute for specialized experience on a federal resume?',
+        answer:
+          'Education can substitute for specialized experience at GS-5 through GS-11 levels only, and only in occupational series that permit substitution. At GS-12 and above, there is no education substitution — the full one year of specialized experience at the equivalent of the next lower grade is required. The specific substitution rules vary by occupational series and are published in the OPM Qualification Standards. Always verify the substitution provision in the individual vacancy announcement.',
+      },
+    ],
+    content: `
+<h2>What Counts as Specialized Experience Under OPM Rules?</h2>
+<p>Specialized experience is the cornerstone of federal qualification determinations. Under OPM qualification standards, it is defined as experience that has equipped the applicant with the particular knowledge, skills, and abilities to perform the specific duties of the target position successfully. This definition has two critical implications: the experience must be relevant to the <em>specific position</em>, and its documentation in the resume must be explicit enough to allow independent verification by an HR specialist.</p>
+<p>OPM requires that specialized experience be at a level equivalent to the next lower grade. For a GS-9 position, one year of qualifying experience at GS-7 equivalent is required. For GS-12, one year at GS-11 equivalent. For GS-13 and above, no education substitution is permitted — the experience must be present and documented.</p>
+<p>Several categories of experience can satisfy the specialized experience requirement:</p>
+<ul>
+  <li><strong>Direct federal civilian employment</strong> in a position with duties equivalent to the required grade</li>
+  <li><strong>Federal contractor or grantee work</strong> performing the same functional duties as a federal GS employee</li>
+  <li><strong>Private sector or nonprofit employment</strong> where the nature, complexity, and scope of duties is equivalent to the federal GS standard</li>
+  <li><strong>Military service</strong> in an occupational specialty with equivalent duties (subject to HR determination)</li>
+  <li><strong>Unpaid or volunteer work</strong> in some occupational series, when documented with sufficient specificity</li>
+</ul>
+<p>The key principle is documentation. Experience that is not described in the resume does not exist from an HR screening perspective. The burden of proof is on the applicant to make the qualification traceable within the resume text.</p>
+
+<h2>GS-7 Specialized Experience Example</h2>
+<p>GS-7 is a developmental grade level. Education may substitute for experience in many series, but when experience is documented, it must demonstrate at least one year at the GS-5 equivalent. Below is a comparison of a weak versus a strong specialized experience statement for a GS-7 Program Analyst position.</p>
+
+<p><strong>Vacancy Announcement Language (Required Qualification):</strong><br />
+<em>One year of specialized experience equivalent to GS-5 that includes: analyzing administrative processes and procedures to identify inefficiencies; preparing written reports or briefings for management; and coordinating work assignments with internal and external stakeholders.</em></p>
+
+<div style="background:#fef2f2;border-left:4px solid #ef4444;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#991b1b;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Weak Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Assisted with administrative tasks, helped prepare reports, and worked with team members on various assignments. Supported the department in day-to-day operations.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it fails: No specific duties are described. \'Assisted\' and \'helped\' do not demonstrate the applicant performed the required functions. No scope, method, or outcome is documented. HR cannot verify any of the three required competencies.</p>
+</div>
+
+<div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#15803d;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Strong Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Analyzed 14 administrative workflows across 3 divisions to identify processing bottlenecks, producing a written findings report presented to senior management that resulted in a 22% reduction in manual processing time. Coordinated weekly task assignments among 6 internal staff and 2 contractor teams, tracking deliverable status using SharePoint and escalating delays to supervisors through formal briefing memoranda.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it works: All three required competencies are explicitly addressed. Scope is quantified (14 workflows, 3 divisions, 6 staff, 2 contractor teams). The output format (written report, briefing memoranda) matches the announcement language. The outcome is measurable (22% reduction).</p>
+</div>
+
+<h2>GS-9 Specialized Experience Example</h2>
+<p>At GS-9, the applicant must demonstrate one year of specialized experience at GS-7 equivalent, or possess a master\'s degree or two full years of graduate education in a closely related field. When experience is the qualifying basis, the resume must document independent performance of substantive analytical or technical work — not supervised or developmental-level duties.</p>
+
+<p><strong>Vacancy Announcement Language (Required Qualification):</strong><br />
+<em>One year of specialized experience equivalent to GS-7 that includes: independently conducting data analysis to evaluate program performance metrics; developing recommendations for program improvements; and drafting policy documents, standard operating procedures, or technical reports for management review.</em></p>
+
+<div style="background:#fef2f2;border-left:4px solid #ef4444;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#991b1b;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Weak Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Performed data analysis and contributed to policy development. Worked on improving program processes and wrote reports as needed.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it fails: \'Performed\' and \'contributed\' are vague. No data sources, analytical methods, or output formats are specified. \'As needed\' implies reactive, non-independent work. No quantification of scope or impact.</p>
+</div>
+
+<div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#15803d;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Strong Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Independently conducted quarterly performance metric analysis for a $12M grant program using Excel pivot tables and PowerBI dashboards, identifying a 31% variance in grant expenditure rates across 8 recipient organizations. Drafted 3 standard operating procedures and 2 policy guidance memoranda adopted agency-wide, reducing inconsistent application of program requirements by field staff. Developed written recommendations presented to the Deputy Director that led to revised monitoring protocols for 40 active grants.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it works: \'Independently\' directly addresses the requirement for independent performance. All three competency areas are substantiated with specific tools, outputs, and outcomes. The scope (12M program, 8 organizations, 40 grants) documents GS-7 equivalent complexity.</p>
+</div>
+
+<h2>GS-12 Specialized Experience Example</h2>
+<p>GS-12 is a full performance level in most occupational series. No education substitution is permitted. The applicant must have one year of specialized experience equivalent to GS-11, demonstrating expert-level performance, independent judgment on complex matters, and program-wide or cross-organizational impact. Developmental or supporting language is disqualifying at this grade.</p>
+
+<p><strong>Vacancy Announcement Language (Required Qualification):</strong><br />
+<em>One year of specialized experience equivalent to GS-11 that includes: leading or directing analysis of complex program or policy issues with government-wide or multi-organizational impact; providing written or oral briefings to senior leadership on findings and recommendations; and developing or revising agency policies, directives, or regulations.</em></p>
+
+<div style="background:#fef2f2;border-left:4px solid #ef4444;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#991b1b;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Weak Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Analyzed policy issues and provided recommendations to management. Participated in briefings and contributed to policy development projects across several departments.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it fails: \'Participated\' and \'contributed\' are supporting-role language, incompatible with GS-12 leading/directing requirements. No scope of impact (government-wide or multi-organizational) is documented. Briefings were provided \'to management\'— not senior leadership. No policies are identified.</p>
+</div>
+
+<div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#15803d;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Strong Statement</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Led cross-agency analysis of procurement policy compliance across 12 federal agencies, identifying $4.7M in systemic billing irregularities and drafting a corrective action framework adopted by OMB as government-wide guidance. Briefed the Assistant Secretary and Inspector General on findings quarterly, producing executive summary packages and presentation materials reviewed by senior career officials. Authored 4 agency directives and one regulatory revision to 48 CFR Part 15 governing competitive negotiation procedures, coordinating clearance through legal counsel and 6 stakeholder offices.</p>
+  <p style="margin:8px 0 0;font-size:0.8rem;color:#6b7280">Why it works: \'Led\' and \'Authored\' establish independent, lead-level performance. Scope is explicitly government-wide (12 agencies, OMB adoption). Senior leadership briefings are documented (Assistant Secretary, IG). Specific policy outputs are named (4 directives, one CFR revision). Financial impact is quantified.</p>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
+  <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check If Your Specialized Experience Meets GS Standards</p>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">Upload your resume and target vacancy announcement to verify that your specialized experience language satisfies the qualification requirements at your target grade level.</p>
+  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+</div>
+
+<h2>How to Align Your Experience with Vacancy Language</h2>
+<p>The most effective method for writing specialized experience is direct alignment with the Required Qualifications section of the vacancy announcement. This is a structured, repeatable process:</p>
+<ol>
+  <li><strong>Extract each required competency phrase</strong> from the vacancy announcement\'s Qualifications section. List them separately.</li>
+  <li><strong>Identify which of your positions</strong> involved work that satisfies each competency. Map each competency to a specific position and date range.</li>
+  <li><strong>Draft experience bullets</strong> using the announcement\'s terminology, documenting the specific nature of the work, the tools or methods used, the scope of responsibility, and the measurable outcome.</li>
+  <li><strong>Verify coverage</strong>: every required competency must be traceable to at least one specific bullet in the resume. If any required competency is not documented, the application is at risk of an Ineligible rating regardless of whether the experience technically exists.</li>
+</ol>
+<p>For guidance on the broader qualification framework that governs grade-level targeting, see our article on <a href="/blog/how-to-target-gs-pay-grade-requirements-in-your-federal-resume">targeting GS pay grade requirements in your federal resume</a>.</p>
+
+<h2>How HR Interprets Specialized Experience</h2>
+<p>Understanding the HR review process is essential context for writing effective specialized experience statements. HR specialists do not evaluate resumes holistically. They apply a structured qualification standard to each application, comparing the resume\'s documented experience against a defined checklist of required competencies.</p>
+<p>Two factors determine whether a specialized experience statement passes HR review:</p>
+<p><strong>Language alignment.</strong> The resume must use vocabulary that maps to the vacancy announcement\'s competency language. HR specialists are not required to infer equivalence — if the connection between the resume and the qualification requirement is not explicit, the requirement is treated as unmet. This is not bureaucratic rigidity; it is a compliance function designed to ensure consistent, defensible hiring decisions.</p>
+<p><strong>Scope and complexity documentation.</strong> The resume must demonstrate that the experience was performed at the appropriate grade-level equivalent. A GS-11 experience claim requires documented evidence of independent judgment, cross-organizational impact, and substantive technical output — not developmental or supporting work supervised by a higher-grade employee. The grade equivalency is inferred from the complexity indicators in the resume: dollar amounts, organizational scope, number of subordinates, policy-level versus operational work.</p>
+<p>For a detailed breakdown of each stage of the HR review — from minimum qualification verification through category rating — see our guide on <a href="/blog/how-hr-screens-federal-resumes">how HR reviews federal resumes</a> on USAJOBS.</p>
+<p>Additionally, for positions requiring time-in-grade documentation alongside specialized experience, review our analysis of <a href="/blog/federal-time-in-grade-rules">federal time-in-grade rules</a> to ensure your resume satisfies both qualification gates simultaneously.</p>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
