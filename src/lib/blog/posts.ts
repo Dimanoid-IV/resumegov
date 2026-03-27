@@ -434,6 +434,109 @@ const POSTS: BlogPost[] = [
 <p>Using one generic federal resume across all applications is a major competitive disadvantage. Each vacancy announcement has different required specializations, competency priorities, and qualification language. Our compatibility scoring tool analyzes your resume against a specific announcement and generates a targeted compatibility score with actionable suggestions — so every application is precisely calibrated to that position.</p>
 `,
   },
+
+  // ── Article: How HR Screens Federal Resumes ─────────────────────────────────
+  {
+    slug: 'how-hr-screens-federal-resumes',
+    title: 'How HR Reviews Federal Resumes on USAJOBS (2026 Guide)',
+    description:
+      'Learn how HR specialists evaluate federal resumes, determine eligibility, verify time-in-grade, and decide referral status on USAJOBS.',
+    date: '2026-01-15',
+    readingTime: 9,
+    author: 'ResumeGov Editorial Team',
+    tags: ['HR screening', 'USAJOBS', 'eligibility', 'category rating', 'time-in-grade'],
+    relatedSlugs: [
+      'federal-resume-2-page-limit-2025',
+      'top-10-federal-resume-mistakes-that-lead-to-automatic-usajobs-rejection',
+      'how-to-target-gs-pay-grades',
+    ],
+    faqs: [
+      {
+        question: 'How does HR determine federal resume eligibility?',
+        answer:
+          'HR specialists apply OPM qualification standards to each applicant. They verify minimum qualifications, confirm that specialized experience language in the resume matches the vacancy announcement requirements, validate time-in-grade for competitive service positions, and check that all mandatory compliance fields are present. If any required element is missing or insufficient, the applicant receives an Ineligible rating before the hiring manager is involved.',
+      },
+      {
+        question: 'What does "Best Qualified" mean on USAJOBS?',
+        answer:
+          'Under category rating, qualified applicants are grouped into defined tiers such as Best Qualified, Well Qualified, and Qualified. Only applicants in the Best Qualified category are typically referred to the hiring manager. Placement in this tier depends on structured self-assessments, the depth of specialized experience documented in the resume, and whether the applicant\'s narrative fully satisfies the competencies listed in the vacancy announcement.',
+      },
+      {
+        question: 'What does "Referred" status mean on USAJOBS?',
+        answer:
+          'Referred means your application package was forwarded to the selecting official (hiring manager) for consideration. It confirms you were rated Eligible and placed in the Best Qualified category. Referred status does not guarantee an interview or selection — the hiring manager independently reviews the referred certificates and decides who to contact.',
+      },
+      {
+        question: 'How long does HR review take on USAJOBS?',
+        answer:
+          'The HR qualification review period varies by agency and vacancy. Most federal announcements close and begin processing within 2–4 weeks. Certificate issuance — when referred applicants are identified — typically occurs 4–8 weeks after announcement close. High-volume agencies such as VA, DHS, and DoD may take longer. The USAJOBS application status tracker provides real-time updates as your application moves through each stage.',
+      },
+      {
+        question: 'Why was I rated Ineligible on a federal application?',
+        answer:
+          'The most common causes of Ineligible ratings are: missing month/year employment dates, omitted hours-per-week fields, insufficient specialized experience language relative to the vacancy announcement requirements, failure to meet time-in-grade minimums for competitive service promotions, or submitting a private-sector style resume that lacks the mandatory documentation structure required under OPM qualification standards.',
+      },
+    ],
+    content: `
+<h2>Overview of the Federal Resume Screening Process</h2>
+<p>Federal resume evaluation is not a holistic reading exercise. It is a structured compliance review conducted by trained HR specialists who follow OPM-prescribed qualification standards for each occupational series and grade level. Understanding this process is essential for any applicant seeking to avoid an Ineligible rating.</p>
+<p>The review occurs in a defined sequence: minimum qualification verification, specialized experience matching, time-in-grade validation, and category rating assignment. Each stage is a discrete pass/fail gate. Failure at any stage results in an Ineligible determination regardless of an applicant\'s actual experience or seniority. No supplementary materials submitted after the announcement closes are considered.</p>
+<p>Unlike private-sector hiring — where a recruiter may call to clarify a gap or request additional documentation — federal HR specialists evaluate only what is present in the submitted application package. The resume must be self-sufficient.</p>
+
+<h2>Step 1 — Minimum Qualification Review</h2>
+<p>The first screening pass confirms that the applicant meets the basic OPM qualification standard for the target position. These standards are defined in the OPM Qualification Standards for General Schedule Positions and specify the minimum education, experience, or combination thereof required for each occupational series and GS grade.</p>
+<p>For most professional and administrative series (GS-5 through GS-15), the minimum qualification standard requires a specific amount of general or specialized experience at the next lower grade equivalent. For some positions, a relevant academic degree may substitute for experience requirements at lower grade levels.</p>
+<p>HR specialists do not estimate or infer experience levels. If the resume does not explicitly state the required information — employment dates in MM/YYYY format, hours worked per week, and a clear description of duties — the applicant is rated Ineligible without further review. The burden of documentation is entirely on the applicant.</p>
+
+<h2>Step 2 — Specialized Experience Matching</h2>
+<p>After confirming minimum qualifications, HR specialists conduct a vocabulary-level alignment between the resume and the vacancy announcement. Specifically, they verify that the applicant\'s documented experience satisfies the Required Specialized Experience statement published in the vacancy announcement.</p>
+<p>Specialized experience is defined as experience that equipped the applicant with the specific knowledge, skills, and abilities to perform successfully in the duties of the target position. This is not a general assessment of capability — it is a documentation review. The resume must contain language that explicitly demonstrates the required experience.</p>
+<p>Resumes that describe general duties without mirroring the competency language in the vacancy announcement frequently fail this review. A financial analyst who managed budgets may possess the requisite skills yet receive an Ineligible rating if the resume states "monitored spending" while the vacancy announcement requires "experience analyzing financial data using automated accounting systems to support budget formulation." The match must be traceable.</p>
+<p>Applicants should extract the exact competency phrases from the Required Qualifications section of the vacancy announcement and ensure those phrases — or close equivalents — appear in their resume experience narratives.</p>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
+  <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check Your Resume Before HR Does</p>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">Verify keyword alignment, specialized experience coverage, and compliance documentation before your application is reviewed.</p>
+  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+</div>
+<h2>Step 3 — 52-Week Time-in-Grade Verification</h2>
+<p>For competitive service positions at GS-2 and above, federal employees seeking promotion must demonstrate that they have served at least 52 weeks at the next lower grade level in the federal service. This requirement applies to current federal employees and former federal employees returning to service at a higher grade.</p>
+<p>HR specialists verify time-in-grade using the employment dates documented in the resume and SF-50 (Notification of Personnel Action) forms included in the application package. Month and year precision is required. If a resume lists only years without months, HR cannot calculate whether the 52-week threshold has been met — a common and easily avoidable cause of Ineligible ratings.</p>
+<p>For detailed information on this requirement, see our guide on the <a href="/blog/federal-time-in-grade-rules">federal time-in-grade requirement</a>.</p>
+
+<h2>Step 4 — Category Rating and Best Qualified Determination</h2>
+<p>Applicants who pass all three initial screening stages are rated Eligible and then assigned to a quality category under the category rating system, which replaced the traditional numerical ranking system for most federal positions.</p>
+<p>Most agencies use a three-tier structure:</p>
+<ul>
+  <li><strong>Best Qualified:</strong> Applicants who fully satisfy all qualification requirements and whose experience, education, and self-assessment responses demonstrate superior alignment with the position\'s competencies.</li>
+  <li><strong>Well Qualified:</strong> Applicants who meet all minimum requirements but whose documentation does not demonstrate the depth of experience necessary for the Best Qualified tier.</li>
+  <li><strong>Qualified:</strong> Applicants who meet minimum requirements with limited evidence of specialized competency alignment.</li>
+</ul>
+<p>Category placement is determined by a combination of factors: the structured self-assessment questionnaire completed during application, the depth and specificity of the resume\'s specialized experience narratives, and, for some positions, the results of occupational knowledge tests or job-related assessments.</p>
+<p>Only applicants in the Best Qualified category are placed on the referral certificate sent to the hiring manager. Being rated Eligible but placed in a lower category is functionally equivalent to rejection for most competitive announcements with large applicant pools.</p>
+
+<h2>Referred vs Not Referred — What It Actually Means</h2>
+<p>After the category rating determination, HR issues a certificate of eligibles — a ranked or unranked list of Best Qualified applicants — to the selecting official. Applicants whose names appear on this certificate receive a Referred status in their USAJOBS application tracker.</p>
+<p><strong>Referred</strong> status means your application package has been forwarded to the hiring manager for consideration. It does not guarantee an interview, a selection, or any further contact. The selecting official reviews the referred certificates and independently determines which applicants to interview and ultimately select.</p>
+<p><strong>Not Referred</strong> status means you were rated Eligible but were not placed in the Best Qualified category, or the position was filled before your certificate was reviewed. This is the most common outcome for applicants who meet minimum qualifications but whose resumes do not contain sufficient specialized experience documentation to place them in the top tier.</p>
+<p>Applicants with Not Referred status are sometimes confused because they believe they are clearly qualified for the position. In many cases they are — but qualification alone is not sufficient. The documentation of that qualification in the resume must meet the evidentiary standard required for Best Qualified placement.</p>
+
+<h2>Common Reasons Applicants Are Rated Ineligible</h2>
+<p>The following conditions consistently result in Ineligible ratings across federal agencies:</p>
+<ul>
+  <li><strong>Missing or imprecise employment dates.</strong> Year-only dates prevent time-in-grade verification and are treated as non-compliant. Month and year are required for every position listed.</li>
+  <li><strong>Omitted hours-per-week fields.</strong> OPM qualification calculations prorate part-time experience. Without hours-per-week data, HR cannot verify whether the applicant meets the experience threshold.</li>
+  <li><strong>Insufficient specialized experience language.</strong> General duty descriptions that do not reflect the vocabulary of the vacancy announcement fail the specialized experience matching review.</li>
+  <li><strong>Resume exceeds evaluation threshold.</strong> Under the September 2025 OPM 2-page rule, content beyond the first two pages is not evaluated. Experience placed on page three or beyond is invisible to HR.</li>
+  <li><strong>Private-sector resume format.</strong> Resumes submitted in civilian format — without employment blocks, hours-per-week, supervisor information, and pay rate — do not satisfy USAJOBS documentation requirements.</li>
+  <li><strong>Self-assessment scores not supported by resume.</strong> Federal applications include structured self-assessments where applicants rate their own proficiency on listed competencies. HR cross-references these ratings against the resume. An applicant who claims Expert proficiency on a competency but whose resume does not document corresponding experience may be downgraded or disqualified.</li>
+</ul>
+<p>For a comprehensive breakdown of application errors, see our analysis of <a href="/blog/top-10-federal-resume-mistakes-that-lead-to-automatic-usajobs-rejection">top federal resume mistakes that lead to automatic rejection</a> and the requirements under the <a href="/blog/federal-resume-2-page-limit-2025">OPM 2-page federal resume rule</a>.</p>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
