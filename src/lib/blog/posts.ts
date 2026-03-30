@@ -818,6 +818,194 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+
+  // ── Article 9 ────────────────────────────────────────────────────────
+  {
+    slug: 'veterans-preference-usajobs',
+    title: 'Veterans Preference on USAJOBS: 5-Point vs 10-Point Explained (2026 Guide)',
+    description:
+      'Learn how 5-point and 10-point veterans preference works on USAJOBS, how HR applies category rating, and what documentation is required.',
+    date: '2026-04-15',
+    readingTime: 10,
+    author: 'ResumeGov Editorial Team',
+    tags: ['veterans preference', '5-point preference', '10-point preference', 'USAJOBS', 'category rating', 'DD-214', 'SF-15'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'federal-time-in-grade-rules',
+      'specialized-experience-examples-federal-resume',
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between 5-point and 10-point veterans preference?',
+        answer: '5-point preference (TP) applies to veterans who served on active duty and received an honorable or general discharge, typically documented with a DD-214. 10-point preference applies to veterans with a service-connected disability, Purple Heart recipients, and certain other qualifying categories. The points affect placement within category rating — 10-point preference categories, particularly CPS (30% or more disability), carry the strongest statutory protections including priority referral rights.',
+      },
+      {
+        question: 'Does veterans preference guarantee a federal job?',
+        answer: 'No. Veterans preference improves ranking within the category rating system but does not waive minimum qualifications or specialized experience requirements. An applicant who does not meet the basic qualification standard for the position will be rated Ineligible regardless of preference eligibility. Preference operates only among candidates who have first been determined to meet all qualification requirements.',
+      },
+      {
+        question: 'What documents are required for 10-point preference?',
+        answer: 'Applicants claiming 10-point preference must submit the DD-214 (Certificate of Release or Discharge from Active Duty) showing character of discharge, the SF-15 (Application for 10-Point Veteran Preference), and a letter from the Department of Veterans Affairs confirming the service-connected disability rating and percentage. Failure to submit any of these documents may result in the preference claim being disallowed.',
+      },
+      {
+        question: 'Does veterans preference apply to excepted service?',
+        answer: 'Veterans preference is mandated by statute for competitive service appointments. In the excepted service, application of preference varies by agency and appointing authority. Some excepted service positions apply preference voluntarily; others do not. Veterans should verify preference applicability in the specific vacancy announcement and consult the agency human resources office if unclear.',
+      },
+      {
+        question: 'Can veterans preference override specialized experience requirements?',
+        answer: 'No. Veterans preference does not waive or substitute for any qualification requirement, including specialized experience. Title 5 regulations require that all candidates — including preference eligibles — meet the minimum qualification standards established for the position before preference points are applied. Preference affects ranking among qualified candidates only; it has no bearing on the qualification determination itself.',
+      },
+    ],
+    content: `
+<h2>What Is Veterans Preference in Federal Hiring?</h2>
+<p>Veterans preference is a statutory benefit established under Title 5 of the United States Code that provides eligible veterans with advantages in the federal competitive hiring process. Its legal foundation reflects congressional intent to recognize military service and ease the transition to civilian federal employment.</p>
+<p>Several foundational principles govern how veterans preference operates:</p>
+<ul>
+  <li><strong>Scope of application.</strong> Veterans preference applies primarily to competitive service appointments. Its application in the excepted service varies by agency and appointing authority.</li>
+  <li><strong>Role in category rating.</strong> Under the category rating system, preference eligibles are placed ahead of non-preference eligibles within the same quality category. Certain 10-point preference eligibles receive additional statutory protections affecting referral order.</li>
+  <li><strong>Qualification threshold not waived.</strong> Veterans preference does not waive minimum qualifications. A preference-eligible applicant must first meet all qualification requirements — including education, specialized experience, and any selective placement factors — before preference points are applied.</li>
+  <li><strong>Specialized experience not substituted.</strong> Preference cannot replace the specialized experience requirements specified in the vacancy announcement. These requirements must be met independently of preference status.</li>
+</ul>
+<p>For a detailed overview of how HR specialists apply qualification standards before preference is considered, see our guide on <a href="/blog/how-hr-screens-federal-resumes">How HR Reviews Federal Resumes on USAJOBS</a>.</p>
+
+<h2>Who Qualifies for Veterans Preference?</h2>
+
+<h3>5-Point Preference (TP)</h3>
+<p>Five-point preference applies to veterans who meet all of the following criteria:</p>
+<ul>
+  <li>Served on active duty in the armed forces of the United States</li>
+  <li>Were released under honorable conditions (honorable or general discharge)</li>
+  <li>Served during a qualifying period or campaign, or received an Armed Forces Expeditionary Medal or other qualifying campaign or expeditionary badge</li>
+</ul>
+<p>The primary documentation required is the <strong>DD-214 (Certificate of Release or Discharge from Active Duty)</strong>, which must show the character of discharge and the period of service. Without a DD-214 reflecting qualifying service and an eligible discharge characterization, the 5-point preference claim cannot be verified.</p>
+
+<h3>10-Point Preference Categories (CP, CPS, XP)</h3>
+<p>Ten-point preference applies to a broader set of qualifying circumstances and carries stronger statutory protections than 5-point preference. The three primary 10-point categories are:</p>
+<ul>
+  <li><strong>CP — Compensable Disability (less than 30%).</strong> Veterans with a service-connected disability of at least 10% but less than 30%, as rated by the Department of Veterans Affairs.</li>
+  <li><strong>CPS — Compensable Disability (30% or more).</strong> Veterans with a service-connected disability rated at 30% or more. This category carries the highest level of statutory protection, including priority placement rights in the referral process.</li>
+  <li><strong>XP — Other 10-Point Preference.</strong> Includes Purple Heart recipients, veterans with a non-compensable service-connected disability, and certain surviving spouses, widows, and mothers of veterans under specific qualifying conditions.</li>
+</ul>
+<p>Documentation requirements for 10-point preference are more extensive than for 5-point preference. Applicants must submit:</p>
+<ul>
+  <li>DD-214 showing character of discharge and period of service</li>
+  <li><strong>SF-15 (Application for 10-Point Veteran Preference)</strong> — the official OPM form used to claim 10-point preference</li>
+  <li>A letter from the Department of Veterans Affairs confirming the service-connected disability rating and percentage</li>
+</ul>
+<p>Failure to submit any of these documents may result in the preference claim being disallowed, even if the underlying eligibility exists.</p>
+
+<h2>5-Point vs 10-Point Preference — What Is the Difference?</h2>
+<p>The distinction between preference categories has direct consequences for how an applicant is ranked and referred under the category rating system.</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin:24px 0">
+  <thead>
+    <tr style="background:#f1f5f9">
+      <th style="border:1px solid #cbd5e1;padding:10px 14px;text-align:left">Category</th>
+      <th style="border:1px solid #cbd5e1;padding:10px 14px;text-align:left">Points Added</th>
+      <th style="border:1px solid #cbd5e1;padding:10px 14px;text-align:left">Disability Required</th>
+      <th style="border:1px solid #cbd5e1;padding:10px 14px;text-align:left">Referral Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">TP (5-Point)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">5</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">No</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Listed ahead of non-preference eligibles within category</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">CP (10-Point)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">10</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Yes (10–29%)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Listed ahead of non-preference eligibles within category</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">CPS (10-Point)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">10</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Yes (30%+)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Priority referral; placed at top of Best Qualified</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">XP (10-Point)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">10</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Varies (Purple Heart, etc.)</td>
+      <td style="border:1px solid #cbd5e1;padding:10px 14px">Listed ahead of non-preference eligibles within category</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The additional points associated with 10-point preference do not generate a numerical score in modern category rating systems. Instead, preference status determines the <em>order within a quality category</em>. Veterans are listed ahead of non-veterans within the same category regardless of point value. The critical distinction of CPS preference is that applicants in this category are placed at the top of the Best Qualified list and referred before non-preference eligibles in that category — a statutory protection that significantly affects hiring outcomes in competitive announcements.</p>
+
+<h2>How Veterans Preference Affects Category Rating</h2>
+<p>The category rating system replaced the traditional numerical ranking system for most competitive service positions. Under category rating, applicants are assessed and placed into defined quality groups — typically Best Qualified, Well Qualified, and Qualified — based on their qualifications, competencies, and experience.</p>
+<p>Veterans preference interacts with this system in the following way:</p>
+<ul>
+  <li><strong>Within-category ordering.</strong> Preference eligibles are listed ahead of non-preference eligibles within the same quality category. A veteran rated as Well Qualified will appear before a non-veteran also rated as Well Qualified.</li>
+  <li><strong>30%+ disabled veteran protection.</strong> Veterans in the CPS category must be placed at the top of the highest quality category. This means they are referred to the selecting official before other Best Qualified applicants, including other preference eligibles.</li>
+  <li><strong>Best Qualified category referral.</strong> Hiring managers may only select from candidates referred on the certificate. Preference improves competitive position but does not guarantee placement in the Best Qualified category — that determination is based on qualification and competency scoring.</li>
+</ul>
+<p>For current federal employees, understanding how time-in-grade requirements interact with category placement is also important when applying for promotion-level positions. See our analysis of <a href="/blog/federal-time-in-grade-rules">Federal Time-in-Grade Rules Explained</a> for a detailed breakdown of that qualification gate.</p>
+
+<h2>Does Veterans Preference Guarantee a Federal Job?</h2>
+<p>No. Veterans preference does not guarantee selection for a federal position. This is one of the most frequently misunderstood aspects of the federal hiring process.</p>
+<p>Preference improves competitive ranking among qualified applicants; it does not alter the qualification determination. The following conditions must all be satisfied before preference has any effect:</p>
+<ul>
+  <li><strong>Basic qualifications must be met.</strong> Every applicant — including preference eligibles — must meet the minimum qualification requirements for the position, including education and experience thresholds established by OPM qualification standards.</li>
+  <li><strong>Specialized experience must be documented.</strong> The resume must demonstrate specialized experience at the appropriate grade level equivalent, fully described in sufficient detail for HR to make a determination. Preference does not substitute for this documentation. See our article on <a href="/blog/specialized-experience-examples-federal-resume">Specialized Experience Examples for Federal Resumes</a> for structured guidance on meeting this requirement.</li>
+  <li><strong>Resume must pass HR screening.</strong> The resume must satisfy all HR review criteria before the applicant is rated and placed in a quality category. Common documentation errors — including missing qualifications language or insufficient experience detail — result in an Ineligible rating that preference cannot overcome. For a breakdown of common errors, see our guide on <a href="/blog/top-10-federal-resume-mistakes-that-lead-to-automatic-usajobs-rejection">Top Federal Resume Mistakes That Lead to Ineligible Ratings</a>.</li>
+  <li><strong>Hiring manager retains selection authority.</strong> Even after referral, the selecting official retains discretion to select any candidate on the certificate, pass over a preference eligible, or request a new certificate. Pass-over of a 30%+ disabled veteran requires OPM approval, but selection among other preference eligibles is at the manager\'s discretion.</li>
+</ul>
+
+<h2>Veterans Preference in Competitive vs Excepted Service</h2>
+<p><strong>Competitive service.</strong> Veterans preference is mandated by statute for all competitive service appointments. HR specialists are required to apply the preference rules established under Title 5 to every applicable announcement. There is no agency discretion to waive or modify these requirements in competitive service hiring.</p>
+<p><strong>Excepted service.</strong> In the excepted service, veterans preference requirements vary by agency, appointing authority, and position type. Some excepted service agencies apply preference voluntarily and consistently; others apply it selectively based on the nature of the appointment. Veterans applying for excepted service positions should review the specific vacancy announcement carefully and may contact the agency HR office to confirm how preference will be applied.</p>
+<p><strong>Senior Executive Service (SES).</strong> Veterans preference does not apply to SES appointments. SES positions are filled through a separate executive selection process that is not subject to the preference requirements governing General Schedule competitive service positions.</p>
+
+<h2>Veterans Preference for Current Federal Employees</h2>
+<p><strong>External competitive announcements.</strong> Veterans preference applies when a current federal employee applies for a position through an external competitive announcement open to all U.S. citizens. In this context, the employee\'s veteran status is evaluated the same way as any other applicant\'s.</p>
+<p><strong>Internal merit promotion procedures.</strong> Merit promotion procedures — used for internal advancement within the federal government — are generally not subject to veterans preference requirements. Preference is a feature of competitive hiring from outside the agency, not of promotion from within. Employees seeking advancement through merit promotion cannot invoke veterans preference to improve their standing on internal referral certificates.</p>
+<p><strong>Cross-agency applications.</strong> A current federal employee who applies to a position at a different agency through an external competitive announcement may claim veterans preference if otherwise eligible. The preference applies to the competitive process, not to the employee\'s current employment status.</p>
+
+<h2>Common Veterans Preference Documentation Mistakes</h2>
+<ul>
+  <li><strong>Missing DD-214.</strong> Failure to submit the DD-214 is the most common error. Without it, HR cannot verify service dates, discharge characterization, or qualifying campaign participation.</li>
+  <li><strong>Incorrect discharge characterization.</strong> Only honorable and general discharges qualify for preference. Other than honorable, bad conduct, and dishonorable discharges do not qualify. Applicants must ensure the DD-214 reflects a qualifying discharge type.</li>
+  <li><strong>Failure to submit SF-15.</strong> Applicants claiming 10-point preference must submit the SF-15 in addition to the DD-214. Omitting the SF-15 results in the 10-point claim being disallowed, even if the disability is documented elsewhere.</li>
+  <li><strong>Missing VA disability letter.</strong> For disability-based 10-point preference, the VA letter confirming the service-connected disability rating and percentage is required. A benefits summary or general medical letter is not a substitute.</li>
+  <li><strong>Assuming preference replaces qualification.</strong> Some applicants incorrectly assume that preference status reduces or eliminates qualification requirements. It does not. An Ineligible rating is final regardless of preference category.</li>
+</ul>
+
+<h2>How HR Verifies Veterans Preference</h2>
+<p>HR specialists follow a structured process for verifying and applying veterans preference claims:</p>
+<ul>
+  <li><strong>Document review.</strong> HR reviews submitted documentation — DD-214, SF-15, VA letter — against the claimed preference category. Missing or insufficient documents result in the claim being disallowed without further recourse during the current announcement cycle.</li>
+  <li><strong>Disability percentage validation.</strong> For CPS claims, HR verifies the disability percentage from the VA letter to confirm the 30% threshold is met. Applicants below this threshold may still qualify for CP preference if the disability is at least 10% compensable.</li>
+  <li><strong>Category placement adjustment.</strong> Once preference is verified, HR adjusts the applicant\'s placement within the quality category. Preference eligibles are reordered ahead of non-preference eligibles within the same category; CPS-eligible applicants are placed at the top of the highest quality category.</li>
+  <li><strong>Referral certificate implications.</strong> The adjusted ordering determines which candidates appear on the referral certificate sent to the selecting official. Candidates not on the certificate are not considered for selection regardless of their qualifications or preference status.</li>
+</ul>
+<p>For a complete overview of the HR review process from minimum qualification verification through referral, see our guide on <a href="/blog/how-hr-screens-federal-resumes">How HR Reviews Federal Resumes</a>.</p>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:40px 0">
+  <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#64748b;margin:0 0 8px">ResumeGov Compliance Tool</p>
+  <h3 style="font-size:1.25rem;font-weight:700;color:#0f172a;margin:0 0 12px">Verify Your Federal Resume Before HR Reviews It</h3>
+  <p style="color:#475569;margin:0 0 20px;font-size:0.95rem">ResumeGov analyzes compliance signals including qualification alignment, documentation readiness, and GS-level compatibility.</p>
+  <a href="https://www.resumegov.com/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem">Analyze My Resume — Free</a>
+</div>
+
+<h2>Conclusion</h2>
+<p>Veterans preference is a statutory mechanism that improves competitive ranking within the federal hiring process. It does not guarantee selection, waive qualification requirements, or substitute for specialized experience documentation. Understanding its precise function — and the documentation standards required to invoke it — is essential for preference-eligible applicants seeking federal employment.</p>
+<ul>
+  <li>Preference increases ranking within category rating; it does not affect the qualification determination.</li>
+  <li>Documentation accuracy — DD-214, SF-15, and VA disability letter — determines whether the preference claim is applied.</li>
+  <li>CPS preference (30%+ disability) carries the strongest statutory protections, including priority placement in the Best Qualified category.</li>
+  <li>Preference operates within the competitive service framework; its application in the excepted service and SES is limited or absent.</li>
+  <li>Compliance with all qualification and documentation requirements determines referral outcome — preference amplifies a qualified application; it cannot repair a disqualified one.</li>
+</ul>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
