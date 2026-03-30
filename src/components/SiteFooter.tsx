@@ -12,6 +12,7 @@ export default function SiteFooter() {
         </div>
         <div className="flex items-center gap-6 text-xs text-slate-500">
           <Link href="/blog" className="hover:text-slate-300 transition-colors">Guides</Link>
+          <Link href="/editorial-standards" className="hover:text-slate-300 transition-colors">Editorial Standards</Link>
           <Link href="/#pricing" className="hover:text-slate-300 transition-colors">Pricing</Link>
           <Link href="/login" className="hover:text-slate-300 transition-colors">Sign in</Link>
           <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Dashboard</Link>

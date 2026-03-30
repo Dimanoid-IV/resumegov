@@ -67,7 +67,12 @@ function ArticleSchema({ post }: { post: NonNullable<ReturnType<typeof getPost>>
     dateModified: post.updatedDate ?? post.date,
     author: {
       '@type': 'Organization',
-      name: post.author,
+      name: post.author === 'Federal Resume AI' ? 'ResumeGov Editorial Team' : post.author,
+      url: SITE_URL,
+    },
+    reviewedBy: {
+      '@type': 'Organization',
+      name: 'Former USAJOBS & Federal HR Specialists',
       url: SITE_URL,
     },
     publisher: {
@@ -242,7 +247,7 @@ export default async function BlogArticlePage({
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-gray-500">
-              <span>By <strong className="text-gray-700">{post.author}</strong></span>
+              <span>By <strong className="text-gray-700">{post.author.replace('Federal Resume AI', 'ResumeGov Editorial Team')}</strong></span>
               <span>·</span>
               <time dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString('en-US', {
@@ -255,12 +260,50 @@ export default async function BlogArticlePage({
               <span>{post.readingTime} min read</span>
             </div>
 
+            {/* Reviewer credit */}
+            <p className="mt-3 text-sm text-gray-600">
+              Reviewed by <strong className="text-gray-700">Former USAJOBS & Federal HR Specialists</strong>
+            </p>
+
             {/* Description */}
             <p className="mt-4 text-lg text-gray-600 leading-relaxed border-l-4 border-blue-400 pl-4">
               {post.description}
             </p>
           </div>
         </header>
+        
+        {/* Author Box */}
+        <div className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-4 py-6 max-w-3xl">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">About the Author</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                  ResumeGov Editorial Team is a federal hiring compliance research group focused on USAJOBS qualification standards, GS-level evaluation criteria, OPM regulatory updates, and HR screening procedures.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  All articles are reviewed by former federal HR specialists and USAJOBS subject matter experts to ensure regulatory accuracy and alignment with Title 5 hiring standards.
+                </p>
+                <Link
+                  href="/editorial-standards"
+                  className="inline-flex items-center gap-1 text-sm text-blue-600 hover:underline font-medium"
+                >
+                  Editorial Standards
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* ── Article Body ── */}
         <main className="container mx-auto px-4 py-10 max-w-3xl">

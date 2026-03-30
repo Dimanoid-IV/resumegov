@@ -45,7 +45,7 @@ const POSTS: BlogPost[] = [
       'The OPM 2-page federal resume rule takes effect September 27, 2025. Learn the exact word count targets, hard limits, and what happens if you exceed them on USAJOBS.',
     date: '2025-09-01',
     readingTime: 7,
-    author: 'Federal Resume AI',
+    author: 'ResumeGov Editorial Team',
     tags: ['2-page limit', 'OPM regulation', 'USAJOBS', 'word count', '2025'],
     relatedSlugs: [
       'federal-resume-vs-civilian-resume',
@@ -144,7 +144,7 @@ const POSTS: BlogPost[] = [
       'GS-5 through GS-15 each require different specialized experience. Learn how OPM evaluates your qualifications and how to write a resume that passes HR screening at every grade level.',
     date: '2025-08-15',
     readingTime: 6,
-    author: 'Federal Resume AI',
+    author: 'ResumeGov Editorial Team',
     tags: ['GS levels', 'OPM qualifications', 'specialized experience', 'USAJOBS', 'pay grade'],
     relatedSlugs: [
       'federal-resume-2-page-limit-2025',
@@ -218,7 +218,7 @@ const POSTS: BlogPost[] = [
       'Knowledge, Skills, and Abilities statements have evolved — but they still matter. Learn when KSAs are required, how to write them using the CCAR method, and how to integrate them into your 2-page federal resume.',
     date: '2025-07-20',
     readingTime: 6,
-    author: 'Federal Resume AI',
+    author: 'ResumeGov Editorial Team',
     tags: ['KSA', 'knowledge skills abilities', 'CCAR', 'federal resume', 'USAJOBS'],
     relatedSlugs: [
       'how-to-target-gs-pay-grades',
@@ -298,7 +298,7 @@ const POSTS: BlogPost[] = [
       'Federal resumes and civilian resumes follow entirely different rules. Understanding the 7 key differences — length, format, content, and submission — will prevent automatic disqualification on USAJOBS.',
     date: '2025-06-30',
     readingTime: 5,
-    author: 'Federal Resume AI',
+    author: 'ResumeGov Editorial Team',
     tags: ['federal resume', 'USAJOBS', 'resume format', 'OPM', 'job application'],
     relatedSlugs: [
       'federal-resume-2-page-limit-2025',
@@ -370,7 +370,7 @@ const POSTS: BlogPost[] = [
       'These 10 federal resume mistakes cause automatic ineligible ratings on USAJOBS — and most applicants make at least three of them. Learn how to identify and fix every one before you apply.',
     date: '2025-06-01',
     readingTime: 8,
-    author: 'Federal Resume AI',
+    author: 'ResumeGov Editorial Team',
     tags: ['federal resume', 'USAJOBS mistakes', 'ineligible rating', 'OPM', 'HR screening'],
     relatedSlugs: [
       'federal-resume-2-page-limit-2025',

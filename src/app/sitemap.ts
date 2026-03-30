@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/editorial-standards`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
     // ── Guides ──────────────────────────────────────────────────────────────
     {
       url: `${baseUrl}/guides/usajobs-resume-requirements`,
