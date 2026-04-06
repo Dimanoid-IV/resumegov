@@ -123,6 +123,7 @@ function Hero() {
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <Link
             href="/start"
+            data-gtm-event="cta_click"
             className="inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors"
           >
             Get My Compliance Score — Free
@@ -624,6 +625,7 @@ function FooterCTA() {
         </p>
         <Link
           href="/start"
+          data-gtm-event="cta_click"
           className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors"
         >
           Start free — 3 analyses included

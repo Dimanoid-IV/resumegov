@@ -111,6 +111,11 @@ export default function UploadPage() {
       return;
     }
 
+    // Track GA4 event via GTM dataLayer
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event: 'resume_analysis_submit' });
+    }
+
     setLoading(true);
 
     const res = await fetch('/api/free-analyze', {

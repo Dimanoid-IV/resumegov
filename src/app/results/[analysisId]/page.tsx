@@ -189,14 +189,13 @@ export default async function ResultsPage({
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* GA4 Event Tracking */}
+      {/* GA4 Event Tracking via GTM */}
       <Script id="ga4-analysis-completed" strategy="afterInteractive">
         {`
-          if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('event', 'resume_analysis_completed', {
-              event_category: 'engagement',
-              value: ${compat},
-              non_interaction: false
+          if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+              event: 'resume_analysis_completed',
+              value: ${compat}
             });
           }
         `}

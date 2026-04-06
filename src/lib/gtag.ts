@@ -1,47 +1,32 @@
 /**
- * Google Analytics 4 Configuration
+ * Google Analytics 4 Configuration via Google Tag Manager
+ * GTM Container ID: GT-MQDTST4W
+ * GA4 Measurement ID: G-WL9BDH49MY
  */
 
 export const GA_MEASUREMENT_ID = "G-WL9BDH49MY";
+export const GTM_CONTAINER_ID = "GT-MQDTST4W";
 
-// Type definition for gtag function
+// Type definition for gtag and dataLayer functions
 declare global {
   interface Window {
-    gtag: (
+    gtag?: (
       command: string,
       targetId?: string,
       config?: Record<string, any>
     ) => void;
-    dataLayer: any[];
+    dataLayer?: any[];
   }
 }
 
 /**
- * Track page views on route changes
+ * Track custom events via GTM dataLayer
  */
-export const pageview = (url: string) => {
-  // Only track in production
-  if (process.env.NODE_ENV !== 'production' && process.env.NEXT_PUBLIC_ENABLE_GA4 !== 'true') {
-    return;
-  }
-  
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_MEASUREMENT_ID, {
-      page_path: url,
-    });
-  }
-};
-
-/**
- * Track custom events
- */
-export const event = ({
+export const trackEvent = ({
   eventName,
-  value,
   ...params
 }: {
   eventName: string;
-  value?: number;
   [key: string]: any;
 }) => {
   // Only track in production
@@ -49,9 +34,9 @@ export const event = ({
     return;
   }
   
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, {
-      value,
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: eventName,
       ...params,
     });
   }

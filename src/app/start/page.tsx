@@ -38,12 +38,9 @@ export default function StartPage() {
       return;
     }
 
-    // Track GA4 event
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'resume_analysis_started', {
-        event_category: 'engagement',
-        non_interaction: false,
-      });
+    // Track GA4 event via GTM dataLayer
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event: 'resume_analysis_started' });
     }
 
     setLoading(true);
