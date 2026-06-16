@@ -37,6 +37,99 @@ export function getRelatedPosts(slugs: string[]): BlogPost[] {
 // ─── Posts ────────────────────────────────────────────────────────────────────
 
 const POSTS: BlogPost[] = [
+
+  {
+    slug: 'usajobs-resume-builder-vs-uploaded-resume',
+    title: 'USAJOBS Resume Builder vs Uploaded Resume: Which One Passes HR Screening Better?',
+    description:
+      'Compare the USAJOBS resume builder and uploaded federal resumes. Learn which format helps HR verify eligibility, keywords, specialized experience, and 2-page compliance.',
+    date: '2026-06-16',
+    readingTime: 9,
+    author: 'ResumeGov Editorial Team',
+    tags: ['USAJOBS', 'resume builder', 'uploaded resume', 'federal resume', 'HR screening'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'federal-resume-2-page-limit-2025',
+      'top-10-federal-resume-mistakes',
+      'federal-resume-vs-civilian-resume',
+    ],
+    faqs: [
+      {
+        question: 'Is the USAJOBS resume builder better than uploading a resume?',
+        answer:
+          'The USAJOBS resume builder is safer for basic compliance because it prompts for federal fields such as dates, hours per week, and employer details. An uploaded resume can work well, but only if it includes the same information and stays within current page and word-count expectations.',
+      },
+      {
+        question: 'Can an uploaded resume pass federal HR screening?',
+        answer:
+          'Yes. Uploaded resumes can pass HR screening when they clearly show specialized experience, month/year dates, hours per week, supervisor or employer details, citizenship where relevant, and vacancy-specific qualification language.',
+      },
+      {
+        question: 'Which format is better under the 2-page federal resume rule?',
+        answer:
+          'Neither format automatically solves the 2-page issue. The important part is whether the first two pages contain the qualifications HR must verify. A resume builder export can become too long, and an uploaded resume can omit required fields.',
+      },
+      {
+        question: 'Should I tailor my USAJOBS resume for every vacancy?',
+        answer:
+          'Yes. Federal HR screens against the exact vacancy announcement. Reusing the same resume without matching specialized experience and keywords increases the chance of an ineligible rating.',
+      },
+    ],
+    content: `
+<h2>The short answer</h2>
+<p>The USAJOBS resume builder is safer for applicants who forget required federal fields. An uploaded resume gives you more control over wording, formatting, and the first two pages. Neither option wins automatically. HR does not reward the format by itself. HR verifies whether the resume proves eligibility for the vacancy.</p>
+<p>That means the real question is practical: which version makes it easiest for a federal HR specialist to confirm dates, hours, grade level, specialized experience, and required keywords without hunting through vague language?</p>
+
+<h2>What the USAJOBS resume builder does well</h2>
+<p>The resume builder pushes applicants to include details that private-sector resumes often leave out. For federal hiring, that matters. A civilian resume can say “Program Analyst, 2019–Present.” A federal resume should usually show month and year dates, hours per week, employer information, and duties tied to the announcement.</p>
+<ul>
+  <li><strong>Employment dates:</strong> month/year formatting helps HR verify experience duration.</li>
+  <li><strong>Hours per week:</strong> essential for part-time or mixed experience calculations.</li>
+  <li><strong>Employer details:</strong> useful when HR needs to verify federal or equivalent experience.</li>
+  <li><strong>Structured entries:</strong> less risk of leaving out a required field by accident.</li>
+</ul>
+<p>This is why the builder is often a decent starting point for first-time federal applicants. It reduces basic compliance mistakes.</p>
+
+<h2>Where the resume builder can hurt you</h2>
+<p>The builder can also create bloated resumes. Applicants keep adding duties, older roles, training, and repeated skill lists until the resume reads like a database export. Under the current 2-page federal resume standard, that is risky.</p>
+<p>If your most important specialized experience lands too late, HR may never consider it. The builder does not automatically decide which bullets belong on page one. It records what you enter. You still have to compress and prioritize.</p>
+
+<h2>What an uploaded resume does well</h2>
+<p>An uploaded resume gives you control. You can put the vacancy's most important qualification language near the top, tighten repeated duties, and build a two-page narrative around the exact job announcement.</p>
+<p>This works especially well for competitive GS-11, GS-12, and GS-13 roles where specialized experience needs to be obvious quickly. An uploaded resume can make the first page carry more weight, as long as it does not become a private-sector one-pager missing federal details.</p>
+
+<h2>The uploaded resume mistake that causes problems</h2>
+<p>The most common mistake is uploading a polished civilian resume and assuming it will work on USAJOBS. It usually will not. Federal HR needs evidence, not just branding.</p>
+<ul>
+  <li>Do not remove hours per week.</li>
+  <li>Do not compress dates so far that time-in-grade cannot be verified.</li>
+  <li>Do not replace specialized experience with broad soft skills.</li>
+  <li>Do not make achievements sound impressive but unrelated to the vacancy.</li>
+</ul>
+<p>If an uploaded resume omits those details, it may look cleaner and still screen worse.</p>
+
+<h2>How HR sees both formats</h2>
+<p>HR specialists are not trying to admire your layout. They are checking eligibility. They look for the required experience at the right level, documented for the right amount of time, with enough detail to match the announcement.</p>
+<p>For a deeper view of the review process, read our guide on <a href="/blog/how-hr-screens-federal-resumes">how HR screens federal resumes</a>. The same screening logic applies whether your resume came from the builder or a PDF upload.</p>
+
+<h2>Which format should you choose?</h2>
+<p>Use the USAJOBS resume builder if you are new to federal resumes or if your current resume is missing basic federal fields. Use an uploaded resume if you understand the requirements and need tighter control over the first two pages.</p>
+<p>A strong uploaded resume should still behave like a federal resume. It needs dates, hours, qualifications, grade-level language, and measurable results. A strong builder resume should still be edited. It cannot be a warehouse of every task you have ever performed.</p>
+
+<h2>A simple decision checklist</h2>
+<ul>
+  <li><strong>Choose the builder</strong> if you keep forgetting dates, hours, or employer details.</li>
+  <li><strong>Choose upload</strong> if you need a carefully compressed 2-page resume.</li>
+  <li><strong>Choose upload</strong> if you are tailoring to one competitive announcement.</li>
+  <li><strong>Choose the builder</strong> if the announcement asks for very detailed employment history and you are not confident in your formatting.</li>
+</ul>
+
+<h2>Before you submit</h2>
+<p>Whichever format you choose, check the resume against the vacancy announcement before applying. Confirm that the required specialized experience appears in your resume, that your dates and hours are clear, and that your strongest qualifications appear early enough to survive HR screening.</p>
+<p>You can also compare this against our guides on the <a href="/blog/federal-resume-2-page-limit-2025">2-page federal resume limit</a> and <a href="/blog/top-10-federal-resume-mistakes">federal resume mistakes that lead to rejection</a>.</p>
+<p>ResumeGov's analyzer is designed for exactly this step: paste your resume and the vacancy announcement, then check whether the document proves the right qualifications before you click submit.</p>
+`,
+  },
   // ── Article 1 ──────────────────────────────────────────────────────────────
   {
     slug: 'federal-resume-2-page-limit-2025',

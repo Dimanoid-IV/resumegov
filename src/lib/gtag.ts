@@ -22,6 +22,19 @@ declare global {
 /**
  * Track custom events via GTM dataLayer
  */
+export const pageview = (url: string) => {
+  if (process.env.NODE_ENV !== 'production' && process.env.NEXT_PUBLIC_ENABLE_GA4 !== 'true') {
+    return;
+  }
+
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'page_view',
+      page_path: url,
+    });
+  }
+};
+
 export const trackEvent = ({
   eventName,
   ...params

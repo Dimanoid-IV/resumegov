@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { compressResume, compressResumeIterative } from '@/lib/ai';
-import { event } from '@/lib/gtag';
+import { trackEvent as event } from '@/lib/gtag';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
