@@ -1099,6 +1099,287 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+
+  // ── Article: Federal Resume Keywords ─────────────────────────────────
+  {
+    slug: 'federal-resume-keywords',
+    title: 'Federal Resume Keywords: How to Match Vacancy Announcement Language',
+    description:
+      'Learn how to identify and integrate federal resume keywords from USAJOBS vacancy announcements. This guide explains keyword matching strategies that help HR verify specialized experience within the 2-page limit.',
+    date: '2026-06-22',
+    readingTime: 9,
+    author: 'ResumeGov Editorial Team',
+    tags: ['federal resume keywords', 'USAJOBS keywords', 'vacancy announcement', 'keyword matching', 'specialized experience', 'HR screening', '2-page limit'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'specialized-experience-examples-federal-resume',
+      'federal-resume-2-page-limit-2025',
+      'top-10-federal-resume-mistakes',
+      'how-to-target-gs-pay-grades',
+    ],
+    faqs: [
+      {
+        question: 'What are federal resume keywords and why are they important?',
+        answer: 'Federal resume keywords are specific terms and phrases from the vacancy announcement that HR specialists use to verify you meet specialized experience requirements. Unlike private-sector keywords for ATS scanning, federal keywords are compliance elements — if your resume lacks the exact vocabulary from the announcement, HR may score the corresponding qualification as unmet, resulting in an Ineligible rating.',
+      },
+      {
+        question: 'Where do I find keywords in a USAJOBS vacancy announcement?',
+        answer: 'Keywords are concentrated in four sections: 1) "Qualifications Required" (mandatory specialized experience keywords), 2) "Duties" (contextual keywords), 3) "Selective Placement Factors" (critical mandatory keywords), and 4) "Competencies" (behavioral keywords). The most important keywords come from the specialized experience statements, which HR uses as a verification checklist.',
+      },
+      {
+        question: 'Should I copy keywords verbatim or can I use synonyms?',
+        answer: 'Copy verbatim when possible. HR specialists match resume language against the announcement’s exact vocabulary. Synonyms may not be recognized during structured review. For example, "managed projects" may not satisfy "directed project execution," and "worked with data" may not equal "analyzed complex program data." When the announcement uses specific terminology, mirror it in your resume.',
+      },
+      {
+        question: 'How do I include all required keywords within the 2-page limit?',
+        answer: 'Prioritize mandatory keywords from specialized experience requirements. Combine multiple keywords into single, dense experience bullets using the CCAR (Context, Challenge, Action, Result) format. Use skills sections for technical keywords that are also demonstrated in experience narratives. Remove redundant mentions and focus on keywords that demonstrate grade-level scope and complexity.',
+      },
+      {
+        question: 'What happens if my resume has keywords but not in the right context?',
+        answer: 'Keywords must appear in experience descriptions relevant to the qualification. Listing "SAS" in a skills section without connecting it to "analyzing complex program data" may not satisfy the requirement. Each keyword should be embedded in a duty description that demonstrates its application, with specific dates, hours per week, and quantifiable outcomes.',
+      },
+    ],
+    content: `
+<h1>Federal Resume Keywords: How to Match Vacancy Announcement Language</h1>
+
+<p>Federal resume keywords are not optional — they are the primary mechanism HR specialists use to determine whether you meet the specialized experience requirements listed in the vacancy announcement. Unlike private-sector resumes, where keywords serve as optimization tools, federal resume keywords are compliance elements: if your resume lacks the specific vocabulary from the announcement, HR will score the corresponding qualification as unmet, resulting in an Ineligible rating.</p>
+
+<p>This guide explains how to identify, extract, and integrate federal resume keywords into your 2-page resume without exceeding the word count limit. You will learn where to find keywords in a USAJOBS announcement, how to structure your experience bullets to satisfy HR keyword matching, and which common mistakes cause automatic disqualification.</p>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:36px 0">
+  <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#64748b;margin:0 0 8px">ResumeGov Keyword Analysis</p>
+  <h3 style="font-size:1.25rem;font-weight:700;color:#0f172a;margin:0 0 12px">Check Your Resume Against Target Announcement Keywords</h3>
+  <p style="color:#475569;margin:0 0 20px;font-size:0.95rem">Upload your resume and a target vacancy announcement to see which keywords are missing and how to integrate them within the 2-page limit.</p>
+  <a href="https://www.resumegov.com/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem">Analyze My Resume — Free</a>
+</div>
+
+<h2>Why Keyword Matching Matters in Federal Hiring</h2>
+
+<p>Federal HR specialists use structured checklists when reviewing resumes. These checklists are derived directly from the vacancy announcement's "Qualifications" and "Specialized Experience" sections. Each competency or requirement is treated as a distinct item that must be verified in the resume. The verification process is not interpretive — HR looks for explicit language that matches or closely parallels the announcement's phrasing.</p>
+
+<p>Consider this example from a GS-13 Program Analyst vacancy:</p>
+
+<p><strong>Announcement requirement:</strong> "Experience analyzing complex program data using statistical software to develop performance metrics and brief senior leadership."</p>
+
+<p><strong>Resume statement that passes:</strong> "Analyzed complex program data using SAS and R to develop quarterly performance metrics for 14 agency programs, presenting findings to the Deputy Assistant Secretary in monthly briefings."</p>
+
+<p><strong>Resume statement that fails:</strong> "Worked with data to create reports for management."</p>
+
+<p>The second statement contains none of the required keywords — "analyzing," "complex program data," "statistical software," "performance metrics," or "senior leadership" — and would receive a "not met" determination for that qualification.</p>
+
+<h2>Where to Find Keywords in a USAJOBS Vacancy Announcement</h2>
+
+<p>Keywords are concentrated in specific sections of every federal vacancy announcement. The most critical sections for keyword extraction are:</p>
+
+<h3>1. Qualifications Required (Mandatory Keywords)</h3>
+<p>This section lists the minimum education, experience, and specialized experience requirements. The specialized experience statements are the richest source of mandatory keywords. Extract every verb, noun phrase, and technical term.</p>
+
+<h3>2. Duties (Contextual Keywords)</h3>
+<p>The duties section describes what the position does. While not always part of the qualification checklist, duties keywords help demonstrate alignment with the role's scope and complexity.</p>
+
+<h3>3. Selective Placement Factors (Critical Keywords)</h3>
+<p>These are mandatory requirements that cannot be substituted. Failure to address any selective placement factor results in automatic disqualification. Keywords in this section are non-negotiable.</p>
+
+<h3>4. Competencies (Behavioral Keywords)</h3>
+<p>Many announcements list competencies such as "Attention to Detail," "Written Communication," or "Technical Credibility." Your resume should demonstrate these competencies using the same terminology.</p>
+
+<h2>Keyword Categories and Examples</h2>
+
+<p>Federal resume keywords fall into distinct categories. Understanding these categories helps you prioritize which keywords to include within the 2-page limit.</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin:24px 0">
+  <thead>
+    <tr style="background:#0f172a;color:#fff">
+      <th style="padding:12px 16px;text-align:left">Category</th>
+      <th style="padding:12px 16px;text-align:left">Example Keywords</th>
+      <th style="padding:12px 16px;text-align:left">Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#f8fafc">
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0"><strong>Technical Skills</strong><br><span style="font-size:0.85rem;color:#64748b">Software, systems, methodologies</span></td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">SAS, R, Python, SQL, SharePoint, Tableau, Agile, Scrum, ITIL, ISO 9001</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">High</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0"><strong>Functional Competencies</strong><br><span style="font-size:0.85rem;color:#64748b">Core job functions</span></td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">budget formulation, procurement, contract administration, policy analysis, program evaluation, strategic planning</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">High</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0"><strong>Grade-Level Indicators</strong><br><span style="font-size:0.85rem;color:#64748b">Demonstrate GS-equivalent scope</span></td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">agency-wide, government-wide, cross-functional, multi-stakeholder, $2M+ budget, team of 8+, independently</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">High</td>
+    </tr>
+    <tr>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0"><strong>Outcome Verbs</strong><br><span style="font-size:0.85rem;color:#64748b">Demonstrate achievement</span></td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">developed, implemented, led, managed, reduced, increased, saved, improved, streamlined</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">Medium</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0"><strong>Documentation Terms</strong><br><span style="font-size:0.85rem;color:#64748b">Required federal elements</span></td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">MM/YYYY, hours per week, GS-12, supervisor contact, citizenship, security clearance</td>
+      <td style="padding:12px 16px;border-bottom:1px solid #e2e8f0">Required</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Step-by-Step Keyword Integration Process</h2>
+
+<p>Follow this four-step process to ensure your resume contains all required keywords while staying within the 950–1,050 word target.</p>
+
+<h3>Step 1: Extract and Categorize Keywords</h3>
+<p>Open the vacancy announcement in a text editor. Copy the entire "Qualifications" section. Using a highlighter or spreadsheet, identify:</p>
+<ul>
+  <li><strong>Mandatory keywords:</strong> From specialized experience requirements and selective placement factors</li>
+  <li><strong>Technical keywords:</strong> Software, systems, certifications, methodologies</li>
+  <li><strong>Scope keywords:</strong> Indications of grade-level equivalence (agency-wide, multi-million dollar, etc.)</li>
+</ul>
+
+<h3>Step 2: Map Keywords to Your Experience</h3>
+<p>For each mandatory keyword, identify a specific position in your background where you performed work involving that keyword. Create a mapping table:</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin:20px 0">
+  <thead>
+    <tr style="background:#f1f5f9">
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">Keyword from Announcement</th>
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">My Position</th>
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">Date Range</th>
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">Evidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">analyzing complex program data</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Program Analyst, Agency X</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">03/2020–06/2023</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Quarterly performance metrics for 14 programs</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">using statistical software</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Data Analyst, Organization Y</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">01/2018–02/2020</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">SAS and R for regression analysis</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Step 3: Rewrite Experience Bullets with Keywords</h3>
+<p>Transform your existing experience descriptions into keyword-rich statements using the CCAR (Context, Challenge, Action, Result) format:</p>
+
+<div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#15803d;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">Before Keyword Integration</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Responsible for data analysis and reporting. Created dashboards and presented to management.</p>
+</div>
+
+<div style="background:#dbeafe;border-left:4px solid #3b82f6;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0">
+  <p style="font-weight:700;color:#1e40af;margin:0 0 8px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em">After Keyword Integration</p>
+  <p style="margin:0;color:#374151;font-size:0.9rem">Analyzed complex program data using SAS and R statistical software to develop quarterly performance metrics for 14 agency programs; presented findings in monthly briefings to senior leadership including the Deputy Assistant Secretary.</p>
+</div>
+
+<h3>Step 4: Verify Coverage and Word Count</h3>
+<p>Cross-reference your revised resume against your keyword extraction list. Ensure every mandatory keyword appears at least once. Then check the total word count — it should be between 950 and 1,050 words to comply with the <a href="/blog/federal-resume-2-page-limit-2025">2-page federal resume limit</a>.</p>
+
+<h2>Common Keyword Mistakes That Cause Ineligible Ratings</h2>
+
+<p>The following errors consistently result in disqualification during HR keyword screening:</p>
+
+<h3>1. Using Synonyms Instead of Exact Terminology</h3>
+<p>HR specialists match against the announcement's exact vocabulary. "Managed projects" does not equal "directed project execution." "Worked with data" does not equal "analyzed complex program data." When in doubt, use the announcement's phrasing verbatim.</p>
+
+<h3>2. Burying Keywords in Unrelated Context</h3>
+<p>Keywords must appear in experience descriptions relevant to the qualification. Listing "SAS" in a skills section without connecting it to "analyzing complex program data" may not satisfy the requirement. The keyword must be embedded in a duty description that demonstrates its application.</p>
+
+<h3>3. Overlooking Selective Placement Factors</h3>
+<p>These are mandatory and non-negotiable. If the announcement lists "Experience with federal procurement regulations (FAR)" as a selective placement factor, your resume must explicitly state "Applied Federal Acquisition Regulations (FAR) to..." — not "familiar with government contracting rules."</p>
+
+<h3>4. Exceeding Keyword Density at the Expense of Specificity</h3>
+<p>Some applicants create "keyword soup" — stuffing keywords without context. This triggers HR scrutiny and may result in a "not sufficiently documented" determination. Every keyword should be part of a complete, specific experience statement.</p>
+
+<h2>Keyword Integration Within the 2-Page Limit</h2>
+
+<p>The September 2025 2-page rule (950–1,050 words) creates a strategic challenge: you must include all mandatory keywords while maintaining conciseness. The solution is selective integration:</p>
+
+<ol>
+  <li><strong>Prioritize mandatory keywords</strong> from the specialized experience requirements. These are non-negotiable.</li>
+  <li><strong>Combine multiple keywords</strong> into single, dense experience bullets. Instead of separate bullets for "analyzed data," "used statistical software," and "developed metrics," create one bullet that incorporates all three.</li>
+  <li><strong>Use skills sections strategically.</strong> Technical keywords (software, certifications) can be listed in a skills section if they are also demonstrated in experience bullets. The skills section serves as a keyword index; the experience section provides the evidentiary context.</li>
+  <li><strong>Remove redundant keywords.</strong> If "project management" appears five times in your resume, consolidate to two or three instances with stronger context.</li>
+</ol>
+
+<h2>Tools for Keyword Analysis and Verification</h2>
+
+<p>Several tools can help you identify and integrate keywords effectively:</p>
+
+<h3>Manual Extraction with Spreadsheet</h3>
+<p>Copy the announcement text into a spreadsheet, highlight keywords, and track which ones you've addressed. This method gives you full control but is time-consuming.</p>
+
+<h3>Word Frequency Analysis</h3>
+<p>Use text analysis tools to identify the most frequent nouns and verbs in the announcement. Focus on technical terms and competency language that appears repeatedly.</p>
+
+<h3>ResumeGov Compatibility Scoring</h3>
+<p>Our AI-powered analyzer compares your resume against the target vacancy announcement, identifying missing keywords and suggesting specific integration points within your existing experience narratives. The tool respects the 2-page limit and flags compliance issues before submission.</p>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
+  <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check Your Keyword Coverage Before HR Does</p>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">ResumeGov analyzes keyword alignment between your resume and the target vacancy announcement, identifying gaps and suggesting integration strategies.</p>
+  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+</div>
+
+<h2>Advanced Keyword Strategy for Competitive Positions</h2>
+
+<p>For GS-12 through GS-15 positions, keyword integration must demonstrate grade-level equivalency through scope indicators:</p>
+
+<h3>GS-12/13 Keywords</h3>
+<ul>
+  <li><strong>Agency-wide:</strong> Implemented agency-wide policy affecting 500+ employees</li>
+  <li><strong>Multi-stakeholder:</strong> Coordinated with 8+ stakeholder groups across 3 agencies</li>
+  <li><strong>$1M+ budget:</strong> Managed $2.3M annual operating budget</li>
+  <li><strong>Independent judgment:</strong> Made independent determinations on complex regulatory interpretations</li>
+</ul>
+
+<h3>GS-14/15 Keywords</h3>
+<ul>
+  <li><strong>Government-wide:</strong> Developed government-wide guidance adopted by OMB</li>
+  <li><strong>Strategic leadership:</strong> Provided strategic leadership for enterprise transformation initiative</li>
+  <li><strong>Senior executive briefings:</strong> Briefed Assistant Secretary and Deputy Under Secretary quarterly</li>
+  <li><strong>Policy development:</strong> Authored 4 agency directives and one regulatory revision</li>
+</ul>
+
+<p>For detailed guidance on grade-level targeting, see our article on <a href="/blog/how-to-target-gs-pay-grades">How to Target GS Pay Grade Requirements in Your Federal Resume</a>.</p>
+
+<h2>Keyword Documentation for HR Verification</h2>
+
+<p>Remember that keywords are not just for automated screening — they provide the documentation HR needs to verify your qualifications. Each keyword should be supported by:</p>
+
+<ul>
+  <li><strong>Specific dates</strong> (MM/YYYY format) when you performed the keyword-relevant work</li>
+  <li><strong>Hours per week</strong> to establish full-time equivalency</li>
+  <li><strong>Quantifiable outcomes</strong> that demonstrate the impact of your keyword-relevant activities</li>
+  <li><strong>Grade-level context</strong> showing the complexity and scope of your responsibility</li>
+</ul>
+
+<p>For positions requiring time-in-grade verification, ensure your resume includes the documentation elements explained in our guide on <a href="/blog/federal-time-in-grade-rules">Federal Time-in-Grade Rules Explained</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>Federal resume keywords are compliance elements, not optimization tricks. Their presence or absence determines whether HR can verify that you meet the specialized experience requirements in the vacancy announcement. Effective keyword integration requires:</p>
+
+<ol>
+  <li>Systematic extraction of mandatory keywords from the announcement</li>
+  <li>Strategic mapping of keywords to specific experience entries</li>
+  <li>CCAR-formatted experience bullets that embed keywords in context</li>
+  <li>Verification that all mandatory keywords are addressed within the 950–1,050 word limit</li>
+  <li>Inclusion of grade-level scope indicators for competitive GS-12+ positions</li>
+</ol>
+
+<p>The federal hiring process is documentation-driven. Experience that is real but not documented with the correct keywords does not exist from HR's perspective. Before submitting any application, verify that your resume contains the specific vocabulary from the announcement and that each keyword appears in an appropriate evidentiary context.</p>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
