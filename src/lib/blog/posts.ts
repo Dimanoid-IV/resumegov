@@ -1380,6 +1380,231 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+
+  // ── Article: GS‑12 Resume Example ───────────────────────────────────────────
+  {
+    slug: 'gs-12-resume-example',
+    title: 'GS‑12 Resume Example with Specialized Experience: Federal Hiring Guide 2026',
+    description:
+      'Complete GS‑12 federal resume example with specialized experience templates, OPM qualification standards, USAJOBS compliance, and keyword integration strategies for Program Analyst, Budget Analyst, and Contract Specialist positions.',
+    date: '2026-06-29',
+    readingTime: 11,
+    author: 'ResumeGov Editorial Team',
+    tags: ['GS‑12 resume', 'specialized experience', 'federal resume template', 'OPM qualification standards', 'USAJOBS compliance', 'program analyst', 'budget analyst', 'contract specialist'],
+    relatedSlugs: [
+      'federal-resume-keywords',
+      'specialized-experience-examples-federal-resume',
+      'how-to-target-gs-pay-grades',
+      'federal-resume-2-page-limit-2025',
+      'how-hr-screens-federal-resumes',
+    ],
+    faqs: [
+      {
+        question: 'What is GS‑12 specialized experience and how do I demonstrate it?',
+        answer: 'GS‑12 specialized experience is work at the GS‑11 level (or equivalent) that demonstrates independent judgment, complex analysis, and program-level responsibility. You must show 52 weeks at the next lower grade with duties that match the target announcement’s specialized experience statements, using specific vocabulary and quantifiable outcomes.',
+      },
+      {
+        question: 'How do I convert private-sector experience to GS‑12 equivalency?',
+        answer: 'Map private-sector duties to federal grade indicators: agency‑wide scope ($1M+ budgets, teams of 5‑10), independent judgment on complex issues, policy development or implementation, and multi‑stakeholder coordination. Use OPM classification standards to identify comparable responsibility levels.',
+      },
+      {
+        question: 'What are the most common mistakes in GS‑12 resume submissions?',
+        answer: '1) Missing grade‑level scope indicators (agency‑wide, $1M+, independent), 2) Using private‑section terminology instead of federal keywords, 3) Failing to document 52 weeks at GS‑11 equivalent, 4) Omitting selective placement factors, 5) Exceeding the 2‑page limit with irrelevant details.',
+      },
+      {
+        question: 'How should I structure a GS‑12 resume for USAJOBS?',
+        answer: 'Lead with current GS‑11 (or equivalent) position showing specialized experience keywords. Include month/year dates, hours per week, supervisor contact. Use CCAR format for experience bullets with quantifiable results. Keep within 950‑1,050 words (2 pages). Include skills section with technical keywords demonstrated in experience.',
+      },
+      {
+        question: 'What if I don’t have exact GS‑11 time‑in‑grade?',
+        answer: 'You may qualify through “equivalent experience” if your private‑sector or military duties demonstrate GS‑11 level responsibility. Document scope, budget, team size, and independence. Provide supervisor verification details. Be prepared for HR to scrutinize equivalency claims more closely than federal time‑in‑grade.',
+      },
+    ],
+    content: `
+<h1>GS‑12 Resume Example with Specialized Experience: Federal Hiring Guide 2026</h1>
+
+<p>A GS‑12 federal resume must demonstrate 52 weeks of specialized experience at the GS‑11 level (or equivalent) while staying within the 2‑page limit. This guide provides a complete GS‑12 resume example for Program Analyst, Budget Analyst, and Contract Specialist positions, with OPM‑compliant language, keyword integration strategies, and documentation required for HR verification.</p>
+
+<p>GS‑12 positions represent the first fully independent professional level in the federal system. Unlike GS‑11 roles where work is reviewed for technical adequacy, GS‑12 employees exercise independent judgment on complex issues, develop agency‑wide procedures, and manage programs or projects with measurable impact. Your resume must reflect this scope through specific vocabulary and quantifiable achievements.</p>
+
+<h2>GS‑12 Specialized Experience Requirements (OPM Standards)</h2>
+
+<p>OPM defines GS‑12 specialized experience as work that demonstrates:</p>
+
+<ul>
+  <li><strong>Independent judgment</strong> on complex technical or programmatic issues</li>
+  <li><strong>Agency‑wide or program‑wide responsibility</strong> affecting multiple offices or functions</li>
+  <li><strong>Analysis and evaluation</strong> of programs, policies, or procedures</li>
+  <li><strong>Development of new methods, criteria, or approaches</strong> to solve problems</li>
+  <li><strong>Supervision or team leadership</strong> (not required for all GS‑12 positions)</li>
+</ul>
+
+<p>For time‑in‑grade eligibility, you must show 52 weeks at GS‑11 (or equivalent). Private‑sector experience can qualify if it demonstrates comparable scope and responsibility.</p>
+
+<h2>Complete GS‑12 Resume Example: Program Analyst (0510 Series)</h2>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:36px 0">
+  <h3 style="margin-top:0;color:#0f172a">PROGRAM ANALYST, GS‑0510‑12</h3>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 16px">U.S. Department of Health and Human Services, Office of the Assistant Secretary for Planning and Evaluation (ASPE)</p>
+  
+  <h4>Specialized Experience Summary</h4>
+  <p>52 weeks of specialized experience at GS‑11 equivalent performing program evaluation, policy analysis, and data‑driven recommendations for federal health programs. Demonstrated independent judgment in analyzing complex program data, developing agency‑wide performance metrics, and briefing senior leadership on findings.</p>
+  
+  <h4>Experience Bullets (CCAR Format)</h4>
+  <ul>
+    <li><strong>Analyzed complex program data</strong> for 14 agency health programs using SAS and R statistical software; developed quarterly performance metrics that identified $2.3M in efficiency improvements and informed FY2025 budget decisions.</li>
+    <li><strong>Led agency‑wide evaluation</strong> of the Maternal, Infant, and Early Childhood Home Visiting (MIECHV) program across 8 regional offices; coordinated with 12+ stakeholder groups to develop uniform data‑collection protocols adopted by OMB in 2025.</li>
+    <li><strong>Authored policy analysis briefs</strong> on telehealth expansion under the 21st Century Cures Act; briefed Deputy Assistant Secretary quarterly on implementation barriers and recommended regulatory changes adopted in CMS FY2026 rulemaking.</li>
+    <li><strong>Managed $1.8M contract</strong> for external program evaluation; developed statement of work, evaluated vendor proposals, and monitored deliverables ensuring compliance with Federal Acquisition Regulations (FAR) Part 16.</li>
+  </ul>
+</div>
+
+<h2>GS‑12 Budget Analyst Example (0560 Series)</h2>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:36px 0">
+  <h3 style="margin-top:0;color:#0f172a">BUDGET ANALYST, GS‑0560‑12</h3>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 16px">U.S. Department of Veterans Affairs, Office of Management and Budget</p>
+  
+  <h4>Specialized Experience Summary</h4>
+  <p>52 weeks of specialized experience at GS‑11 equivalent performing budget formulation, execution, and analysis for VA medical programs. Demonstrated independent judgment in interpreting appropriation law, developing spend plans for $45M+ accounts, and preparing Congressional justification materials.</p>
+  
+  <h4>Experience Bullets (CCAR Format)</h4>
+  <ul>
+    <li><strong>Formulated and executed</strong> $45.2M annual budget for VA Community Care Program; developed monthly spend plans, tracked obligations against apportionments, and identified $3.7M in reprogramming opportunities approved by OMB.</li>
+    <li><strong>Analyzed complex financial data</strong> from 12 VA medical centers using Microsoft Power BI and Oracle Hyperion; created agency‑wide dashboard that reduced reporting errors by 42% and improved fiscal year closeout timeliness.</li>
+    <li><strong>Prepared Congressional justification</strong> materials for the FY2026 President’s Budget Request; drafted 14 program narratives and 8‑year funding tables that survived House Appropriations Committee review without modification.</li>
+    <li><strong>Developed agency‑wide guidance</strong> on continuing resolution (CR) operations under the Anti‑Deficiency Act; trained 25+ budget analysts across 6 administrations on proper obligational authority during funding gaps.</li>
+  </ul>
+</div>
+
+<h2>GS‑12 Contract Specialist Example (1102 Series)</h2>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:36px 0">
+  <h3 style="margin-top:0;color:#0f172a">CONTRACT SPECIALIST, GS‑1102‑12</h3>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 16px">U.S. Department of Defense, Defense Logistics Agency (DLA)</p>
+  
+  <h4>Specialized Experience Summary</h4>
+  <p>52 weeks of specialized experience at GS‑11 equivalent performing pre‑award and post‑award contracting functions for defense acquisition programs. Demonstrated independent judgment in applying Federal Acquisition Regulations (FAR), developing evaluation criteria for competitive procurements, and administering contracts up to $15M.</p>
+  
+  <h4>Experience Bullets (CCAR Format)</h4>
+  <ul>
+    <li><strong>Administered 15+ contracts</strong> valued at $15M for IT hardware and software maintenance; conducted monthly performance evaluations, negotiated equitable adjustments, and processed modifications ensuring compliance with FAR Part 42.</li>
+    <li><strong>Developed source selection plans</strong> for $8.5M competitive procurement of warehouse management systems; created evaluation criteria, chaired technical evaluation panel, and awarded contract within 90‑day statutory timeframe.</li>
+    <li><strong>Applied Federal Acquisition Regulations</strong> (FAR) and Defense Federal Acquisition Regulation Supplement (DFARS) to resolve complex contractual issues; authored 12 determination and findings (D&F) documents approved by contracting officer.</li>
+    <li><strong>Led agency‑wide training</strong> on simplified acquisition procedures for micro‑purchases under $10,000; developed handbook adopted by 3 DLA directorates reducing improper payments by 67%.</li>
+  </ul>
+</div>
+
+<h2>Converting Private‑Sector Experience to GS‑12 Equivalency</h2>
+
+<p>If you lack federal time‑in‑grade, you can demonstrate GS‑12 equivalency through private‑sector, military, or non‑profit experience. Key indicators HR looks for:</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin:20px 0">
+  <thead>
+    <tr style="background:#f1f5f9">
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">GS‑12 Indicator</th>
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">Private‑Sector Equivalent</th>
+      <th style="padding:10px 12px;border:1px solid #cbd5e1;text-align:left">How to Document</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Agency‑wide scope</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Company‑wide initiative affecting 500+ employees</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">“Led company‑wide implementation of Salesforce CRM across 12 departments (600 users)”</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">$1M+ budget responsibility</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Managed P&L or project budget over $1M</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">“Managed $2.3M annual operating budget with 94% utilization rate”</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Independent judgment</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Made final decisions on complex technical issues without supervisor approval</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">“Made independent determinations on regulatory compliance issues affecting 200+ client accounts”</td>
+    </tr>
+    <tr style="background:#f8fafc">
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Policy development</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">Created company policies, procedures, or standards</td>
+      <td style="padding:10px 12px;border:1px solid #cbd5e1">“Developed and implemented company‑wide data security policy adopted by executive leadership”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>GS‑12 Keyword Integration Strategy</h2>
+
+<p>GS‑12 announcements contain specific vocabulary that HR uses as verification checkpoints. Your resume must include these keywords in context:</p>
+
+<h3>Mandatory GS‑12 Keywords (Program Analyst Example)</h3>
+<ul>
+  <li><strong>Analyzed complex program data</strong> – not “worked with data”</li>
+  <li><strong>Developed agency‑wide performance metrics</strong> – not “created reports”</li>
+  <li><strong>Briefed senior leadership</strong> – not “presented to management”</li>
+  <li><strong>Coordinated with multiple stakeholders</strong> – not “worked with teams”</li>
+  <li><strong>Managed contract</strong> – not “oversaw vendor”</li>
+</ul>
+
+<h3>Grade‑Level Scope Indicators</h3>
+<ul>
+  <li><strong>Agency‑wide</strong> (not “department‑wide”)</li>
+  <li><strong>Government‑wide</strong> (for GS‑13/14 equivalency claims)</li>
+  <li><strong>$1M+ budget</strong> (specify exact amount)</li>
+  <li><strong>Team of 5‑10</strong> (or “supervised 8 staff”)</li>
+  <li><strong>Independent judgment</strong> (not “with supervision”)</li>
+</ul>
+
+<h2>Common GS‑12 Resume Mistakes That Cause Ineligible Ratings</h2>
+
+<ol>
+  <li><strong>Missing time‑in‑grade documentation:</strong> 52 weeks at GS‑11 must be clearly shown with month/year dates and hours per week.</li>
+  <li><strong>Private‑sector terminology:</strong> Using “profit & loss” instead of “budget formulation and execution.”</li>
+  <li><strong>Omitting selective placement factors:</strong> If announcement requires “Experience with Federal Acquisition Regulations (FAR),” your resume must say “Applied FAR…” not “familiar with contracting rules.”</li>
+  <li><strong>Exceeding 2‑page limit with irrelevant details:</strong> Including outdated positions, generic skills lists, or training not required for the target grade.</li>
+  <li><strong>Vague outcomes:</strong> “Improved efficiency” without quantifiable metrics like “reduced processing time by 35%.”</li>
+</ol>
+
+<h2>Verification Checklist Before Submission</h2>
+
+<div style="background:#f0fdf4;border:1px solid #22c55e;border-radius:12px;padding:24px 28px;margin:36px 0">
+  <h3 style="margin-top:0;color:#15803d">GS‑12 Resume Compliance Checklist</h3>
+  <ul style="color:#374151">
+    <li><input type="checkbox"> 52 weeks at GS‑11 (or equivalent) clearly documented with month/year dates</li>
+    <li><input type="checkbox"> Hours per week specified for each position (usually 40 for full‑time)</li>
+    <li><input type="checkbox"> Specialized experience keywords from announcement appear verbatim in experience bullets</li>
+    <li><input type="checkbox"> Grade‑level scope indicators present (agency‑wide, $1M+, independent judgment)</li>
+    <li><input type="checkbox"> Selective placement factors addressed with exact terminology</li>
+    <li><input type="checkbox"> Total word count 950–1,050 (2‑page limit)</li>
+    <li><input type="checkbox"> Supervisor name, phone, and permission to contact included (or explanation why not)</li>
+    <li><input type="checkbox"> U.S. citizenship stated if required</li>
+    <li><input type="checkbox"> Security clearance level and investigation date if applicable</li>
+  </ul>
+</div>
+
+<h2>Next Steps: Tailoring Your GS‑12 Resume</h2>
+
+<p>Once you have a compliant GS‑12 resume template, tailor it for each vacancy announcement:</p>
+
+<ol>
+  <li><strong>Extract mandatory keywords</strong> from the announcement’s specialized experience section</li>
+  <li><strong>Map keywords</strong> to your experience bullets using the CCAR format</li>
+  <li><strong>Verify grade‑level equivalency</strong> – ensure your examples demonstrate GS‑12 scope</li>
+  <li><strong>Check 2‑page compliance</strong> – stay within 950‑1,050 words</li>
+  <li><strong>Use ResumeGov compatibility scoring</strong> to identify gaps before HR does</li>
+</ol>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
+  <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Verify Your GS‑12 Resume Compliance</p>
+  <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">ResumeGov analyzes your resume against GS‑12 vacancy announcements, identifying missing keywords, scope indicators, and documentation requirements.</p>
+  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My GS‑12 Resume — Free</a>
+</div>
+
+<p>GS‑12 positions are competitive because they represent career‑level responsibility in the federal system. Your resume must prove not only that you performed the duties, but that you performed them at the GS‑12 scope and complexity level. Use this example as a template, then tailor it with announcement‑specific keywords and quantifiable outcomes.</p>
+
+<hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
+
+<p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
+`,
+  },
 ];
 
 export default POSTS;
