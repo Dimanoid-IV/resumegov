@@ -1605,6 +1605,150 @@ const POSTS: BlogPost[] = [
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
 `,
   },
+  {
+    slug: 'federal-resume-writing-guide-2026',
+    title: 'How to Write a Federal Resume for US Government Service: Step-by-Step Guide 2026',
+    description: 'Step-by-step guide to writing a federal resume that passes HR screening in 2026. Covers USAJOBS resume builder, uploaded resumes, keyword optimization, and compliance with the 2-page limit.',
+    date: '2026-06-29',
+    readingTime: 10,
+    author: 'ResumeGov Editorial Team',
+    tags: ['federal resume writing', 'USAJOBS resume builder', 'government job application', 'federal resume guide', 'USAJOBS', 'HR screening'],
+    relatedSlugs: [
+      'usajobs-resume-builder-vs-uploaded-resume',
+      'federal-resume-2-page-limit-2025',
+      'how-to-target-gs-pay-grades',
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between a federal resume and a civilian resume?',
+        answer: 'Federal resumes are verification documents designed to prove eligibility against specific vacancy announcements. They require detailed information such as month/year dates, hours per week, employer details, and specialized experience language. Civilian resumes focus on achievements and brevity, while federal resumes prioritize completeness and compliance.',
+      },
+      {
+        question: 'Should I use the USAJOBS resume builder or upload my own resume?',
+        answer: 'For 2026, we recommend a hybrid approach: use the USAJOBS builder as a first draft to capture all required federal fields, then export and edit the content into a tighter, two‑page uploaded resume that highlights the most relevant qualifications. This satisfies both ATS scanning and human readability.',
+      },
+      {
+        question: 'What are the most common mistakes in federal resumes in 2026?',
+        answer: 'The top mistakes include assuming civilian resume rules apply, omitting hours per week, using vague language like "responsible for," ignoring the 2‑page guideline, reusing the same resume for every vacancy, and neglecting ATS optimization by using fancy formatting that confuses automated parsers.',
+      },
+      {
+        question: 'How can I optimize my resume for Applicant Tracking Systems (ATS)?',
+        answer: 'Use standard headings (e.g., "Work Experience," "Education"), avoid tables and text boxes, save as a PDF unless Word is specified, and integrate keywords from the vacancy announcement naturally into your bullet points. Place the most important keywords within the first two pages.',
+      },
+    ],
+    content: `<h1>How to Write a Federal Resume for US Government Service: Step-by-Step Guide 2026</h1>
+<h2>Introduction</h2>
+<p>Writing a federal resume is a fundamentally different task than preparing a civilian resume. Where private-sector hiring often values brevity and achievements, federal HR specialists are tasked with verifying eligibility against specific vacancy announcements. Your resume must prove that you meet the exact qualifications, specialized experience, and regulatory requirements listed in the job posting. This step-by-step guide will walk you through the process of crafting a federal resume that passes HR screening and increases your chances of landing a government job in 2026.</p>
+<p><strong>What’s new in 2026:</strong> The Office of Personnel Management (OPM) has emphasized clearer formatting standards and encouraged the use of the USAJOBS resume builder’s enhanced export features. Additionally, many agencies now employ Applicant Tracking Systems (ATS) that scan resumes for keyword matches before human review. This guide incorporates the latest best practices to navigate these changes.</p>
+<h2>Step 1: Analyze the Vacancy Announcement</h2>
+<p>Before you write a single word, you need to understand what HR will be looking for. Download the vacancy announcement from USAJOBS.gov and focus on these sections:</p>
+<ul>
+<li><strong>Qualifications:</strong> Required specialized experience, education, or combination.</li>
+<li><strong>Duties:</strong> The actual tasks you’ll perform—these inform the keywords you must include.</li>
+<li><strong>How to Apply:</strong> Any format or page‑length instructions (e.g., the current 2‑page federal resume standard).</li>
+<li><strong>Required Documents:</strong> Citizenship, veterans’ preference, or other supporting paperwork.</li>
+</ul>
+<p>Create a checklist of every qualification, keyword, and required detail. This checklist will guide your writing.</p>
+<h2>Step 2: Gather Your Information</h2>
+<p>Federal resumes demand specific data that civilian resumes often omit. Collect the following for each position you’ve held:</p>
+<ul>
+<li><strong>Employer name and address</strong></li>
+<li><strong>Employment dates:</strong> month/year to month/year (e.g., June 2019 – March 2026)</li>
+<li><strong>Hours per week:</strong> essential for part‑time or multiple‑job calculations</li>
+<li><strong>Supervisor name and contact information</strong> (optional but recommended)</li>
+<li><strong>Grade level</strong> (if you held a federal position)</li>
+<li><strong>Detailed duties and accomplishments</strong> that match the vacancy’s specialized experience</li>
+</ul>
+<p>Organize this information in a spreadsheet or document so you can easily reference it while writing.</p>
+<h2>Step 3: Choose the Right Format</h2>
+<p>You have two main options: the USAJOBS resume builder or an uploaded resume.</p>
+<ul>
+<li><strong>USAJOBS Resume Builder:</strong> A structured online tool that prompts you for federal‑specific fields. It reduces the risk of omitting required details but can produce bloated, unfocused content if you’re not careful.</li>
+<li><strong>Uploaded Resume:</strong> A Word or PDF document you create yourself. This gives you full control over wording, formatting, and the crucial first two pages, but you must ensure you include all federal data points.</li>
+<li><strong>Alternative Paths:</strong> Some agencies accept the ResumeBuilder.gov format or require specific forms like the OF‑612. Always check the vacancy announcement for format instructions.</li>
+</ul>
+<p><strong>Recommendation for 2026:</strong> Use the USAJOBS builder as a first draft to capture all required fields, then export and edit the content into a tighter, two‑page uploaded resume that highlights the most relevant qualifications. This hybrid approach satisfies both ATS scanning and human readability.</p>
+<h2>Step 4: Write Each Section with HR Screening in Mind</h2>
+<h3>Contact Information</h3>
+<p>Include your name, address, phone, email, and citizenship status. If you’re claiming veterans’ preference, note it here.</p>
+<h3>Summary / Objective</h3>
+<p>Write a brief (2–3 sentence) statement that aligns your experience with the vacancy’s requirements. Example: “Senior Program Analyst with 8 years of specialized experience in federal budget formulation and execution, seeking a GS‑13 Budget Analyst role at the Department of Health and Human Services.”</p>
+<h3>Work Experience</h3>
+<p>This is the most important section. For each relevant position:</p>
+<ul>
+<li><strong>Job title, employer, location, dates, hours per week</strong></li>
+<li><strong>Bulleted duties</strong> that mirror the vacancy’s specialized experience. Use the exact keywords from the announcement.</li>
+<li><strong>Accomplishments</strong> that quantify your impact (e.g., “Reduced processing time by 30%,” “Managed a $2M annual budget”).</li>
+<li><strong>Include non‑federal experience</strong> if it demonstrates equivalent skills.</li>
+</ul>
+<p><strong>Example entry for an IT Specialist:</strong></p>
+<pre><code>IT Specialist (GS‑2210‑12)
+Department of Commerce, Washington, DC
+January 2020 – Present | 40 hours per week
+- Managed agency‑wide migration to cloud‑based collaboration tools (Microsoft 365), improving remote‑work readiness by 40%.
+- Applied NIST SP 800‑53 security controls to 15+ systems, achieving Authority to Operate (ATO) for each.
+- Led cross‑functional team of 5 developers in agile DevOps implementation, reducing deployment cycles from 4 weeks to 3 days.
+</code></pre>
+<h3>Education</h3>
+<p>List degrees, institutions, graduation dates. If the vacancy requires specific coursework or credits, detail them here.</p>
+<h3>Additional Sections</h3>
+<ul>
+<li><strong>Licenses and Certifications</strong></li>
+<li><strong>Training</strong> relevant to the job</li>
+<li><strong>Awards</strong></li>
+<li><strong>Professional Affiliations</strong></li>
+</ul>
+<h2>Step 5: Optimize for Keywords and Readability</h2>
+<p>HR specialists and ATS software scan for keywords that match the announcement. Integrate them naturally:</p>
+<ul>
+<li>Use the exact terminology from the vacancy (e.g., “budget formulation,” “procurement oversight,” “stakeholder engagement”).</li>
+<li>Place the most important keywords in the first two pages.</li>
+<li>Avoid jargon that isn’t in the announcement.</li>
+<li>Keep sentences clear and concise. Federal resumes are legal documents; clarity trumps creativity.</li>
+</ul>
+<p><strong>ATS‑Friendly Formatting Tips:</strong>
+- Use standard headings (e.g., “Work Experience,” “Education”) rather than creative titles.
+- Avoid tables, text boxes, or complex graphics that may confuse parsers.
+- Save your file as a PDF (unless the announcement specifies Word) to preserve formatting.</p>
+<h2>Step 6: Review for Compliance</h2>
+<p>Before submitting, verify:</p>
+<ul>
+<li><strong>Page length:</strong> Does your resume fit within the current federal standard (typically 2 pages)? Exceptions exist for senior executive (SES) or highly technical roles where additional pages are acceptable.</li>
+<li><strong>Required fields:</strong> Have you included month/year dates, hours per week, employer details?</li>
+<li><strong>Keywords:</strong> Does each bullet point tie back to the vacancy’s qualifications?</li>
+<li><strong>Formatting:</strong> Is the document easy to read with consistent headings and bullet points?</li>
+<li><strong>Proofreading:</strong> Are there spelling or grammatical errors?</li>
+</ul>
+<p>Consider asking a colleague who understands federal hiring to review your resume.</p>
+<h2>Step 7: Submit and Track</h2>
+<p>Once your resume is ready, upload it to USAJOBS and complete the application questionnaire. Save a copy of your submission and note the confirmation number. Monitor your USAJOBS account for status updates.</p>
+<h2>Common Mistakes to Avoid in 2026</h2>
+<ul>
+<li><strong>Assuming civilian resume rules apply.</strong> Federal HR looks for verification, not persuasion.</li>
+<li><strong>Omitting hours per week.</strong> This can lead to underestimation of your experience.</li>
+<li><strong>Using vague language.</strong> “Responsible for” doesn’t tell HR what you actually did.</li>
+<li><strong>Ignoring the 2‑page guideline.</strong> If your most relevant experience is on page 3, HR may never see it.</li>
+<li><strong>Reusing the same resume for every vacancy.</strong> Tailoring is non‑negotiable.</li>
+<li><strong>Neglecting ATS optimization.</strong> Fancy formatting can cause your resume to be rejected before a human sees it.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>A well‑crafted federal resume is your ticket to a government career. By following these steps—analyzing the vacancy, gathering complete data, choosing the right format, writing with HR screening in mind, optimizing keywords, reviewing for compliance, and submitting carefully—you’ll create a document that proves your eligibility and moves you closer to the job you want. Remember, the goal isn’t to impress with flair; it’s to verify with precision.</p>
+<h2>Next Steps</h2>
+<ol>
+<li>Download a vacancy announcement from USAJOBS.gov.</li>
+<li>Use the checklist in Step 1 to identify requirements.</li>
+<li>Draft your resume using the USAJOBS builder, then refine it into a two‑page uploaded version.</li>
+<li>Ask a federal‑hiring mentor or career counselor to review your draft.</li>
+<li>Submit your application and prepare for the next stages of the federal hiring process.</li>
+</ol>
+<h2>Additional Resources</h2>
+<ul>
+<li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/federal-resumes/">OPM Federal Resume Guide</a></li>
+<li><a href="https://www.usajobs.gov/Help/">USAJOBS Help Center</a></li>
+<li><a href="https://www.resumebuilder.gov/">ResumeBuilder.gov</a> (alternative format for some agencies)</li>
+</ul>
+`,
+  }
 ];
 
 export default POSTS;
