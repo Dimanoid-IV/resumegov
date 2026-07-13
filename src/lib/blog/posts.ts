@@ -39,6 +39,80 @@ export function getRelatedPosts(slugs: string[]): BlogPost[] {
 const POSTS: BlogPost[] = [
 
   {
+    slug: 'federal-resume-format-2026-chronological-functional-combination',
+    title: 'Federal Resume Format 2026: Chronological, Functional, and Combination Examples',
+    description:
+      'Compare chronological, functional, and combination federal resume formats for 2026. Learn which structure works best for USAJOBS, HR screening, and specialized experience.',
+    date: '2026-07-13',
+    readingTime: 9,
+    author: 'ResumeGov Editorial Team',
+    tags: ['federal resume format', 'USAJOBS', 'chronological resume', 'functional resume', 'government jobs'],
+    relatedSlugs: ['usajobs-resume-builder-pros-cons-2026', 'federal-resume-writing-guide-2026', 'federal-resume-2-page-limit-2025'],
+    faqs: [
+      { question: 'What is the best federal resume format in 2026?', answer: 'For most applicants, a reverse-chronological or combination format works best because federal HR can verify dates, hours per week, grade level, and specialized experience quickly.' },
+      { question: 'Can I use a functional resume for USAJOBS?', answer: 'A purely functional resume is risky for federal applications because it can hide dates and employment context. Use functional skill groups only inside a combination format.' },
+      { question: 'Should a federal resume be two pages?', answer: 'Yes, current best practice is to keep the strongest qualification evidence within the first two pages, especially specialized experience matching the vacancy announcement.' },
+      { question: 'Do I need to tailor the format for each vacancy?', answer: 'Yes. Keep the structure consistent, but reorder bullets and keywords so the most relevant specialized experience appears early.' },
+    ],
+    content: `
+<h2>The short answer</h2>
+<p>The best federal resume format in 2026 is the one that lets HR verify your eligibility fastest. For most applicants, that means a reverse-chronological format with targeted bullets. For career changers or applicants with mixed experience, a combination format is safer than a purely functional resume.</p>
+<p>Federal resumes are not judged mainly by design. They are screened for dates, hours per week, grade-level duties, specialized experience, certifications, and keywords from the vacancy announcement.</p>
+
+<h2>Why federal resume format matters</h2>
+<p>Private-sector resumes can often rely on branding, short summaries, and visual hierarchy. Federal hiring is different. HR specialists must determine whether your experience meets the exact qualifications in the announcement. If the format hides the evidence, the resume may look polished and still fail screening.</p>
+<ul>
+  <li><strong>Dates</strong> prove duration of experience.</li>
+  <li><strong>Hours per week</strong> allow HR to calculate full-time equivalency.</li>
+  <li><strong>Grade level or scope</strong> shows whether the work matches GS requirements.</li>
+  <li><strong>Specific duties and outcomes</strong> prove specialized experience.</li>
+</ul>
+
+<h2>Chronological federal resume format</h2>
+<p>A chronological resume lists jobs from most recent to oldest. This is the safest federal format when your recent roles clearly match the announcement. It lets HR follow your career path and confirm progressively responsible experience.</p>
+<p>Use this format if you are applying within the same occupation, moving from contractor to federal employment, or targeting roles where your latest job contains the strongest evidence.</p>
+<ul>
+  <li>Start with a short targeted summary.</li>
+  <li>Place the most relevant recent role first.</li>
+  <li>Include employer, location, dates, hours per week, and supervisor information if requested.</li>
+  <li>Write bullets that mirror the vacancy's specialized experience language.</li>
+</ul>
+
+<h2>Functional federal resume format</h2>
+<p>A functional resume groups experience by skill instead of job timeline. For USAJOBS, this format is usually risky. It can make it hard for HR to connect a skill to a specific employer, date range, and number of hours worked.</p>
+<p>Use a functional structure only when the announcement explicitly values competency categories and you can still document where and when each competency was performed. A skills-only document without employment context may cause avoidable eligibility problems.</p>
+
+<h2>Combination federal resume format</h2>
+<p>The combination format is often the best compromise. It opens with a focused skills section and then provides a chronological employment history. This helps career changers, veterans, and applicants with mixed public-private experience show relevance without hiding the timeline.</p>
+<p>For example, an applicant moving from military logistics to a GS supply role can lead with inventory control, contracting coordination, and compliance experience, then document the exact roles where those duties were performed.</p>
+
+<h2>Example structure for 2026</h2>
+<ol>
+  <li><strong>Header:</strong> name, email, phone, location, citizenship if required.</li>
+  <li><strong>Targeted summary:</strong> two to three lines matching the announcement.</li>
+  <li><strong>Core qualifications:</strong> 6–8 keyword-rich skills from the vacancy.</li>
+  <li><strong>Professional experience:</strong> reverse chronological entries with federal details.</li>
+  <li><strong>Education and certifications:</strong> include transcripts or license details when required.</li>
+  <li><strong>Optional sections:</strong> awards, clearances, publications, or training only if relevant.</li>
+</ol>
+
+<h2>How to choose the right format</h2>
+<p>Choose chronological if your latest job is directly relevant. Choose combination if your strongest evidence is spread across several roles. Avoid pure functional formatting unless you have a specific reason and can still document dates and hours clearly.</p>
+<p>Before submitting, compare the first two pages against the vacancy announcement. If HR cannot find the required specialized experience quickly, revise the format before you apply.</p>
+
+<h2>Final checklist</h2>
+<ul>
+  <li>Does every job entry show month/year dates?</li>
+  <li>Are hours per week visible?</li>
+  <li>Do the first two pages include the highest-value qualifications?</li>
+  <li>Are keywords used naturally, not stuffed?</li>
+  <li>Can a reviewer connect each skill to a real role and outcome?</li>
+</ul>
+<p>A strong federal resume format is not decorative. It is an evidence map. Build it so HR can say yes quickly.</p>
+`,
+  },
+
+  {
     slug: 'usajobs-resume-builder-vs-uploaded-resume',
     title: 'USAJOBS Resume Builder vs Uploaded Resume: Which One Passes HR Screening Better?',
     description:
