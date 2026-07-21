@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { getStripe } from '@/lib/stripe';
 import Stripe from 'stripe';
 
@@ -11,6 +11,9 @@ import Stripe from 'stripe';
  * - customer.subscription.created: Update user to subscription plan
  * - customer.subscription.updated: Update subscription status
  * - customer.subscription.deleted: Downgrade to free plan
+ *
+ * Uses the service-role client: webhooks have no user session, and RLS
+ * correctly blocks anon/authenticated writes to payments/users.
  */
 export async function POST(request: NextRequest) {
   try {
@@ -33,7 +36,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Handle the event
     switch (event.type) {
