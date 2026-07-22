@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/gtag';
 
 type Stage = 'input' | 'sent' | 'error';
 
@@ -38,10 +39,7 @@ export default function StartPage() {
       return;
     }
 
-    // Track GA4 event via GTM dataLayer
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({ event: 'resume_analysis_started' });
-    }
+    trackEvent({ eventName: 'resume_analysis_started' });
 
     setLoading(true);
     const supabase = createClient();

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/gtag';
 
 const FREE_LIMIT = 3;
 const MIN_RESUME_WORDS = 100;
@@ -111,10 +112,7 @@ export default function UploadPage() {
       return;
     }
 
-    // Track GA4 event via GTM dataLayer
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({ event: 'resume_analysis_submit' });
-    }
+    trackEvent({ eventName: 'resume_analysis_submit' });
 
     setLoading(true);
 

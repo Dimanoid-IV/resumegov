@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import ResultsAnalytics from './ResultsAnalytics';
 
 export const metadata: Metadata = {
   title: 'Analysis Results — ResumeGov',
@@ -189,17 +189,7 @@ export default async function ResultsPage({
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* GA4 Event Tracking via GTM */}
-      <Script id="ga4-analysis-completed" strategy="afterInteractive">
-        {`
-          if (typeof window !== 'undefined' && window.dataLayer) {
-            window.dataLayer.push({
-              event: 'resume_analysis_completed',
-              value: ${compat}
-            });
-          }
-        `}
-      </Script>
+      <ResultsAnalytics compatibilityScore={compat} />
       {/* Nav */}
       <nav className="bg-slate-900 border-b border-slate-800">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">

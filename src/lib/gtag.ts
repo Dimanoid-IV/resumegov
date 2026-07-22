@@ -1,56 +1,51 @@
 /**
- * Google Analytics 4 Configuration via Google Tag Manager
- * GTM Container ID: GT-MQDTST4W
- * GA4 Measurement ID: G-WL9BDH49MY
+ * Google Analytics 4 helpers (gtag.js)
+ * Measurement ID: G-WL9BDH49MY
  */
 
-export const GA_MEASUREMENT_ID = "G-WL9BDH49MY";
-export const GTM_CONTAINER_ID = "GT-MQDTST4W";
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-WL9BDH49MY';
 
-// Type definition for gtag and dataLayer functions
 declare global {
   interface Window {
     gtag?: (
-      command: string,
-      targetId?: string,
-      config?: Record<string, any>
+      command: 'config' | 'event' | 'js' | 'set' | 'consent',
+      targetOrAction: string | Date,
+      params?: Record<string, unknown>
     ) => void;
-    dataLayer?: any[];
+    dataLayer?: unknown[];
   }
 }
 
-/**
- * Track custom events via GTM dataLayer
- */
-export const pageview = (url: string) => {
-  if (process.env.NODE_ENV !== 'production' && process.env.NEXT_PUBLIC_ENABLE_GA4 !== 'true') {
-    return;
+function canTrack(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    process.env.NEXT_PUBLIC_ENABLE_GA4 !== 'true'
+  ) {
+    return false;
   }
+  return true;
+}
 
-  if (typeof window !== 'undefined' && window.dataLayer) {
-    window.dataLayer.push({
-      event: 'page_view',
-      page_path: url,
-    });
-  }
-};
+/** SPA page views — call on App Router pathname changes */
+export function pageview(url: string) {
+  if (!canTrack() || typeof window.gtag !== 'function') return;
 
-export const trackEvent = ({
+  window.gtag('config', GA_MEASUREMENT_ID, {
+    page_path: url,
+  });
+}
+
+/** Custom GA4 events */
+export function trackEvent({
   eventName,
   ...params
 }: {
   eventName: string;
-  [key: string]: any;
-}) => {
-  // Only track in production
-  if (process.env.NODE_ENV !== 'production' && process.env.NEXT_PUBLIC_ENABLE_GA4 !== 'true') {
-    return;
-  }
-  
-  if (typeof window !== 'undefined' && window.dataLayer) {
-    window.dataLayer.push({
-      event: eventName,
-      ...params,
-    });
-  }
-};
+  [key: string]: unknown;
+}) {
+  if (!canTrack() || typeof window.gtag !== 'function') return;
+
+  window.gtag('event', eventName, params);
+}
