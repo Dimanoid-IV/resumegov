@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
+import { getBillingConfig } from '@/lib/billing-env';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -63,6 +64,7 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
+    const billing = getBillingConfig(request.nextUrl.origin);
     const supabase = await createClient();
     
     // Verify authentication
@@ -97,7 +99,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const plan = STRIPE_PRICES[planId as PriceKey];
+    const configuredPrices = {
+      ...STRIPE_PRICES,
+      single: { ...STRIPE_PRICES.single, id: billing.analystPriceId },
+      pack3: { ...STRIPE_PRICES.pack3, id: billing.analystPriceId },
+      subscription: { ...STRIPE_PRICES.subscription, id: billing.professionalPriceId },
+    };
+    const plan = configuredPrices[planId as PriceKey];
     const isSubscription = planId === 'subscription';
 
     // Create or retrieve Stripe customer
@@ -130,8 +138,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: isSubscription ? 'subscription' : 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?success=true&plan=${planId}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?canceled=true`,
+      success_url: `${billing.siteUrl}/dashboard?success=true&plan=${planId}`,
+      cancel_url: `${billing.siteUrl}/dashboard?canceled=true`,
       metadata: {
         userId: user.id,
         planId,
