@@ -196,7 +196,7 @@ export default async function ResultsPage({
 
   const risk = twoPageRisk(wordCount);
   const canOptimize = paidPlan && hasCredits && wordCount > 1050;
-  const optimizeHref = paidPlan && hasCredits ? '/dashboard' : '/api/checkout?plan=analyst';
+  const optimizeHref = paidPlan && hasCredits ? '/dashboard' : '/api/checkout?plan=single';
   const optimizeLabel = canOptimize
     ? 'Open Optimization Tools'
     : paidPlan && hasCredits
@@ -431,7 +431,7 @@ export default async function ResultsPage({
                 </svg>
               </Link>
               <p className="text-xs text-slate-500 mt-3">
-                One credit required · Analyst plan: $19.99 for 3 credits
+                One credit required · Single: $9.99 · Analyst: $19.99 for 3 credits
               </p>
             </div>
 

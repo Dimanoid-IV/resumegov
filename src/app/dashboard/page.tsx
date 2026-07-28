@@ -204,10 +204,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             {currentWordCount > 1050 && (!userProfile?.plan_type || userProfile.plan_type === 'free') && (
               <div className="mt-4 space-y-3">
                 <a
-                  href="/api/checkout?plan=analyst"
+                  href="/api/checkout?plan=single"
                   className="block w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm text-center"
                 >
-                  Optimize Resume — $19.99
+                  Optimize Resume — $9.99
                 </a>
                 
                 <div className="text-xs text-slate-600 space-y-1">

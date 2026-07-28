@@ -207,7 +207,7 @@ export default function UploadPage() {
               View Plans
             </Link>
             <p className="text-xs text-slate-400 mt-4">
-              Analyst: $19.99 for 3 credits · Professional: $39.99/month
+              Single: $9.99 · Analyst: $19.99 for 3 credits · Professional: $29/month
             </p>
           </div>
         ) : (

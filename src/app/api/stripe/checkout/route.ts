@@ -44,13 +44,13 @@ export async function GET() {
         id: 'pack3',
         name: '3 Credits Pack',
         credits: 3,
-        price: 2499, // $24.99
+    price: 1999, // $19.99
       },
       {
         id: 'subscription',
         name: 'Monthly Subscription',
         credits: -1, // Unlimited
-        price: 2999, // $29.99/month
+        price: 2900, // $29.00/month
         interval: 'month',
       },
     ],
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
 
     const configuredPrices = {
       ...STRIPE_PRICES,
-      single: { ...STRIPE_PRICES.single, id: billing.analystPriceId },
+      single: { ...STRIPE_PRICES.single, id: billing.singlePriceId },
       pack3: { ...STRIPE_PRICES.pack3, id: billing.analystPriceId },
       subscription: { ...STRIPE_PRICES.subscription, id: billing.professionalPriceId },
     };

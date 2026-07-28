@@ -9,7 +9,8 @@ interface SuccessBannerProps {
 export default function SuccessBanner({ show }: SuccessBannerProps) {
   const searchParams = useSearchParams();
   const planType = searchParams.get('plan') ?? 'analyst';
-  const planName = planType === 'professional' ? 'Professional' : 'Analyst';
+  const planName =
+    planType === 'professional' ? 'Professional' : planType === 'single' ? 'Single' : 'Analyst';
 
   if (!show) return null;
 

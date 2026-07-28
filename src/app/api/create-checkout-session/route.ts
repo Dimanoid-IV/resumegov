@@ -11,12 +11,13 @@ type UserRow = Database['public']['Tables']['users']['Row'];
 /**
  * POST /api/create-checkout-session
  * Creates a Stripe checkout session for one-time payment
- * Body: { plan: 'analyst' | 'professional' }
+ * Body: { plan: 'single' | 'analyst' | 'professional' }
  */
 export async function POST(request: NextRequest) {
   try {
     // Resolve env vars inside handler to ensure availability in serverless context
     const billing = getBillingConfig(request.nextUrl.origin);
+    const singlePriceId = billing.singlePriceId;
     const analystPriceId = billing.analystPriceId;
     const professionalPriceId = billing.professionalPriceId;
 
@@ -43,13 +44,18 @@ export async function POST(request: NextRequest) {
       }
       priceId = professionalPriceId;
       planType = 'professional';
-    } else {
+    } else if (plan === 'analyst') {
       if (!analystPriceId) {
         console.error('Missing STRIPE_PRICE_ANALYST');
         return NextResponse.json({ error: 'Analyst plan not configured' }, { status: 500 });
       }
       priceId = analystPriceId;
       planType = 'analyst';
+    } else if (plan === 'single') {
+      priceId = singlePriceId;
+      planType = 'single';
+    } else {
+      return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
     }
 
     // Get user profile for Stripe customer ID

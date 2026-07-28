@@ -9,7 +9,7 @@ type UserRow = Database['public']['Tables']['users']['Row'];
 /**
  * GET /api/checkout
  * Redirects to Stripe Checkout for one-time payment
- * Query: ?plan=analyst|professional
+ * Query: ?plan=single|analyst|professional
  */
 export async function GET(request: NextRequest) {
   try {
@@ -25,10 +25,17 @@ export async function GET(request: NextRequest) {
 
     // Get plan from query params
     const searchParams = request.nextUrl.searchParams;
-    const plan = searchParams.get('plan') || 'analyst';
+    const requestedPlan = searchParams.get('plan') || 'analyst';
+    const plan = ['single', 'analyst', 'professional'].includes(requestedPlan)
+      ? requestedPlan
+      : 'analyst';
 
     // Determine price ID
-    const priceId = plan === 'professional' ? billing.professionalPriceId : billing.analystPriceId;
+    const priceId = plan === 'professional'
+      ? billing.professionalPriceId
+      : plan === 'single'
+        ? billing.singlePriceId
+        : billing.analystPriceId;
 
     // Get user profile for Stripe customer ID
     const { data: userProfileData, error: profileError } = await supabase

@@ -62,10 +62,10 @@ Tracked on every route change via `components/Analytics.tsx`.
 - currency: 'USD'
 
 #### subscription_started (Future)
-**When:** User subscribes to Professional plan ($39.99/mo)  
+**When:** User subscribes to Professional plan ($29/mo)  
 **Location:** Stripe webhook  
 **Parameters:**
-- value: 3999 (cents)
+- value: 2900 (cents)
 - currency: 'USD'
 - recurring: true
 

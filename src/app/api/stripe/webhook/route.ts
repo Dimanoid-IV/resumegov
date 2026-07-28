@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
 
           // Update user plan and credits based on purchased tier
           let newPlanType: 'free' | 'basic' | 'pro' | 'enterprise' = 'basic';
-          let newCredits: number = 1; // Default for analyst
+          let newCredits: number = 1;
 
           if (plan === 'professional') {
             newPlanType = 'pro';
@@ -66,6 +66,9 @@ export async function POST(request: NextRequest) {
           } else if (plan === 'analyst') {
             newPlanType = 'basic';
             newCredits = 3;
+          } else if (plan === 'single') {
+            newPlanType = 'basic';
+            newCredits = 1;
           }
 
           // Update user plan and credits

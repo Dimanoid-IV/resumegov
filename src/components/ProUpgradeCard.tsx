@@ -14,7 +14,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
 
   const isPro = currentPlan === 'pro' || currentPlan === 'basic' || currentPlan === 'enterprise';
 
-  const handleUpgrade = async (planType: 'analyst' | 'professional') => {
+  const handleUpgrade = async (planType: 'single' | 'analyst' | 'professional') => {
     setLoading(true);
     try {
       const response = await fetch('/api/create-checkout-session', {
@@ -134,6 +134,14 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
 
         <div className="space-y-3">
           <button
+            onClick={() => handleUpgrade('single')}
+            disabled={loading}
+            className="w-full bg-blue-50 text-blue-800 border border-blue-200 font-semibold px-6 py-3 rounded-lg hover:bg-blue-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Processing...' : 'Single — $9.99'}
+          </button>
+
+          <button
             onClick={() => handleUpgrade('analyst')}
             disabled={loading}
             className="w-full bg-white text-blue-700 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -146,7 +154,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
             disabled={loading}
             className="w-full bg-slate-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Processing...' : 'Professional — $39.99'}
+            {loading ? 'Processing...' : 'Professional — $29/month'}
           </button>
         </div>
       </div>
@@ -172,6 +180,14 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
             </p>
             <div className="space-y-3">
               <button
+                onClick={() => handleUpgrade('single')}
+                disabled={loading}
+                className="w-full bg-blue-50 text-blue-800 border border-blue-200 font-semibold px-6 py-3 rounded-lg hover:bg-blue-100 transition-colors disabled:opacity-50"
+              >
+                {loading ? 'Processing...' : 'Single — $9.99'}
+              </button>
+
+              <button
                 onClick={() => handleUpgrade('analyst')}
                 disabled={loading}
                 className="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
@@ -184,7 +200,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
                 disabled={loading}
                 className="w-full bg-slate-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50"
               >
-                {loading ? 'Processing...' : 'Professional — $39.99'}
+                {loading ? 'Processing...' : 'Professional — $29/month'}
               </button>
             </div>
             <button

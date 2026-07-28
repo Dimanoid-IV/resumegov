@@ -479,6 +479,23 @@ function Pricing() {
       footnote: null,
     },
     {
+      name: 'Single',
+      price: '$9.99',
+      period: 'one-time',
+      description: 'For one resume tailored to one vacancy announcement.',
+      highlight: false,
+      cta: 'Optimize once',
+      ctaHref: '/login',
+      features: [
+        'Everything in Free',
+        '1 optimization credit',
+        'Two-pass compression engine',
+        'Qualification coverage report',
+        'Download optimized DOCX',
+      ],
+      footnote: 'No subscription.',
+    },
+    {
       name: 'Analyst',
       price: '$19.99',
       period: 'one-time (3 credits)',
@@ -497,7 +514,7 @@ function Pricing() {
     },
     {
       name: 'Professional',
-      price: '$39.99',
+      price: '$29',
       period: '/ month',
       description: 'For active applicants submitting multiple USAJOBS applications under the September 2025 rule.',
       highlight: true,
@@ -521,7 +538,7 @@ function Pricing() {
           <p className="text-xs font-mono text-blue-700 uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Straightforward plans. No usage surprises.</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {plans.map((plan) => (
             <div
               key={plan.name}

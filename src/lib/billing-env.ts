@@ -3,6 +3,7 @@ type BillingConfig = {
   siteUrl: string;
   stripeSecretKey: string;
   webhookSecret: string;
+  singlePriceId: string;
   analystPriceId: string;
   professionalPriceId: string;
 };
@@ -16,11 +17,12 @@ export function getBillingConfig(requestOrigin?: string): BillingConfig {
 
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY ?? '';
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? '';
+  const singlePriceId = process.env.STRIPE_PRICE_SINGLE ?? '';
   const analystPriceId = process.env.STRIPE_PRICE_ANALYST ?? '';
   const professionalPriceId = process.env.STRIPE_PRICE_PROFESSIONAL ?? '';
   const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
 
-  if (!stripeSecretKey || !webhookSecret || !analystPriceId || !professionalPriceId) {
+  if (!stripeSecretKey || !webhookSecret || !singlePriceId || !analystPriceId || !professionalPriceId) {
     throw new Error('Billing environment is incomplete');
   }
 
@@ -56,6 +58,7 @@ export function getBillingConfig(requestOrigin?: string): BillingConfig {
     siteUrl,
     stripeSecretKey,
     webhookSecret,
+    singlePriceId,
     analystPriceId,
     professionalPriceId,
   };

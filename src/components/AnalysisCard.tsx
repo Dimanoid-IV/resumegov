@@ -77,7 +77,7 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
     }
   };
 
-  const handleUpgrade = (planType: 'analyst' | 'professional') => {
+  const handleUpgrade = (planType: 'single' | 'analyst' | 'professional') => {
     window.location.href = `/api/checkout?plan=${planType}`;
   };
 
@@ -167,6 +167,12 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
             </p>
             <div className="space-y-3">
               <button
+                onClick={() => handleUpgrade('single')}
+                className="w-full bg-blue-50 text-blue-800 border border-blue-200 font-semibold px-6 py-3 rounded-lg hover:bg-blue-100 transition-colors"
+              >
+                Single — $9.99
+              </button>
+              <button
                 onClick={() => handleUpgrade('analyst')}
                 className="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
@@ -176,7 +182,7 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
                 onClick={() => handleUpgrade('professional')}
                 className="w-full bg-slate-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors"
               >
-                Professional — $39.99
+                Professional — $29/month
               </button>
             </div>
             <button

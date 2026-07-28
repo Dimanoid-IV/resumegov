@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
       billingEnvironment: billing.environment,
       isolatedSupabase: process.env.NEXT_PUBLIC_SUPABASE_URL === process.env.TEST_SUPABASE_URL,
       liveChargesPossible: false,
+      singlePriceConfigured: Boolean(billing.singlePriceId),
       analystPriceConfigured: Boolean(billing.analystPriceId),
       professionalPriceConfigured: Boolean(billing.professionalPriceId),
     });
