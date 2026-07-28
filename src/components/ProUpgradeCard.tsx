@@ -75,7 +75,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
   };
 
   if (isPro) {
-    const planName = currentPlan === 'basic' ? 'Analyst' : 'Professional';
+    const planName = currentPlan === 'basic' ? 'Credits' : 'Professional';
     return (
       <div className="bg-white border border-slate-200 rounded-xl p-6">
         <div className="flex items-center justify-between">

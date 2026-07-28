@@ -47,28 +47,70 @@ export async function POST(request: NextRequest) {
         const plan = session.metadata?.plan || 'analyst';
         
         if (userId) {
+          const paymentReference =
+            typeof session.payment_intent === 'string'
+              ? session.payment_intent
+              : typeof session.subscription === 'string'
+                ? session.subscription
+                : session.id;
+
+          // Stripe retries webhook deliveries. Do not grant credits twice.
+          const { data: existingPayment } = await supabase
+            .from('payments')
+            .select('id')
+            .eq('stripe_payment_id', paymentReference)
+            .maybeSingle();
+
+          if (existingPayment) {
+            console.log(`Checkout ${session.id} already processed`);
+            break;
+          }
+
           // Record payment
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           await (supabase as any).from('payments').insert({
             user_id: userId,
-            stripe_payment_id: session.payment_intent as string,
+            stripe_payment_id: paymentReference,
             amount: session.amount_total || 0,
             status: 'completed',
           });
 
           // Update user plan and credits based on purchased tier
           let newPlanType: 'free' | 'basic' | 'pro' | 'enterprise' = 'basic';
-          let newCredits: number = 1;
+          let purchasedCredits = 1;
 
           if (plan === 'professional') {
             newPlanType = 'pro';
-            newCredits = -1; // Unlimited for professional
+            purchasedCredits = -1; // Unlimited for professional
           } else if (plan === 'analyst') {
             newPlanType = 'basic';
-            newCredits = 3;
+            purchasedCredits = 3;
           } else if (plan === 'single') {
             newPlanType = 'basic';
-            newCredits = 1;
+            purchasedCredits = 1;
+          }
+
+          const { data: currentProfile } = await supabase
+            .from('users')
+            .select('plan_type, credits_remaining')
+            .eq('id', userId)
+            .single();
+
+          const typedProfile = currentProfile as {
+            plan_type: 'free' | 'basic' | 'pro' | 'enterprise';
+            credits_remaining: number;
+          } | null;
+          const currentPlan = typedProfile?.plan_type ?? 'free';
+          const currentCredits = typedProfile?.credits_remaining ?? 0;
+          const newCredits =
+            purchasedCredits === -1 || currentCredits === -1
+              ? -1
+              : currentPlan === 'free'
+                ? purchasedCredits
+                : currentCredits + purchasedCredits;
+
+          if (currentCredits === -1) {
+            newPlanType = 'pro';
           }
 
           // Update user plan and credits

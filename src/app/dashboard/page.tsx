@@ -130,7 +130,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               </a>
             ) : userProfile?.plan_type === 'pro' || userProfile?.plan_type === 'basic' ? (
               <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">
-                {userProfile.plan_type === 'basic' ? 'Analyst Active' : 'Professional Active'}
+                {userProfile.plan_type === 'basic' ? 'Credits Active' : 'Professional Active'}
               </span>
             ) : null}
           </div>
