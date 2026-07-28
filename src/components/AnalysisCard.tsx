@@ -87,7 +87,9 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
         <div className="flex justify-between items-start mb-3">
           <div>
             <p className="text-sm text-gray-500">
-              {new Date(analysis.created_at).toLocaleDateString()}
+              {new Intl.DateTimeFormat('en-US', { timeZone: 'UTC' }).format(
+                new Date(analysis.created_at)
+              )}
             </p>
             <p className="text-xs text-gray-400">{analysis.word_count} words</p>
           </div>
