@@ -261,6 +261,12 @@ export async function POST(request: NextRequest) {
     const compatibilityScore = Math.min(100, Math.round(
       keywordScore + specializedScore + complianceScore + achievementScore
     ));
+    // The persisted score columns are integers. AI output can produce weighted
+    // fractional values (for example 28.5), so normalize them before insert.
+    const persistedKeywordScore = Math.round(keywordScore);
+    const persistedSpecializedScore = Math.round(specializedScore);
+    const persistedComplianceScore = Math.round(complianceScore);
+    const persistedAchievementScore = Math.round(achievementScore);
 
     const wordCount = countWords(safeResume);
 
@@ -273,10 +279,10 @@ export async function POST(request: NextRequest) {
         resume_id: storedResumeId,
         job_post_id: storedJobPostId,
         compatibility_score: compatibilityScore,
-        keyword_score: Math.round(keywordScore * 10) / 10,
-        specialized_score: Math.round(specializedScore * 10) / 10,
-        compliance_score: Math.round(complianceScore * 10) / 10,
-        achievement_score: Math.round(achievementScore * 10) / 10,
+        keyword_score: persistedKeywordScore,
+        specialized_score: persistedSpecializedScore,
+        compliance_score: persistedComplianceScore,
+        achievement_score: persistedAchievementScore,
         word_count: wordCount,
         word_count_original: postValidation.wordCount.original,
         word_count_final: postValidation.wordCount.final,
@@ -320,10 +326,10 @@ export async function POST(request: NextRequest) {
       remaining,
       scores: {
         compatibility_score: compatibilityScore,
-        keyword_score: Math.round(keywordScore * 10) / 10,
-        specialized_score: Math.round(specializedScore * 10) / 10,
-        compliance_score: Math.round(complianceScore * 10) / 10,
-        achievement_score: Math.round(achievementScore * 10) / 10,
+        keyword_score: persistedKeywordScore,
+        specialized_score: persistedSpecializedScore,
+        compliance_score: persistedComplianceScore,
+        achievement_score: persistedAchievementScore,
         word_count: wordCount,
       },
     });
