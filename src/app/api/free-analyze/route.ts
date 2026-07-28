@@ -286,7 +286,7 @@ export async function POST(request: NextRequest) {
         feedback_json: {
           missing_elements: aiData.feedback?.qualification_gaps || [],
           weak_bullets: aiData.feedback?.improvements || [],
-          rule_engine_warnings: postValidation.warnings,
+          rule_engine_warnings: [...preValidation.warnings, ...postValidation.warnings],
         },
       })
       .select('id')

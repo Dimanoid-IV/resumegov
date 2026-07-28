@@ -113,18 +113,21 @@ export function validatePreAI(resumeText: string, jobText: string): PreAIValidat
   const structure: ResumeStructure = {
     hasJobTitle: /(?:title|position|role)\s*[:\-]?/i.test(resumeText),
     hasEmployer: /(?:agency|department|company|employer)\s*[:\-]?/i.test(resumeText),
-    hasEmploymentDates: /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4}\b/i.test(resumeText),
+    hasEmploymentDates: /(?:\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4}\b|\b(?:0?[1-9]|1[0-2])\/\d{4}\b)/i.test(resumeText),
     hasHoursPerWeek: /\b(?:hours? per week|hrs?\/?week|h\/w)\b/i.test(resumeText),
     hasDutiesDescription: /\b(?:duties|responsibilities|tasks)\s*[:\-]?/i.test(resumeText),
     achievementCount: (resumeText.match(/\b(?:increased|reduced|improved|achieved|completed|led|managed)\b/gi) || []).length,
   };
 
   // Mandatory elements check
-  if (!structure.hasJobTitle) errors.push('Missing job title');
-  if (!structure.hasEmployer) errors.push('Missing employer/agency name');
-  if (!structure.hasEmploymentDates) errors.push('Missing employment dates (month/year format required)');
+  // These regex checks are intentionally advisory. Real resumes use many
+  // layouts ("Program Analyst — Agency", tables, copied PDF text, etc.), so a
+  // heuristic miss must not prevent the user from receiving an analysis.
+  if (!structure.hasJobTitle) warnings.push('Could not reliably detect a labeled job title');
+  if (!structure.hasEmployer) warnings.push('Could not reliably detect a labeled employer/agency name');
+  if (!structure.hasEmploymentDates) warnings.push('Could not detect employment dates in month/year format');
   if (!structure.hasHoursPerWeek) warnings.push('Missing hours per week (recommended for federal resumes)');
-  if (!structure.hasDutiesDescription) errors.push('Missing duties description');
+  if (!structure.hasDutiesDescription) warnings.push('Could not reliably detect a labeled duties section');
 
   // Achievement density warning
   if (structure.achievementCount === 0) {
