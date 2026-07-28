@@ -159,10 +159,20 @@ export default function ImproveResume({ currentPlan, wordCount, creditsRemaining
         {isPro ? (
           <button
             onClick={handleOptimize}
-            disabled={loading || !latestAnalysisId}
-            className="w-full bg-blue-600 text-white hover:bg-blue-700 font-semibold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading || !latestAnalysisId || (wordCount !== undefined && wordCount <= 1050)}
+            className={`w-full font-semibold px-6 py-3 rounded-lg transition-colors ${
+              wordCount !== undefined && wordCount <= 1050
+                ? 'bg-gray-100 text-gray-500'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            } disabled:opacity-70 disabled:cursor-not-allowed`}
           >
-            {loading ? 'Optimizing...' : latestAnalysisId ? 'Optimize Resume Now' : 'Analyze a Resume First'}
+            {loading
+              ? 'Optimizing...'
+              : !latestAnalysisId
+                ? 'Analyze a Resume First'
+                : wordCount !== undefined && wordCount <= 1050
+                  ? 'No Compression Needed'
+                  : 'Optimize Resume Now'}
           </button>
         ) : (
           <div className="space-y-3">

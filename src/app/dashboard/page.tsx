@@ -127,7 +127,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               </a>
             ) : userProfile?.plan_type === 'pro' || userProfile?.plan_type === 'basic' ? (
               <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">
-                PRO Active
+                {userProfile.plan_type === 'basic' ? 'Analyst Active' : 'Professional Active'}
               </span>
             ) : null}
           </div>
@@ -264,7 +264,9 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       <td className="py-2">{opt.final_word_count}</td>
                       <td className="py-2">{opt.qualification_coverage_percent}%</td>
                       <td className="py-2">
-                        {opt.final_word_count <= 1050 ? (
+                        {opt.final_word_count < 950 ? (
+                          <span className="text-orange-600">⚠ Below target</span>
+                        ) : opt.final_word_count <= 1050 ? (
                           <span className="text-green-600">✅ Optimal</span>
                         ) : opt.final_word_count <= 1100 ? (
                           <span className="text-yellow-600">⚠ Borderline</span>

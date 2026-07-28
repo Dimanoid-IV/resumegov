@@ -195,8 +195,13 @@ export default async function ResultsPage({
     : [];
 
   const risk = twoPageRisk(wordCount);
+  const canOptimize = paidPlan && hasCredits && wordCount > 1050;
   const optimizeHref = paidPlan && hasCredits ? '/dashboard' : '/api/checkout?plan=analyst';
-  const optimizeLabel = paidPlan && hasCredits ? 'Open Optimization Tools' : 'Upgrade to Analyst';
+  const optimizeLabel = canOptimize
+    ? 'Open Optimization Tools'
+    : paidPlan && hasCredits
+      ? 'No Compression Needed'
+      : 'Upgrade to Analyst';
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -384,7 +389,7 @@ export default async function ResultsPage({
             {/* What's hidden (upgrade prompt) */}
             <div className="bg-white border border-slate-200 rounded-xl p-5">
               <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
-                Full Optimization — Locked
+                Full Optimization — {paidPlan && hasCredits ? 'Available' : 'Locked'}
               </h2>
               <ul className="space-y-2 mb-4">
                 {[
@@ -415,7 +420,10 @@ export default async function ResultsPage({
               </p>
               <Link
                 href={optimizeHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors w-full sm:w-auto"
+                aria-disabled={!canOptimize && paidPlan && hasCredits}
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded transition-colors w-full sm:w-auto ${
+                  !canOptimize && paidPlan && hasCredits ? 'opacity-60 pointer-events-none' : 'hover:bg-slate-100'
+                }`}
               >
                 {optimizeLabel}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
