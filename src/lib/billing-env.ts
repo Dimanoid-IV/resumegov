@@ -11,8 +11,8 @@ const PRODUCTION_HOSTS = new Set(['resumegov.com', 'www.resumegov.com']);
 
 export function getBillingConfig(requestOrigin?: string): BillingConfig {
   const vercelEnv = process.env.VERCEL_ENV;
-  const isProduction = vercelEnv === 'production';
-  const isTest = !isProduction && process.env.BILLING_TEST_MODE === 'true';
+  const isTest = process.env.BILLING_TEST_MODE === 'true';
+  const isProduction = vercelEnv === 'production' && !isTest;
 
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY ?? '';
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? '';
@@ -28,21 +28,18 @@ export function getBillingConfig(requestOrigin?: string): BillingConfig {
     if (!stripeSecretKey.startsWith('sk_live_')) {
       throw new Error('Production billing requires a live Stripe key');
     }
-    if (process.env.BILLING_TEST_MODE === 'true') {
-      throw new Error('Test billing cannot run in production');
-    }
   } else {
     if (!isTest) {
       throw new Error('Billing is disabled outside production unless BILLING_TEST_MODE=true');
     }
     if (!stripeSecretKey.startsWith('sk_test_') && !stripeSecretKey.startsWith('rkcs_test_')) {
-      throw new Error('Preview billing requires a Stripe test key');
+      throw new Error('Test billing requires a Stripe test key');
     }
 
     const testSupabaseUrl = process.env.TEST_SUPABASE_URL ?? '';
     const activeSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
     if (!testSupabaseUrl || activeSupabaseUrl !== testSupabaseUrl) {
-      throw new Error('Preview billing requires the dedicated test Supabase project');
+      throw new Error('Test billing requires the dedicated test Supabase project');
     }
   }
 
@@ -51,7 +48,7 @@ export function getBillingConfig(requestOrigin?: string): BillingConfig {
 
   const siteHost = new URL(siteUrl).hostname;
   if (!isProduction && PRODUCTION_HOSTS.has(siteHost)) {
-    throw new Error('Preview billing cannot return users to the production domain');
+    throw new Error('Test billing cannot return users to the production domain');
   }
 
   return {
