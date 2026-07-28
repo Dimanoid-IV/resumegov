@@ -38,6 +38,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // All writes happen server-side after the authenticated user check. Using
+    // the service client avoids deployment-specific RLS policy drift while the
+    // explicit user_id values below keep every record scoped to this user.
+    const admin = createAdminClient();
+
     // ── Parse body ────────────────────────────────────────────────────────────
     let body: { resumeText?: string; jobText?: string; jobUrl?: string };
     try {
@@ -172,7 +177,7 @@ export async function POST(request: NextRequest) {
     // ── Store resume ──────────────────────────────────────────────────────────
     console.log('[free-analyze] Storing resume...');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: resumeRecord, error: resumeError } = await (supabase as any)
+    const { data: resumeRecord, error: resumeError } = await (admin as any)
       .from('resumes')
       .insert({ user_id: user.id, original_text: safeResume })
       .select('id')
@@ -188,7 +193,7 @@ export async function POST(request: NextRequest) {
 
     // ── Store job post ────────────────────────────────────────────────────────
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: jobRecord } = await (supabase as any)
+    const { data: jobRecord, error: jobError } = await (admin as any)
       .from('job_posts')
       .insert({
         user_id: user.id,
@@ -199,6 +204,11 @@ export async function POST(request: NextRequest) {
       })
       .select('id')
       .single();
+
+    if (jobError) {
+      console.error('[free-analyze] Job post insert error:', jobError);
+      return NextResponse.json({ error: 'Failed to save vacancy announcement' }, { status: 500 });
+    }
 
     const storedJobPostId = (jobRecord as { id: string } | null)?.id ?? null;
 
@@ -256,7 +266,7 @@ export async function POST(request: NextRequest) {
 
     // ── Store analysis ────────────────────────────────────────────────────────
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: analysisRecord } = await (supabase as any)
+    const { data: analysisRecord, error: analysisError } = await (admin as any)
       .from('analyses')
       .insert({
         user_id: user.id,
@@ -282,6 +292,11 @@ export async function POST(request: NextRequest) {
       .select('id')
       .single();
 
+    if (analysisError) {
+      console.error('[free-analyze] Analysis insert error:', analysisError);
+      return NextResponse.json({ error: 'Failed to store analysis results' }, { status: 500 });
+    }
+
     const analysisId = (analysisRecord as { id: string } | null)?.id;
 
     if (!analysisId) {
@@ -289,7 +304,6 @@ export async function POST(request: NextRequest) {
     }
 
     // ── Increment free_analysis_count (admin client, bypasses RLS) ────────────
-    const admin = createAdminClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await (admin as any)
       .from('users')

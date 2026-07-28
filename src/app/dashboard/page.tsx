@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { Database } from '@/types/database';
 import ProUpgradeCard from '@/components/ProUpgradeCard';
 import SuccessBanner from '@/components/SuccessBanner';
@@ -95,7 +96,15 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <Link
+          href="/upload"
+          className="inline-flex items-center justify-center bg-slate-900 text-white font-semibold px-5 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+        >
+          Analyze a New Resume
+        </Link>
+      </div>
       
       {upgraded && <SuccessBanner show={upgraded} />}
       
@@ -112,7 +121,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 href="/api/checkout?plan=analyst"
                 className="text-xs text-blue-600 hover:text-blue-700 font-medium"
               >
-                Перейти на Pro →
+                Upgrade →
               </a>
             ) : userProfile?.plan_type === 'pro' || userProfile?.plan_type === 'basic' ? (
               <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">
@@ -179,7 +188,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               ) : currentWordCount <= 1100 ? (
                 <span className="text-yellow-600">⚠ Borderline - consider optimization</span>
               ) : (
-                <span className="text-red-600">❌ Превышен лимит — выполните оптимизацию</span>
+                <span className="text-red-600">❌ High two-page overflow risk — review formatting</span>
               )}
             </div>
             
@@ -190,16 +199,16 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   href="/api/checkout?plan=analyst"
                   className="block w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm text-center"
                 >
-                  Оптимизировать резюме до 2 страниц — $19
+                  Optimize Resume — $19.99
                 </a>
                 
                 <div className="text-xs text-slate-600 space-y-1">
-                  <p className="font-medium">Оптимизация включает:</p>
+                  <p className="font-medium">Optimization includes:</p>
                   <ul className="list-disc list-inside space-y-1 ml-1">
-                    <li>Двухпроходную AI-компрессию</li>
-                    <li>Сохранение квалификационного языка</li>
-                    <li>Проверку соответствия требованиям OPM</li>
-                    <li>Финальный compliance score</li>
+                    <li>Two-pass AI compression</li>
+                    <li>Qualification-language protection</li>
+                    <li>Two-page formatting guidance</li>
+                    <li>Final compatibility score</li>
                   </ul>
                 </div>
               </div>
@@ -275,12 +284,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 <svg className="w-12 h-12 text-slate-400 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
-                <p className="text-slate-700 font-medium mb-2">Доступно в версии Pro</p>
+                <p className="text-slate-700 font-medium mb-2">Available with a paid plan</p>
                 <a
                   href="/api/checkout?plan=analyst"
                   className="inline-block bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors"
                 >
-                  Перейти на Pro
+                  View Plans
                 </a>
               </div>
             </div>
@@ -304,7 +313,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No analyses yet. Upload a resume and job posting to get started!</p>
+            <div className="bg-white p-5 rounded-lg shadow">
+              <p className="text-gray-500 mb-4">No analyses yet. Add a resume and vacancy announcement to get started.</p>
+              <Link href="/upload" className="inline-flex bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-blue-700">
+                Start an Analysis
+              </Link>
+            </div>
           )}
         </div>
 
@@ -342,7 +356,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No resumes yet. Upload your first resume!</p>
+            <div className="bg-white p-5 rounded-lg shadow">
+              <p className="text-gray-500 mb-4">No resumes yet.</p>
+              <Link href="/upload" className="inline-flex bg-slate-900 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-slate-800">
+                Add Your First Resume
+              </Link>
+            </div>
           )}
         </div>
       </div>

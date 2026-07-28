@@ -22,7 +22,7 @@ export default function AnalysisCard({ analysis, userPlan, creditsRemaining }: A
 
   const handleViewDetails = () => {
     // Free users see basic info, paid users see full details
-    window.location.href = `/results?analysisId=${analysis.id}`;
+    window.location.href = `/results/${analysis.id}`;
   };
 
   const handleDownload = async () => {
@@ -81,7 +81,7 @@ export default function AnalysisCard({ analysis, userPlan, creditsRemaining }: A
   };
 
   const handleUpgrade = (planType: 'analyst' | 'professional') => {
-    window.location.href = `/dashboard?upgrade=${planType}`;
+    window.location.href = `/api/checkout?plan=${planType}`;
   };
 
   return (
