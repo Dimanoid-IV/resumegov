@@ -207,7 +207,7 @@ export default function UploadPage() {
               View Plans
             </Link>
             <p className="text-xs text-slate-400 mt-4">
-              Analyst pack from $9.99 · Pro unlimited at $29.99/month
+              Analyst: $19.99 for 3 credits · Professional: $39.99/month
             </p>
           </div>
         ) : (
@@ -225,7 +225,7 @@ export default function UploadPage() {
 
             {/* Error */}
             {error && (
-              <div className="mb-6 flex items-start gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+              <div id="analysis-error" role="alert" className="mb-6 flex items-start gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
                 <svg className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -237,7 +237,7 @@ export default function UploadPage() {
               {/* Resume */}
               <div className="bg-white border border-slate-200 rounded-xl p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-base font-semibold text-slate-900">
+                  <label htmlFor="resume-text" className="text-base font-semibold text-slate-900">
                     Your Federal Resume
                   </label>
                   <div className="flex items-center gap-2">
@@ -258,7 +258,10 @@ export default function UploadPage() {
                   </div>
                 </div>
                 <textarea
+                  id="resume-text"
+                  name="resumeText"
                   required
+                  aria-describedby={error ? 'resume-guidance analysis-error' : 'resume-guidance'}
                   value={resumeText}
                   onChange={e => setResumeText(e.target.value)}
                   rows={14}
@@ -266,8 +269,8 @@ export default function UploadPage() {
                   className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
                 />
                 <div className="flex justify-between mt-2 text-sm text-slate-400">
-                  <span>
-                    Target: 950–1,050 words · Hard limit: 1,100
+                  <span id="resume-guidance">
+                    Planning guide: about 950–1,050 words. Verify the rendered PDF is no more than 2 pages.
                   </span>
                   {resumeText && (
                     <span className={
@@ -283,17 +286,19 @@ export default function UploadPage() {
 
               {/* Job Announcement */}
               <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <label className="block text-base font-semibold text-slate-900 mb-3">
+                <label htmlFor="job-text" className="block text-base font-semibold text-slate-900 mb-3">
                   USAJOBS Vacancy Announcement
                 </label>
 
                 {/* Optional URL field */}
                 <div className="mb-3">
-                  <label className="block text-sm font-medium text-slate-500 mb-1">
+                  <label htmlFor="job-url" className="block text-sm font-medium text-slate-500 mb-1">
                     Vacancy URL
                     <span className="ml-1 font-normal text-slate-400">(optional)</span>
                   </label>
                   <input
+                    id="job-url"
+                    name="jobUrl"
                     type="url"
                     value={jobUrl}
                     onChange={e => setJobUrl(e.target.value)}
@@ -303,6 +308,8 @@ export default function UploadPage() {
                 </div>
 
                 <textarea
+                  id="job-text"
+                  name="jobText"
                   required
                   value={jobText}
                   onChange={e => setJobText(e.target.value)}
@@ -333,7 +340,9 @@ export default function UploadPage() {
               </button>
 
               <p className="text-center text-sm text-slate-400">
-                Analysis does not modify your resume. No data is shared externally.
+                Analysis does not modify your resume. Your text is processed by our service providers
+                to generate the report. See our{' '}
+                <Link href="/privacy" className="underline hover:text-slate-600">Privacy Policy</Link>.
               </p>
             </form>
           </>

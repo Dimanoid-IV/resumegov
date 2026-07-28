@@ -70,11 +70,6 @@ function ArticleSchema({ post }: { post: NonNullable<ReturnType<typeof getPost>>
       name: post.author === 'Federal Resume AI' ? 'ResumeGov Editorial Team' : post.author,
       url: SITE_URL,
     },
-    reviewedBy: {
-      '@type': 'Organization',
-      name: 'Former USAJOBS & Federal HR Specialists',
-      url: SITE_URL,
-    },
     publisher: {
       '@type': 'Organization',
       name: PUBLISHER_NAME,

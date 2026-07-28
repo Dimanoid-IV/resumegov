@@ -45,11 +45,11 @@ export const metadata: Metadata = {
 const FAQ_ITEMS = [
   {
     q: 'When did the OPM 2-page federal resume rule take effect?',
-    a: 'The Office of Personnel Management 2-page federal resume limit became effective September 27, 2025. All USAJOBS applications submitted on or after that date are subject to the requirement. HR specialists are instructed to evaluate only the first two pages; content on subsequent pages is not considered.',
+    a: 'The Office of Personnel Management 2-page federal resume limit became effective September 27, 2025. USAJOBS requires applicants to select a resume of two pages or less, and applications with only an over-length resume may be found ineligible.',
   },
   {
     q: 'What is the exact word count target for a compliant federal resume?',
-    a: 'The optimal range is 950–1,050 words, corresponding to approximately two standard pages at normal formatting. ResumeGov enforces a hard ceiling of 1,100 words. Submissions exceeding this threshold risk disqualification during initial HR screening.',
+    a: 'OPM does not set an exact word count. ResumeGov uses 950–1,050 words as an internal planning range, but page count depends on formatting. Applicants must verify that the final rendered document is no more than two pages.',
   },
   {
     q: 'Does ResumeGov fabricate or invent experience?',
@@ -115,8 +115,8 @@ function Hero() {
           Federal Resume Compliance<br className="hidden sm:block" /> for USAJOBS.
         </h1>
         <p className="text-lg text-slate-400 max-w-2xl mb-8 leading-relaxed">
-          Stop receiving 'Ineligible' ratings for positions you qualify for.
-          ResumeGov validates your federal resume against the OPM 2-page rule,
+          Catch avoidable documentation gaps before HR review.
+          ResumeGov checks your federal resume against the OPM 2-page rule,
           GS-level qualification requirements, and vacancy-specific language — before HR screening.
         </p>
 
@@ -139,9 +139,9 @@ function Hero() {
         {/* Trust indicators */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
           {[
-            { stat: '1,000+', label: 'Federal resumes evaluated' },
+            { stat: '2-page', label: 'Formatting risk check' },
             { stat: '4-component', label: 'Structured scoring' },
-            { stat: '0%', label: 'No fabrication. Ever.' },
+            { stat: 'Reviewable', label: 'Human approval required' },
             { stat: 'Independent', label: 'Compliance platform' },
           ].map(item => (
             <div key={item.label} className="border-l border-slate-700 pl-4">
@@ -155,9 +155,9 @@ function Hero() {
         <div className="border-t border-slate-800 pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             { stat: '950–1,050', label: 'Target word range' },
-            { stat: '1,100', label: 'Hard word ceiling' },
+            { stat: 'Format-dependent', label: 'Final page count' },
             { stat: 'Deterministic', label: 'Scoring model' },
-            { stat: '100%', label: 'Qualification preserved' },
+            { stat: 'Protected', label: 'Required language flagged' },
           ].map(({ stat, label }) => (
             <div key={label}>
               <p className="text-2xl font-bold font-mono text-white">{stat}</p>
@@ -176,7 +176,7 @@ function Problem() {
   const problems = [
     {
       title: 'Wrong length',
-      body: 'Federal resumes require exactly 2 pages under the September 2025 OPM rule. Most applicants submit 4–8 page resumes that HR is now instructed to truncate at page two — causing qualified candidates to appear ineligible.',
+      body: 'Federal resumes submitted through USAJOBS must be no more than 2 pages under the September 2025 OPM rule. An over-length resume can make an application ineligible.',
     },
     {
       title: 'Missing qualification language',
@@ -193,10 +193,11 @@ function Problem() {
         <div className="mb-12">
           <p className="text-xs font-mono text-blue-700 uppercase tracking-widest mb-3">The problem</p>
           <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-            30–50% of qualified federal applicants<br className="hidden sm:block" /> receive ineligible ratings.
+            Small resume details can determine<br className="hidden sm:block" /> whether experience is credited.
           </h2>
           <p className="mt-4 text-slate-500 max-w-xl">
-            Not because they lack qualifications — because their resumes fail the HR screening checklist on format, length, or language.
+            Federal reviewers can only credit experience documented in the application. Missing dates,
+            hours per week, or vacancy-specific experience can prevent a qualification finding.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -231,21 +232,21 @@ function TwoPageRule() {
             </h2>
             <p className="text-slate-500 leading-relaxed mb-6">
               The Office of Personnel Management formalized a 2-page federal resume limit.
-              HR specialists are instructed to use only the first two pages for qualification determinations.
-              Content beyond page two is not evaluated.
+              USAJOBS requires applicants to choose a resume that is two pages or less, and an
+              application submitted with only an over-length resume may be found ineligible.
             </p>
             <p className="text-slate-500 leading-relaxed">
               The rule does not specify a word count directly — it specifies page count.
-              Based on standard federal document formatting, two pages maps to a specific word range
-              that ResumeGov enforces automatically.
+              ResumeGov uses word-count ranges as planning signals, not as an OPM requirement.
+              Always verify the page count in the final rendered PDF.
             </p>
           </div>
           <div className="space-y-3">
             {[
-              { label: 'Minimum floor', value: '900 words', color: 'text-slate-500', bar: 'bg-slate-300', pct: '45%', note: 'Below this appears thin' },
-              { label: 'Target range', value: '950–1,050 words', color: 'text-green-700', bar: 'bg-green-500', pct: '60%', note: 'Optimal compliance zone' },
-              { label: 'Caution zone', value: '1,051–1,100 words', color: 'text-amber-700', bar: 'bg-amber-400', pct: '78%', note: 'Borderline — review required' },
-              { label: 'Hard ceiling', value: '> 1,100 words', color: 'text-red-700', bar: 'bg-red-500', pct: '100%', note: 'Truncation risk' },
+              { label: 'Planning floor', value: '≈ 900 words', color: 'text-slate-500', bar: 'bg-slate-300', pct: '45%', note: 'May lack needed detail' },
+              { label: 'Planning range', value: '≈ 950–1,050', color: 'text-green-700', bar: 'bg-green-500', pct: '60%', note: 'ResumeGov estimate, not an OPM limit' },
+              { label: 'Formatting review', value: '1,051–1,100', color: 'text-amber-700', bar: 'bg-amber-400', pct: '78%', note: 'Render and verify page count' },
+              { label: 'High overflow risk', value: '> 1,100 words', color: 'text-red-700', bar: 'bg-red-500', pct: '100%', note: 'Formatting determines final pages' },
             ].map((item) => (
               <div key={item.label} className="bg-white border border-slate-200 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
@@ -490,7 +491,7 @@ function Pricing() {
         '3 optimization credits',
         'Two-pass compression engine',
         'Qualification coverage report',
-        'Compliant word count guaranteed',
+        'Two-page formatting risk guidance',
       ],
       footnote: 'Credits do not expire.',
     },

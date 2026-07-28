@@ -17,9 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.resumegov.com"),
   title: "ResumeGov — Federal Resume Compliance for USAJOBS",
   description:
-    "Stop receiving 'Ineligible' ratings. ResumeGov validates your federal resume against OPM 2-page rule, GS-level requirements, and vacancy-specific language.",
+    "Check a federal resume against the OPM 2-page rule, GS-level requirements, and vacancy-specific language before applying through USAJOBS.",
 };
 
 export default function RootLayout({

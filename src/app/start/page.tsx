@@ -130,7 +130,11 @@ export default function StartPage() {
 
                 {/* Inline error */}
                 {errorMsg && (
-                  <div className="mb-4 flex items-start gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                  <div
+                    id="email-error"
+                    role="alert"
+                    className="mb-4 flex items-start gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3"
+                  >
                     <svg className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M12 3a9 9 0 110 18A9 9 0 0112 3z" />
                     </svg>
@@ -145,14 +149,24 @@ export default function StartPage() {
                     </label>
                     <input
                       id="email"
-                      type="text"
+                      name="email"
+                      type="email"
                       inputMode="email"
+                      required
                       autoComplete="email"
                       autoCapitalize="none"
                       autoCorrect="off"
                       spellCheck={false}
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={e => {
+                        setEmail(e.target.value);
+                        if (errorMsg) {
+                          setErrorMsg('');
+                          setStage('input');
+                        }
+                      }}
+                      aria-invalid={Boolean(errorMsg)}
+                      aria-describedby={errorMsg ? 'email-error email-privacy' : 'email-privacy'}
                       placeholder="you@agency.gov"
                       className="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
                     />
@@ -176,8 +190,9 @@ export default function StartPage() {
                 </form>
 
                 {/* Microcopy */}
-                <p className="text-xs text-slate-400 mt-4 text-center">
-                  We do not share your data. Used only to deliver your analysis.
+                <p id="email-privacy" className="text-xs text-slate-400 mt-4 text-center">
+                  Used to create your account and deliver your analysis. See our{' '}
+                  <Link href="/privacy" className="underline hover:text-slate-600">Privacy Policy</Link>.
                 </p>
 
                 {/* Divider + Sign in link */}

@@ -5,15 +5,6 @@ import { parseJobPosting } from '@/lib/ai/jobParser';
 import { analyzeResume } from '@/lib/ai/resumeAnalyzer';
 import { validatePreAI, validatePostAI } from '@/lib/ruleEngine';
 
-// ─── Debug: Log environment on import ──────────────────────────────────────────
-console.log('[free-analyze] Module loaded, env vars:', {
-  nodeEnv: process.env.NODE_ENV,
-  hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-  hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-  openAIKeyStarts: process.env.OPENAI_API_KEY?.slice(0, 10) ?? 'NOT FOUND',
-});
-
 // ─── Regulatory constants ─────────────────────────────────────────────────────
 const FREE_LIMIT = 3;
 const RATE_LIMIT_SECONDS = 30;        // Min seconds between analyses
@@ -38,14 +29,6 @@ function countWords(text: string): number {
  */
 export async function POST(request: NextRequest) {
   try {
-    // Debug: Log environment status (without exposing secrets)
-    console.log('[free-analyze] Environment check:', {
-      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-      hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      hasOpenAIKey: !!process.env.OPENAI_API_KEY,
-    });
-
     // ── Auth ─────────────────────────────────────────────────────────────────
     const supabase = await createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -54,8 +37,6 @@ export async function POST(request: NextRequest) {
       console.error('[free-analyze] Auth error:', authError);
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    console.log('[free-analyze] User authenticated:', user.id);
 
     // ── Parse body ────────────────────────────────────────────────────────────
     let body: { resumeText?: string; jobText?: string; jobUrl?: string };

@@ -10,12 +10,14 @@ export default function SiteFooter() {
           </span>
           <span className="text-slate-600 text-xs">— Federal Resume Compliance Infrastructure</span>
         </div>
-        <div className="flex items-center gap-6 text-xs text-slate-500">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500">
           <Link href="/blog" className="hover:text-slate-300 transition-colors">Guides</Link>
           <Link href="/editorial-standards" className="hover:text-slate-300 transition-colors">Editorial Standards</Link>
           <Link href="/#pricing" className="hover:text-slate-300 transition-colors">Pricing</Link>
           <Link href="/login" className="hover:text-slate-300 transition-colors">Sign in</Link>
           <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Dashboard</Link>
+          <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>
+          <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
         </div>
         <p className="text-xs text-slate-600">OPM 2-page rule effective Sep 27, 2025</p>
       </div>

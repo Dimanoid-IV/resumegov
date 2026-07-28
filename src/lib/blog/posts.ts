@@ -568,7 +568,7 @@ const POSTS: BlogPost[] = [
     ],
     content: `
 <h2>Why Federal Resumes Fail at a Higher Rate Than You'd Expect</h2>
-<p>The U.S. federal government receives millions of USAJOBS applications annually. Studies and agency reports consistently show that 30–50% of applicants who apply for positions they are objectively qualified for receive ineligible ratings. The most frequent cause? Resume errors that are entirely preventable. Here are the ten mistakes that most often trigger automatic rejection.</p>
+<p>Federal HR specialists can only credit qualifications that are documented in the application package. Avoidable resume errors—such as missing dates, hours per week, required specialized experience, or an over-length document—can prevent an eligibility finding. Here are ten mistakes to check before submitting.</p>
 
 <h2>Mistake 1: Missing Employment Date Precision</h2>
 <p>Listing "2019–2023" instead of "January 2019 – March 2023" prevents HR from calculating time-in-grade. This single formatting error can make a fully qualified candidate appear ineligible. Every position must include month, year, and average hours per week.</p>
@@ -1848,7 +1848,7 @@ January 2020 – Present | 40 hours per week
       },
       {
         question: 'How long should a federal resume be in 2026?',
-        answer: 'While civilian resumes are 1-2 pages, a successful federal resume is typically 3 to 5 pages. Any longer, and you risk overwhelming the hiring manager; any shorter, and you may fail to provide the exhaustive proof required to verify your qualifications.',
+        answer: 'Federal resumes submitted through USAJOBS must be no more than two pages under the OPM standard effective September 27, 2025. Include the most relevant evidence required by the vacancy announcement and verify the final rendered file is two pages or less.',
       },
       {
         question: 'Can I use generative AI to write my federal resume in 2026?',
@@ -1978,12 +1978,12 @@ January 2020 – Present | 40 hours per week
 <h3>2. Does the USAJOBS resume builder have a character limit?</h3>
 <p>Yes. The work experience section in the native builder typically limits you to 5,000 characters per job entry. If you have highly detailed accomplishments, this character cap can feel restrictive, making an uploaded document a better option.</p>
 <h3>3. How long should a federal resume be in 2026?</h3>
-<p>While civilian resumes are 1-2 pages, a successful federal resume is typically <strong>3 to 5 pages</strong>. Any longer, and you risk overwhelming the hiring manager; any shorter, and you may fail to provide the exhaustive proof required to verify your qualifications.</p>
+<p>Federal resumes submitted through USAJOBS must be <strong>no more than two pages</strong> under the OPM standard effective September 27, 2025. Prioritize the most relevant qualification evidence and verify the final rendered file before submitting.</p>
 <h3>4. Can I use generative AI to write your federal resume in 2026?</h3>
 <p>Yes, but with caution. OPM and individual federal agencies have updated their guidelines in 2026. While using AI to help structure sentences and brainstorm action verbs is acceptable, copying and pasting generic AI-generated content is highly discouraged. HR specialists are increasingly adept at spotting generic AI patterns, and you must ensure that every single metric and duty listed is entirely accurate and personally verifiable.</p>
 <hr />
 <h2>Conclusion</h2>
-<p>The <strong>USAJOBS resume builder</strong> remains an invaluable safety net for government job seekers, ensuring 100% compliance with federal standards. However, its visual limitations can make your application blend into a sea of identical resumes once it reaches the hiring manager. </p>
+<p>The <strong>USAJOBS resume builder</strong> can help applicants remember structured work-history fields, but it does not guarantee eligibility or compliance with every vacancy announcement. Review the final resume against the announcement before submitting.</p>
 <p>For the best results in 2026, consider a <strong>hybrid approach</strong>: use the native builder as a checklist and structural guide to map out your experience, then transition your content into a professionally styled, offline Word or PDF document. By combining the rigid compliance of a <strong>federal resume builder</strong> with the visual polish of a tailored upload, you can confidently pass the initial HR screening and make an unforgettable first impression on the selecting official.</p>`,
   }
 ];

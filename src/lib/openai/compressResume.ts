@@ -1,4 +1,4 @@
-import { openai } from "./client";
+import { getOpenAIClient } from "./client";
 
 export interface CompressedResumeResult {
   compressed_text: string;
@@ -11,7 +11,7 @@ export async function compressResume(params: {
   targetWordCount: number;
   hardLimit: number;
 }): Promise<CompressedResumeResult> {
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAIClient().chat.completions.create({
     model: "gpt-4.1-mini",
     temperature: 0.3,
     response_format: { type: "json_object" },

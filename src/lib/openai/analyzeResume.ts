@@ -1,4 +1,4 @@
-import { openai } from "./client";
+import { getOpenAIClient } from "./client";
 
 export interface FederalResumeAnalysis {
   required_keywords: string[];
@@ -12,7 +12,7 @@ export async function analyzeResume(params: {
   resumeText: string;
   vacancyText: string;
 }): Promise<FederalResumeAnalysis> {
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAIClient().chat.completions.create({
     model: "gpt-4.1",
     temperature: 0.2,
     response_format: { type: "json_object" },
