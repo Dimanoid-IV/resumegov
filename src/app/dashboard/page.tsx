@@ -68,10 +68,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   // Fetch all optimizations for user
   const { data: allOptimizationsData } = await admin
     .from('optimizations')
-    .select('*, analyses(resume_id, job_post_id)')
+    .select('*, analyses!inner(resume_id, job_post_id, user_id)')
+    .eq('analyses.user_id', user.id)
     .order('created_at', { ascending: false });
 
-  const allOptimizations = (allOptimizationsData || []) as (OptimizationRow & { analyses: { resume_id: string; job_post_id: string } })[];
+  const allOptimizations = (allOptimizationsData || []) as (OptimizationRow & {
+    analyses: { resume_id: string; job_post_id: string; user_id: string };
+  })[];
 
   // Fetch payment history
   const { data: paymentsData } = await admin
@@ -166,6 +169,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           wordCount={currentWordCount}
           creditsRemaining={userProfile?.credits_remaining}
           latestAnalysisId={analyses[0]?.id}
+          alreadyOptimized={optimizations.length > 0}
         />
 
         {/* Word Count Stats */}
@@ -314,7 +318,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   key={analysis.id}
                   analysis={analysis}
                   userPlan={userProfile?.plan_type || 'free'}
-                  creditsRemaining={userProfile?.credits_remaining}
                 />
               ))}
             </ul>

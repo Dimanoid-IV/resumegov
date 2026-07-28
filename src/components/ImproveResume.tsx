@@ -7,9 +7,16 @@ interface ImproveResumeProps {
   wordCount?: number;
   creditsRemaining?: number;
   latestAnalysisId?: string;
+  alreadyOptimized?: boolean;
 }
 
-export default function ImproveResume({ currentPlan, wordCount, creditsRemaining, latestAnalysisId }: ImproveResumeProps) {
+export default function ImproveResume({
+  currentPlan,
+  wordCount,
+  creditsRemaining,
+  latestAnalysisId,
+  alreadyOptimized = false,
+}: ImproveResumeProps) {
   const [loading, setLoading] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
 
@@ -159,7 +166,7 @@ export default function ImproveResume({ currentPlan, wordCount, creditsRemaining
         {isPro ? (
           <button
             onClick={handleOptimize}
-            disabled={loading || !latestAnalysisId || (wordCount !== undefined && wordCount <= 1050)}
+            disabled={loading || !latestAnalysisId || alreadyOptimized || (wordCount !== undefined && wordCount <= 1050)}
             className={`w-full font-semibold px-6 py-3 rounded-lg transition-colors ${
               wordCount !== undefined && wordCount <= 1050
                 ? 'bg-gray-100 text-gray-500'
@@ -170,6 +177,8 @@ export default function ImproveResume({ currentPlan, wordCount, creditsRemaining
               ? 'Optimizing...'
               : !latestAnalysisId
                 ? 'Analyze a Resume First'
+                : alreadyOptimized
+                  ? 'Resume Already Optimized'
                 : wordCount !== undefined && wordCount <= 1050
                   ? 'No Compression Needed'
                   : 'Optimize Resume Now'}

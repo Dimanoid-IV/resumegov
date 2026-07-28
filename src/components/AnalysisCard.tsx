@@ -9,24 +9,21 @@ type AnalysisRow = Database['public']['Tables']['analyses']['Row'];
 interface AnalysisCardProps {
   analysis: AnalysisRow;
   userPlan: string;
-  creditsRemaining?: number;
 }
 
-export default function AnalysisCard({ analysis, userPlan, creditsRemaining }: AnalysisCardProps) {
+export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) {
   const [loading, setLoading] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
   const supabase = createClient();
 
   const isPro = userPlan === 'pro' || userPlan === 'basic' || userPlan === 'enterprise';
-  const hasCredits = creditsRemaining === -1 || (creditsRemaining !== undefined && creditsRemaining > 0);
-
   const handleViewDetails = () => {
     // Free users see basic info, paid users see full details
     window.location.href = `/results/${analysis.id}`;
   };
 
   const handleDownload = async () => {
-    if (!isPro || !hasCredits) {
+    if (!isPro) {
       setShowPaywall(true);
       return;
     }
