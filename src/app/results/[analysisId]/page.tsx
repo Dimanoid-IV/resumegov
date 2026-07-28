@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -155,7 +156,8 @@ export default async function ResultsPage({
 
   // Fetch analysis — verify ownership via user_id
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: raw, error } = await (supabase as any)
+  const admin = createAdminClient();
+  const { data: raw, error } = await (admin as any)
     .from('analyses')
     .select(
       'id, user_id, compatibility_score, keyword_score, specialized_score, compliance_score, achievement_score, word_count, feedback_json, created_at'
