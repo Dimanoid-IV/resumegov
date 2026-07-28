@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getBillingConfig } from '@/lib/billing-env';
 
 export async function GET(request: NextRequest) {
-  if (process.env.VERCEL_ENV === 'production') {
+  if (
+    process.env.VERCEL_ENV === 'production' &&
+    process.env.BILLING_TEST_MODE !== 'true'
+  ) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
