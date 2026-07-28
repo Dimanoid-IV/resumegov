@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
+import { getBillingConfig } from '@/lib/billing-env';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
-
-const ANALYST_PRICE_ID = process.env.STRIPE_PRICE_ANALYST || 'price_analyst';
-const PROFESSIONAL_PRICE_ID = process.env.STRIPE_PRICE_PROFESSIONAL || 'price_professional';
 
 /**
  * GET /api/checkout
@@ -15,6 +13,7 @@ const PROFESSIONAL_PRICE_ID = process.env.STRIPE_PRICE_PROFESSIONAL || 'price_pr
  */
 export async function GET(request: NextRequest) {
   try {
+    const billing = getBillingConfig(request.nextUrl.origin);
     const supabase = await createClient();
     
     // Verify authentication
@@ -29,7 +28,7 @@ export async function GET(request: NextRequest) {
     const plan = searchParams.get('plan') || 'analyst';
 
     // Determine price ID
-    const priceId = plan === 'professional' ? PROFESSIONAL_PRICE_ID : ANALYST_PRICE_ID;
+    const priceId = plan === 'professional' ? billing.professionalPriceId : billing.analystPriceId;
 
     // Get user profile for Stripe customer ID
     const { data: userProfileData, error: profileError } = await supabase
@@ -75,9 +74,9 @@ export async function GET(request: NextRequest) {
           quantity: 1,
         },
       ],
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/dashboard?upgraded=true&plan=${plan}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/dashboard`,
+      mode: plan === 'professional' ? 'subscription' : 'payment',
+      success_url: `${billing.siteUrl}/dashboard?upgraded=true&plan=${plan}`,
+      cancel_url: `${billing.siteUrl}/dashboard`,
       metadata: {
         userId: user.id,
         plan,

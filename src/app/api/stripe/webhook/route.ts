@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getStripe } from '@/lib/stripe';
+import { getBillingConfig } from '@/lib/billing-env';
 import Stripe from 'stripe';
 
 /**
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
     let event: Stripe.Event;
 
     const stripe = getStripe();
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+    const webhookSecret = getBillingConfig().webhookSecret;
 
     try {
       event = stripe.webhooks.constructEvent(payload, signature, webhookSecret);
@@ -64,7 +65,7 @@ export async function POST(request: NextRequest) {
             newCredits = -1; // Unlimited for professional
           } else if (plan === 'analyst') {
             newPlanType = 'basic';
-            newCredits = 1; // 1 credit for analyst
+            newCredits = 3;
           }
 
           // Update user plan and credits

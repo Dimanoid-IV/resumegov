@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
+import { getBillingConfig } from '@/lib/billing-env';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -15,14 +16,9 @@ type UserRow = Database['public']['Tables']['users']['Row'];
 export async function POST(request: NextRequest) {
   try {
     // Resolve env vars inside handler to ensure availability in serverless context
-    const stripeKey = process.env.STRIPE_SECRET_KEY;
-    const analystPriceId = process.env.STRIPE_PRICE_ANALYST;
-    const professionalPriceId = process.env.STRIPE_PRICE_PROFESSIONAL;
-
-    if (!stripeKey) {
-      console.error('Missing STRIPE_SECRET_KEY');
-      return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
-    }
+    const billing = getBillingConfig(request.nextUrl.origin);
+    const analystPriceId = billing.analystPriceId;
+    const professionalPriceId = billing.professionalPriceId;
 
     const supabase = await createClient();
     
@@ -100,9 +96,9 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/dashboard?upgraded=true&plan=${planType}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/dashboard`,
+      mode: planType === 'professional' ? 'subscription' : 'payment',
+      success_url: `${billing.siteUrl}/dashboard?upgraded=true&plan=${planType}`,
+      cancel_url: `${billing.siteUrl}/dashboard`,
       metadata: {
         userId: user.id,
         plan: planType,
