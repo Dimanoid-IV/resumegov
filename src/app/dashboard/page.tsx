@@ -342,20 +342,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <a
-                      href={`/upload?resumeId=${resume.id}`}
-                      className="flex-1 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
-                    >
-                      View
-                    </a>
-                    <a
-                      href={`/upload?resumeId=${resume.id}`}
-                      className="flex-1 bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-800 transition-colors text-center"
-                    >
-                      Analyze
-                    </a>
-                  </div>
+                  <Link
+                    href="/upload"
+                    className="inline-flex bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded hover:bg-slate-800 transition-colors"
+                  >
+                    Start New Analysis
+                  </Link>
                 </li>
               ))}
             </ul>
