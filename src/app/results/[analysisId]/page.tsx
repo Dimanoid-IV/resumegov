@@ -63,9 +63,10 @@ function twoPageRisk(wordCount: number): {
   bg: string;
   border: string;
 } {
-  if (wordCount <= 1050) return { icon: '✓', label: 'Compliant', color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' };
-  if (wordCount <= 1100) return { icon: '⚠', label: 'Near Limit', color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
-  return { icon: '✕', label: 'Over Limit — Non-Compliant', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
+  if (wordCount < 850) return { icon: '⚠', label: 'May Need More Detail', color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
+  if (wordCount <= 1050) return { icon: '✓', label: 'Planning Range', color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' };
+  if (wordCount <= 1100) return { icon: '⚠', label: 'Check Final Pages', color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
+  return { icon: '✕', label: 'High Overflow Risk', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
 }
 
 // ─── Sub-score bar ─────────────────────────────────────────────────────────
@@ -169,6 +170,13 @@ export default async function ResultsPage({
   if (error || !raw) notFound();
 
   const analysis = raw as Analysis;
+  const { data: profile } = await (admin as any)
+    .from('users')
+    .select('plan_type, credits_remaining')
+    .eq('id', user.id)
+    .single();
+  const paidPlan = ['basic', 'pro', 'enterprise'].includes(profile?.plan_type ?? '');
+  const hasCredits = profile?.credits_remaining === -1 || (profile?.credits_remaining ?? 0) > 0;
 
   const compat = analysis.compatibility_score ?? 0;
   const kwScore = analysis.keyword_score ?? 0;      // stored 0-40
@@ -187,7 +195,8 @@ export default async function ResultsPage({
     : [];
 
   const risk = twoPageRisk(wordCount);
-  const optimizeHref = `/set-password?analysisId=${analysisId}`;
+  const optimizeHref = paidPlan && hasCredits ? '/dashboard' : '/api/checkout?plan=analyst';
+  const optimizeLabel = paidPlan && hasCredits ? 'Open Optimization Tools' : 'Upgrade to Analyst';
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -260,7 +269,7 @@ export default async function ResultsPage({
               style={{ borderColor: risk.border }}
             >
               <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
-                2-Page Compliance
+                Length Planning
               </h2>
               <div className="flex items-center justify-between">
                 <div>
@@ -287,7 +296,7 @@ export default async function ResultsPage({
                 />
               </div>
               <p className="text-xs text-slate-400 mt-2">
-                Target: 950–1,050 words · Hard limit: 1,100
+                Internal estimate only. Verify that the final rendered PDF is no more than 2 pages.
               </p>
             </div>
 
@@ -408,13 +417,13 @@ export default async function ResultsPage({
                 href={optimizeHref}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors w-full sm:w-auto"
               >
-                Optimize My Resume
+                {optimizeLabel}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
               <p className="text-xs text-slate-500 mt-3">
-                One credit required · Analyst plan from $9.99
+                One credit required · Analyst plan: $19.99 for 3 credits
               </p>
             </div>
 

@@ -1,17 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 interface ProUpgradeCardProps {
   currentPlan: string;
   wordCount?: number;
+  latestAnalysisId?: string;
 }
 
-export default function ProUpgradeCard({ currentPlan, wordCount }: ProUpgradeCardProps) {
+export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisId }: ProUpgradeCardProps) {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const supabase = createClient();
 
   const isPro = currentPlan === 'pro' || currentPlan === 'basic' || currentPlan === 'enterprise';
 
@@ -47,33 +46,15 @@ export default function ProUpgradeCard({ currentPlan, wordCount }: ProUpgradeCar
 
     setLoading(true);
     try {
-      // Get the first resume for optimization
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        alert('Please log in again');
+      if (!latestAnalysisId) {
+        alert('No analysis found. Please analyze a resume first.');
         return;
       }
-
-      // Fetch the user's latest resume
-      const { data: resumeData, error: resumeError } = await supabase
-        .from('resumes')
-        .select('id, original_text')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (resumeError || !resumeData) {
-        alert('No resume found. Please upload a resume first.');
-        return;
-      }
-
-      const resume = resumeData as { id: string; original_text: string };
 
       const response = await fetch('/api/optimize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resumeId: resume.id }),
+        body: JSON.stringify({ analysisId: latestAnalysisId }),
       });
 
       const data = await response.json();
@@ -115,7 +96,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount }: ProUpgradeCar
   return (
     <>
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white">
-        <h3 className="text-xl font-bold mb-3">Выберите тариф</h3>
+        <h3 className="text-xl font-bold mb-3">Choose a Plan</h3>
         
         <ul className="space-y-2 mb-5 text-blue-100">
           <li className="flex items-start gap-2">

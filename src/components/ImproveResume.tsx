@@ -1,18 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 interface ImproveResumeProps {
   currentPlan: string;
   wordCount?: number;
   creditsRemaining?: number;
+  latestAnalysisId?: string;
 }
 
-export default function ImproveResume({ currentPlan, wordCount, creditsRemaining }: ImproveResumeProps) {
+export default function ImproveResume({ currentPlan, wordCount, creditsRemaining, latestAnalysisId }: ImproveResumeProps) {
   const [loading, setLoading] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
-  const supabase = createClient();
 
   const isPro = currentPlan === 'pro' || currentPlan === 'basic' || currentPlan === 'enterprise';
   const hasCredits = creditsRemaining === -1 || (creditsRemaining !== undefined && creditsRemaining > 0);
@@ -25,31 +24,15 @@ export default function ImproveResume({ currentPlan, wordCount, creditsRemaining
 
     setLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        alert('Please log in again');
+      if (!latestAnalysisId) {
+        alert('No analysis found. Please analyze a resume first.');
         return;
       }
-
-      const { data: resumeData, error: resumeError } = await supabase
-        .from('resumes')
-        .select('id, original_text')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (resumeError || !resumeData) {
-        alert('No resume found. Please upload a resume first.');
-        return;
-      }
-
-      const resume = resumeData as { id: string; original_text: string };
 
       const response = await fetch('/api/optimize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resumeId: resume.id }),
+        body: JSON.stringify({ analysisId: latestAnalysisId }),
       });
 
       const data = await response.json();

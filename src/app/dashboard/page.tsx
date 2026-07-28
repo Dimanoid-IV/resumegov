@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Database } from '@/types/database';
@@ -30,9 +31,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   if (!user) {
     redirect('/login');
   }
+  const admin = createAdminClient();
 
   // Fetch user profile
-  const { data: userProfileData } = await supabase
+  const { data: userProfileData } = await admin
     .from('users')
     .select('*')
     .eq('id', user.id)
@@ -41,7 +43,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const userProfile = (userProfileData || {}) as UserRow | null;
 
   // Fetch analyses
-  const { data: analysesData } = await supabase
+  const { data: analysesData } = await admin
     .from('analyses')
     .select('*')
     .eq('user_id', user.id)
@@ -55,7 +57,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     : 0;
 
   // Fetch optimizations
-  const { data: optimizationsData } = await supabase
+  const { data: optimizationsData } = await admin
     .from('optimizations')
     .select('*')
     .eq('analysis_id', analyses[0]?.id || '')
@@ -64,7 +66,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const optimizations = (optimizationsData || []) as OptimizationRow[];
 
   // Fetch all optimizations for user
-  const { data: allOptimizationsData } = await supabase
+  const { data: allOptimizationsData } = await admin
     .from('optimizations')
     .select('*, analyses(resume_id, job_post_id)')
     .order('created_at', { ascending: false });
@@ -72,7 +74,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const allOptimizations = (allOptimizationsData || []) as (OptimizationRow & { analyses: { resume_id: string; job_post_id: string } })[];
 
   // Fetch payment history
-  const { data: paymentsData } = await supabase
+  const { data: paymentsData } = await admin
     .from('payments')
     .select('*')
     .eq('user_id', user.id)
@@ -81,7 +83,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const payments = (paymentsData || []) as PaymentRow[];
 
   // Fetch resumes
-  const { data: resumesData } = await supabase
+  const { data: resumesData } = await admin
     .from('resumes')
     .select('*')
     .eq('user_id', user.id)
@@ -153,6 +155,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         <ProUpgradeCard 
           currentPlan={userProfile?.plan_type || 'free'} 
           wordCount={currentWordCount}
+          latestAnalysisId={analyses[0]?.id}
         />
       </div>
 
@@ -162,6 +165,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           currentPlan={userProfile?.plan_type || 'free'}
           wordCount={currentWordCount}
           creditsRemaining={userProfile?.credits_remaining}
+          latestAnalysisId={analyses[0]?.id}
         />
 
         {/* Word Count Stats */}

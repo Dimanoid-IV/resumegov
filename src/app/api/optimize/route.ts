@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { Database } from '@/types/database';
 import { compressResume, compressResumeIterative } from '@/lib/ai';
 
@@ -31,9 +32,10 @@ export async function POST(request: NextRequest) {
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const admin = createAdminClient();
 
     // Check user credits and plan
-    const { data: userProfileData, error: userError } = await supabase
+    const { data: userProfileData, error: userError } = await admin
       .from('users')
       .select('plan_type, credits_remaining')
       .eq('id', user.id)
@@ -73,10 +75,11 @@ export async function POST(request: NextRequest) {
     let jobPostId: string | null = null;
 
     if (resumeId) {
-      const { data: resumeData, error: resumeError } = await supabase
+      const { data: resumeData, error: resumeError } = await admin
         .from('resumes')
         .select('original_text')
         .eq('id', resumeId)
+        .eq('user_id', user.id)
         .single();
 
       if (resumeError || !resumeData) {
@@ -86,10 +89,11 @@ export async function POST(request: NextRequest) {
       resumeText = (resumeData as { original_text: string }).original_text;
     } else {
       // Get resume from analysis
-      const { data: analysisData, error: analysisError } = await supabase
+      const { data: analysisData, error: analysisError } = await admin
         .from('analyses')
         .select('resume_id, job_post_id')
         .eq('id', analysisId)
+        .eq('user_id', user.id)
         .single();
 
       if (analysisError || !analysisData) {
@@ -99,7 +103,7 @@ export async function POST(request: NextRequest) {
       const analysis = analysisData as { resume_id: string; job_post_id: string };
       jobPostId = analysis.job_post_id;
 
-      const { data: resumeData, error: resumeError } = await supabase
+      const { data: resumeData, error: resumeError } = await admin
         .from('resumes')
         .select('original_text')
         .eq('id', analysis.resume_id)
@@ -116,7 +120,7 @@ export async function POST(request: NextRequest) {
     let requiredQualifications: string[] = [];
     
     if (jobPostId) {
-      const { data: jobData } = await supabase
+      const { data: jobData } = await admin
         .from('job_posts')
         .select('parsed_json')
         .eq('id', jobPostId)
@@ -183,7 +187,7 @@ export async function POST(request: NextRequest) {
     // Store optimization result if analysisId provided
     if (analysisId) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (supabase as any)
+      await (admin as any)
         .from('optimizations')
         .insert({
           analysis_id: analysisId,
@@ -197,7 +201,7 @@ export async function POST(request: NextRequest) {
     // Decrement credits if not unlimited
     if (creditsRemaining > 0) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (supabase as any)
+      await (admin as any)
         .from('users')
         .update({
           credits_remaining: creditsRemaining - 1,
