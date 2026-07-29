@@ -9,6 +9,7 @@ const corePages = [
   ['/federal-resume-2-page-rule', 0.9, 'monthly'],
   ['/usajobs-resume-requirements', 0.9, 'monthly'],
   ['/editorial-standards', 0.7, 'monthly'],
+  ['/contact', 0.7, 'monthly'],
   ['/privacy', 0.3, 'yearly'],
   ['/terms', 0.3, 'yearly'],
   ['/guides/usajobs-resume-requirements', 0.9, 'monthly'],

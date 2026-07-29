@@ -22,6 +22,9 @@ export default function SiteNav() {
           <Link href="/#pricing" className="text-sm text-slate-400 hover:text-white transition-colors">
             Pricing
           </Link>
+          <Link href="/contact" className="hidden text-sm text-slate-400 hover:text-white transition-colors sm:block">
+            Contact
+          </Link>
           <Link
             href="/login"
             className="text-sm px-4 py-1.5 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors"

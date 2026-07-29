@@ -16,6 +16,7 @@ export default function SiteFooter() {
           <Link href="/#pricing" className="hover:text-slate-300 transition-colors">Pricing</Link>
           <Link href="/login" className="hover:text-slate-300 transition-colors">Sign in</Link>
           <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Dashboard</Link>
+          <Link href="/contact" className="hover:text-slate-300 transition-colors">Contact</Link>
           <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>
           <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
         </div>
