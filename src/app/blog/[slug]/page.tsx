@@ -29,7 +29,7 @@ export async function generateMetadata({
   const url = `${SITE_URL}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Federal Resume AI`,
+    title: post.seoTitle ?? `${post.title} | Federal Resume AI`,
     description: post.description,
     authors: [{ name: post.author }],
     keywords: post.tags,

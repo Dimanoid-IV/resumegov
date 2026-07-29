@@ -8,6 +8,7 @@ export interface FAQ {
 export interface BlogPost {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;    // Used in <meta name="description"> and card excerpt
   date: string;           // ISO date string
   updatedDate?: string;
@@ -37,6 +38,260 @@ export function getRelatedPosts(slugs: string[]): BlogPost[] {
 // ─── Posts ────────────────────────────────────────────────────────────────────
 
 const POSTS: BlogPost[] = [
+
+  {
+    slug: 'ai-federal-resume-builder-usajobs-2026',
+    title: 'AI Federal Resume Builder for USAJOBS: What It Can and Cannot Do in 2026',
+    seoTitle: 'AI Federal Resume Builder for USAJOBS (2026 Guide)',
+    description:
+      'Learn how to use an AI federal resume builder safely in 2026, what it should check against a USAJOBS announcement, and where human verification is still essential.',
+    date: '2026-07-30',
+    readingTime: 10,
+    author: 'ResumeGov Editorial Team',
+    tags: ['AI federal resume builder', 'USAJOBS', 'federal resume AI', 'resume optimizer', '2026'],
+    relatedSlugs: [
+      'federal-resume-keywords',
+      'usajobs-resume-builder-vs-uploaded-resume',
+      'federal-resume-writing-guide-2026',
+    ],
+    faqs: [
+      {
+        question: 'Can AI write a federal resume for USAJOBS?',
+        answer:
+          'AI can organize and rewrite facts you provide, compare a resume with a vacancy announcement, and identify missing qualification evidence. It cannot truthfully invent experience, decide your legal eligibility, or guarantee that HR will refer you.',
+      },
+      {
+        question: 'What should an AI federal resume builder check?',
+        answer:
+          'It should check the two-page limit, dates, hours per week, federal series and grade where applicable, specialized experience, required education or licenses, vacancy-specific terminology, measurable results, and unsupported claims.',
+      },
+      {
+        question: 'Is it safe to paste a USAJOBS announcement into an AI resume tool?',
+        answer:
+          'A public vacancy announcement is generally safe to paste. Before uploading your resume, remove Social Security numbers, classified or sensitive government information, and personal details that are not needed for the analysis.',
+      },
+      {
+        question: 'Does ResumeGov guarantee a referral or federal job?',
+        answer:
+          'No. ResumeGov helps compare and improve a resume against a specific announcement, but the hiring agency alone determines eligibility, qualifications, referral, interviews, and selection.',
+      },
+      {
+        question: 'Is ResumeGov affiliated with USAJOBS or OPM?',
+        answer:
+          'No. ResumeGov is an independent service and is not affiliated with, endorsed by, or operated by USAJOBS, OPM, or any federal agency.',
+      },
+    ],
+    content: `
+<h2>Short answer</h2>
+<p>An AI federal resume builder is most useful as a <strong>comparison and editing assistant</strong>: it can map your documented experience to one USAJOBS announcement, reveal missing evidence, reduce repetition, and help fit the current two-page requirement. It should not invent qualifications, make legal eligibility decisions, or promise a referral.</p>
+<p>The safest workflow is simple: provide your real resume and the exact vacancy announcement, let the tool identify gaps and propose clearer wording, then verify every sentence yourself before submitting.</p>
+
+<h2>What changed for federal resumes</h2>
+<p>Federal resume advice written before late 2025 is often outdated. USAJOBS now states that federal agencies accept resumes of no more than two pages. Its current guidance also tells applicants to tailor each resume, use plain language, include month-and-year dates and hours per week, and show work performed at the level required by the announcement.</p>
+<p>That makes generic “write my resume” prompts a poor fit. A useful federal resume tool must solve two problems at once: preserve enough evidence for HR to verify qualifications and remove material that is not relevant to the target vacancy.</p>
+
+<h2>What a good AI federal resume builder should do</h2>
+<table>
+  <thead>
+    <tr><th>Task</th><th>Useful AI output</th><th>What you must verify</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Announcement analysis</td><td>Extract specialized experience, competencies, required documents, education, licenses, and assessment language</td><td>That the requirement came from the actual announcement and applies to your hiring path</td></tr>
+    <tr><td>Experience matching</td><td>Connect each requirement to a role, project, or achievement already in your resume</td><td>That you personally performed the work and can defend the claim</td></tr>
+    <tr><td>Gap detection</td><td>Flag requirements with weak, vague, or missing evidence</td><td>Whether valid evidence exists elsewhere in your history</td></tr>
+    <tr><td>Rewriting</td><td>Turn duty lists into concise action, scope, and result statements</td><td>Every number, tool, outcome, date, and level of responsibility</td></tr>
+    <tr><td>Compression</td><td>Remove duplication and prioritize relevant experience for two pages</td><td>That required dates, hours, grade, education, and licenses remain visible</td></tr>
+  </tbody>
+</table>
+
+<h2>What AI cannot decide for you</h2>
+<p>AI cannot determine every federal eligibility issue from a resume. The announcement may limit applications by citizenship, career status, veterans' preference, time-in-grade, area of consideration, clearance, education, or another hiring authority. Supporting documents such as an SF-50, DD-214, transcripts, or licenses may control the outcome.</p>
+<p>It also cannot guarantee referral. USAJOBS explains that real HR specialists review resumes, even when an agency uses automated application review. The agency—not the software—makes the qualification and referral decision.</p>
+<ul>
+  <li>Do not let a tool add experience you did not perform.</li>
+  <li>Do not copy vacancy duties as if they were your accomplishments.</li>
+  <li>Do not treat a keyword score as an eligibility determination.</li>
+  <li>Do not upload classified, controlled, or government-sensitive information.</li>
+  <li>Do not include an SSN, photo, age, religion, or other unnecessary personal information.</li>
+</ul>
+
+<h2>A safe 7-step workflow</h2>
+<ol>
+  <li><strong>Confirm eligibility first.</strong> Read “This job is open to,” “Requirements,” and “Qualifications.”</li>
+  <li><strong>Save the exact announcement.</strong> Similar job titles can have different specialized experience.</li>
+  <li><strong>Remove sensitive data.</strong> Keep only information needed to evaluate qualifications.</li>
+  <li><strong>Compare, do not generate from nothing.</strong> Give the AI your real experience and the announcement together.</li>
+  <li><strong>Resolve evidence gaps.</strong> For each required qualification, identify where, when, and at what scope you performed the work.</li>
+  <li><strong>Verify every rewrite.</strong> Check facts, dates, hours, metrics, tools, and responsibility.</li>
+  <li><strong>Review the final PDF.</strong> Confirm two pages, readable formatting, and the documents requested by the announcement.</li>
+</ol>
+
+<h2>Example: weak wording versus verifiable evidence</h2>
+<p><strong>Weak:</strong> “Responsible for program analysis and stakeholder communication.”</p>
+<p><strong>Stronger:</strong> “Analyzed monthly performance data for a $2.4M workforce program, identified a 12% processing backlog, and briefed corrective actions to division leaders and four regional stakeholders.”</p>
+<p>The stronger version helps because it shows the action, scope, context, and result. But AI should only propose that structure. The applicant must supply and verify the facts.</p>
+
+<h2>How ResumeGov fits this workflow</h2>
+<p>ResumeGov is an independent federal-resume analysis service built around a specific resume and a specific vacancy announcement. It checks qualification alignment, missing federal-resume elements, keyword coverage, and two-page-focused compression, then lets the user review the proposed changes before using the optimized document.</p>
+<p>That makes it most useful when you already have genuine experience but need help answering questions such as:</p>
+<ul>
+  <li>Which specialized-experience requirement is not yet proven?</li>
+  <li>Which bullets are relevant enough to keep within two pages?</li>
+  <li>Where does the resume use vague language instead of evidence?</li>
+  <li>Which announcement terms should appear naturally in the resume?</li>
+</ul>
+<p>ResumeGov does not apply for jobs, determine eligibility, or guarantee a referral. It is not affiliated with USAJOBS, OPM, or a federal agency.</p>
+
+<h2>How to evaluate any AI resume service</h2>
+<ul>
+  <li><strong>Announcement-specific:</strong> Can it analyze the actual vacancy, not just a job title?</li>
+  <li><strong>Evidence-first:</strong> Does it flag missing proof instead of silently inventing it?</li>
+  <li><strong>Federal fields:</strong> Does it preserve dates, hours per week, series and grade when relevant?</li>
+  <li><strong>Two-page awareness:</strong> Does it prioritize rather than merely shorten sentences?</li>
+  <li><strong>Transparent limits:</strong> Does it avoid guarantees and tell you to verify the result?</li>
+  <li><strong>Editable output:</strong> Can you inspect and correct the content before submitting?</li>
+</ul>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://help.usajobs.gov/faq/application/documents/resume/what-to-include">USAJOBS Help Center: What to include in a federal resume</a></li>
+  <li><a href="https://help.usajobs.gov/working-in-government/myths/resume-scanned-for-keywords">USAJOBS Help Center: How resumes are reviewed</a></li>
+  <li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/merit-hiring-plan-resources/">OPM Merit Hiring Plan resources</a></li>
+</ul>
+<p><em>Last reviewed July 30, 2026. Always follow the instructions in the individual vacancy announcement when they differ from general guidance.</em></p>
+`,
+  },
+
+  {
+    slug: 'usajobs-not-referred-reasons-federal-resume',
+    title: 'USAJOBS “Not Referred”: 9 Reasons and How to Fix Your Federal Resume',
+    seoTitle: 'USAJOBS Not Referred: 9 Reasons and Resume Fixes',
+    description:
+      'Understand what “not referred” means on USAJOBS, the most common qualification and resume problems behind it, and what to change before your next application.',
+    date: '2026-07-30',
+    readingTime: 11,
+    author: 'ResumeGov Editorial Team',
+    tags: ['USAJOBS not referred', 'federal resume', 'eligibility', 'specialized experience', 'HR screening'],
+    relatedSlugs: [
+      'how-hr-screens-federal-resumes',
+      'specialized-experience-examples-federal-resume',
+      'federal-resume-keywords',
+    ],
+    faqs: [
+      {
+        question: 'What does “not referred” mean on USAJOBS?',
+        answer:
+          'It generally means your application was not forwarded to the hiring manager for that vacancy. The reason may involve eligibility, minimum qualifications, supporting documents, assessment results, ranking, or insufficient evidence in the resume.',
+      },
+      {
+        question: 'Does “eligible but not referred” mean my resume was bad?',
+        answer:
+          'Not necessarily. You may have met minimum requirements but ranked below the applicants sent forward, lost priority under the hiring process, or lacked sufficiently clear evidence for a higher rating.',
+      },
+      {
+        question: 'Can I ask why I was not referred?',
+        answer:
+          'Yes. Use the agency contact listed in the vacancy announcement and request a concise explanation of your eligibility, qualification, and referral determination. Keep the announcement number and your application information available.',
+      },
+      {
+        question: 'Can keywords alone get a federal resume referred?',
+        answer:
+          'No. Similar terminology can help HR locate relevant experience, but the resume must show where, when, how, and at what level you performed the work. Unsupported keyword copying is not evidence.',
+      },
+      {
+        question: 'Should I use the same federal resume for every USAJOBS application?',
+        answer:
+          'No. USAJOBS advises applicants to tailor the resume to each job. The qualifications, specialized experience, grade, hiring path, and required documents can change even when job titles look similar.',
+      },
+    ],
+    content: `
+<h2>Short answer</h2>
+<p>“Not referred” means your application did not move forward to the hiring manager for that vacancy. It does <strong>not</strong> identify one universal resume mistake. The cause can be an eligibility restriction, missing document, unmet specialized experience, assessment result, ranking decision, or a resume that did not make your qualifications verifiable.</p>
+<p>Before rewriting everything, find out whether the decision was about <strong>eligibility</strong>, <strong>qualifications</strong>, or <strong>competitive ranking</strong>. Those problems require different fixes.</p>
+
+<h2>Eligible, qualified, and referred are different decisions</h2>
+<table>
+  <thead>
+    <tr><th>Decision</th><th>Question being answered</th><th>Typical evidence</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Eligible</td><td>Are you allowed to compete under this announcement and hiring path?</td><td>Citizenship, status, veterans' documents, SF-50, area of consideration</td></tr>
+    <tr><td>Qualified</td><td>Do you meet education, license, and specialized-experience requirements?</td><td>Resume, transcripts, licenses, dates, hours, grade and duties</td></tr>
+    <tr><td>Referred</td><td>Will your application be sent to the hiring manager?</td><td>Qualification rating, assessment results, category placement, applicable preference and agency process</td></tr>
+  </tbody>
+</table>
+<p>You can therefore be eligible but not qualified, qualified but not referred, or referred but not selected.</p>
+
+<h2>1. You applied under the wrong hiring path</h2>
+<p>The “This job is open to” section controls who may apply. A current federal employee announcement, veterans hiring path, recent graduate program, or agency-internal posting may require a status you do not have or did not document.</p>
+<p><strong>Fix:</strong> Check the hiring-path icons and eligibility language before editing your resume. Upload the exact proof requested, such as an SF-50 or veterans' documentation.</p>
+
+<h2>2. Your resume did not prove one year of specialized experience</h2>
+<p>Many announcements require one year of specialized experience equivalent to the next lower grade. A title alone is not proof. HR needs enough detail to determine that you performed the listed work for the required period and at the required level.</p>
+<p><strong>Fix:</strong> Map every specialized-experience element to a dated position. Show the task, complexity, independence, scope, tools, stakeholders, and outcome. Include hours per week so part-time experience can be evaluated.</p>
+
+<h2>3. Required dates, hours, series, or grade were missing</h2>
+<p>USAJOBS currently tells applicants to include employer, job title, month-and-year dates, hours per week, and—when the position was federal—the series and grade. Missing context can prevent HR from calculating duration or comparing the level of work.</p>
+<p><strong>Fix:</strong> Audit every relevant job entry for those fields. Do not make HR infer them from a profile or another document.</p>
+
+<h2>4. A required document was absent or did not support the claim</h2>
+<p>Transcripts, licenses, SF-50s, DD-214s, disability documentation, or other forms may be required by the announcement. A strong resume cannot substitute for a mandatory document.</p>
+<p><strong>Fix:</strong> Build a vacancy-specific document checklist from “Required Documents” and “How to Apply.” Open every uploaded file and confirm it is legible, current, and the correct version.</p>
+
+<h2>5. Your education did not meet the stated substitution</h2>
+<p>Some grades allow education to substitute for experience; others do not. Certain occupations also have a positive education requirement. A degree with a similar name may not satisfy required coursework or accreditation.</p>
+<p><strong>Fix:</strong> Read the education section literally. If qualifying through education, include the school, degree, completion date, GPA when requested, and transcripts in the required format.</p>
+
+<h2>6. Your assessment or questionnaire result was not competitive</h2>
+<p>A resume is only one part of many federal applications. The agency may use occupational questions, USA Hire, writing samples, technical exercises, or structured assessments. Under current merit-hiring policy, agencies are expanding job-related assessments.</p>
+<p><strong>Fix:</strong> Preview the assessment when the announcement provides a link. Answer accurately, allow enough uninterrupted time, and make sure the resume supports the level of experience claimed.</p>
+
+<h2>7. Your resume used duties instead of evidence</h2>
+<p>“Responsible for budgets, reports, and stakeholder communication” names duties but does not show level or performance. HR cannot assume that broad language equals the announcement's specialized experience.</p>
+<p><strong>Fix:</strong> Use a compact evidence pattern: <strong>action + subject + scope + method + result</strong>.</p>
+<p><strong>Before:</strong> “Prepared management reports.”</p>
+<p><strong>After:</strong> “Built monthly performance reports from five regional datasets, identified a 14% case backlog, and briefed division leadership on corrective staffing actions.”</p>
+
+<h2>8. The resume was not tailored to the announcement</h2>
+<p>Two jobs called “Program Analyst” may emphasize completely different experience. One may require budget formulation; another may focus on process improvement and executive briefings. A reusable generic resume can be truthful and still fail to prove the right qualifications.</p>
+<p><strong>Fix:</strong> Start with “Qualifications” and “Specialized Experience,” then check “Duties” and “How You Will Be Evaluated.” Reorder and rewrite genuine evidence so the most relevant material appears early.</p>
+
+<h2>9. You qualified, but other applicants were referred instead</h2>
+<p>Meeting minimum qualifications does not always guarantee referral. Depending on the authority and agency process, assessment scores, category ranking, veterans' preference, the number of referral slots, and other rules can affect who is sent to the hiring manager.</p>
+<p><strong>Fix:</strong> Ask the agency contact whether you were found eligible, qualified, and in which rating or referral category. Then improve the evidence you can control without assuming the resume was the only factor.</p>
+
+<h2>What to ask the agency HR contact</h2>
+<p>Use the contact information in the closed announcement. A short, neutral request is more useful than arguing the result:</p>
+<blockquote>
+  <p>I applied to announcement [number] and received a not-referred notice. Could you please confirm whether I was found eligible and qualified, and whether the non-referral resulted from missing documentation, the specialized-experience determination, assessment ranking, or another factor?</p>
+</blockquote>
+<p>The response may be brief, but it can prevent you from solving the wrong problem.</p>
+
+<h2>A 10-minute resume diagnostic</h2>
+<ol>
+  <li>Copy each specialized-experience requirement into a checklist.</li>
+  <li>Mark the exact resume sentence that proves each one.</li>
+  <li>Confirm the sentence belongs to a role with month/year dates and hours per week.</li>
+  <li>Check whether the scope matches the required grade level.</li>
+  <li>Replace unsupported adjectives with actions, scale, and results.</li>
+  <li>Remove unrelated content competing for space.</li>
+  <li>Confirm the final resume is no more than two pages and remains readable.</li>
+  <li>Verify every required supporting document separately.</li>
+</ol>
+
+<h2>Where ResumeGov can help—and where it cannot</h2>
+<p>ResumeGov can compare a resume with the exact vacancy announcement, flag missing specialized-experience evidence and federal-resume fields, identify weak keyword alignment, and help prioritize content for two pages. This is useful when the problem is how clearly your genuine experience is presented.</p>
+<p>It cannot change your legal eligibility, create missing experience, improve an assessment score after submission, or override an agency decision. ResumeGov is an independent service and is not affiliated with USAJOBS, OPM, or any federal agency.</p>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://help.usajobs.gov/faq/application/documents/resume/what-to-include">USAJOBS Help Center: How to write a federal resume</a></li>
+  <li><a href="https://help.usajobs.gov/working-in-government/myths/resume-scanned-for-keywords">USAJOBS Help Center: Automated and human resume review</a></li>
+  <li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/merit-hiring-plan-resources/">OPM Merit Hiring Plan resources</a></li>
+</ul>
+<p><em>Last reviewed July 30, 2026. Vacancy-specific instructions and agency determinations control over general guidance.</em></p>
+`,
+  },
 
   {
     slug: 'federal-resume-format-2026-chronological-functional-combination',
