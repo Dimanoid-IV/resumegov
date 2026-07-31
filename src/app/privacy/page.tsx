@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const sections = [
   ['Information we process', [
-    'We process the email address you use to sign in, the resume and vacancy-announcement text you submit, analysis and optimization results, and basic account and usage records.',
+    'We process the name and email address you use to create or access your account, the resume and vacancy-announcement text you submit, analysis and optimization results, and basic account and usage records.',
     'Federal resumes can contain sensitive personal information. Remove Social Security numbers, dates of birth, photographs, and any information that is not needed for the analysis before submitting text.',
   ]],
   ['How we use information', [

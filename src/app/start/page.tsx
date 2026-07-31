@@ -14,6 +14,7 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function StartPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [stage, setStage] = useState<Stage>('input');
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,12 @@ export default function StartPage() {
     e.preventDefault();
     setErrorMsg('');
 
+    const trimmedName = name.trim().replace(/\s+/g, ' ');
     const trimmed = email.trim().toLowerCase();
+    if (trimmedName.length < 2) {
+      setErrorMsg('Enter your name.');
+      return;
+    }
     if (!isValidEmail(trimmed)) {
       setErrorMsg('Enter a valid email address.');
       return;
@@ -53,6 +59,7 @@ export default function StartPage() {
       email: trimmed,
       options: {
         emailRedirectTo: `${currentOrigin}/auth/callback?next=/upload`,
+        data: { full_name: trimmedName },
       },
     });
 
@@ -112,7 +119,7 @@ export default function StartPage() {
                   The link expires in 60 minutes. No password required.
                 </p>
                 <button
-                  onClick={() => { setStage('input'); setEmail(''); }}
+                  onClick={() => { setStage('input'); setName(''); setEmail(''); }}
                   className="text-sm text-blue-600 hover:underline"
                 >
                   Use a different email
@@ -143,6 +150,30 @@ export default function StartPage() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
+                      Your name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      minLength={2}
+                      maxLength={100}
+                      autoComplete="name"
+                      value={name}
+                      onChange={e => {
+                        setName(e.target.value);
+                        if (errorMsg) {
+                          setErrorMsg('');
+                          setStage('input');
+                        }
+                      }}
+                      placeholder="Jane Smith"
+                      className="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                    />
+                  </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
                       Email address

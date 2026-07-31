@@ -18,6 +18,7 @@ export interface AdminStats {
 export interface AdminUser {
   id: string;
   email: string;
+  full_name: string | null;
   plan_type: string;
   credits_remaining: number;
   is_admin: boolean;
@@ -307,6 +308,57 @@ export default function AdminDashboardClient({
     { id: 'flags', label: 'Flags', count: flags.filter(f => !f.resolved).length },
   ];
 
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  const newToday = users.filter(user => new Date(user.created_at) >= startOfToday).length;
+  const recentUsers = users.slice(0, 10);
+
+  function UsersTable({ rows, emptyMessage }: { rows: AdminUser[]; emptyMessage: string }) {
+    return (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm min-w-[720px]">
+          <thead>
+            <tr className="border-b text-left text-gray-500">
+              <th className="pb-2 font-medium">Name</th>
+              <th className="pb-2 font-medium">Email</th>
+              <th className="pb-2 font-medium">Joined</th>
+              <th className="pb-2 font-medium">Plan</th>
+              <th className="pb-2 font-medium">Credits</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(user => (
+              <tr key={user.id} className="border-b hover:bg-gray-50">
+                <td className="py-2.5 pr-4 font-medium text-gray-900">
+                  {user.full_name || <span className="font-normal text-gray-400">Not provided</span>}
+                </td>
+                <td className="py-2.5 pr-4">
+                  <a href={`mailto:${user.email}`} className="text-blue-700 hover:underline">
+                    {user.email}
+                  </a>
+                </td>
+                <td className="py-2.5 pr-4 text-gray-500">
+                  {new Date(user.created_at).toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                  })}
+                </td>
+                <td className="py-2.5 pr-4"><PlanBadge plan={user.plan_type} /></td>
+                <td className="py-2.5">{user.credits_remaining === -1 ? '∞' : user.credits_remaining}</td>
+              </tr>
+            ))}
+            {rows.length === 0 && (
+              <tr><td colSpan={5} className="py-6 text-center text-gray-400">{emptyMessage}</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
@@ -415,8 +467,19 @@ export default function AdminDashboardClient({
 
           {/* ── Overview Tab ── */}
           {tab === 'overview' && (
-            <div className="space-y-4 text-sm text-gray-600">
-              <p>Select a tab above to drill into users, analyses, resumes, payments, or flags.</p>
+            <div className="space-y-6 text-sm text-gray-600">
+              <section>
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                  <div>
+                    <h2 className="font-semibold text-base text-gray-900">New Users</h2>
+                    <p className="text-xs text-gray-500">Latest registrations, newest first</p>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium">
+                    {newToday} new today
+                  </span>
+                </div>
+                <UsersTable rows={recentUsers} emptyMessage="No users yet." />
+              </section>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <p className="font-semibold text-blue-800 mb-1">Active Users</p>
@@ -439,31 +502,7 @@ export default function AdminDashboardClient({
 
           {/* ── Users Tab ── */}
           {tab === 'users' && (
-            <table className="w-full text-sm min-w-[600px]">
-              <thead>
-                <tr className="border-b text-left text-gray-500">
-                  <th className="pb-2 font-medium">Email</th>
-                  <th className="pb-2 font-medium">Plan</th>
-                  <th className="pb-2 font-medium">Credits</th>
-                  <th className="pb-2 font-medium">Admin</th>
-                  <th className="pb-2 font-medium">Joined</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map(u => (
-                  <tr key={u.id} className="border-b hover:bg-gray-50">
-                    <td className="py-2 pr-4">{u.email}</td>
-                    <td className="py-2 pr-4"><PlanBadge plan={u.plan_type} /></td>
-                    <td className="py-2 pr-4">{u.credits_remaining === -1 ? '∞' : u.credits_remaining}</td>
-                    <td className="py-2 pr-4">{u.is_admin ? '✅' : '—'}</td>
-                    <td className="py-2 text-gray-500">{new Date(u.created_at).toLocaleDateString()}</td>
-                  </tr>
-                ))}
-                {users.length === 0 && (
-                  <tr><td colSpan={5} className="py-4 text-center text-gray-400">No users yet.</td></tr>
-                )}
-              </tbody>
-            </table>
+            <UsersTable rows={users} emptyMessage="No users yet." />
           )}
 
           {/* ── Analyses Tab ── */}

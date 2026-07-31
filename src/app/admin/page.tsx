@@ -48,6 +48,7 @@ export default async function AdminPage() {
     { data: allPayments },
     { data: allFlags },
     { data: dailyAnalysesData },
+    { data: authUsersData },
   ] = await Promise.all([
     a.from('users').select('*').order('created_at', { ascending: false }),
     a.from('analyses').select('*, job_posts(gs_level)').order('created_at', { ascending: false }).limit(200),
@@ -58,6 +59,7 @@ export default async function AdminPage() {
     a.from('analyses')
       .select('id')
       .gte('created_at', new Date(new Date().setHours(0, 0, 0, 0)).toISOString()),
+    admin.auth.admin.listUsers({ page: 1, perPage: 1000 }),
   ]);
 
   // ── Fetch user emails for analyses and optimizations ──────────────────────
@@ -67,7 +69,7 @@ export default async function AdminPage() {
   }
 
   // ── Stats computation ─────────────────────────────────────────────────────
-  const users = (allUsers || []) as AdminUser[];
+  const users = (allUsers || []) as Omit<AdminUser, 'full_name'>[];
   const totalUsers = users.length;
   const paidUsers = users.filter(u => u.plan_type !== 'free').length;
   const conversionRate = totalUsers > 0 ? (paidUsers / totalUsers) * 100 : 0;
@@ -125,7 +127,18 @@ export default async function AdminPage() {
   };
 
   // ── Shape data for client ─────────────────────────────────────────────────
-  const shapedUsers: AdminUser[] = users;
+  const authNameMap: Record<string, string> = {};
+  for (const authUser of authUsersData?.users || []) {
+    const metadataName = authUser.user_metadata?.full_name ?? authUser.user_metadata?.name;
+    if (typeof metadataName === 'string' && metadataName.trim()) {
+      authNameMap[authUser.id] = metadataName.trim();
+    }
+  }
+
+  const shapedUsers: AdminUser[] = users.map(userProfile => ({
+    ...userProfile,
+    full_name: authNameMap[userProfile.id] ?? null,
+  }));
 
   const shapedAnalyses: AdminAnalysis[] = ((allAnalyses || []) as {
     id: string;
