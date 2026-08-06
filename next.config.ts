@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
-
   // ── Canonical domain redirect ─────────────────────────────────────────────
   // Redirect bare domain → www (301 permanent, SEO-safe)
   async redirects() {
