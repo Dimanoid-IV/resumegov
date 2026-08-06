@@ -26,9 +26,23 @@ export async function GET(request: NextRequest) {
     // Get plan from query params
     const searchParams = request.nextUrl.searchParams;
     const requestedPlan = searchParams.get('plan') || 'analyst';
+    const requestedAnalysisId = searchParams.get('analysisId');
     const plan = ['single', 'analyst', 'professional'].includes(requestedPlan)
       ? requestedPlan
       : 'analyst';
+    let analysisId: string | null = null;
+    if (requestedAnalysisId) {
+      const { data: ownedAnalysis } = await supabase
+        .from('analyses')
+        .select('id')
+        .eq('id', requestedAnalysisId)
+        .eq('user_id', user.id)
+        .maybeSingle();
+      if (!ownedAnalysis) {
+        return NextResponse.redirect(new URL('/dashboard?error=analysis_not_found', request.url));
+      }
+      analysisId = requestedAnalysisId;
+    }
 
     // Determine price ID
     const priceId = plan === 'professional'
@@ -82,11 +96,16 @@ export async function GET(request: NextRequest) {
         },
       ],
       mode: plan === 'professional' ? 'subscription' : 'payment',
-      success_url: `${billing.siteUrl}/dashboard?upgraded=true&plan=${plan}`,
-      cancel_url: `${billing.siteUrl}/dashboard`,
+      success_url: analysisId
+        ? `${billing.siteUrl}/dashboard?upgraded=true&plan=${plan}&analysisId=${encodeURIComponent(analysisId)}`
+        : `${billing.siteUrl}/dashboard?upgraded=true&plan=${plan}`,
+      cancel_url: analysisId
+        ? `${billing.siteUrl}/results/${encodeURIComponent(analysisId)}?checkout=cancelled`
+        : `${billing.siteUrl}/dashboard?checkout=cancelled`,
       metadata: {
         userId: user.id,
         plan,
+        analysisId: analysisId || '',
       },
     });
 

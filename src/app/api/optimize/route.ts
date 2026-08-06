@@ -1,233 +1,228 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { Database } from '@/types/database';
-import { compressResume, compressResumeIterative } from '@/lib/ai';
+import type { Database } from '@/types/database';
+import type { ParsedJobData } from '@/lib/ai/types';
+import { repairTailoredResume, tailorResume, verifyTailoredResume } from '@/lib/ai';
+import { calculateKeywordCoverage } from '@/lib/scoring';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
-// Constants for federal resume compliance
-const TARGET_MIN = 950;
-const TARGET_MAX = 1050;
-const HARD_LIMIT = 1100;
-
-// Output interface
-interface OptimizeOutput {
-  compressed_resume_text: string;
-  final_word_count: number;
-  qualification_coverage_percent: number;
-}
-
-/**
- * POST /api/optimize
- * Optimizes resume for federal compliance (2-page limit, 950-1050 words)
- * Body: { analysisId: string }
- */
 export async function POST(request: NextRequest) {
-  try {
-    const supabase = await createClient();
-    
-    // Verify authentication
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-    const admin = createAdminClient();
+  const startedAt = Date.now();
+  const supabase = await createClient();
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    // Check user credits and plan
-    const { data: userProfileData, error: userError } = await admin
+  if (authError || !user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const admin = createAdminClient();
+  // Server-side ownership checks are explicit below. The service client is
+  // intentionally untyped here because the generated schema lags nested JSON.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const db = admin as any;
+
+  try {
+    const body = await request.json() as { analysisId?: string };
+    const analysisId = body.analysisId;
+    if (!analysisId) {
+      return NextResponse.json({ error: 'Missing required field: analysisId' }, { status: 400 });
+    }
+
+    const { data: existing } = await db
+      .from('optimizations')
+      .select('compressed_resume_text, final_word_count, qualification_coverage_percent')
+      .eq('analysis_id', analysisId)
+      .maybeSingle();
+
+    if (existing) {
+      return NextResponse.json({
+        tailored_resume_text: existing.compressed_resume_text,
+        compressed_resume_text: existing.compressed_resume_text,
+        final_word_count: existing.final_word_count,
+        qualification_coverage_percent: existing.qualification_coverage_percent,
+        reused: true,
+      });
+    }
+
+    const { data: profileData, error: profileError } = await db
       .from('users')
       .select('plan_type, credits_remaining')
       .eq('id', user.id)
       .single();
 
-    if (userError || !userProfileData) {
+    if (profileError || !profileData) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const userProfile = userProfileData as Pick<UserRow, 'plan_type' | 'credits_remaining'>;
-    const userPlan = userProfile.plan_type;
-    const creditsRemaining = userProfile.credits_remaining;
+    const profile = profileData as Pick<UserRow, 'plan_type' | 'credits_remaining'>;
+    const paidPlan = ['basic', 'pro', 'enterprise'].includes(profile.plan_type);
+    const hasCredits = profile.credits_remaining === -1 || profile.credits_remaining > 0;
+    if (!paidPlan || !hasCredits) {
+      return NextResponse.json({ error: 'No optimization credits available.' }, { status: 403 });
+    }
 
-    // Check if user has access
-    const isPro = userPlan === 'pro' || userPlan === 'basic' || userPlan === 'enterprise';
-    const hasCredits = creditsRemaining === -1 || (creditsRemaining !== undefined && creditsRemaining > 0);
+    const { data: analysis, error: analysisError } = await db
+      .from('analyses')
+      .select('resume_id, job_post_id')
+      .eq('id', analysisId)
+      .eq('user_id', user.id)
+      .single();
 
-    if (!isPro || !hasCredits) {
+    if (analysisError || !analysis) {
+      return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
+    }
+
+    const [{ data: resume }, { data: jobPost }] = await Promise.all([
+      db.from('resumes').select('original_text').eq('id', analysis.resume_id).eq('user_id', user.id).single(),
+      db.from('job_posts').select('original_text, parsed_json').eq('id', analysis.job_post_id).eq('user_id', user.id).single(),
+    ]);
+
+    if (!resume?.original_text || !jobPost?.original_text) {
+      return NextResponse.json({ error: 'Resume or vacancy data is missing.' }, { status: 422 });
+    }
+
+    const parsedJob = jobPost.parsed_json as unknown as ParsedJobData;
+    let tailored = await tailorResume({
+      resumeText: resume.original_text,
+      jobText: jobPost.original_text,
+      parsedJob,
+    });
+    let totalTokens = tailored.tokens_used;
+    let repairedAfterReview = false;
+
+    if (!tailored.success || !tailored.data) {
       return NextResponse.json(
-        { error: 'No credits remaining. Please upgrade your plan.' },
-        { status: 403 }
+        { error: tailored.error || 'Resume tailoring failed. No credit was used.' },
+        { status: 422 }
       );
     }
 
-    const body = await request.json();
-    const { analysisId, resumeId } = body;
+    let verification = await verifyTailoredResume({
+      originalResume: resume.original_text,
+      tailoredResume: tailored.data.tailored_resume_text,
+    });
+    totalTokens += verification.tokens_used;
 
-    if (!analysisId && !resumeId) {
+    if (verification.success && verification.data && !verification.data.safe) {
+      const repaired = await repairTailoredResume({
+        resumeText: resume.original_text,
+        jobText: jobPost.original_text,
+        parsedJob,
+        draft: tailored.data,
+        verification: verification.data,
+      });
+      totalTokens += repaired.tokens_used;
+
+      if (repaired.success && repaired.data) {
+        const repairedData = repaired.data;
+        tailored = repaired;
+        repairedAfterReview = true;
+        verification = await verifyTailoredResume({
+          originalResume: resume.original_text,
+          tailoredResume: repairedData.tailored_resume_text,
+        });
+        totalTokens += verification.tokens_used;
+      }
+    }
+
+    if (!verification.success || !verification.data?.safe) {
+      await db.from('ai_usage_logs').insert({
+        user_id: user.id,
+        model: verification.model || tailored.model,
+        tokens_used: totalTokens,
+        latency_ms: Date.now() - startedAt,
+        success: false,
+        error_message: 'Factual verification rejected tailored output',
+      });
       return NextResponse.json(
-        { error: 'Missing required field: analysisId or resumeId' },
-        { status: 400 }
+        {
+          error: 'The draft failed the factual-safety check. No credit was used.',
+          verification_issues: verification.data?.unsupported_claims?.slice(0, 5) || [],
+        },
+        { status: 422 }
       );
     }
 
-    // Fetch resume
-    let resumeText: string;
-    let jobPostId: string | null = null;
-
-    if (resumeId) {
-      const { data: resumeData, error: resumeError } = await admin
-        .from('resumes')
-        .select('original_text')
-        .eq('id', resumeId)
-        .eq('user_id', user.id)
-        .single();
-
-      if (resumeError || !resumeData) {
-        return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
-      }
-
-      resumeText = (resumeData as { original_text: string }).original_text;
-    } else {
-      // Get resume from analysis
-      const { data: analysisData, error: analysisError } = await admin
-        .from('analyses')
-        .select('resume_id, job_post_id')
-        .eq('id', analysisId)
-        .eq('user_id', user.id)
-        .single();
-
-      if (analysisError || !analysisData) {
-        return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
-      }
-
-      const analysis = analysisData as { resume_id: string; job_post_id: string };
-      jobPostId = analysis.job_post_id;
-
-      const { data: resumeData, error: resumeError } = await admin
-        .from('resumes')
-        .select('original_text')
-        .eq('id', analysis.resume_id)
-        .single();
-
-      if (resumeError || !resumeData) {
-        return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
-      }
-
-      resumeText = (resumeData as { original_text: string }).original_text;
+    const finalTailored = tailored.data;
+    if (!finalTailored) {
+      return NextResponse.json(
+        { error: 'Resume tailoring returned no usable draft. No credit was used.' },
+        { status: 422 }
+      );
     }
 
-    // Get required qualifications from job post if available
-    let requiredQualifications: string[] = [];
-    
-    if (jobPostId) {
-      const { data: jobData } = await admin
-        .from('job_posts')
-        .select('parsed_json')
-        .eq('id', jobPostId)
-        .single();
-
-      if (jobData) {
-        const parsed = (jobData as { parsed_json: Record<string, unknown> }).parsed_json;
-        requiredQualifications = (parsed?.mandatory_elements as string[]) || 
-                               (parsed?.required_qualifications as string[]) || [];
-      }
+    if (finalTailored.tailored_resume_text.trim() === resume.original_text.trim()) {
+      return NextResponse.json(
+        { error: 'No meaningful safe improvement could be produced. No credit was used.' },
+        { status: 422 }
+      );
     }
 
-    // Check initial word count
-    const initialWordCount = resumeText.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const coverageRequirements = [
+      ...(parsedJob.required_qualifications || []),
+      ...(parsedJob.specialized_experience || []),
+      ...(parsedJob.keywords || []),
+    ];
+    const coverage = calculateKeywordCoverage(
+      finalTailored.tailored_resume_text,
+      coverageRequirements
+    );
 
-    let result;
-    let compressionPass = 1;
-
-    // First compression pass
-    const firstResult = await compressResume({
-      resumeText,
-      targetWordCount: TARGET_MAX,
-      hardWordLimit: HARD_LIMIT,
-      requiredQualifications,
+    const { error: insertError } = await db.from('optimizations').insert({
+      analysis_id: analysisId,
+      compressed_resume_text: finalTailored.tailored_resume_text,
+      qualification_coverage_percent: coverage,
+      final_word_count: finalTailored.final_word_count,
+      ksa_text: JSON.stringify({
+        change_summary: finalTailored.change_summary,
+        matched_requirements: finalTailored.matched_requirements,
+        unresolved_gaps: finalTailored.unresolved_gaps,
+        questions_for_user: finalTailored.questions_for_user,
+        verification_notes: verification.data.notes,
+        lost_critical_facts: verification.data.lost_critical_facts,
+        repaired_after_review: repairedAfterReview,
+      }),
     });
 
-    if (!firstResult.success || !firstResult.data) {
-      return NextResponse.json(
-        { error: firstResult.error || 'Compression failed' },
-        { status: 422 }
-      );
+    if (insertError) {
+      throw insertError;
     }
 
-    result = firstResult;
-
-    // If still over hard limit, run second pass
-    if (result.data && result.data.final_word_count > HARD_LIMIT) {
-      compressionPass = 2;
-      const secondResult = await compressResumeIterative({
-        resumeText: result.data.compressed_text,
-        targetWordCount: TARGET_MAX,
-        hardWordLimit: HARD_LIMIT,
-        requiredQualifications,
-      });
-
-      if (secondResult.success && secondResult.data) {
-        result = secondResult;
-      }
-    }
-
-    if (!result.data) {
-      return NextResponse.json(
-        { error: 'Compression failed after attempts' },
-        { status: 422 }
-      );
-    }
-
-    const output: OptimizeOutput = {
-      compressed_resume_text: result.data.compressed_text,
-      final_word_count: result.data.final_word_count,
-      qualification_coverage_percent: result.data.qualification_coverage_percent,
-    };
-
-    // Store optimization result if analysisId provided
-    if (analysisId) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (admin as any)
-        .from('optimizations')
-        .insert({
-          analysis_id: analysisId,
-          compressed_resume_text: output.compressed_resume_text,
-          qualification_coverage_percent: output.qualification_coverage_percent,
-          final_word_count: output.final_word_count,
-          ksa_text: '', // KSA generation is separate endpoint
-        });
-    }
-
-    // Decrement credits if not unlimited
-    if (creditsRemaining > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (admin as any)
+    if (profile.credits_remaining > 0) {
+      await db
         .from('users')
-        .update({
-          credits_remaining: creditsRemaining - 1,
-        })
+        .update({ credits_remaining: profile.credits_remaining - 1 })
         .eq('id', user.id);
     }
 
-    return NextResponse.json({
-      ...output,
-      meta: {
-        original_word_count: initialWordCount,
-        compression_pass: compressionPass,
-        target_range: `${TARGET_MIN}-${TARGET_MAX}`,
-        hard_limit: HARD_LIMIT,
-        compliance: {
-          within_target: output.final_word_count >= TARGET_MIN && output.final_word_count <= TARGET_MAX,
-          within_hard_limit: output.final_word_count <= HARD_LIMIT,
-          all_qualifications_preserved: result.data.compliance_status?.all_qualifications_preserved ?? true,
-        },
-      },
-    }, { status: 200 });
+    await db.from('ai_usage_logs').insert({
+      user_id: user.id,
+      model: tailored.model,
+      tokens_used: totalTokens,
+      latency_ms: Date.now() - startedAt,
+      success: true,
+      error_message: null,
+    });
 
+    return NextResponse.json({
+      tailored_resume_text: finalTailored.tailored_resume_text,
+      compressed_resume_text: finalTailored.tailored_resume_text,
+      original_word_count: finalTailored.original_word_count,
+      final_word_count: finalTailored.final_word_count,
+      qualification_coverage_percent: coverage,
+      change_summary: finalTailored.change_summary,
+      matched_requirements: finalTailored.matched_requirements,
+      unresolved_gaps: finalTailored.unresolved_gaps,
+      questions_for_user: finalTailored.questions_for_user,
+      fact_checked: true,
+      repaired_after_review: repairedAfterReview,
+    });
   } catch (error) {
     console.error('Optimize API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Resume tailoring failed. No credit was used.' },
       { status: 500 }
     );
   }

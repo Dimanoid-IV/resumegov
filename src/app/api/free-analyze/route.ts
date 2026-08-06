@@ -4,18 +4,13 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { parseJobPosting } from '@/lib/ai/jobParser';
 import { analyzeResume } from '@/lib/ai/resumeAnalyzer';
 import { validatePreAI, validatePostAI } from '@/lib/ruleEngine';
+import { scoreResumeEvidence } from '@/lib/scoring';
 
 // ─── Regulatory constants ─────────────────────────────────────────────────────
 const FREE_LIMIT = 3;
 const RATE_LIMIT_SECONDS = 30;        // Min seconds between analyses
 const MAX_RESUME_WORDS = 12_000;
 const MAX_JOB_WORDS = 6_000;
-
-// Cost weights matching the scoring formula
-const KW_WEIGHT = 0.40;
-const SE_WEIGHT = 0.30;
-const CO_WEIGHT = 0.20;
-const AE_WEIGHT = 0.10;
 
 function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(w => w.length > 0).length;
@@ -253,20 +248,18 @@ export async function POST(request: NextRequest) {
       extractedKeywords: parsedJob.keywords || [],
     });
 
-    // Weighted scoring formula (deterministic)
-    const keywordScore = Math.min(40, aiData.keyword_score * KW_WEIGHT);
-    const specializedScore = Math.min(30, aiData.specialized_score * SE_WEIGHT);
-    const complianceScore = Math.min(20, aiData.compliance_score * CO_WEIGHT);
-    const achievementScore = Math.min(10, aiData.achievement_score * AE_WEIGHT);
-    const compatibilityScore = Math.min(100, Math.round(
-      keywordScore + specializedScore + complianceScore + achievementScore
-    ));
-    // The persisted score columns are integers. AI output can produce weighted
-    // fractional values (for example 28.5), so normalize them before insert.
-    const persistedKeywordScore = Math.round(keywordScore);
-    const persistedSpecializedScore = Math.round(specializedScore);
-    const persistedComplianceScore = Math.round(complianceScore);
-    const persistedAchievementScore = Math.round(achievementScore);
+    const evidenceScores = scoreResumeEvidence({
+      resumeText: safeResume,
+      keywords: parsedJob.keywords || [],
+      specializedExperience: parsedJob.specialized_experience || [],
+      aiAnalysis: aiData,
+      preValidation,
+    });
+    const compatibilityScore = evidenceScores.compatibilityScore;
+    const persistedKeywordScore = evidenceScores.keywordScore;
+    const persistedSpecializedScore = evidenceScores.specializedScore;
+    const persistedComplianceScore = evidenceScores.complianceScore;
+    const persistedAchievementScore = evidenceScores.achievementScore;
 
     const wordCount = countWords(safeResume);
 
@@ -292,6 +285,12 @@ export async function POST(request: NextRequest) {
         feedback_json: {
           missing_elements: aiData.feedback?.qualification_gaps || [],
           weak_bullets: aiData.feedback?.improvements || [],
+          strengths: aiData.feedback?.strengths || [],
+          missing_keywords: aiData.feedback?.missing_keywords || [],
+          compliance_issues: aiData.feedback?.compliance_issues || [],
+          rewrite_preview: aiData.feedback?.rewrite_preview || null,
+          keyword_coverage_percent: evidenceScores.keywordCoveragePercent,
+          score_confidence_cap: evidenceScores.confidenceCap,
           rule_engine_warnings: [...preValidation.warnings, ...postValidation.warnings],
         },
       })

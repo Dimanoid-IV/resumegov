@@ -45,7 +45,7 @@ export default function StartPage() {
       return;
     }
 
-    trackEvent({ eventName: 'resume_analysis_started' });
+    trackEvent({ eventName: 'signup_submitted' });
 
     setLoading(true);
     const supabase = createClient();

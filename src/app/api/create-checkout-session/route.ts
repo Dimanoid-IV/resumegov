@@ -31,7 +31,20 @@ export async function POST(request: NextRequest) {
 
     // Get request body to determine plan
     const body = await request.json();
-    const { plan } = body;
+    const { plan, analysisId: requestedAnalysisId } = body as { plan?: string; analysisId?: string };
+    let analysisId: string | null = null;
+    if (requestedAnalysisId) {
+      const { data: ownedAnalysis } = await supabase
+        .from('analyses')
+        .select('id')
+        .eq('id', requestedAnalysisId)
+        .eq('user_id', user.id)
+        .maybeSingle();
+      if (!ownedAnalysis) {
+        return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
+      }
+      analysisId = requestedAnalysisId;
+    }
 
     // Determine price ID based on plan
     let priceId: string;
@@ -103,11 +116,16 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: planType === 'professional' ? 'subscription' : 'payment',
-      success_url: `${billing.siteUrl}/dashboard?upgraded=true&plan=${planType}`,
-      cancel_url: `${billing.siteUrl}/dashboard`,
+      success_url: analysisId
+        ? `${billing.siteUrl}/dashboard?upgraded=true&plan=${planType}&analysisId=${encodeURIComponent(analysisId)}`
+        : `${billing.siteUrl}/dashboard?upgraded=true&plan=${planType}`,
+      cancel_url: analysisId
+        ? `${billing.siteUrl}/results/${encodeURIComponent(analysisId)}?checkout=cancelled`
+        : `${billing.siteUrl}/dashboard?checkout=cancelled`,
       metadata: {
         userId: user.id,
         plan: planType,
+        analysisId: analysisId || '',
       },
     });
 

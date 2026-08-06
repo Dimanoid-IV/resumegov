@@ -6,6 +6,11 @@ import { useState } from 'react';
 
 export interface AdminStats {
   totalUsers: number;
+  usersWithAnalysis: number;
+  checkoutStartedUsers: number;
+  paidUsers: number;
+  totalAnalyses: number;
+  totalOptimizations: number;
   dailyAnalyses: number;
   conversionRate: number;
   totalRevenue: number;
@@ -22,6 +27,7 @@ export interface AdminUser {
   plan_type: string;
   credits_remaining: number;
   is_admin: boolean;
+  stripe_customer_id?: string | null;
   created_at: string;
 }
 
@@ -391,6 +397,32 @@ export default function AdminDashboardClient({
         />
       </div>
 
+      <div className="bg-white p-5 rounded-lg shadow border border-gray-100 mb-8">
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <div>
+            <h2 className="font-semibold text-gray-900">Product Funnel</h2>
+            <p className="text-xs text-gray-500">Unique users at each stored stage</p>
+          </div>
+          <span className="text-xs text-gray-500">{stats.totalAnalyses} analyses · {stats.totalOptimizations} tailored resumes</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            { label: 'Registered', value: stats.totalUsers, color: 'bg-slate-100 text-slate-800' },
+            { label: 'Completed analysis', value: stats.usersWithAnalysis, color: 'bg-blue-50 text-blue-800' },
+            { label: 'Started checkout', value: stats.checkoutStartedUsers, color: 'bg-amber-50 text-amber-800' },
+            { label: 'Paid', value: stats.paidUsers, color: 'bg-green-50 text-green-800' },
+          ].map(stage => (
+            <div key={stage.label} className={`rounded-lg p-4 ${stage.color}`}>
+              <p className="text-xs font-medium">{stage.label}</p>
+              <p className="text-2xl font-bold mt-1">{stage.value}</p>
+              <p className="text-xs opacity-70 mt-1">
+                {stats.totalUsers > 0 ? `${((stage.value / stats.totalUsers) * 100).toFixed(1)}% of registrations` : 'No users'}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── Distributions Row ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* GS Level Distribution */}
@@ -489,7 +521,7 @@ export default function AdminDashboardClient({
                 <div className="p-4 bg-green-50 rounded-lg">
                   <p className="font-semibold text-green-800 mb-1">Optimizations</p>
                   <p className="text-2xl font-bold text-green-700">{optimizations.length}</p>
-                  <p className="text-xs text-green-600 mt-1">Total compressions</p>
+                  <p className="text-xs text-green-600 mt-1">Tailored resumes</p>
                 </div>
                 <div className="p-4 bg-red-50 rounded-lg">
                   <p className="font-semibold text-red-800 mb-1">Open Flags</p>

@@ -72,6 +72,10 @@ export default async function AdminPage() {
   const users = (allUsers || []) as Omit<AdminUser, 'full_name'>[];
   const totalUsers = users.length;
   const paidUsers = users.filter(u => u.plan_type !== 'free').length;
+  const analyzedUserIds = new Set(
+    ((allAnalyses || []) as { user_id: string }[]).map(analysis => analysis.user_id)
+  );
+  const checkoutStartedUsers = users.filter(user => Boolean(user.stripe_customer_id)).length;
   const conversionRate = totalUsers > 0 ? (paidUsers / totalUsers) * 100 : 0;
 
   const dailyAnalyses = (dailyAnalysesData || []).length;
@@ -117,6 +121,11 @@ export default async function AdminPage() {
 
   const stats: AdminStats = {
     totalUsers,
+    usersWithAnalysis: analyzedUserIds.size,
+    checkoutStartedUsers,
+    paidUsers,
+    totalAnalyses: analysisCount,
+    totalOptimizations: optimizationCount,
     dailyAnalyses,
     conversionRate,
     totalRevenue,

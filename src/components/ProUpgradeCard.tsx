@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+import { trackEvent } from '@/lib/gtag';
 
 interface ProUpgradeCardProps {
   currentPlan: string;
-  wordCount?: number;
   latestAnalysisId?: string;
 }
 
-export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisId }: ProUpgradeCardProps) {
+export default function ProUpgradeCard({ currentPlan, latestAnalysisId }: ProUpgradeCardProps) {
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   const isPro = currentPlan === 'pro' || currentPlan === 'basic' || currentPlan === 'enterprise';
 
   const handleUpgrade = async (planType: 'single' | 'analyst' | 'professional') => {
+    trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: latestAnalysisId });
     setLoading(true);
     try {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: planType }),
+        body: JSON.stringify({ plan: planType, analysisId: latestAnalysisId }),
       });
 
       const data = await response.json();
@@ -32,42 +32,6 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleOptimize = async () => {
-    if (!isPro) {
-      setShowModal(true);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      if (!latestAnalysisId) {
-        alert('No analysis found. Please analyze a resume first.');
-        return;
-      }
-
-      const response = await fetch('/api/optimize', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ analysisId: latestAnalysisId }),
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        alert(data.error);
-      } else {
-        alert(`Optimization complete! New word count: ${data.final_word_count} words`);
-        // Refresh the page to show updated data
-        window.location.reload();
-      }
-    } catch (error) {
-      console.error('Optimization error:', error);
       alert('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
@@ -110,7 +74,7 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
             <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            <span>Two-pass compression to 950–1,050 words</span>
+            <span>Vacancy-targeted rewrite with factual verification</span>
           </li>
           <li className="flex items-start gap-2">
             <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -159,59 +123,6 @@ export default function ProUpgradeCard({ currentPlan, wordCount, latestAnalysisI
         </div>
       </div>
 
-      {wordCount !== undefined && wordCount > 1050 && (
-        <div className="mt-4">
-          <button
-            onClick={handleOptimize}
-            className="bg-slate-900 text-white font-medium px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm"
-          >
-            Optimize Now
-          </button>
-        </div>
-      )}
-
-      {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md mx-4">
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Pro Feature</h3>
-            <p className="text-slate-600 mb-5">
-              Resume optimization is available for Pro users. 
-              Upgrade now to unlock AI-powered compression and full analysis features.
-            </p>
-            <div className="space-y-3">
-              <button
-                onClick={() => handleUpgrade('single')}
-                disabled={loading}
-                className="w-full bg-blue-50 text-blue-800 border border-blue-200 font-semibold px-6 py-3 rounded-lg hover:bg-blue-100 transition-colors disabled:opacity-50"
-              >
-                {loading ? 'Processing...' : 'Single — $9.99'}
-              </button>
-
-              <button
-                onClick={() => handleUpgrade('analyst')}
-                disabled={loading}
-                className="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-              >
-                {loading ? 'Processing...' : 'Analyst — $19.99'}
-              </button>
-              
-              <button
-                onClick={() => handleUpgrade('professional')}
-                disabled={loading}
-                className="w-full bg-slate-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50"
-              >
-                {loading ? 'Processing...' : 'Professional — $29/month'}
-              </button>
-            </div>
-            <button
-              onClick={() => setShowModal(false)}
-              className="w-full mt-3 text-slate-500 hover:text-slate-700 text-sm"
-            >
-              Maybe later
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

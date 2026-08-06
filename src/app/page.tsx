@@ -53,7 +53,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Does ResumeGov fabricate or invent experience?',
-    a: 'No. ResumeGov never fabricates experience, credentials, or achievements. The compression engine removes redundancy and condenses passive language while preserving all required qualification elements verbatim. Every optimization is reviewable before submission.',
+    a: 'No. ResumeGov may reorder, clarify, and tailor documented experience to the vacancy, but it does not invent experience, credentials, metrics, or achievements. Every paid draft is checked against the source resume before a credit is used and remains reviewable by the applicant.',
   },
   {
     q: 'How does the scoring formula work?',
@@ -61,11 +61,11 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Will optimization remove required qualification language?',
-    a: 'No. The compression engine flags all language extracted from the vacancy announcement\'s qualification requirements as protected. This language is never removed during any compression pass. A qualification coverage percentage is reported with every optimization.',
+    a: 'ResumeGov prioritizes qualification evidence already supported by the source resume and independently checks the tailored draft for unsupported claims. Requirements that are not proven are reported as unresolved gaps instead of being copied into the resume.',
   },
   {
     q: 'What is included in the free plan?',
-    a: 'The free plan includes 3 resume analyses with full scoring breakdowns, keyword gap identification, and word count compliance checking. Resume optimization (compression to the 950–1,050 word target) requires a paid credit or subscription.',
+    a: 'The free plan includes 3 resume analyses with evidence-based scoring, keyword gaps, missing federal fields, and a safe rewrite preview. A complete vacancy-targeted, fact-checked resume and DOCX download require a paid credit or subscription.',
   },
 ];
 
@@ -264,7 +264,7 @@ function TwoPageRule() {
 
         {/* Non-removable elements */}
         <div className="mt-12 border border-slate-200 bg-white rounded-lg p-6">
-          <h3 className="font-semibold text-slate-900 mb-4">Elements ResumeGov never removes during compression</h3>
+          <h3 className="font-semibold text-slate-900 mb-4">Elements protected during vacancy tailoring</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
               'Required specialized experience language',
@@ -367,13 +367,13 @@ function Solution() {
     },
     {
       step: '03',
-      title: 'Run two-pass compression',
-      body: 'Pass 1 removes structural redundancy. Pass 2 compresses sentence-level language to the 950–1,050 word target. Required qualification language is protected throughout both passes.',
+      title: 'Create a vacancy-targeted draft',
+      body: 'ResumeGov reorganizes and rewrites only documented facts, prioritizes supported specialized experience, and lists missing evidence as questions instead of inventing it.',
     },
     {
       step: '04',
       title: 'Review and submit',
-      body: 'Every optimization is returned for human review with a qualification coverage percentage. You verify before you submit — ResumeGov does not auto-submit to USAJOBS.',
+      body: 'A second AI pass checks the draft against the source for unsupported claims before a credit is used. You review and download the DOCX — ResumeGov does not auto-submit to USAJOBS.',
     },
   ];
   return (
@@ -406,7 +406,7 @@ function ComparisonTable() {
     { feature: 'Keyword gap report', free: true, analyst: true, pro: true },
     { feature: 'Word count compliance check', free: true, analyst: true, pro: true },
     { feature: 'Missing elements report', free: true, analyst: true, pro: true },
-    { feature: 'Two-pass resume optimization', free: false, analyst: true, pro: true },
+    { feature: 'Vacancy-targeted, fact-checked rewrite', free: false, analyst: true, pro: true },
     { feature: 'Qualification coverage %', free: false, analyst: true, pro: true },
     { feature: 'KSA statement generation', free: false, analyst: false, pro: true },
     { feature: 'Optimization history', free: false, analyst: false, pro: true },
@@ -489,7 +489,8 @@ function Pricing() {
       features: [
         'Everything in Free',
         '1 optimization credit',
-        'Two-pass compression engine',
+        'Vacancy-targeted rewrite',
+        'Independent factual-safety check',
         'Qualification coverage report',
         'Download optimized DOCX',
       ],
@@ -506,7 +507,8 @@ function Pricing() {
       features: [
         'Everything in Free',
         '3 optimization credits',
-        'Two-pass compression engine',
+        'Vacancy-targeted rewrites',
+        'Independent factual-safety checks',
         'Qualification coverage report',
         'Two-page formatting risk guidance',
       ],

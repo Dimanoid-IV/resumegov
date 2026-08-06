@@ -34,6 +34,11 @@ export interface ResumeAnalysis {
     missing_keywords: string[];
     compliance_issues: string[];
     qualification_gaps: string[];
+    rewrite_preview?: {
+      before: string;
+      after: string;
+      rationale: string;
+    } | null;
   };
 }
 

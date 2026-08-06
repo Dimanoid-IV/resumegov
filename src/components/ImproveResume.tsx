@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { trackEvent } from '@/lib/gtag';
 
 interface ImproveResumeProps {
   currentPlan: string;
-  wordCount?: number;
   creditsRemaining?: number;
   latestAnalysisId?: string;
   alreadyOptimized?: boolean;
@@ -12,13 +12,13 @@ interface ImproveResumeProps {
 
 export default function ImproveResume({
   currentPlan,
-  wordCount,
   creditsRemaining,
   latestAnalysisId,
   alreadyOptimized = false,
 }: ImproveResumeProps) {
   const [loading, setLoading] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const isPro = currentPlan === 'pro' || currentPlan === 'basic' || currentPlan === 'enterprise';
   const hasCredits = creditsRemaining === -1 || (creditsRemaining !== undefined && creditsRemaining > 0);
@@ -30,9 +30,10 @@ export default function ImproveResume({
     }
 
     setLoading(true);
+    setMessage(null);
     try {
       if (!latestAnalysisId) {
-        alert('No analysis found. Please analyze a resume first.');
+        setMessage({ type: 'error', text: 'No analysis found. Please analyze a resume first.' });
         return;
       }
 
@@ -45,22 +46,27 @@ export default function ImproveResume({
       const data = await response.json();
 
       if (data.error) {
-        alert(data.error);
+        const issues = Array.isArray(data.verification_issues)
+          ? ` ${data.verification_issues.slice(0, 2).join(' ')}`
+          : '';
+        setMessage({ type: 'error', text: `${data.error}${issues}` });
       } else {
-        alert(`Optimization complete! New word count: ${data.final_word_count} words`);
+        setMessage({ type: 'success', text: `Your fact-checked resume is ready (${data.final_word_count} words).` });
         window.location.reload();
       }
     } catch (error) {
       console.error('Optimization error:', error);
-      alert('Something went wrong. Please try again.');
+      setMessage({ type: 'error', text: 'Something went wrong. Please try again. Your credit was not used.' });
     } finally {
       setLoading(false);
     }
   };
 
   const handleUpgrade = (planType: 'single' | 'analyst' | 'professional') => {
+    trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: latestAnalysisId });
     // Redirect to pricing or trigger checkout
-    window.location.href = `/api/checkout?plan=${planType}`;
+    const analysis = latestAnalysisId ? `&analysisId=${encodeURIComponent(latestAnalysisId)}` : '';
+    window.location.href = `/api/checkout?plan=${planType}${analysis}`;
   };
 
   return (
@@ -124,8 +130,8 @@ export default function ImproveResume({
               </svg>
             )}
             <div>
-              <p className="text-sm font-medium text-slate-900">Full Rewrite & Compression</p>
-              <p className="text-xs text-slate-500">AI-powered optimization to 950-1050 words</p>
+              <p className="text-sm font-medium text-slate-900">Complete Vacancy-Targeted Rewrite</p>
+              <p className="text-xs text-slate-500">Vacancy-targeted rewrite using only documented facts</p>
             </div>
           </div>
 
@@ -164,25 +170,29 @@ export default function ImproveResume({
 
         {/* CTA Button */}
         {isPro ? (
-          <button
-            onClick={handleOptimize}
-            disabled={loading || !latestAnalysisId || alreadyOptimized || (wordCount !== undefined && wordCount <= 1050)}
-            className={`w-full font-semibold px-6 py-3 rounded-lg transition-colors ${
-              wordCount !== undefined && wordCount <= 1050
-                ? 'bg-gray-100 text-gray-500'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
-            } disabled:opacity-70 disabled:cursor-not-allowed`}
-          >
-            {loading
-              ? 'Optimizing...'
-              : !latestAnalysisId
-                ? 'Analyze a Resume First'
-                : alreadyOptimized
-                  ? 'Resume Already Optimized'
-                : wordCount !== undefined && wordCount <= 1050
-                  ? 'No Compression Needed'
-                  : 'Optimize Resume Now'}
-          </button>
+          <div>
+            <button
+              onClick={handleOptimize}
+              disabled={loading || !latestAnalysisId || alreadyOptimized}
+              className="w-full font-semibold px-6 py-3 rounded-lg transition-colors bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {loading
+                ? 'Tailoring and fact-checking…'
+                : !latestAnalysisId
+                  ? 'Analyze a Resume First'
+                  : alreadyOptimized
+                    ? 'Resume Already Optimized'
+                    : 'Tailor Resume to Vacancy'}
+            </button>
+            {loading && (
+              <p className="text-xs text-slate-500 mt-2 text-center">This can take up to two minutes. Keep this page open.</p>
+            )}
+            {message && (
+              <p className={`text-sm mt-3 ${message.type === 'success' ? 'text-green-700' : 'text-red-700'}`} role="status">
+                {message.text}
+              </p>
+            )}
+          </div>
         ) : (
           <div className="space-y-3">
             <button
@@ -225,7 +235,7 @@ export default function ImproveResume({
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-slate-700">Two-pass compression to 950-1050 words</span>
+                <span className="text-slate-700">Vacancy-targeted, fact-checked resume rewrite</span>
               </li>
               <li className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

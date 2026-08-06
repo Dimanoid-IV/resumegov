@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import ResultsAnalytics from './ResultsAnalytics';
+import OptimizedResumeDownload from '@/components/OptimizedResumeDownload';
 
 export const metadata: Metadata = {
   title: 'Analysis Results — ResumeGov',
@@ -16,6 +17,12 @@ export const metadata: Metadata = {
 type FeedbackJson = {
   missing_elements?: string[];
   weak_bullets?: string[];
+  compliance_issues?: string[];
+  rewrite_preview?: {
+    before?: string;
+    after?: string;
+    rationale?: string;
+  } | null;
 };
 
 type Analysis = {
@@ -34,6 +41,20 @@ type Analysis = {
   risk_level: string | null;
   feedback_json: FeedbackJson | null;
   created_at: string;
+};
+
+type OptimizationMetadata = {
+  change_summary?: string[];
+  matched_requirements?: string[];
+  unresolved_gaps?: string[];
+  questions_for_user?: string[];
+};
+
+type Optimization = {
+  compressed_resume_text: string;
+  final_word_count: number | null;
+  qualification_coverage_percent: number | null;
+  ksa_text: string | null;
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -156,9 +177,8 @@ export default async function ResultsPage({
   }
 
   // Fetch analysis — verify ownership via user_id
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const admin = createAdminClient();
-  const { data: raw, error } = await (admin as any)
+  const { data: raw, error } = await admin
     .from('analyses')
     .select(
       'id, user_id, compatibility_score, keyword_score, specialized_score, compliance_score, achievement_score, word_count, feedback_json, created_at'
@@ -170,13 +190,31 @@ export default async function ResultsPage({
   if (error || !raw) notFound();
 
   const analysis = raw as Analysis;
-  const { data: profile } = await (admin as any)
+  const { data: profileData } = await admin
     .from('users')
     .select('plan_type, credits_remaining')
     .eq('id', user.id)
     .single();
+  const profile = profileData as {
+    plan_type: string;
+    credits_remaining: number;
+  } | null;
   const paidPlan = ['basic', 'pro', 'enterprise'].includes(profile?.plan_type ?? '');
   const hasCredits = profile?.credits_remaining === -1 || (profile?.credits_remaining ?? 0) > 0;
+  const { data: optimizationData } = await admin
+    .from('optimizations')
+    .select('compressed_resume_text, final_word_count, qualification_coverage_percent, ksa_text')
+    .eq('analysis_id', analysisId)
+    .maybeSingle();
+  const optimization = optimizationData as Optimization | null;
+  let optimizationMetadata: OptimizationMetadata = {};
+  if (optimization?.ksa_text) {
+    try {
+      optimizationMetadata = JSON.parse(optimization.ksa_text) as OptimizationMetadata;
+    } catch {
+      optimizationMetadata = {};
+    }
+  }
 
   const compat = analysis.compatibility_score ?? 0;
   const kwScore = analysis.keyword_score ?? 0;      // stored 0-40
@@ -195,13 +233,13 @@ export default async function ResultsPage({
     : [];
 
   const risk = twoPageRisk(wordCount);
-  const canOptimize = paidPlan && hasCredits && wordCount > 1050;
-  const optimizeHref = paidPlan && hasCredits ? '/dashboard' : '/api/checkout?plan=single';
-  const optimizeLabel = canOptimize
-    ? 'Open Optimization Tools'
-    : paidPlan && hasCredits
-      ? 'No Compression Needed'
-      : 'Upgrade to Analyst';
+  const isOptimized = Boolean(optimization?.compressed_resume_text);
+  const canOptimize = paidPlan && hasCredits;
+  const optimizeHref = canOptimize
+    ? '/dashboard'
+    : `/api/checkout?plan=single&analysisId=${analysisId}`;
+  const optimizeLabel = canOptimize ? 'Tailor This Resume Now' : 'Tailor This Resume — $9.99';
+  const rewritePreview = feedback.rewrite_preview;
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -387,22 +425,45 @@ export default async function ResultsPage({
             </div>
 
             {/* What's hidden (upgrade prompt) */}
+            {rewritePreview?.before && rewritePreview?.after && (
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                <h2 className="text-sm font-semibold text-blue-900 uppercase tracking-wide mb-3">
+                  Safe Rewrite Preview
+                </h2>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1">Before</p>
+                    <p className="text-slate-700">{rewritePreview.before}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1">Vacancy-targeted</p>
+                    <p className="text-slate-900 font-medium">{rewritePreview.after}</p>
+                  </div>
+                  {rewritePreview.rationale && <p className="text-xs text-blue-700">{rewritePreview.rationale}</p>}
+                </div>
+              </div>
+            )}
+
             <div className="bg-white border border-slate-200 rounded-xl p-5">
               <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
-                Full Optimization — {paidPlan && hasCredits ? 'Available' : 'Locked'}
+                Full Optimization — {isOptimized ? 'Ready' : paidPlan && hasCredits ? 'Available' : 'Locked'}
               </h2>
               <ul className="space-y-2 mb-4">
                 {[
-                  'Compressed 2-page resume (950–1,050 word target)',
-                  'Full qualification coverage mapping',
-                  'KSA statement generation',
-                  'Iterative word count reduction to hard limit',
-                  'Protected required-qualification language report',
+                  'Complete resume tailored to this exact vacancy',
+                  'Supported specialized experience prioritized',
+                  'Truth-preserving rewrite — no invented experience',
+                  'Independent factual-safety check before credit use',
+                  'Editable DOCX download and unresolved-gap list',
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-2.5 text-sm text-slate-500">
-                    <svg className="w-4 h-4 text-slate-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                  <li key={item} className={`flex items-center gap-2.5 text-sm ${isOptimized ? 'text-green-800' : 'text-slate-500'}`}>
+                    {isOptimized ? (
+                      <span className="w-4 h-4 text-green-600 flex-shrink-0">✓</span>
+                    ) : (
+                      <svg className="w-4 h-4 text-slate-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    )}
                     {item}
                   </li>
                 ))}
@@ -412,28 +473,50 @@ export default async function ResultsPage({
             {/* Primary CTA */}
             <div className="bg-slate-900 rounded-xl p-6 text-center">
               <h2 className="text-lg font-bold text-white mb-2">
-                Optimize to 2-Page Compliance
+                {isOptimized ? 'Your Vacancy-Targeted Resume Is Ready' : 'Get the Vacancy-Targeted Resume'}
               </h2>
               <p className="text-slate-400 text-sm mb-5 leading-relaxed">
-                Compress your resume to 950–1,050 words while preserving all required qualification
-                language. Never fabricates experience.
+                {isOptimized
+                  ? `${optimization?.final_word_count ?? 0} words · ${optimization?.qualification_coverage_percent ?? 0}% supported requirement coverage · fact checked`
+                  : 'Reorder and rewrite your documented experience for this vacancy, preserve required federal fields, and flag facts that only you can supply.'}
               </p>
-              <Link
-                href={optimizeHref}
-                aria-disabled={!canOptimize && paidPlan && hasCredits}
-                className={`inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded transition-colors w-full sm:w-auto ${
-                  !canOptimize && paidPlan && hasCredits ? 'opacity-60 pointer-events-none' : 'hover:bg-slate-100'
-                }`}
-              >
-                {optimizeLabel}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              {isOptimized && optimization ? (
+                <OptimizedResumeDownload resumeText={optimization.compressed_resume_text} analysisId={analysisId} />
+              ) : (
+                <Link
+                  href={optimizeHref}
+                  data-gtm-event="checkout_started"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded transition-colors w-full sm:w-auto hover:bg-slate-100"
+                >
+                  {optimizeLabel}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              )}
               <p className="text-xs text-slate-500 mt-3">
-                One credit required · Single: $9.99 · Analyst: $19.99 for 3 credits
+                {isOptimized ? 'Your credit has already been applied. Download again at any time.' : 'One credit required · Failed factual-safety checks do not use a credit'}
               </p>
             </div>
+
+            {isOptimized && (
+              <div className="bg-white border border-slate-200 rounded-xl p-5">
+                <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">What Changed</h2>
+                {(optimizationMetadata.change_summary?.length ?? 0) > 0 ? (
+                  <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                    {optimizationMetadata.change_summary?.slice(0, 6).map(item => <li key={item}>{item}</li>)}
+                  </ul>
+                ) : <p className="text-sm text-slate-500">The resume was reordered and rewritten for the selected vacancy.</p>}
+                {(optimizationMetadata.unresolved_gaps?.length ?? 0) > 0 && (
+                  <div className="mt-5 border-t border-slate-100 pt-4">
+                    <h3 className="text-sm font-semibold text-amber-800 mb-2">Information only you can add</h3>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-slate-700">
+                      {optimizationMetadata.unresolved_gaps?.slice(0, 5).map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Run another */}
             <div className="text-center">

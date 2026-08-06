@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Database } from '@/types/database';
+import { trackEvent } from '@/lib/gtag';
+import { downloadResumeDocx } from '@/lib/downloadResumeDocx';
 
 type AnalysisRow = Database['public']['Tables']['analyses']['Row'];
 
@@ -45,27 +47,8 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
       const optimization = optimizationData as { compressed_resume_text: string };
 
       if (optimization.compressed_resume_text) {
-        // Create and download DOCX
-        const { Document, Packer, Paragraph, TextRun } = await import('docx');
-        
-        const doc = new Document({
-          sections: [{
-            properties: {},
-            children: optimization.compressed_resume_text.split('\n').map((text: string) => 
-              new Paragraph({
-                children: [new TextRun(text)],
-              })
-            ),
-          }],
-        });
-
-        const blob = await Packer.toBlob(doc);
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'optimized-resume.docx';
-        a.click();
-        URL.revokeObjectURL(url);
+        await downloadResumeDocx(optimization.compressed_resume_text);
+        trackEvent({ eventName: 'optimized_resume_downloaded', analysis_id: analysis.id });
       } else {
         alert('No optimized resume found. Please run optimization first.');
       }
@@ -78,7 +61,8 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
   };
 
   const handleUpgrade = (planType: 'single' | 'analyst' | 'professional') => {
-    window.location.href = `/api/checkout?plan=${planType}`;
+    trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: analysis.id });
+    window.location.href = `/api/checkout?plan=${planType}&analysisId=${encodeURIComponent(analysis.id)}`;
   };
 
   return (

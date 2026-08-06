@@ -9,10 +9,10 @@ import ProUpgradeCard from '@/components/ProUpgradeCard';
 import SuccessBanner from '@/components/SuccessBanner';
 import ImproveResume from '@/components/ImproveResume';
 import AnalysisCard from '@/components/AnalysisCard';
+import PostCheckoutOptimizer from '@/components/PostCheckoutOptimizer';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 type ResumeRow = Database['public']['Tables']['resumes']['Row'];
-type JobPostRow = Database['public']['Tables']['job_posts']['Row'];
 type AnalysisRow = Database['public']['Tables']['analyses']['Row'];
 type OptimizationRow = Database['public']['Tables']['optimizations']['Row'];
 type PaymentRow = Database['public']['Tables']['payments']['Row'];
@@ -25,6 +25,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const supabase = await createClient();
   const params = await searchParams;
   const upgraded = params.upgraded === 'true';
+  const paidAnalysisId = typeof params.analysisId === 'string' ? params.analysisId : null;
 
   const { data: { user } } = await supabase.auth.getUser();
   
@@ -112,6 +113,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       </div>
       
       {upgraded && <SuccessBanner show={upgraded} />}
+      {upgraded && paidAnalysisId && <PostCheckoutOptimizer analysisId={paidAnalysisId} />}
       
       {/* Credits & Plan */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -157,7 +159,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       <div className="mb-8">
         <ProUpgradeCard 
           currentPlan={userProfile?.plan_type || 'free'} 
-          wordCount={currentWordCount}
           latestAnalysisId={analyses[0]?.id}
         />
       </div>
@@ -166,7 +167,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <ImproveResume 
           currentPlan={userProfile?.plan_type || 'free'}
-          wordCount={currentWordCount}
           creditsRemaining={userProfile?.credits_remaining}
           latestAnalysisId={analyses[0]?.id}
           alreadyOptimized={optimizations.length > 0}
@@ -186,37 +186,37 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Target Range</span>
-              <span className="font-medium">950-1050</span>
+              <span className="font-medium">Page-based</span>
             </div>
             <div className="mt-4 p-3 bg-gray-50 rounded text-sm">
               {currentWordCount < 950 ? (
-                <span className="text-orange-600">⚠ Below target - add more detail</span>
+                <span className="text-orange-600">⚠ May need more qualification evidence</span>
               ) : currentWordCount <= 1050 ? (
-                <span className="text-green-600">✅ Within optimal range</span>
+                <span className="text-green-600">✓ Lower text-density risk — verify final pages</span>
               ) : currentWordCount <= 1100 ? (
-                <span className="text-yellow-600">⚠ Borderline - consider optimization</span>
+                <span className="text-yellow-600">⚠ Review formatting and vacancy relevance</span>
               ) : (
-                <span className="text-red-600">❌ High two-page overflow risk — review formatting</span>
+                <span className="text-red-600">✕ High two-page overflow risk — tailor and verify formatting</span>
               )}
             </div>
             
             {/* CTA Button for Free Users */}
-            {currentWordCount > 1050 && (!userProfile?.plan_type || userProfile.plan_type === 'free') && (
+            {analyses.length > 0 && (!userProfile?.plan_type || userProfile.plan_type === 'free') && (
               <div className="mt-4 space-y-3">
                 <a
-                  href="/api/checkout?plan=single"
+                  href={`/api/checkout?plan=single&analysisId=${encodeURIComponent(analyses[0].id)}`}
                   className="block w-full bg-slate-900 text-white font-medium px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-sm text-center"
                 >
-                  Optimize Resume — $9.99
+                  Tailor to This Vacancy — $9.99
                 </a>
                 
                 <div className="text-xs text-slate-600 space-y-1">
                   <p className="font-medium">Optimization includes:</p>
                   <ul className="list-disc list-inside space-y-1 ml-1">
-                    <li>Two-pass AI compression</li>
-                    <li>Qualification-language protection</li>
-                    <li>Two-page formatting guidance</li>
-                    <li>Final compatibility score</li>
+                    <li>Complete vacancy-targeted rewrite</li>
+                    <li>Independent factual-safety check</li>
+                    <li>Unresolved qualification-gap list</li>
+                    <li>Editable DOCX download</li>
                   </ul>
                 </div>
               </div>
@@ -268,15 +268,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       <td className="py-2">{opt.final_word_count}</td>
                       <td className="py-2">{opt.qualification_coverage_percent}%</td>
                       <td className="py-2">
-                        {opt.final_word_count < 950 ? (
-                          <span className="text-orange-600">⚠ Below target</span>
-                        ) : opt.final_word_count <= 1050 ? (
-                          <span className="text-green-600">✅ Optimal</span>
-                        ) : opt.final_word_count <= 1100 ? (
-                          <span className="text-yellow-600">⚠ Borderline</span>
-                        ) : (
-                          <span className="text-red-600">❌ Over limit</span>
-                        )}
+                        <span className="text-green-700">✓ Fact checked</span>
                       </td>
                     </tr>
                   ))}

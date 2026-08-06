@@ -49,6 +49,17 @@ export {
   type CompressionInput,
 } from './compressionEngine';
 
+// Export vacancy-targeted resume tailoring + factual verification
+export {
+  tailorResume,
+  verifyTailoredResume,
+  repairTailoredResume,
+  type TailoredResume,
+  type TailoringVerification,
+  type TailorResumeInput,
+  type RepairTailoredResumeInput,
+} from './tailoringEngine';
+
 // Export KSA Generator
 export {
   generateKSAResponses,

@@ -23,11 +23,17 @@ SCORING CRITERIA (0-100 each):
 - achievement_score: Quality of accomplishments (metrics, impact, CCAR format)
 
 FEDERAL RESUME COMPLIANCE RULES (effective Sept 27, 2025):
-- Target word count: 950-1050 words
-- Hard limit: 1100 words
+- The submitted resume must render to no more than 2 pages
+- Word count alone cannot prove page-count compliance
 - Must include all relevant experience
 - Must use CCAR format (Challenge-Context-Action-Result)
 - Must quantify achievements where possible
+
+REWRITE PREVIEW:
+- Select one real line from the resume that can be improved for this vacancy
+- Rewrite it using ONLY facts already present in the resume
+- Do not add a metric, tool, responsibility, result, credential, or scope that is not explicit in the source
+- If no safe rewrite is possible, return null
 
 OUTPUT FORMAT - Return valid JSON only:
 {
@@ -42,7 +48,12 @@ OUTPUT FORMAT - Return valid JSON only:
     "improvements": ["specific improvement suggestions"],
     "missing_keywords": ["important keywords not found in resume"],
     "compliance_issues": ["any compliance problems"],
-    "qualification_gaps": ["required qualifications not demonstrated"]
+    "qualification_gaps": ["required qualifications not demonstrated"],
+    "rewrite_preview": {
+      "before": "exact or minimally shortened source line",
+      "after": "truth-preserving vacancy-targeted rewrite",
+      "rationale": "what changed and why"
+    }
   }
 }`;
 
@@ -121,7 +132,7 @@ export function countWords(resumeText: string): number {
 }
 
 /**
- * Check if resume meets federal word count requirements
+ * Return a planning signal. The rendered page count remains authoritative.
  * @param wordCount - Current word count
  * @returns Compliance status
  */
@@ -134,7 +145,7 @@ export function checkWordCountCompliance(wordCount: number): {
     return {
       compliant: false,
       status: 'under',
-      message: `Resume is ${950 - wordCount} words under the target minimum of 950 words`,
+      message: `Resume may need more qualification evidence (${wordCount} words detected)`,
     };
   }
   
@@ -142,7 +153,7 @@ export function checkWordCountCompliance(wordCount: number): {
     return {
       compliant: true,
       status: 'optimal',
-      message: `Resume is within optimal range (${wordCount} words)`,
+      message: `Resume is within the internal planning range (${wordCount} words); verify rendered pages`,
     };
   }
   
@@ -150,13 +161,13 @@ export function checkWordCountCompliance(wordCount: number): {
     return {
       compliant: true,
       status: 'over',
-      message: `Resume is ${wordCount - 1050} words over target but within hard limit`,
+      message: `Resume may require formatting review (${wordCount} words detected)`,
     };
   }
   
   return {
     compliant: false,
     status: 'exceeded',
-    message: `Resume exceeds hard limit by ${wordCount - 1100} words (max: 1100)`,
+      message: `Resume has a high two-page overflow risk (${wordCount} words detected)`,
   };
 }

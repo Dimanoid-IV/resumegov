@@ -43,11 +43,14 @@ export default function UploadPage() {
   const [jobText, setJobText] = useState('');
   const [jobUrl, setJobUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [extracting, setExtracting] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState('');
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auth + profile check
   useEffect(() => {
+    trackEvent({ eventName: 'analysis_form_viewed' });
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) {
         router.replace('/start');
@@ -69,23 +72,44 @@ export default function UploadPage() {
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // File upload handler (.txt only client-side)
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (!file.name.endsWith('.txt')) {
-      setError('Only .txt files are supported for upload. For PDF or DOCX, copy-paste the text below.');
+    if (!/\.(pdf|docx|txt)$/i.test(file.name)) {
+      setError('Supported formats: PDF, DOCX, and TXT.');
       e.target.value = '';
       return;
     }
-    if (file.size > 500_000) {
-      setError('File too large. Maximum 500 KB.');
+    if (file.size > 6 * 1024 * 1024) {
+      setError('File too large. Maximum 6 MB.');
       e.target.value = '';
       return;
     }
-    const reader = new FileReader();
-    reader.onload = ev => setResumeText((ev.target?.result as string) ?? '');
-    reader.readAsText(file);
+
+    setError('');
+    setExtracting(true);
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const response = await fetch('/api/extract-resume', { method: 'POST', body: form });
+      const data = await response.json() as { text?: string; wordCount?: number; error?: string };
+      if (!response.ok || !data.text) {
+        setError(data.error || 'Could not extract text from this file.');
+        return;
+      }
+      setResumeText(data.text);
+      setUploadedFileName(file.name);
+      trackEvent({
+        eventName: 'resume_file_extracted',
+        file_type: file.name.split('.').pop()?.toLowerCase(),
+        word_count: data.wordCount,
+      });
+    } catch {
+      setError('Could not upload this file. Try again or paste the text.');
+    } finally {
+      setExtracting(false);
+      e.target.value = '';
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -244,19 +268,25 @@ export default function UploadPage() {
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
+                      disabled={extracting}
                       className="text-sm text-blue-600 hover:underline"
                     >
-                      Upload .txt file
+                      {extracting ? 'Reading file…' : 'Upload PDF, DOCX, or TXT'}
                     </button>
                     <input
                       ref={fileInputRef}
                       type="file"
-                      accept=".txt"
+                      accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
                       className="hidden"
                       onChange={handleFile}
                     />
                   </div>
                 </div>
+                {uploadedFileName && (
+                  <p className="mb-3 text-xs font-medium text-green-700">
+                    ✓ Text extracted from {uploadedFileName}
+                  </p>
+                )}
                 <textarea
                   id="resume-text"
                   name="resumeText"
@@ -265,7 +295,7 @@ export default function UploadPage() {
                   value={resumeText}
                   onChange={e => setResumeText(e.target.value)}
                   rows={14}
-                  placeholder="Paste your full resume text here. For PDF or Word documents, open the file and copy-paste the content."
+                  placeholder="Upload your PDF/DOCX above or paste the full resume text here."
                   className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
                 />
                 <div className="flex justify-between mt-2 text-sm text-slate-400">
