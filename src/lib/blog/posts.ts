@@ -40,6 +40,374 @@ export function getRelatedPosts(slugs: string[]): BlogPost[] {
 const POSTS: BlogPost[] = [
 
   {
+    slug: 'how-to-read-usajobs-job-announcement-2026',
+    title: 'How to Read a USAJOBS Job Announcement: Section-by-Section Guide',
+    seoTitle: 'How to Read a USAJOBS Job Announcement',
+    description:
+      'Learn how to read every section of a USAJOBS announcement, confirm eligibility and qualifications, find specialized experience, and build an application checklist.',
+    date: '2026-08-06',
+    readingTime: 12,
+    author: 'ResumeGov Editorial Team',
+    tags: ['USAJOBS job announcement', 'specialized experience', 'federal eligibility', 'federal resume', '2026'],
+    relatedSlugs: [
+      'specialized-experience-examples-federal-resume',
+      'federal-resume-keywords',
+      'how-hr-screens-federal-resumes',
+    ],
+    faqs: [
+      {
+        question: 'What should I read first in a USAJOBS announcement?',
+        answer:
+          'Start with “This job is open to” to confirm eligibility, then read Requirements and Qualifications to confirm that you meet every mandatory condition and the specialized-experience standard by the stated deadline.',
+      },
+      {
+        question: 'What is the difference between eligibility and qualifications?',
+        answer:
+          'Eligibility means you belong to a group the agency may consider under the listed hiring path. Qualifications mean your experience, education, skills, and other credentials meet the position requirements. An applicant generally needs both.',
+      },
+      {
+        question: 'Where is specialized experience listed on USAJOBS?',
+        answer:
+          'It is normally in the Qualifications section. Read the full section because an announcement may include separate requirements for each grade, a selective placement factor, an education substitution, or a combination rule.',
+      },
+      {
+        question: 'Do the Duties section and Qualifications section mean the same thing?',
+        answer:
+          'No. Duties describe the work the selectee may perform. Qualifications state what you must already demonstrate to be considered. Use Duties for context, but build your resume evidence around the actual qualification language.',
+      },
+      {
+        question: 'Can I use one federal resume for every announcement?',
+        answer:
+          'You can maintain a master resume, but the submitted version should be tailored to the exact announcement. Similar titles may have different specialized experience, grade levels, documents, and evaluation methods.',
+      },
+    ],
+    content: `
+<h2>Short answer</h2>
+<p>Read a USAJOBS announcement as a set of gates, not as a general job description. First confirm that you are eligible under <strong>“This job is open to”</strong>. Next verify every mandatory item in <strong>Requirements</strong> and <strong>Qualifications</strong>. Then use <strong>How you will be evaluated</strong> and <strong>Required documents</strong> to build your resume and submission checklist.</p>
+<p>The most common mistake is starting with Duties and immediately editing a resume. Duties explain the role; Qualifications determine whether your prior experience or education can move forward.</p>
+
+<h2>The seven-part reading order</h2>
+<table>
+  <thead><tr><th>Read</th><th>Decision to make</th><th>What to record</th></tr></thead>
+  <tbody>
+    <tr><td>Overview / This job is open to</td><td>May you apply through one of the listed hiring paths?</td><td>Hiring path, location, grade, salary, appointment type, close date and applicant cap</td></tr>
+    <tr><td>Requirements</td><td>Can you satisfy every condition?</td><td>Citizenship, probation, clearance, travel, financial disclosure, time-in-grade or other conditions</td></tr>
+    <tr><td>Qualifications</td><td>Do you meet the exact standard by the deadline?</td><td>Specialized experience, grade-specific requirements, selective factors, education and licenses</td></tr>
+    <tr><td>Duties</td><td>Does the actual work fit your goals and background?</td><td>Recurring functions, scope, stakeholders, tools and subject matter</td></tr>
+    <tr><td>How you will be evaluated</td><td>What evidence and assessments will be used?</td><td>Competencies, questionnaire, USA Hire or technical assessment, category rating</td></tr>
+    <tr><td>Required documents</td><td>Which proof applies to your eligibility claim?</td><td>Resume, SF-50, DD-214, transcripts, Schedule A letter or other listed documents</td></tr>
+    <tr><td>How to apply</td><td>Can you complete every step before the deadline?</td><td>Submission steps, assessment deadline and agency contact</td></tr>
+  </tbody>
+</table>
+
+<h2>Step 1: confirm eligibility before rewriting anything</h2>
+<p>USAJOBS distinguishes eligibility from qualifications. Eligibility is based on the hiring paths in the announcement—for example, the public, current federal employees, veterans, military spouses, recent graduates, or people with disabilities. Qualifications concern the experience, education, and skills needed for the job.</p>
+<p>If none of the listed hiring paths applies to you, excellent experience does not create eligibility for that announcement. If more than one announcement is posted for the same role, check each one: an agency may publish separate public and status-candidate announcements with different instructions.</p>
+
+<h2>Step 2: turn Qualifications into a pass/fail checklist</h2>
+<p>Copy each mandatory requirement into a private checklist. Separate basic requirements from specialized experience, selective factors, education, licenses, and grade-specific standards. Words such as <strong>must</strong>, <strong>required</strong>, and <strong>by the closing date</strong> deserve special attention.</p>
+<p>For each requirement, identify where your resume proves:</p>
+<ul>
+  <li>the action you personally performed;</li>
+  <li>the subject matter, tool, regulation, or process involved;</li>
+  <li>the scope or complexity of the work;</li>
+  <li>the result, decision, or work product;</li>
+  <li>the employer, dates, and hours per week that establish the duration.</li>
+</ul>
+<p>If the announcement has multiple grades, match your evidence to the standard for the grade you select. Do not assume that performing one listed duty proves the entire specialized-experience statement.</p>
+
+<h2>Step 3: distinguish Duties from qualification evidence</h2>
+<p>The Duties section is useful for understanding the job and choosing relevant accomplishments. It is not permission to copy future duties into your resume as past experience. A copied phrase without context does not show where, when, how often, or at what level you performed the work.</p>
+<p><strong>Weak:</strong> “Performs program analysis and prepares briefings.”</p>
+<p><strong>Evidence-based:</strong> “Analyzed quarterly performance and spending data for six grant programs totaling $8.1M; identified three reporting gaps and briefed corrective options to the division director.”</p>
+<p>Use only facts you can verify. The stronger example works because it connects the relevant function to scope, output, audience, and result.</p>
+
+<h2>Step 4: read the evaluation language before answering the questionnaire</h2>
+<p>“How you will be evaluated” identifies competencies and may describe an occupational questionnaire, USA Hire assessment, writing exercise, structured interview, panel review, or another assessment. Your questionnaire answers and resume must agree. Selecting an expert-level response without supporting resume evidence can create a credibility problem.</p>
+<p>If the application sends you to an external assessment, follow the deadline shown in the invitation. Submitting the USAJOBS portion may not finish the application process.</p>
+
+<h2>Step 5: map required documents to the claim they prove</h2>
+<p>The Required Documents section is conditional: not every document applies to every applicant. Determine which document supports each hiring path or qualification you claim. A current or former federal employee may need an SF-50; a veteran may need a DD-214 and, depending on the claim, other preference documentation; education-based qualification may require transcripts.</p>
+<p>Do not rely on a document already stored in your profile without opening it. Confirm that the correct version is attached, readable, complete, and allowed by the announcement.</p>
+
+<h2>A 15-minute announcement extraction worksheet</h2>
+<ol>
+  <li>Write down the announcement number, agency, close date, time zone, grade and location.</li>
+  <li>Circle the hiring path that makes you eligible.</li>
+  <li>Copy the specialized-experience paragraph for your target grade.</li>
+  <li>List every mandatory selective factor, license, education or time-in-grade condition.</li>
+  <li>List the competencies and assessments named in the evaluation section.</li>
+  <li>Match each requirement to at least one truthful resume example.</li>
+  <li>List the documents required for your specific eligibility and qualification claims.</li>
+  <li>Record the application and assessment deadlines separately.</li>
+</ol>
+
+<h2>Red flags that mean you should slow down</h2>
+<ul>
+  <li>The announcement closes after a fixed number of applications.</li>
+  <li>Different grades have different specialized-experience paragraphs.</li>
+  <li>A selective factor is described as mandatory.</li>
+  <li>Education is required rather than merely substitutable.</li>
+  <li>The role requires a license, clearance, drug test, travel or relocation.</li>
+  <li>The announcement requires an additional assessment after submission.</li>
+  <li>A supporting document must show specific information, dates or status.</li>
+</ul>
+
+<h2>How ResumeGov can help after you read the announcement</h2>
+<p>Once eligibility and mandatory conditions are confirmed, <a href="/start">ResumeGov can compare your resume with the exact announcement</a>, surface weak or missing qualification evidence, and help prioritize content for the current two-page federal resume format. You remain responsible for the accuracy of every statement and for submitting the required documents.</p>
+<p>For deeper examples, read the guides to <a href="/blog/specialized-experience-examples-federal-resume">specialized experience</a>, <a href="/blog/federal-resume-keywords">federal resume keywords</a>, and <a href="/blog/how-hr-screens-federal-resumes">the HR screening process</a>.</p>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://help.usajobs.gov/how-to/job-announcement">USAJOBS Help Center: How to understand a job announcement</a></li>
+  <li><a href="https://help.usajobs.gov/faq/application/eligibility/difference-from-qualifications">USAJOBS: Eligibility versus qualifications</a></li>
+  <li><a href="https://help.usajobs.gov/how-to/job-announcement/requirements">USAJOBS: How to understand the Requirements section</a></li>
+  <li><a href="https://help.usajobs.gov/how-to/job-announcement/required-documents">USAJOBS: How to understand Required Documents</a></li>
+</ul>
+<p><em>Last reviewed August 6, 2026. The individual announcement controls when its instructions differ from general guidance.</em></p>
+`,
+  },
+
+  {
+    slug: 'usa-hire-assessment-preparation-2026',
+    title: 'USA Hire Assessment Preparation: What to Expect and How to Prepare in 2026',
+    seoTitle: 'USA Hire Assessment Preparation (2026 Guide)',
+    description:
+      'Prepare for a USA Hire assessment with official practice resources, a practical testing checklist, accommodation guidance, and common mistakes to avoid.',
+    date: '2026-08-06',
+    readingTime: 11,
+    author: 'ResumeGov Editorial Team',
+    tags: ['USA Hire assessment', 'USAJOBS assessment', 'federal hiring test', 'OPM assessment', '2026'],
+    relatedSlugs: [
+      'how-to-read-usajobs-job-announcement-2026',
+      'how-hr-screens-federal-resumes',
+      'usajobs-not-referred-reasons-federal-resume',
+    ],
+    faqs: [
+      {
+        question: 'What is a USA Hire assessment?',
+        answer:
+          'USA Hire is OPM’s online assessment platform. Depending on the vacancy, an assessment battery may measure general competencies such as reasoning, reading, judgment, interaction, math, attention to detail, or supervisory capability, and an agency may add technical assessments.',
+      },
+      {
+        question: 'How long does a USA Hire assessment take?',
+        answer:
+          'The length varies by the number and type of assessments assigned. OPM advises applicants that they may need up to three hours, so use the time estimate and deadline shown in your own invitation.',
+      },
+      {
+        question: 'Are official USA Hire practice tests available?',
+        answer:
+          'Yes. OPM’s Applicant Resource Center provides practice versions for several common assessments. They are shorter than the actual assessments, do not cover every possible question, and not every assessment has a practice version.',
+      },
+      {
+        question: 'Can I request a reasonable accommodation?',
+        answer:
+          'Yes. Follow the accommodation instructions in the application and assessment materials. OPM advises applicants who believe they need an accommodation not to begin the actual assessment before making the request.',
+      },
+      {
+        question: 'Does submitting my resume complete a USA Hire application?',
+        answer:
+          'Not necessarily. If the vacancy requires an external assessment, you must also complete that assessment by the deadline stated in the invitation or application record.',
+      },
+    ],
+    content: `
+<h2>Short answer</h2>
+<p>The best USA Hire preparation is legitimate and repeatable: identify the exact assessments assigned to you, use OPM’s official practice materials, reserve enough uninterrupted time, verify your device and connection, and complete the assessment before the final day. Do not buy “answer keys” or rely on leaked questions.</p>
+<p>USA Hire is not one universal test. OPM offers assessment batteries for different roles and grade combinations, and agencies may pair them with a technical or other secondary assessment. Your invitation is the authoritative source for what you must complete and when.</p>
+
+<h2>What USA Hire may measure</h2>
+<table>
+  <thead><tr><th>Assessment area</th><th>What it generally examines</th><th>Useful preparation</th></tr></thead>
+  <tbody>
+    <tr><td>Reading</td><td>Understanding and applying written information</td><td>Practice careful reading under moderate time pressure</td></tr>
+    <tr><td>Reasoning</td><td>Drawing sound conclusions from facts and rules</td><td>Work through official sample formats and explain your logic</td></tr>
+    <tr><td>Math</td><td>Using quantitative information to solve work-related problems</td><td>Refresh basic arithmetic and interpret tables or charts</td></tr>
+    <tr><td>Judgment</td><td>Choosing effective responses to workplace situations</td><td>Consider policy, mission, ethics, communication and escalation</td></tr>
+    <tr><td>Interaction</td><td>Responses involving workplace relationships</td><td>Read the instructions closely; answer consistently and honestly</td></tr>
+    <tr><td>Supervisor or technical assessment</td><td>Leadership competencies or role-specific knowledge and skills</td><td>Use the vacancy competencies and the exact invitation as your guide</td></tr>
+  </tbody>
+</table>
+<p>The table is a preparation map, not a prediction of your assigned test. OPM’s Applicant Resource Center lists the practice assessments that are currently available.</p>
+
+<h2>How to identify the assessments assigned to you</h2>
+<ol>
+  <li>Submit the USAJOBS application and read the confirmation page completely.</li>
+  <li>Use the assessment button in the application record or the unique access link sent to your email.</li>
+  <li>Read the Important Information page before starting.</li>
+  <li>Record each assessment, its instructions, device requirements and final deadline.</li>
+  <li>Open the official practice center and complete the matching practice version when one exists.</li>
+</ol>
+<p>Not seeing a practice test does not mean the assigned assessment is optional. OPM notes that not every assessment has a practice version.</p>
+
+<h2>A practical preparation plan</h2>
+<h3>Two or more days before</h3>
+<ul>
+  <li>Confirm the deadline in the assessment invitation, including the time zone.</li>
+  <li>Use a current supported browser and enable JavaScript.</li>
+  <li>Choose a reliable connection and avoid a VPN if the platform instructions warn against it.</li>
+  <li>Complete relevant official practice assessments on the device you plan to use.</li>
+  <li>Review the vacancy competencies and technical subject matter without trying to memorize copied answers.</li>
+  <li>If you may need a reasonable accommodation, follow the request process before beginning.</li>
+</ul>
+<h3>On assessment day</h3>
+<ul>
+  <li>Reserve a quiet block of time; OPM says some applicants may need up to three hours depending on the assigned assessments.</li>
+  <li>Connect the device to power and close unnecessary applications and notifications.</li>
+  <li>Have only the materials expressly allowed by the instructions.</li>
+  <li>Read the directions and examples for each section instead of assuming every part works the same way.</li>
+  <li>Use permitted breaks between assessments and verify completion before closing the session.</li>
+</ul>
+
+<h2>Reasonable accommodation</h2>
+<p>A reasonable accommodation changes access to the assessment; it does not lower the job standard. The application process includes instructions for requesting one. OPM’s current applicant guidance says that if practice testing indicates you may need an accommodation, you should not begin the actual assessment before requesting it.</p>
+<p>Because processing steps and contacts can vary, use the instructions attached to your vacancy and invitation. Keep copies of relevant messages and act early enough for the agency to respond.</p>
+
+<h2>Five mistakes that can end an otherwise strong application</h2>
+<ol>
+  <li><strong>Waiting until the deadline.</strong> A device, access-link or connection problem becomes much harder to resolve at the last minute.</li>
+  <li><strong>Assuming USAJOBS submission is the final step.</strong> The external assessment may still be required.</li>
+  <li><strong>Practicing from unofficial “answer dumps.”</strong> They may be inaccurate and can compromise assessment security.</li>
+  <li><strong>Ignoring the instructions for a new section.</strong> Different assessment formats measure different behavior.</li>
+  <li><strong>Starting before resolving an accommodation need.</strong> Follow the official request process first.</li>
+</ol>
+
+<h2>How the assessment relates to your federal resume</h2>
+<p>The resume and the assessment do different jobs. Your resume documents eligibility and qualification evidence; the assessment measures selected competencies or skills. A strong score cannot repair a resume that fails to show required specialized experience, and a strong resume does not excuse an incomplete required assessment.</p>
+<p>Before applying, use the <a href="/blog/how-to-read-usajobs-job-announcement-2026">USAJOBS announcement reading guide</a> to identify every gate. Then <a href="/start">compare your resume with the announcement in ResumeGov</a> before you submit. ResumeGov does not administer, predict or bypass USA Hire assessments.</p>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://www.opm.gov/agency-services/talent-systems/usa-hire/">OPM: USA Hire overview and assessment types</a></li>
+  <li><a href="https://support-usahire.opm.gov/hc/en-us/articles/45424541744531-Determining-which-practice-assessments-to-complete">OPM: Determining which practice assessments to complete</a></li>
+  <li><a href="https://support-usahire.opm.gov/hc/en-us/articles/45424508107283-General-pre-testing-tips">OPM: General pre-testing tips</a></li>
+  <li><a href="https://support-usahire.opm.gov/hc/en-us">OPM USA Hire Applicant Resource Center</a></li>
+</ul>
+<p><em>Last reviewed August 6, 2026. Always follow the instructions and deadline in your specific assessment invitation.</em></p>
+`,
+  },
+
+  {
+    slug: 'merit-hiring-plan-four-essay-questions',
+    title: 'Federal Job Application Essay Questions: How to Answer the Merit Hiring Plan Prompts',
+    seoTitle: 'How to Answer the Federal Hiring Essay Questions',
+    description:
+      'Learn what the four Merit Hiring Plan essay prompts are designed to show, how agencies use the responses, and how to write concise, authentic answers.',
+    date: '2026-08-06',
+    readingTime: 10,
+    author: 'ResumeGov Editorial Team',
+    tags: ['Merit Hiring Plan essays', 'federal application questions', 'USAJOBS', 'public service', 'federal hiring'],
+    relatedSlugs: [
+      'how-to-read-usajobs-job-announcement-2026',
+      'federal-resume-writing-guide-2026',
+      'ai-federal-resume-builder-usajobs-2026',
+    ],
+    faqs: [
+      {
+        question: 'What are the four federal hiring essay questions about?',
+        answer:
+          'The prompts ask applicants to discuss commitment to the Constitution and American founding principles, improving government efficiency, supporting the administration’s executive orders or policy priorities, and work ethic. Read the exact wording in your application.',
+      },
+      {
+        question: 'Are the Merit Hiring Plan essays scored?',
+        answer:
+          'OPM’s current FAQ says the responses are not scored or rated and are not used to determine qualifications. Agencies are directed to treat them similarly to a cover letter and may use them to learn more about an applicant.',
+      },
+      {
+        question: 'Will I be disqualified if I leave an essay blank?',
+        answer:
+          'OPM’s current guidance says an applicant who does not answer is not disqualified or screened out. However, follow the current instructions in the individual announcement because federal guidance can change.',
+      },
+      {
+        question: 'Should I use AI to write the essay answers?',
+        answer:
+          'Use AI, if permitted, only for structure or proofreading. The substance should be your own, accurate, specific, and consistent with your record. Never let a tool invent beliefs, experience, achievements, or policy knowledge.',
+      },
+      {
+        question: 'How long should each answer be?',
+        answer:
+          'Follow the character or word limit displayed in the application. Within that limit, answer directly, use one relevant example where possible, and remove generic introductions and repeated resume content.',
+      },
+    ],
+    content: `
+<h2>Short answer</h2>
+<p>The four short federal application essays introduced through the Merit Hiring Plan ask about four themes: constitutional and founding principles, government efficiency, alignment with the administration’s lawful priorities, and personal work ethic. The exact prompt and response limit in your application control.</p>
+<p>According to OPM’s current implementation FAQ, these responses are <strong>not scored or rated</strong>, are not used to determine qualifications, and should be treated similarly to a cover letter. OPM also says that omitting an answer does not disqualify or screen out an applicant. Even so, a thoughtful response can give a hiring manager useful context about your motivation and judgment.</p>
+
+<h2>What each prompt is trying to learn</h2>
+<table>
+  <thead><tr><th>Theme</th><th>Useful evidence</th><th>Avoid</th></tr></thead>
+  <tbody>
+    <tr><td>Constitution and founding principles</td><td>A concrete example of impartial service, due process, equal treatment, stewardship or respect for lawful authority</td><td>A history lecture or unsupported declarations</td></tr>
+    <tr><td>Government efficiency</td><td>A process improvement with a measurable effect on time, cost, quality, risk or service</td><td>Criticizing a former employer without explaining your action</td></tr>
+    <tr><td>Executive orders and policy priorities</td><td>Relevant professional knowledge, implementation experience, or a disciplined approach to lawful execution</td><td>Claiming expertise you do not have or substituting slogans for job-related evidence</td></tr>
+    <tr><td>Work ethic</td><td>An example showing ownership, persistence, reliability, sound judgment and a completed result</td><td>Repeating adjectives such as “hardworking” without proof</td></tr>
+  </tbody>
+</table>
+
+<h2>A concise answer framework</h2>
+<p>Use a four-part structure that fits the space available:</p>
+<ol>
+  <li><strong>Answer:</strong> State your position or motivation in one direct sentence.</li>
+  <li><strong>Evidence:</strong> Give one truthful example from work, military service, education, volunteering, or another relevant setting.</li>
+  <li><strong>Result:</strong> Explain the measurable outcome or what changed because of your action.</li>
+  <li><strong>Connection:</strong> Link the lesson to the duties and mission of the target position.</li>
+</ol>
+<p>This is not a request to duplicate your resume. The essay can explain why an accomplishment matters, which principle guided your decision, or how you would carry the same discipline into public service.</p>
+
+<h2>Example: government efficiency prompt</h2>
+<p><strong>Generic:</strong> “I strongly believe government should be efficient. I always look for ways to improve processes and save money.”</p>
+<p><strong>Evidence-based:</strong> “In my current operations role, I mapped a six-step approval process and found that duplicate data entry delayed requests. I coordinated a revised intake form with finance and compliance, reducing average processing time from nine days to six while preserving required controls. I would bring the same evidence-based approach to improving service delivery in this position.”</p>
+<p>The second response is credible because it shows the problem, the applicant’s action, a quantified result, and relevance to the role. Use your own facts; do not reuse the sample as a personal claim.</p>
+
+<h2>How to approach the policy-priority prompt</h2>
+<p>Read the exact question and identify the executive order or policy area it references. Use official sources rather than social media summaries. Then decide whether you have:</p>
+<ul>
+  <li>direct experience implementing a related requirement;</li>
+  <li>transferable experience converting policy into procedures, controls, training or metrics;</li>
+  <li>subject-matter knowledge relevant to the position; or</li>
+  <li>a clear professional method for learning and carrying out lawful priorities.</li>
+</ul>
+<p>Be precise about the depth of your experience. It is stronger to explain one relevant implementation skill honestly than to claim broad policy expertise you cannot support.</p>
+
+<h2>How to write about work ethic without clichés</h2>
+<p>Choose an example where the result depended on behavior you controlled: meeting a difficult deadline, correcting an error, maintaining quality under pressure, learning an unfamiliar system, supporting a team, or taking ownership of a stalled deliverable. Show the standard you followed and the result.</p>
+<p>“Dedicated,” “passionate,” and “results-driven” are conclusions. Let the evidence earn those conclusions for the reader.</p>
+
+<h2>Should you use AI?</h2>
+<p>An editing tool can help shorten a draft, identify repetition, or test whether your answer follows a clear structure. It should not create a personal belief, policy position, work example, metric, or accomplishment for you. Review the announcement and agency instructions for any specific restrictions.</p>
+<ul>
+  <li>Draft the factual example yourself first.</li>
+  <li>Ask for clarity and compression, not invented substance.</li>
+  <li>Verify every policy reference against an official source.</li>
+  <li>Read the final response aloud so it still sounds like you.</li>
+  <li>Keep a copy of what you submitted for interview preparation.</li>
+</ul>
+
+<h2>Final review checklist</h2>
+<ul>
+  <li>Does the first sentence answer the prompt directly?</li>
+  <li>Is every claim true and supportable?</li>
+  <li>Is there a specific action or example instead of only opinion?</li>
+  <li>Does the response respect the displayed length limit?</li>
+  <li>Is it consistent with your resume, questionnaire and interview story?</li>
+  <li>Have you removed partisan rhetoric, vague praise and copied language?</li>
+  <li>Did you follow the exact current application instructions?</li>
+</ul>
+
+<h2>Where the essays fit in the full application</h2>
+<p>The essays do not replace the qualification evidence in your resume. Read the <a href="/blog/how-to-read-usajobs-job-announcement-2026">complete job announcement</a>, tailor your <a href="/blog/federal-resume-writing-guide-2026">two-page federal resume</a>, attach the required documents, and complete any assessment. You can then use <a href="/start">ResumeGov to check resume-to-announcement alignment</a>; the service does not evaluate political views or guarantee selection.</p>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/merit-hiring-plan-resources/merit-hiring-plan-frequently-asked-questions/">OPM: Merit Hiring Plan frequently asked questions</a></li>
+  <li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/merit-hiring-plan-resources/">OPM: Merit Hiring Plan resources</a></li>
+  <li><a href="https://help.usajobs.gov/how-to/application">USAJOBS Help Center: How to complete an application</a></li>
+</ul>
+<p><em>Last reviewed August 6, 2026. OPM guidance and individual vacancy instructions may change; verify both before submitting.</em></p>
+`,
+  },
+
+  {
     slug: 'ai-federal-resume-builder-usajobs-2026',
     title: 'AI Federal Resume Builder for USAJOBS: What It Can and Cannot Do in 2026',
     seoTitle: 'AI Federal Resume Builder for USAJOBS (2026 Guide)',
