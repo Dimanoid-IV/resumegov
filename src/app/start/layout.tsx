@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Free Federal Resume Compatibility Score | ResumeGov',
+  title: 'Free Federal Resume Checker for USAJOBS | ResumeGov',
   description:
-    'Start a free USAJOBS resume analysis for qualification language, required work-history details, and two-page formatting risk.',
+    'Compare your federal resume with a USAJOBS vacancy, find missing qualification evidence, and review two-page formatting risk for free.',
   alternates: { canonical: 'https://www.resumegov.com/start' },
   robots: { index: true, follow: true },
 };

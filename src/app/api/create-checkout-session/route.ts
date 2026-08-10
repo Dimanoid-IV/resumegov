@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
+import { getGAIdentifiersFromCookies } from '@/lib/ga-cookies';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -31,7 +32,15 @@ export async function POST(request: NextRequest) {
 
     // Get request body to determine plan
     const body = await request.json();
-    const { plan, analysisId: requestedAnalysisId } = body as { plan?: string; analysisId?: string };
+    const {
+      plan,
+      analysisId: requestedAnalysisId,
+      gaClientId: bodyClientId,
+      gaSessionId: bodySessionId,
+    } = body as { plan?: string; analysisId?: string; gaClientId?: string; gaSessionId?: string };
+    const cookieAnalytics = getGAIdentifiersFromCookies(request);
+    const gaClientId = bodyClientId?.slice(0, 64) || cookieAnalytics.clientId || '';
+    const gaSessionId = bodySessionId?.replace(/\D/g, '').slice(0, 24) || cookieAnalytics.sessionId || '';
     let analysisId: string | null = null;
     if (requestedAnalysisId) {
       const { data: ownedAnalysis } = await supabase
@@ -126,7 +135,10 @@ export async function POST(request: NextRequest) {
         userId: user.id,
         plan: planType,
         analysisId: analysisId || '',
+        gaClientId,
+        gaSessionId,
       },
+      client_reference_id: user.id,
     });
 
     if (!session.url) {

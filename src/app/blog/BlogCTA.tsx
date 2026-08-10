@@ -8,8 +8,8 @@ interface BlogCTAProps {
 
 export default function BlogCTA({
   variant = 'inline',
-  headline = 'Is Your Federal Resume 2025-Compliant?',
-  subtext = 'Check your word count, qualify against the vacancy announcement, and get an AI compatibility score — free.',
+  headline = 'Does Your Resume Prove the Vacancy Requirements?',
+  subtext = 'Compare your documented experience with the announcement and find missing qualification evidence — free.',
 }: BlogCTAProps) {
   const isBottom = variant === 'bottom';
 
@@ -55,7 +55,8 @@ export default function BlogCTA({
 
         {/* Button */}
         <a
-          href="/"
+          href="/start"
+          data-gtm-event="blog_cta_click"
           className={`flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors whitespace-nowrap ${
             isBottom
               ? 'bg-white text-blue-700 hover:bg-blue-50'
@@ -73,7 +74,7 @@ export default function BlogCTA({
       <div className={`flex flex-wrap gap-3 mt-4 pt-4 border-t ${isBottom ? 'border-white/20' : 'border-blue-200'}`}>
         {[
           '✓ 2-page limit verified',
-          '✓ Word count 950–1,050',
+          '✓ Two-page formatting risk',
           '✓ Qualification language check',
           '✓ GS level compatibility',
         ].map(badge => (

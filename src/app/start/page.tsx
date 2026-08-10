@@ -24,10 +24,14 @@ export default function StartPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const err = params.get('error');
-    if (err) {
+    if (!err) return;
+
+    const timer = window.setTimeout(() => {
       setErrorMsg(decodeURIComponent(err));
       setStage('error');
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -36,8 +40,8 @@ export default function StartPage() {
 
     const trimmedName = name.trim().replace(/\s+/g, ' ');
     const trimmed = email.trim().toLowerCase();
-    if (trimmedName.length < 2) {
-      setErrorMsg('Enter your name.');
+    if (trimmedName.length > 0 && trimmedName.length < 2) {
+      setErrorMsg('Enter at least two characters or leave the name blank.');
       return;
     }
     if (!isValidEmail(trimmed)) {
@@ -59,7 +63,7 @@ export default function StartPage() {
       email: trimmed,
       options: {
         emailRedirectTo: `${currentOrigin}/auth/callback?next=/upload`,
-        data: { full_name: trimmedName },
+        data: trimmedName ? { full_name: trimmedName } : undefined,
       },
     });
 
@@ -132,7 +136,7 @@ export default function StartPage() {
                   Get Your Free Federal<br />Resume Compatibility Score
                 </h1>
                 <p className="text-slate-500 text-sm mb-6">
-                  Enter your email to receive your structured analysis. No password required.
+                  Use a secure email link to upload your resume and vacancy announcement. No password or payment card required.
                 </p>
 
                 {/* Inline error */}
@@ -152,14 +156,12 @@ export default function StartPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
-                      Your name
+                      Your name <span className="font-normal text-slate-400">(optional)</span>
                     </label>
                     <input
                       id="name"
                       name="name"
                       type="text"
-                      required
-                      minLength={2}
                       maxLength={100}
                       autoComplete="name"
                       value={name}
@@ -222,7 +224,7 @@ export default function StartPage() {
 
                 {/* Microcopy */}
                 <p id="email-privacy" className="text-xs text-slate-400 mt-4 text-center">
-                  Used to create your account and deliver your analysis. See our{' '}
+                  Used to secure and deliver your analysis. ResumeGov is independent from USAJOBS and OPM. See our{' '}
                   <Link href="/privacy" className="underline hover:text-slate-600">Privacy Policy</Link>.
                 </p>
 
@@ -247,7 +249,7 @@ export default function StartPage() {
                 'Compatibility score (0–100)',
                 'Keyword match analysis',
                 'Specialized experience coverage',
-                '2-page compliance check',
+                'Two-page formatting risk',
                 'Top missing qualification elements',
               ].map(item => (
                 <li key={item} className="flex items-center gap-1.5">
@@ -258,6 +260,9 @@ export default function StartPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-3 pt-3 border-t border-slate-100 leading-relaxed">
+              The score is a ResumeGov decision-support signal, not an OPM rating. You review every result before using it.
+            </p>
           </div>
         </div>
       </div>

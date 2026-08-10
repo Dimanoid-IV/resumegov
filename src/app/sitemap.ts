@@ -6,8 +6,6 @@ const BASE_URL = 'https://www.resumegov.com';
 const corePages = [
   ['', 1, 'monthly'],
   ['/start', 0.9, 'monthly'],
-  ['/federal-resume-2-page-rule', 0.9, 'monthly'],
-  ['/usajobs-resume-requirements', 0.9, 'monthly'],
   ['/editorial-standards', 0.7, 'monthly'],
   ['/contact', 0.7, 'monthly'],
   ['/privacy', 0.3, 'yearly'],
@@ -28,11 +26,8 @@ const corePages = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const generatedAt = new Date();
-
   const pages: MetadataRoute.Sitemap = corePages.map(([path, priority, changeFrequency]) => ({
     url: `${BASE_URL}${path}`,
-    lastModified: path === '/privacy' || path === '/terms' ? new Date('2026-07-28') : generatedAt,
     changeFrequency,
     priority,
   }));

@@ -12,6 +12,10 @@ export default function SiteFooter() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500">
           <Link href="/blog" className="hover:text-slate-300 transition-colors">Guides</Link>
+          <Link href="/start" className="hover:text-slate-300 transition-colors">Federal Resume Checker</Link>
+          <Link href="/guides/usajobs-resume-requirements" className="hover:text-slate-300 transition-colors">USAJOBS Requirements</Link>
+          <Link href="/guides/federal-specialized-experience-guide" className="hover:text-slate-300 transition-colors">Specialized Experience</Link>
+          <Link href="/federal-resume-examples" className="hover:text-slate-300 transition-colors">Resume Examples</Link>
           <Link href="/editorial-standards" className="hover:text-slate-300 transition-colors">Editorial Standards</Link>
           <Link href="/#pricing" className="hover:text-slate-300 transition-colors">Pricing</Link>
           <Link href="/login" className="hover:text-slate-300 transition-colors">Sign in</Link>

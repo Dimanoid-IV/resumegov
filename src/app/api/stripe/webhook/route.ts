@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
+import { trackGA4Event } from '@/lib/gtag-server';
 import Stripe from 'stripe';
 
 /**
@@ -122,6 +123,28 @@ export async function POST(request: NextRequest) {
               credits_remaining: newCredits,
             })
             .eq('id', userId);
+
+          const amountInMajorUnits = (session.amount_total || 0) / 100;
+          await trackGA4Event({
+            eventName: 'purchase',
+            clientId: session.metadata?.gaClientId || undefined,
+            sessionId: session.metadata?.gaSessionId || undefined,
+            userId,
+            params: {
+              transaction_id: paymentReference,
+              value: amountInMajorUnits,
+              currency: (session.currency || 'usd').toUpperCase(),
+              plan,
+              items: [
+                {
+                  item_id: plan,
+                  item_name: `ResumeGov ${plan}`,
+                  price: amountInMajorUnits,
+                  quantity: 1,
+                },
+              ],
+            },
+          });
 
           console.log(`Checkout completed for user ${userId}: plan ${plan}, new type: ${newPlanType}, credits: ${newCredits}`);
         }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { trackEvent } from '@/lib/gtag';
+import { getGoogleAnalyticsIdentifiers, trackEvent } from '@/lib/gtag';
 
 interface ImproveResumeProps {
   currentPlan: string;
@@ -62,11 +62,14 @@ export default function ImproveResume({
     }
   };
 
-  const handleUpgrade = (planType: 'single' | 'analyst' | 'professional') => {
+  const handleUpgrade = async (planType: 'single' | 'analyst' | 'professional') => {
     trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: latestAnalysisId });
-    // Redirect to pricing or trigger checkout
-    const analysis = latestAnalysisId ? `&analysisId=${encodeURIComponent(latestAnalysisId)}` : '';
-    window.location.href = `/api/checkout?plan=${planType}${analysis}`;
+    const analytics = await getGoogleAnalyticsIdentifiers();
+    const checkoutParams = new URLSearchParams({ plan: planType });
+    if (latestAnalysisId) checkoutParams.set('analysisId', latestAnalysisId);
+    if (analytics.clientId) checkoutParams.set('gaClientId', analytics.clientId);
+    if (analytics.sessionId) checkoutParams.set('gaSessionId', analytics.sessionId);
+    window.location.href = `/api/checkout?${checkoutParams.toString()}`;
   };
 
   return (

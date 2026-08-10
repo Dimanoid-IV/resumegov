@@ -832,7 +832,7 @@ const POSTS: BlogPost[] = [
     slug: 'federal-resume-2-page-limit-2025',
     title: 'Federal Resume 2-Page Limit: Everything You Need to Know for 2025',
     description:
-      'The OPM 2-page federal resume rule takes effect September 27, 2025. Learn the exact word count targets, hard limits, and what happens if you exceed them on USAJOBS.',
+      'The OPM two-page federal resume rule took effect September 27, 2025. Learn what the official guidance requires and how to preserve qualification evidence.',
     date: '2025-09-01',
     readingTime: 7,
     author: 'ResumeGov Editorial Team',
@@ -851,7 +851,7 @@ const POSTS: BlogPost[] = [
       {
         question: 'What is the exact word count target for a compliant federal resume?',
         answer:
-          'The optimal range is 950–1,050 words, which corresponds to approximately 2 standard pages. The system enforces a hard limit of 1,100 words; submissions exceeding this threshold risk disqualification during initial HR screening.',
+          'OPM does not set a universal word limit. Page count depends on font, spacing, margins, headings, and content structure. Verify the final rendered PDF is no more than two pages and remains legible.',
       },
       {
         question: 'Can I still include all my qualifications within 2 pages?',
@@ -864,9 +864,9 @@ const POSTS: BlogPost[] = [
           'KSA statements that are integrated directly into the resume body count toward the 2-page limit. Separately uploaded KSA documents — when the vacancy announcement requires them — are not subject to the 2-page resume limit.',
       },
       {
-        question: 'What happens if my resume exceeds 1,100 words?',
+        question: 'What happens if my resume exceeds two pages?',
         answer:
-          'HR specialists are instructed to use only the first 2 pages for qualification determinations. Content on subsequent pages may be ignored entirely, potentially causing you to appear unqualified even if you meet all requirements.',
+          'USAJOBS restricts resumes to two pages for covered applications. Follow the individual announcement and reduce the document before upload rather than relying on an assumed word threshold.',
       },
     ],
     content: `
@@ -874,14 +874,14 @@ const POSTS: BlogPost[] = [
 <p>On September 27, 2025, the Office of Personnel Management (OPM) formalized a long-debated policy: federal job applicants must now limit their resumes to two pages. This is one of the most significant changes to the federal hiring process in decades, and millions of applicants using USAJOBS are directly affected.</p>
 <p>For years, federal resumes operated in the opposite direction from civilian resumes. Where a private-sector hiring manager expects one page, federal HR specialists historically wanted <em>more</em> detail — sometimes 5–8 pages covering every position, duty, and certification going back decades. That era is over.</p>
 
-<h2>The Exact Numbers You Need to Hit</h2>
-<p>The regulation does not specify a word count directly — it specifies page count. However, based on standard government document formatting (12pt font, 1-inch margins, standard line spacing), two pages equates to approximately:</p>
+<h2>What the official rule measures</h2>
+<p>The rule measures pages, not words. Two documents with the same word count can render differently because of font, margins, headings, bullets, and spacing. Treat any word-count estimate as a planning aid only.</p>
 <ul>
-  <li><strong>Target range:</strong> 950–1,050 words</li>
-  <li><strong>Hard ceiling:</strong> 1,100 words</li>
-  <li><strong>Minimum floor:</strong> 900 words (below this, your resume may appear thin and uncompetitive)</li>
+  <li><strong>Required check:</strong> final document is two pages or less</li>
+  <li><strong>Required quality:</strong> text remains legible and relevant to the announcement</li>
+  <li><strong>No universal floor:</strong> include enough evidence to prove the required qualifications</li>
 </ul>
-<p>Exceeding 1,100 words puts you at risk of having your qualifications evaluated from only the first two pages. Content pushed to page three may be ignored entirely during HR screening, which uses a structured review checklist.</p>
+<p>Render the final PDF before applying. Do not shrink text or spacing until the document becomes difficult to review.</p>
 
 <h2>What Must Stay In — The Non-Negotiables</h2>
 <p>Compression does not mean deletion. Federal HR specialists are trained to look for specific language pulled directly from vacancy announcements. The following elements <strong>must never be removed</strong> from a compliant federal resume:</p>
@@ -904,7 +904,7 @@ const POSTS: BlogPost[] = [
 </ul>
 
 <h2>Two-Pass Compression: The Recommended Approach</h2>
-<p>Meeting the 950–1,050 word target from an 1,800-word resume requires a disciplined two-pass compression strategy:</p>
+<p>Reducing a long legacy federal resume to two pages requires a disciplined two-pass editing strategy:</p>
 <ol>
   <li><strong>Pass 1 — Structural reduction:</strong> Eliminate entire sections that don't contribute to the target GS level qualifications. Remove positions held before 2010 unless they establish specialized experience unavailable elsewhere in the resume.</li>
   <li><strong>Pass 2 — Sentence-level compression:</strong> Reduce passive voice, remove filler phrases ("responsible for," "tasked with"), and convert narrative descriptions to accomplishment-focused bullets with quantified outcomes.</li>
@@ -912,17 +912,24 @@ const POSTS: BlogPost[] = [
 <p>AI-assisted compression tools can automate both passes while flagging any required qualification language that would be removed, allowing human review before submission.</p>
 
 <h2>Common Compliance Errors</h2>
-<p>In early post-regulation submissions reviewed by federal HR offices, the most common compliance failures were:</p>
+<p>Common risks to check before submission include:</p>
 <ul>
-  <li>Removing the exact "specialized experience" language from the vacancy announcement (triggers an "ineligible" rating)</li>
-  <li>Compressing dates to the point that time-in-grade requirements cannot be verified</li>
-  <li>Shrinking font or margins to fit content (automated systems can detect non-standard formatting)</li>
-  <li>Treating 1,100 words as a target rather than a ceiling</li>
+  <li>Removing evidence that supports the specialized experience requirement</li>
+  <li>Compressing dates or hours until the duration of experience cannot be verified</li>
+  <li>Shrinking font, margins, or spacing until the document is difficult to read</li>
+  <li>Relying on a word-count estimate without rendering the final file</li>
 </ul>
 
 <h2>How to Check Your Compliance</h2>
-<p>Before submitting any federal application after September 27, 2025, run your resume through a word count check against the vacancy announcement. Verify that every required qualification phrase from the announcement appears in your resume, and that your total word count falls between 950 and 1,050.</p>
-<p>Our AI-powered federal resume analyzer performs this check automatically, cross-referencing your resume against the specific vacancy announcement and flagging both word count violations and missing required qualification language.</p>
+<p>Before submitting, compare the resume with the vacancy announcement, confirm that each required qualification is supported by truthful experience, and verify the final file is two pages or less.</p>
+<p>ResumeGov compares your documented experience with the announcement and flags two-page formatting risk. It does not determine eligibility or replace the agency's review.</p>
+
+<h2>Official sources</h2>
+<ul>
+  <li><a href="https://www.opm.gov/policy-data-oversight/hiring-information/merit-hiring-plan-resources/applicant-guidance-on-the-two-page-resume-limit/">OPM applicant guidance on the two-page resume limit</a></li>
+  <li><a href="https://help.usajobs.gov/faq/application/documents/resume/what-to-include">USAJOBS: What to include in a federal resume</a></li>
+</ul>
+<p><em>Last reviewed August 10, 2026. Follow the instructions in the individual vacancy announcement.</em></p>
 `,
   },
 
@@ -1085,7 +1092,7 @@ const POSTS: BlogPost[] = [
     slug: 'federal-resume-vs-civilian-resume',
     title: 'Federal Resume vs. Civilian Resume: 7 Critical Differences',
     description:
-      'Federal resumes and civilian resumes follow entirely different rules. Understanding the 7 key differences — length, format, content, and submission — will prevent automatic disqualification on USAJOBS.',
+      'Federal and civilian resumes serve different review processes. Understand seven differences in length, evidence, formatting, and submission before applying through USAJOBS.',
     date: '2025-06-30',
     readingTime: 5,
     author: 'ResumeGov Editorial Team',
@@ -1124,7 +1131,7 @@ const POSTS: BlogPost[] = [
 
 <h2>Difference 1: Length (The Biggest Change for 2025)</h2>
 <p><strong>Civilian:</strong> 1–2 pages maximum; anything longer signals poor judgment.</p>
-<p><strong>Federal (2025):</strong> Exactly 2 pages — 950–1,050 words. The September 27, 2025 OPM rule caps federal resumes at a 2-page limit with a hard ceiling of 1,100 words. This is a significant departure from the previous norm of 4–8 page federal resumes.</p>
+<p><strong>Federal:</strong> For covered applications, the September 27, 2025 OPM rule limits the resume to two pages. OPM does not set a universal word count; verify the final rendered document and follow the announcement.</p>
 
 <h2>Difference 2: Employment Date Requirements</h2>
 <p><strong>Civilian:</strong> Month/year for start and end dates is standard, but year-only is acceptable.</p>
@@ -1186,7 +1193,7 @@ const POSTS: BlogPost[] = [
       {
         question: 'Is it safe to use an AI tool to optimize a federal resume?',
         answer:
-          'Yes, provided the tool is designed with federal compliance in mind. A compliant AI optimization tool will flag — but never remove — required qualification language, enforce the 950–1,050 word target, and never fabricate experience or achievements. Always review AI-generated content before submitting.',
+          'It can assist with organization and gap detection, but it must not invent experience or treat a word-count estimate as an OPM rule. Always verify the final two-page file and every AI-generated statement before submitting.',
       },
     ],
     content: `
@@ -1200,7 +1207,7 @@ const POSTS: BlogPost[] = [
 <p>The qualification section of every vacancy announcement contains specific language that HR uses as a screening checklist. If your resume says "managed database systems" but the announcement requires "administered and maintained enterprise relational database management systems," you may be scored as not meeting the requirement. Copy the key phrases from the announcement and weave them into your bullets.</p>
 
 <h2>Mistake 3: Exceeding the 2-Page / 1,100-Word Hard Limit</h2>
-<p>Effective September 27, 2025, OPM enforces a 2-page federal resume limit. Resumes that run long cause HR to evaluate only the first two pages. If your most critical qualifications are buried on page three, they don't exist from a screening perspective. Target 950–1,050 words.</p>
+<p>Effective September 27, 2025, covered federal resumes are limited to two pages. OPM does not set a universal word count, so prioritize the most relevant evidence and verify the final rendered file.</p>
 
 <h2>Mistake 4: Omitting the "Average Hours Per Week" Field</h2>
 <p>This is the most overlooked required element. Every position listed must include the average number of hours worked per week. Without it, full-time employment cannot be assumed, and your specialized experience may be downgraded or disqualified.</p>
@@ -1817,7 +1824,7 @@ const POSTS: BlogPost[] = [
     faqs: [
       {
         question: 'What are federal resume keywords and why are they important?',
-        answer: 'Federal resume keywords are specific terms and phrases from the vacancy announcement that HR specialists use to verify you meet specialized experience requirements. Unlike private-sector keywords for ATS scanning, federal keywords are compliance elements — if your resume lacks the exact vocabulary from the announcement, HR may score the corresponding qualification as unmet, resulting in an Ineligible rating.',
+        answer: 'Federal resume keywords are terms from the announcement that can help connect your documented experience with the requirements. They do not replace evidence, and missing one exact phrase does not by itself prove that a qualification is unmet.',
       },
       {
         question: 'Where do I find keywords in a USAJOBS vacancy announcement?',
@@ -1825,7 +1832,7 @@ const POSTS: BlogPost[] = [
       },
       {
         question: 'Should I copy keywords verbatim or can I use synonyms?',
-        answer: 'Copy verbatim when possible. HR specialists match resume language against the announcement’s exact vocabulary. Synonyms may not be recognized during structured review. For example, "managed projects" may not satisfy "directed project execution," and "worked with data" may not equal "analyzed complex program data." When the announcement uses specific terminology, mirror it in your resume.',
+        answer: 'Use the announcement’s terminology where it truthfully describes your work, but do not copy requirements you cannot support. Clear evidence, scope, dates, and context matter more than repeating isolated keywords.',
       },
       {
         question: 'How do I include all required keywords within the 2-page limit?',
@@ -1839,20 +1846,20 @@ const POSTS: BlogPost[] = [
     content: `
 <h1>Federal Resume Keywords: How to Match Vacancy Announcement Language</h1>
 
-<p>Federal resume keywords are not optional — they are the primary mechanism HR specialists use to determine whether you meet the specialized experience requirements listed in the vacancy announcement. Unlike private-sector resumes, where keywords serve as optimization tools, federal resume keywords are compliance elements: if your resume lacks the specific vocabulary from the announcement, HR will score the corresponding qualification as unmet, resulting in an Ineligible rating.</p>
+<p>Vacancy terminology helps reviewers connect your documented experience with the specialized-experience requirements. It is not a substitute for evidence: the resume must truthfully show what you did, at what level, for how long, and with what scope.</p>
 
-<p>This guide explains how to identify, extract, and integrate federal resume keywords into your 2-page resume without exceeding the word count limit. You will learn where to find keywords in a USAJOBS announcement, how to structure your experience bullets to satisfy HR keyword matching, and which common mistakes cause automatic disqualification.</p>
+<p>This guide explains how to identify and use relevant vacancy language within a two-page resume. You will learn where to find important terms, how to connect them to evidence, and how to avoid unsupported keyword stuffing.</p>
 
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 32px;margin:36px 0">
   <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#64748b;margin:0 0 8px">ResumeGov Keyword Analysis</p>
   <h3 style="font-size:1.25rem;font-weight:700;color:#0f172a;margin:0 0 12px">Check Your Resume Against Target Announcement Keywords</h3>
   <p style="color:#475569;margin:0 0 20px;font-size:0.95rem">Upload your resume and a target vacancy announcement to see which keywords are missing and how to integrate them within the 2-page limit.</p>
-  <a href="https://www.resumegov.com/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem">Analyze My Resume — Free</a>
+  <a href="https://www.resumegov.com/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem">Analyze My Resume — Free</a>
 </div>
 
 <h2>Why Keyword Matching Matters in Federal Hiring</h2>
 
-<p>Federal HR specialists use structured checklists when reviewing resumes. These checklists are derived directly from the vacancy announcement's "Qualifications" and "Specialized Experience" sections. Each competency or requirement is treated as a distinct item that must be verified in the resume. The verification process is not interpretive — HR looks for explicit language that matches or closely parallels the announcement's phrasing.</p>
+<p>HR specialists compare the resume with the announcement's qualifications and specialized-experience requirements. Make the connection explicit enough to verify without assuming that an isolated keyword proves the requirement.</p>
 
 <p>Consider this example from a GS-13 Program Analyst vacancy:</p>
 
@@ -1875,7 +1882,7 @@ const POSTS: BlogPost[] = [
 <p>The duties section describes what the position does. While not always part of the qualification checklist, duties keywords help demonstrate alignment with the role's scope and complexity.</p>
 
 <h3>3. Selective Placement Factors (Critical Keywords)</h3>
-<p>These are mandatory requirements that cannot be substituted. Failure to address any selective placement factor results in automatic disqualification. Keywords in this section are non-negotiable.</p>
+<p>Selective placement factors are mandatory when listed. The resume and required documents should clearly demonstrate how you satisfy them; follow the exact evidence instructions in the announcement.</p>
 
 <h3>4. Competencies (Behavioral Keywords)</h3>
 <p>Many announcements list competencies such as "Attention to Detail," "Written Communication," or "Technical Credibility." Your resume should demonstrate these competencies using the same terminology.</p>
@@ -1923,7 +1930,7 @@ const POSTS: BlogPost[] = [
 
 <h2>Step-by-Step Keyword Integration Process</h2>
 
-<p>Follow this four-step process to ensure your resume contains all required keywords while staying within the 950–1,050 word target.</p>
+<p>Follow this four-step process to cover the relevant requirements while keeping the final document within two pages.</p>
 
 <h3>Step 1: Extract and Categorize Keywords</h3>
 <p>Open the vacancy announcement in a text editor. Copy the entire "Qualifications" section. Using a highlighter or spreadsheet, identify:</p>
@@ -1975,14 +1982,14 @@ const POSTS: BlogPost[] = [
 </div>
 
 <h3>Step 4: Verify Coverage and Word Count</h3>
-<p>Cross-reference your revised resume against your keyword extraction list. Ensure every mandatory keyword appears at least once. Then check the total word count — it should be between 950 and 1,050 words to comply with the <a href="/blog/federal-resume-2-page-limit-2025">2-page federal resume limit</a>.</p>
+<p>Cross-reference the revised resume against the qualification requirements. Confirm each supported requirement is backed by a specific experience statement, then render the document and verify the <a href="/blog/federal-resume-2-page-limit-2025">two-page limit</a>.</p>
 
 <h2>Common Keyword Mistakes That Cause Ineligible Ratings</h2>
 
 <p>The following errors consistently result in disqualification during HR keyword screening:</p>
 
 <h3>1. Using Synonyms Instead of Exact Terminology</h3>
-<p>HR specialists match against the announcement's exact vocabulary. "Managed projects" does not equal "directed project execution." "Worked with data" does not equal "analyzed complex program data." When in doubt, use the announcement's phrasing verbatim.</p>
+<p>Generic wording such as "managed projects" or "worked with data" may not show the nature, level, or scope of the required experience. Use the announcement's terminology only where it accurately describes work you can document.</p>
 
 <h3>2. Burying Keywords in Unrelated Context</h3>
 <p>Keywords must appear in experience descriptions relevant to the qualification. Listing "SAS" in a skills section without connecting it to "analyzing complex program data" may not satisfy the requirement. The keyword must be embedded in a duty description that demonstrates its application.</p>
@@ -1995,7 +2002,7 @@ const POSTS: BlogPost[] = [
 
 <h2>Keyword Integration Within the 2-Page Limit</h2>
 
-<p>The September 2025 2-page rule (950–1,050 words) creates a strategic challenge: you must include all mandatory keywords while maintaining conciseness. The solution is selective integration:</p>
+<p>The September 2025 two-page rule creates a strategic challenge: you must demonstrate the important requirements concisely. The solution is selective integration:</p>
 
 <ol>
   <li><strong>Prioritize mandatory keywords</strong> from the specialized experience requirements. These are non-negotiable.</li>
@@ -2066,7 +2073,7 @@ const POSTS: BlogPost[] = [
   <li>Systematic extraction of mandatory keywords from the announcement</li>
   <li>Strategic mapping of keywords to specific experience entries</li>
   <li>CCAR-formatted experience bullets that embed keywords in context</li>
-  <li>Verification that all mandatory keywords are addressed within the 950–1,050 word limit</li>
+  <li>Verification that supported requirements are addressed within the final two-page document</li>
   <li>Inclusion of grade-level scope indicators for competitive GS-12+ positions</li>
 </ol>
 

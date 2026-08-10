@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Database } from '@/types/database';
-import { trackEvent } from '@/lib/gtag';
+import { getGoogleAnalyticsIdentifiers, trackEvent } from '@/lib/gtag';
 import { downloadResumeDocx } from '@/lib/downloadResumeDocx';
 
 type AnalysisRow = Database['public']['Tables']['analyses']['Row'];
@@ -60,9 +60,16 @@ export default function AnalysisCard({ analysis, userPlan }: AnalysisCardProps) 
     }
   };
 
-  const handleUpgrade = (planType: 'single' | 'analyst' | 'professional') => {
+  const handleUpgrade = async (planType: 'single' | 'analyst' | 'professional') => {
     trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: analysis.id });
-    window.location.href = `/api/checkout?plan=${planType}&analysisId=${encodeURIComponent(analysis.id)}`;
+    const analytics = await getGoogleAnalyticsIdentifiers();
+    const checkoutParams = new URLSearchParams({
+      plan: planType,
+      analysisId: analysis.id,
+    });
+    if (analytics.clientId) checkoutParams.set('gaClientId', analytics.clientId);
+    if (analytics.sessionId) checkoutParams.set('gaSessionId', analytics.sessionId);
+    window.location.href = `/api/checkout?${checkoutParams.toString()}`;
   };
 
   return (

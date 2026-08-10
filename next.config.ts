@@ -6,6 +6,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/usajobs-resume-requirements',
+        destination: '/guides/usajobs-resume-requirements',
+        permanent: true,
+      },
+      {
+        source: '/federal-resume-2-page-rule',
+        destination: '/blog/federal-resume-2-page-limit-2025',
+        permanent: true,
+      },
+      {
         source: '/:path*',
         has: [
           {

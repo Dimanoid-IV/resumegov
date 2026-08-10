@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { trackEvent } from '@/lib/gtag';
+import { getGoogleAnalyticsIdentifiers, trackEvent } from '@/lib/gtag';
 
 interface ProUpgradeCardProps {
   currentPlan: string;
@@ -17,10 +17,16 @@ export default function ProUpgradeCard({ currentPlan, latestAnalysisId }: ProUpg
     trackEvent({ eventName: 'checkout_started', plan: planType, analysis_id: latestAnalysisId });
     setLoading(true);
     try {
+      const analytics = await getGoogleAnalyticsIdentifiers();
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: planType, analysisId: latestAnalysisId }),
+        body: JSON.stringify({
+          plan: planType,
+          analysisId: latestAnalysisId,
+          gaClientId: analytics.clientId,
+          gaSessionId: analytics.sessionId,
+        }),
       });
 
       const data = await response.json();

@@ -255,9 +255,9 @@ export default async function BlogArticlePage({
               <span>{post.readingTime} min read</span>
             </div>
 
-            {/* Reviewer credit */}
+            {/* Review disclosure */}
             <p className="mt-3 text-sm text-gray-600">
-              Reviewed by <strong className="text-gray-700">Former USAJOBS & Federal HR Specialists</strong>
+              Source-reviewed against linked OPM and USAJOBS guidance
             </p>
 
             {/* Description */}
@@ -281,10 +281,10 @@ export default async function BlogArticlePage({
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">About the Author</h3>
                 <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                  ResumeGov Editorial Team is a federal hiring compliance research group focused on USAJOBS qualification standards, GS-level evaluation criteria, OPM regulatory updates, and HR screening procedures.
+                  ResumeGov Editorial Team maintains practical guidance based on public OPM, USAJOBS, and agency sources.
                 </p>
                 <p className="text-sm text-gray-700 leading-relaxed mb-3">
-                  All articles are reviewed by former federal HR specialists and USAJOBS subject matter experts to ensure regulatory accuracy and alignment with Title 5 hiring standards.
+                  Each priority guide lists its official sources and review date. ResumeGov is independent and does not speak for OPM, USAJOBS, or a hiring agency.
                 </p>
                 <Link
                   href="/editorial-standards"
@@ -308,7 +308,7 @@ export default async function BlogArticlePage({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M12 3a9 9 0 110 18A9 9 0 0112 3z" />
             </svg>
             <p className="text-amber-800">
-              <strong>Regulatory constraint:</strong> The system never fabricates experience, never removes required qualification language, targets 950–1,050 words, and enforces a hard limit of 1,100 words per the September 27, 2025 OPM rule.
+              <strong>Important:</strong> OPM sets a two-page limit, not a universal word limit. ResumeGov uses text length only as a planning signal; verify the final PDF and the instructions in the vacancy announcement.
             </p>
           </div>
 

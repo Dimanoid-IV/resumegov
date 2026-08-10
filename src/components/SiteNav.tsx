@@ -16,6 +16,12 @@ export default function SiteNav() {
           </span>
         </Link>
         <div className="flex items-center gap-6">
+          <Link href="/start" className="hidden text-sm text-slate-400 hover:text-white transition-colors sm:block">
+            Resume Checker
+          </Link>
+          <Link href="/federal-resume-examples" className="hidden text-sm text-slate-400 hover:text-white transition-colors md:block">
+            Examples
+          </Link>
           <Link href="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">
             Guides
           </Link>

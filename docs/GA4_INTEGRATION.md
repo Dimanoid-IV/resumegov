@@ -20,6 +20,8 @@ Create `.env.local`:
 
 ```bash
 NEXT_PUBLIC_ENABLE_GA4=true
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-WL9BDH49MY
+GA4_API_SECRET=replace_with_a_GA4_measurement_protocol_secret
 ```
 
 This enables GA4 tracking in development mode. By default, tracking only works in production.
@@ -54,20 +56,19 @@ Tracked on every route change via `components/Analytics.tsx`.
 - optimization_passes: number of compression passes (1 or 2)
 - word_count_reduction: words removed
 
-#### credit_purchase (Future)
-**When:** User purchases Analyst plan ($19.99)  
-**Location:** Stripe webhook or checkout API  
+#### purchase
+**When:** Stripe confirms a completed checkout
+**Location:** `app/api/stripe/webhook/route.ts`
 **Parameters:**
-- value: 1999 (cents)
+- transaction_id: Stripe payment or subscription reference
+- value: amount in major currency units
 - currency: 'USD'
+- plan: single, analyst, or professional
+- items: GA4 ecommerce item array
 
-#### subscription_started (Future)
-**When:** User subscribes to Professional plan ($29/mo)  
-**Location:** Stripe webhook  
-**Parameters:**
-- value: 2900 (cents)
-- currency: 'USD'
-- recurring: true
+The checkout captures the GA client and session identifiers before redirecting to Stripe. The webhook uses those identifiers so the server-confirmed purchase remains attached to the originating acquisition session.
+
+Create the Measurement Protocol secret in the GA4 web data stream and store it only as `GA4_API_SECRET` in the server environment. Never expose this value with a `NEXT_PUBLIC_` prefix.
 
 ## Implementation Details
 

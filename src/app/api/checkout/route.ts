@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
+import { getGAIdentifiersFromCookies } from '@/lib/ga-cookies';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -27,6 +28,9 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const requestedPlan = searchParams.get('plan') || 'analyst';
     const requestedAnalysisId = searchParams.get('analysisId');
+    const cookieAnalytics = getGAIdentifiersFromCookies(request);
+    const gaClientId = searchParams.get('gaClientId')?.slice(0, 64) || cookieAnalytics.clientId || '';
+    const gaSessionId = searchParams.get('gaSessionId')?.replace(/\D/g, '').slice(0, 24) || cookieAnalytics.sessionId || '';
     const plan = ['single', 'analyst', 'professional'].includes(requestedPlan)
       ? requestedPlan
       : 'analyst';
@@ -106,7 +110,10 @@ export async function GET(request: NextRequest) {
         userId: user.id,
         plan,
         analysisId: analysisId || '',
+        gaClientId,
+        gaSessionId,
       },
+      client_reference_id: user.id,
     });
 
     if (!session.url) {

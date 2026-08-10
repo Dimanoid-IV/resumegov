@@ -8,9 +8,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com'
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: 'ResumeGov — Federal Resume Compliance for USAJOBS',
+  title: 'Federal Resume Checker for USAJOBS | ResumeGov',
   description:
-    'ResumeGov validates federal resumes against OPM\'s 2-page rule, GS-level qualification standards, and vacancy-specific language requirements. Compliance-first. No fabrication.',
+    'Check a federal resume against a USAJOBS vacancy, find missing qualification evidence, and review two-page formatting risk before you apply.',
   keywords: [
     'federal resume',
     'USAJOBS',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'ResumeGov — Federal Resume Compliance for USAJOBS',
+    title: 'Federal Resume Checker for USAJOBS | ResumeGov',
     description:
       'Validates federal resumes against the OPM 2-page rule, GS-level qualification standards, and vacancy-specific language. Built for compliance.',
     url: SITE_URL,
@@ -154,8 +154,8 @@ function Hero() {
         {/* Trust bar */}
         <div className="border-t border-slate-800 pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
-            { stat: '950–1,050', label: 'Target word range' },
-            { stat: 'Format-dependent', label: 'Final page count' },
+            { stat: 'No fixed cap', label: 'OPM word count' },
+            { stat: 'PDF-verified', label: 'Final page count' },
             { stat: 'Deterministic', label: 'Scoring model' },
             { stat: 'Protected', label: 'Required language flagged' },
           ].map(({ stat, label }) => (
@@ -180,11 +180,11 @@ function Problem() {
     },
     {
       title: 'Missing qualification language',
-      body: 'HR specialists use structured checklists. If your resume does not contain the exact qualification language from the vacancy announcement, you receive an ineligible rating before a hiring manager ever sees your application.',
+      body: 'Your resume must clearly demonstrate the qualifications in the announcement. Vague or missing evidence can prevent HR from crediting experience; reviewers are not required to infer details that are not documented.',
     },
     {
       title: 'Unverifiable time-in-grade',
-      body: 'Every position must list month/year dates and average hours per week. Missing this data prevents HR from calculating whether you meet the 52-week time-in-grade requirement — a near-automatic disqualifier.',
+      body: 'Work entries should include month/year dates and hours per week when required. Missing information can prevent HR from verifying the length or level of qualifying experience.',
     },
   ];
   return (
@@ -243,10 +243,10 @@ function TwoPageRule() {
           </div>
           <div className="space-y-3">
             {[
-              { label: 'Planning floor', value: '≈ 900 words', color: 'text-slate-500', bar: 'bg-slate-300', pct: '45%', note: 'May lack needed detail' },
-              { label: 'Planning range', value: '≈ 950–1,050', color: 'text-green-700', bar: 'bg-green-500', pct: '60%', note: 'ResumeGov estimate, not an OPM limit' },
-              { label: 'Formatting review', value: '1,051–1,100', color: 'text-amber-700', bar: 'bg-amber-400', pct: '78%', note: 'Render and verify page count' },
-              { label: 'High overflow risk', value: '> 1,100 words', color: 'text-red-700', bar: 'bg-red-500', pct: '100%', note: 'Formatting determines final pages' },
+              { label: 'Page limit', value: '2 pages or less', color: 'text-green-700', bar: 'bg-green-500', pct: '100%', note: 'Verify the final rendered document' },
+              { label: 'Employment dates', value: 'Month / year', color: 'text-blue-700', bar: 'bg-blue-500', pct: '100%', note: 'Show the duration of relevant experience' },
+              { label: 'Work schedule', value: 'Hours / week', color: 'text-blue-700', bar: 'bg-blue-500', pct: '100%', note: 'Include when required by the announcement' },
+              { label: 'Qualifications', value: 'Vacancy-specific', color: 'text-amber-700', bar: 'bg-amber-400', pct: '100%', note: 'Document evidence instead of copying requirements' },
             ].map((item) => (
               <div key={item.label} className="bg-white border border-slate-200 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
@@ -307,7 +307,7 @@ function ScoringSystem() {
     {
       weight: '20%',
       label: 'Compliance Score',
-      desc: 'Checks for mandatory federal formatting elements: month/year dates, hours per week, supervisor information, pay rate, and citizenship indicators.',
+      desc: 'Checks common federal application details such as month/year dates, hours per week, and other fields requested by the vacancy announcement.',
       max: 20,
     },
     {
@@ -324,7 +324,7 @@ function ScoringSystem() {
           <p className="text-xs font-mono text-blue-700 uppercase tracking-widest mb-3">Scoring methodology</p>
           <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Structured scoring. Four components.</h2>
           <p className="mt-4 text-slate-500 max-w-xl">
-            The compatibility score is a weighted composite of four independently measured components, each mapped to the OPM HR evaluation process.
+            The compatibility score is ResumeGov&apos;s internal decision-support model. It helps organize evidence but is not an OPM rating or a guarantee of eligibility or referral.
           </p>
           <div className="mt-4 inline-block border border-slate-200 rounded px-3 py-1.5">
             <code className="text-sm text-slate-700 font-mono">
@@ -391,6 +391,54 @@ function Solution() {
               <p className="text-sm text-slate-500 leading-relaxed">{s.body}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SampleReport() {
+  const checks = [
+    { label: 'Specialized experience', result: '2 requirements need clearer evidence', tone: 'text-amber-700 bg-amber-50' },
+    { label: 'Employment details', result: 'Hours per week missing in one role', tone: 'text-red-700 bg-red-50' },
+    { label: 'Vacancy alignment', result: '6 of 9 requirements supported', tone: 'text-blue-700 bg-blue-50' },
+    { label: 'Two-page risk', result: 'Render the final PDF to verify', tone: 'text-slate-700 bg-slate-100' },
+  ];
+
+  return (
+    <section className="bg-white py-20 border-b border-slate-200">
+      <div className="max-w-5xl mx-auto px-6 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p className="text-xs font-mono text-blue-700 uppercase tracking-widest mb-3">Illustrative report</p>
+          <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-4">See the gaps before you create an account.</h2>
+          <p className="text-slate-500 leading-relaxed mb-6">
+            A free analysis compares documented experience with one vacancy announcement. It highlights evidence to clarify; it does not invent facts or predict an agency decision.
+          </p>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <Link href="/start" data-gtm-event="sample_report_cta_click" className="px-5 py-3 rounded bg-slate-900 text-white font-semibold hover:bg-slate-800">
+              Check My Resume Free
+            </Link>
+            <Link href="/guides/usajobs-resume-requirements" className="px-5 py-3 rounded border border-slate-300 text-slate-700 font-semibold hover:bg-slate-50">
+              Review USAJOBS Requirements
+            </Link>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400">Sample compatibility review</p>
+              <p className="font-semibold text-slate-900 mt-1">Program Analyst · GS-12</p>
+            </div>
+            <span className="rounded bg-white border border-slate-200 px-2 py-1 text-xs text-slate-500">Example only</span>
+          </div>
+          <div className="space-y-3">
+            {checks.map(check => (
+              <div key={check.label} className="rounded-lg border border-slate-200 bg-white p-4">
+                <p className="text-sm font-medium text-slate-900">{check.label}</p>
+                <p className={`inline-block rounded px-2 py-1 text-xs mt-2 ${check.tone}`}>{check.result}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -670,6 +718,7 @@ export default function Home() {
       <TwoPageRule />
       <ScoringSystem />
       <Solution />
+      <SampleReport />
       <ComparisonTable />
       <Pricing />
       <FAQ />
