@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['pdf-parse', '@napi-rs/canvas'],
+
   // ── Canonical domain redirect ─────────────────────────────────────────────
   // Redirect bare domain → www (301 permanent, SEO-safe)
   async redirects() {

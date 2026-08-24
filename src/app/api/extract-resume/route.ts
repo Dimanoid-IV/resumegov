@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mammoth from 'mammoth';
+import { CanvasFactory } from 'pdf-parse/worker';
 import { PDFParse } from 'pdf-parse';
 
 export const runtime = 'nodejs';
@@ -73,7 +74,7 @@ export async function POST(request: NextRequest) {
       const result = await mammoth.extractRawText({ buffer: Buffer.from(bytes) });
       text = result.value;
     } else {
-      const parser = new PDFParse({ data: bytes });
+      const parser = new PDFParse({ data: bytes, CanvasFactory });
       try {
         const result = await parser.getText();
         text = result.text;
