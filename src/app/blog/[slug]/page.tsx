@@ -9,6 +9,25 @@ import SiteFooter from '@/components/SiteFooter';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com';
 const PUBLISHER_NAME = 'ResumeGov';
 
+const CTA_COPY: Record<string, { headline: string; subtext: string }> = {
+  'specialized-experience-examples-federal-resume': {
+    headline: 'Does Your Resume Prove the Required Specialized Experience?',
+    subtext: 'Add your resume and one vacancy first. ResumeGov checks whether your dates, scope, duties, and results document the target requirement.',
+  },
+  'merit-hiring-plan-four-essay-questions': {
+    headline: 'Do Your Resume and Hiring Essays Use Consistent Evidence?',
+    subtext: 'Compare your resume with the vacancy before drafting final answers, so the same verified accomplishments support both.',
+  },
+  'federal-time-in-grade-rules': {
+    headline: 'Can HR Verify Your Grade, Dates, and Experience?',
+    subtext: 'Check whether your resume makes time-in-grade details and vacancy-specific experience easy to locate.',
+  },
+  'how-hr-screens-federal-resumes': {
+    headline: 'See What an Initial Resume Screen May Miss',
+    subtext: 'Compare the evidence in your resume with one vacancy and identify qualification gaps before you submit.',
+  },
+};
+
 // ─── Static Params ────────────────────────────────────────────────────────────
 
 export function generateStaticParams() {
@@ -206,6 +225,7 @@ export default async function BlogArticlePage({
   const allPosts = getAllPosts();
   const prevPost = allPosts.find((_, i) => allPosts[i + 1]?.slug === slug) ?? null;
   const nextPost = allPosts.find((_, i) => allPosts[i - 1]?.slug === slug) ?? null;
+  const ctaCopy = CTA_COPY[slug];
 
   return (
     <>
@@ -313,7 +333,12 @@ export default async function BlogArticlePage({
           </div>
 
           {/* Inline CTA (mid-article) */}
-          <BlogCTA variant="inline" />
+          <BlogCTA
+            variant="inline"
+            source={`blog:${slug}:inline`}
+            headline={ctaCopy?.headline}
+            subtext={ctaCopy?.subtext}
+          />
 
           {/* Article HTML content */}
           <article
@@ -327,8 +352,9 @@ export default async function BlogArticlePage({
           {/* Bottom CTA */}
           <BlogCTA
             variant="bottom"
-            headline="Check Your Federal Resume — Right Now"
-            subtext={`Apply what you just read. Our AI checks every requirement covered in this article — word count, qualification language, GS compatibility — in under 30 seconds.`}
+            source={`blog:${slug}:bottom`}
+            headline={ctaCopy?.headline ?? 'Apply This Guidance to Your Own Resume'}
+            subtext={ctaCopy?.subtext ?? 'Add your resume and one USAJOBS vacancy. ResumeGov checks documented experience, qualification language, and missing application evidence.'}
           />
 
           {/* Prev / Next navigation */}

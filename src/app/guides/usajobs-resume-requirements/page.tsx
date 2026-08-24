@@ -105,8 +105,8 @@ export default function USAJOBSResumeRequirementsPage() {
 
           <section className="mt-14 rounded-xl bg-slate-50 border border-slate-200 p-7">
             <h2 className="text-2xl font-bold text-slate-900">Check your resume against one vacancy</h2>
-            <p className="mt-3 text-slate-600 max-w-2xl">ResumeGov compares documented experience with the announcement, identifies missing evidence, and flags two-page formatting risk. It does not invent qualifications or guarantee an agency outcome.</p>
-            <Link href="/start" data-gtm-event="requirements_cta_click" className="inline-flex mt-5 rounded bg-slate-900 text-white font-semibold px-5 py-3 hover:bg-slate-800">Check My Resume Free</Link>
+            <p className="mt-3 text-slate-600 max-w-2xl">Add your resume and one vacancy before entering an email. ResumeGov first verifies that both contain enough information for a useful comparison, then identifies missing evidence and two-page formatting risk.</p>
+            <Link href="/start?source=guide:requirements" data-gtm-event="requirements_cta_click" data-cta-context="guide:requirements" className="inline-flex mt-5 rounded bg-slate-900 text-white font-semibold px-5 py-3 hover:bg-slate-800">Check My Resume Free</Link>
           </section>
 
           <section className="mt-14">

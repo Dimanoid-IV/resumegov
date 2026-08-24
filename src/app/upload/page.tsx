@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/gtag';
+import { clearAnalysisDraft, loadAnalysisDraft } from '@/lib/analysis-draft';
 
 const FREE_LIMIT = 3;
 const MIN_RESUME_WORDS = 100;
@@ -47,6 +48,13 @@ export default function UploadPage() {
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const uploadStartedRef = useRef(false);
+
+  function markUploadStarted(input: 'resume' | 'vacancy' | 'file') {
+    if (uploadStartedRef.current) return;
+    uploadStartedRef.current = true;
+    trackEvent({ eventName: 'upload_started', input });
+  }
 
   // Auth + profile check
   useEffect(() => {
@@ -56,6 +64,28 @@ export default function UploadPage() {
         router.replace('/start');
         return;
       }
+
+      const draft = loadAnalysisDraft();
+      if (draft) {
+        setResumeText(draft.resumeText);
+        setJobText(draft.jobText);
+        setJobUrl(draft.jobUrl ?? '');
+        setUploadedFileName(draft.uploadedFileName ?? '');
+        uploadStartedRef.current = true;
+        trackEvent({
+          eventName: 'analysis_draft_restored',
+          source: draft.source ?? 'unknown',
+          resume_word_count: wordCount(draft.resumeText),
+          vacancy_word_count: wordCount(draft.jobText),
+        });
+        clearAnalysisDraft();
+      }
+
+      if (new URLSearchParams(window.location.search).get('auth') === 'success') {
+        trackEvent({ eventName: 'auth_callback_success' });
+        window.history.replaceState({}, '', '/upload');
+      }
+
       supabase
         .from('users')
         .select('free_analysis_count, plan_type')
@@ -75,6 +105,7 @@ export default function UploadPage() {
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+    markUploadStarted('file');
     if (!/\.(pdf|docx|txt)$/i.test(file.name)) {
       setError('Supported formats: PDF, DOCX, and TXT.');
       e.target.value = '';
@@ -137,6 +168,7 @@ export default function UploadPage() {
     }
 
     trackEvent({ eventName: 'resume_analysis_submit' });
+    trackEvent({ eventName: 'resume_analysis_started' });
 
     setLoading(true);
 
@@ -199,7 +231,7 @@ export default function UploadPage() {
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-3xl mx-auto px-6 py-3">
           <ol className="flex items-center gap-2 text-xs text-slate-400">
-            <li className="text-slate-400">Email</li>
+            <li className="text-slate-400">Prepare</li>
             <li className="text-slate-300">›</li>
             <li className="font-semibold text-slate-900">Upload</li>
             <li className="text-slate-300">›</li>
@@ -293,20 +325,18 @@ export default function UploadPage() {
                   required
                   aria-describedby={error ? 'resume-guidance analysis-error' : 'resume-guidance'}
                   value={resumeText}
-                  onChange={e => setResumeText(e.target.value)}
+                  onChange={e => { markUploadStarted('resume'); setResumeText(e.target.value); }}
                   rows={14}
                   placeholder="Upload your PDF/DOCX above or paste the full resume text here."
                   className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"
                 />
                 <div className="flex justify-between mt-2 text-sm text-slate-400">
                   <span id="resume-guidance">
-                    Planning guide: about 950–1,050 words. Verify the rendered PDF is no more than 2 pages.
+                    Include only relevant evidence, then verify the rendered PDF is no more than 2 pages.
                   </span>
                   {resumeText && (
                     <span className={
-                      wordCount(resumeText) > 1100 ? 'text-red-600 font-semibold' :
-                      wordCount(resumeText) > 1050 ? 'text-amber-600 font-semibold' :
-                      'text-green-600'
+                      wordCount(resumeText) >= MIN_RESUME_WORDS ? 'text-green-600' : 'text-slate-400'
                     }>
                       {wordCount(resumeText)} words
                     </span>
@@ -331,7 +361,7 @@ export default function UploadPage() {
                     name="jobUrl"
                     type="url"
                     value={jobUrl}
-                    onChange={e => setJobUrl(e.target.value)}
+                    onChange={e => { markUploadStarted('vacancy'); setJobUrl(e.target.value); }}
                     placeholder="https://www.usajobs.gov/job/..."
                     className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-300"
                   />
@@ -342,7 +372,7 @@ export default function UploadPage() {
                   name="jobText"
                   required
                   value={jobText}
-                  onChange={e => setJobText(e.target.value)}
+                  onChange={e => { markUploadStarted('vacancy'); setJobText(e.target.value); }}
                   rows={10}
                   placeholder="Paste the full vacancy announcement text from USAJOBS. Include the qualifications, specialized experience, and required elements sections."
                   className="w-full text-base text-slate-700 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-y placeholder:text-slate-300"

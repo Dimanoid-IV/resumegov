@@ -1,17 +1,22 @@
-// BlogCTA — server component, no interactivity needed
+import Link from 'next/link';
 
 interface BlogCTAProps {
   variant?: 'inline' | 'bottom';
   headline?: string;
   subtext?: string;
+  source?: string;
+  buttonLabel?: string;
 }
 
 export default function BlogCTA({
   variant = 'inline',
   headline = 'Does Your Resume Prove the Vacancy Requirements?',
   subtext = 'Compare your documented experience with the announcement and find missing qualification evidence — free.',
+  source = 'blog',
+  buttonLabel = 'Check My Resume Free',
 }: BlogCTAProps) {
   const isBottom = variant === 'bottom';
+  const href = `/start?source=${encodeURIComponent(source)}`;
 
   return (
     <div
@@ -54,26 +59,26 @@ export default function BlogCTA({
         </div>
 
         {/* Button */}
-        <a
-          href="/start"
+        <Link
+          href={href}
           data-gtm-event="blog_cta_click"
+          data-cta-context={source}
           className={`flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors whitespace-nowrap ${
             isBottom
               ? 'bg-white text-blue-700 hover:bg-blue-50'
               : 'bg-blue-600 text-white hover:bg-blue-700'
           }`}
         >
-          Analyze My Resume
+          {buttonLabel}
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </a>
+        </Link>
       </div>
 
       {/* Compliance badges */}
       <div className={`flex flex-wrap gap-3 mt-4 pt-4 border-t ${isBottom ? 'border-white/20' : 'border-blue-200'}`}>
         {[
-          '✓ 2-page limit verified',
           '✓ Two-page formatting risk',
           '✓ Qualification language check',
           '✓ GS level compatibility',

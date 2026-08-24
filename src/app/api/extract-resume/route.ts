@@ -1,11 +1,29 @@
-import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { NextRequest, NextResponse } from 'next/server';
 import mammoth from 'mammoth';
 import { PDFParse } from 'pdf-parse';
 
 export const runtime = 'nodejs';
 
 const MAX_FILE_BYTES = 6 * 1024 * 1024;
+const EXTRACTION_WINDOW_MS = 60 * 1000;
+const EXTRACTIONS_PER_WINDOW = 5;
+const extractionAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function allowExtraction(request: NextRequest): boolean {
+  const forwarded = request.headers.get('x-forwarded-for');
+  const clientKey = forwarded?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || 'unknown';
+  const now = Date.now();
+  const existing = extractionAttempts.get(clientKey);
+
+  if (!existing || existing.resetAt <= now) {
+    extractionAttempts.set(clientKey, { count: 1, resetAt: now + EXTRACTION_WINDOW_MS });
+    return true;
+  }
+  if (existing.count >= EXTRACTIONS_PER_WINDOW) return false;
+
+  existing.count += 1;
+  return true;
+}
 
 function extension(name: string): string {
   return name.toLowerCase().split('.').pop() || '';
@@ -19,11 +37,16 @@ function cleanExtractedText(value: string): string {
     .trim();
 }
 
-export async function POST(request: Request) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+export async function POST(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  if (origin && origin !== request.nextUrl.origin) {
+    return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 });
+  }
+  if (!allowExtraction(request)) {
+    return NextResponse.json(
+      { error: 'Too many files were submitted. Wait one minute and try again.' },
+      { status: 429 },
+    );
   }
 
   try {

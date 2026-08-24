@@ -20,6 +20,7 @@ export default function GTMClickTracker() {
         eventName,
         element_text: el.textContent?.trim(),
         element_href: (el as HTMLAnchorElement).href || undefined,
+        cta_context: el.getAttribute('data-cta-context') || undefined,
       });
     }
 

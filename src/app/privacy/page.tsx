@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 const sections = [
   ['Information we process', [
     'We process the name and email address you use to create or access your account, the resume and vacancy-announcement text you submit, analysis and optimization results, and basic account and usage records.',
+    'When you prepare an analysis before signing in, the draft text is temporarily stored in your browser and is available for restoration for 60 minutes after the email sign-in link is requested. ResumeGov removes the draft after restoration; an expired draft is removed the next time this site checks it. Uploaded files are processed to extract text and are not retained by the extraction endpoint.',
     'Federal resumes can contain sensitive personal information. Remove Social Security numbers, dates of birth, photographs, and any information that is not needed for the analysis before submitting text.',
   ]],
   ['How we use information', [
