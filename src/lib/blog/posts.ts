@@ -40,6 +40,159 @@ export function getRelatedPosts(slugs: string[]): BlogPost[] {
 const POSTS: BlogPost[] = [
 
   {
+    slug: 'federal-hiring-assessment-screening-questions',
+    title: 'Federal Hiring Assessments: How to Answer Screening Questions',
+    seoTitle: 'Federal Hiring Assessments and Screening Questions',
+    description: 'Understand federal occupational questionnaires and assessments, and make your screening answers consistent with your resume evidence.',
+    date: '2026-09-22',
+    readingTime: 7,
+    author: 'ResumeGov Editorial Team',
+    tags: ['federal hiring assessment', 'screening questions', 'occupational questionnaire', 'USA Hire', 'USAJOBS'],
+    relatedSlugs: ['usa-hire-assessment-preparation-2026', 'how-hr-screens-federal-resumes', 'merit-hiring-plan-four-essay-questions'],
+    faqs: [
+      {
+        question: 'How should I answer federal government screening questions?',
+        answer: 'Select the highest response level you can truthfully support with specific work documented in your resume. Read each level carefully and keep your application materials consistent.',
+      },
+      {
+        question: 'Is a USA Hire assessment the same as a questionnaire?',
+        answer: 'No. Occupational questionnaires often collect eligibility and self-reported qualification information; USA Hire provides online assessments of competencies. The vacancy explains which methods apply.',
+      },
+      {
+        question: 'Can an agency compare my answers with my resume?',
+        answer: 'Yes. Applicants should be prepared to support questionnaire responses with duties, scope, dates, and results in their resume and other application materials.',
+      },
+    ],
+    content: `
+<h2>What happens after you click Apply</h2>
+<p>A federal vacancy may ask eligibility questions, use an occupational questionnaire, and require a separate assessment. OPM describes occupational questionnaires as a way to assess competencies and collect information related to minimum qualifications. Agencies may also use structured interviews, work samples, job-knowledge tests, or USA Hire. Read “How you will be evaluated” and the instructions in the actual application before you begin.</p>
+
+<h2>Answer each screening question with evidence</h2>
+<ol>
+  <li><strong>Read every response level.</strong> “Assisted,” “performed independently,” and “served as an expert” describe different levels of responsibility.</li>
+  <li><strong>Choose the highest truthful level.</strong> Do not select an answer merely because you expect it to score better.</li>
+  <li><strong>Find support in your resume.</strong> Identify the role, dates, task, scope, and outcome that justify the answer.</li>
+  <li><strong>Reconcile the whole application.</strong> Your resume, questionnaire, required documents, and interview examples should tell the same factual story.</li>
+</ol>
+<p>For example, if you select “independently analyzed program performance,” a resume line that only says “helped with reports” gives little support. Add a truthful description of the data, method, responsibility, and resulting work product if you performed it. Never invent responsibilities or numbers.</p>
+
+<h2>Keep a short evidence map</h2>
+<table><thead><tr><th>Question theme</th><th>Resume evidence to locate</th></tr></thead><tbody><tr><td>Program analysis</td><td>Data analyzed, method, scale, recommendation, result</td></tr><tr><td>Written communication</td><td>Document type, audience, purpose, decision supported</td></tr><tr><td>Technical skill</td><td>Tool or regulation used in a specific project, not only a skills list</td></tr></tbody></table>
+
+<h2>Questionnaire, USA Hire, and essay prompts</h2>
+<p>A self-reported questionnaire is different from a timed skills assessment. USA Hire can assess general or technical competencies and may send a separate invitation and deadline. See our <a href="/blog/usa-hire-assessment-preparation-2026">USA Hire preparation guide</a>. If the application includes Merit Hiring Plan essays, read the <a href="/blog/merit-hiring-plan-four-essay-questions">essay prompt guide</a>; those prompts serve a different purpose from qualification evidence.</p>
+
+<h2>Before submitting</h2>
+<p>Check the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume requirements</a>, review our <a href="/federal-resume-examples">federal resume examples</a>, and <a href="/start">compare your resume with the target announcement</a>. This can highlight unsupported experience claims, but it does not choose questionnaire answers or guarantee a hiring outcome.</p>
+<h2>Official sources</h2>
+<ul><li><a href="https://www.opm.gov/policy-data-oversight/assessment-and-selection/occupational-questionnaires/">OPM Occupational Questionnaires</a></li><li><a href="https://www.opm.gov/agency-services/talent-systems/usa-hire/">OPM USA Hire</a></li></ul>
+<p><em>Reviewed September 22, 2026. Follow the exact vacancy instructions and deadlines.</em></p>
+`,
+  },
+
+  {
+    slug: 'gs-level-requirements-gs-5-through-gs-12',
+    title: 'GS Level Requirements: Experience and Education for GS-5 Through GS-12',
+    seoTitle: 'GS-5 to GS-12 Experience and Education Requirements',
+    description: 'Compare common GS-5, GS-7, GS-9, GS-11 and GS-12 qualification paths and learn how to document grade-equivalent experience.',
+    date: '2026-09-22',
+    readingTime: 8,
+    author: 'ResumeGov Editorial Team',
+    tags: ['GS level requirements', 'GS-12 requirements', 'GS-11 qualifications', 'GS-9 requirements', 'USAJOBS'],
+    relatedSlugs: ['how-to-target-gs-pay-grades', 'specialized-experience-examples-federal-resume', 'gs-12-resume-example'],
+    faqs: [
+      {
+        question: 'What experience is commonly required for GS-12?',
+        answer: 'Under the general administrative and management standard, GS-12 commonly requires one year of specialized experience equivalent to GS-11. Check the individual occupational standard and announcement for the applicable requirement.',
+      },
+      {
+        question: 'Can graduate education qualify an applicant for GS-9?',
+        answer: 'Some occupations permit a related master’s degree or two years of progressively higher graduate education as an alternative to experience at GS-9. The vacancy must allow that path.',
+      },
+      {
+        question: 'What does lowest grade mean on USAJOBS?',
+        answer: 'In a multi-grade announcement, the lowest grade selected is the lowest level at which you ask to be considered. Select only grades whose requirements you can document.',
+      },
+    ],
+    content: `
+<h2>Start with the occupational series</h2>
+<p>A GS grade describes pay and responsibility, but qualification rules vary by occupation. The table is an orientation based on OPM's general administrative and management standard. It does not override an individual occupational requirement or the wording of a USAJOBS announcement.</p>
+<table><thead><tr><th>Grade</th><th>Common experience path</th><th>Education path when permitted</th></tr></thead><tbody>
+<tr><td>GS-5</td><td>Three years of progressively responsible general experience, including one year equivalent to GS-4</td><td>Four-year course of study leading to a bachelor's degree</td></tr>
+<tr><td>GS-7</td><td>One year of specialized experience equivalent to GS-5</td><td>One year of related graduate education or superior academic achievement</td></tr>
+<tr><td>GS-9</td><td>One year of specialized experience equivalent to GS-7</td><td>Related master's degree or two years of graduate education</td></tr>
+<tr><td>GS-11</td><td>One year of specialized experience equivalent to GS-9</td><td>Related doctorate or three years of graduate education</td></tr>
+<tr><td>GS-12</td><td>One year of specialized experience equivalent to GS-11</td><td>No education substitution under this general standard</td></tr>
+</tbody></table>
+<p>These are common routes under one standard. Some occupations require a particular degree, coursework, credential, or different experience description. Read the specific vacancy before deciding which grade to select.</p>
+
+<h2>How to prove equivalent experience</h2>
+<p>Private-sector, military, nonprofit, state, local, and volunteer work can be relevant. A self-assigned label such as “GS-11 equivalent” is not enough. Give HR the underlying evidence: what you did, how independently you did it, the complexity and scale, and how long you did it. Include month/year dates and average hours per week. Match the announcement's specialized-experience statement with real examples from your work history.</p>
+
+<h2>For GS-12 applicants</h2>
+<p>Do not simply list a senior title or repeat “one year of GS-11 equivalent experience.” Show the particular duties in the GS-12 announcement and support each one with a position, a time period, and a concrete work product. The <a href="/blog/gs-12-resume-example">GS-12 resume example</a> illustrates how to present scope and outcomes. The <a href="/blog/how-to-target-gs-pay-grades">grade-targeting guide</a> explains how to map requirements to resume entries.</p>
+
+<h2>Check your application evidence</h2>
+<p>Read the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a> and compare formats in our <a href="/federal-resume-examples">federal resume examples</a>. You can <a href="/start">check your resume against one target announcement</a> to find evidence gaps. The tool cannot determine eligibility or guarantee referral.</p>
+<h2>Official source</h2>
+<ul><li><a href="https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/">OPM General Schedule qualification standards</a></li></ul>
+<p><em>Reviewed September 22, 2026. Verify the applicable series and announcement.</em></p>
+`,
+  },
+
+  {
+    slug: 'general-experience-vs-specialized-experience',
+    title: 'General Experience vs. Specialized Experience for Federal Jobs',
+    seoTitle: 'General vs Specialized Experience for Federal Jobs',
+    description: 'Understand general and specialized experience on USAJOBS, when each applies, and how to document qualifying work in a federal resume.',
+    date: '2026-09-22',
+    readingTime: 7,
+    author: 'ResumeGov Editorial Team',
+    tags: ['general experience', 'specialized experience', 'USAJOBS', 'federal qualifications'],
+    relatedSlugs: ['specialized-experience-examples-federal-resume', 'how-to-target-gs-pay-grades', 'federal-resume-keywords'],
+    faqs: [
+      {
+        question: 'What is general experience for a federal job?',
+        answer: 'General experience is progressively responsible work that demonstrates transferable abilities such as analyzing problems, planning work, and communicating. The applicable standard depends on the occupation and vacancy.',
+      },
+      {
+        question: 'What is specialized experience?',
+        answer: 'Specialized experience is work directly related to the position that equipped an applicant with the knowledge, skills, and abilities to perform it. The announcement describes the duties and grade level required.',
+      },
+      {
+        question: 'Can private-sector or volunteer experience count?',
+        answer: 'It can count when the duties, level, and duration satisfy the published qualification standard. Federal job titles are not required, but the work must be documented clearly.',
+      },
+    ],
+    content: `
+<h2>The difference in one sentence</h2>
+<p><strong>General experience</strong> demonstrates broad, progressively responsible abilities. <strong>Specialized experience</strong> demonstrates work closely related to the duties of a particular position. Read the exact Qualifications section of the vacancy to find out which one you need.</p>
+
+<h2>When each type matters</h2>
+<p>OPM's general administrative and management qualification standard describes general experience as work showing the ability to analyze problems, plan and organize work, and communicate. Specialized experience adds a job-specific requirement. For many GS-7 and higher positions, the applicant needs one year of specialized experience equivalent to the next lower grade. Individual occupational standards can differ, and some grades permit education or a combination of education and experience.</p>
+<table><thead><tr><th>Type</th><th>Question the resume must answer</th><th>Useful evidence</th></tr></thead><tbody><tr><td>General</td><td>Can you handle progressively responsible work?</td><td>Problems solved, work planned, decisions made, communication delivered</td></tr><tr><td>Specialized</td><td>Have you performed the specific functions required here?</td><td>Relevant duties, methods, scale, responsibility, results, dates, hours per week</td></tr></tbody></table>
+
+<h2>How to document experience in two pages</h2>
+<ol>
+  <li>Copy each required experience statement from the vacancy into a private checklist.</li>
+  <li>Map every requirement you actually meet to a role and date range.</li>
+  <li>Describe your action, the subject matter, scope, and outcome. Use the vacancy's terms where they truthfully describe your work.</li>
+  <li>Include the employer, position title, month/year dates, and average hours per week needed to verify duration.</li>
+  <li>Remove unrelated history if it crowds out required evidence; check the final rendered resume against the applicable page limit.</li>
+</ol>
+
+<h2>Illustrative example</h2>
+<p><strong>Vague:</strong> “Helped manage program reports.” <strong>Clearer:</strong> “Analyzed monthly reporting data for a grant program, identified recurring variances, and presented corrective-action recommendations to the program manager.” This is an invented illustration of structure, not a claim about a real applicant or a guarantee of qualification. Replace it with your own documented work.</p>
+
+<h2>What to do next</h2>
+<p>Compare your draft with our <a href="/federal-resume-examples">federal resume examples</a> and <a href="/blog/specialized-experience-examples-federal-resume">grade-specific experience examples</a>. Read the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a> and the announcement's requirements. Then <a href="/start">check your resume against that vacancy</a> before applying.</p>
+<h2>Official sources</h2>
+<ul><li><a href="https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/">OPM General Schedule qualification standards</a></li><li><a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume guidance</a></li></ul>
+<p><em>Reviewed September 22, 2026. The individual vacancy announcement controls.</em></p>
+`,
+  },
+
+  {
     slug: 'how-to-read-usajobs-job-announcement-2026',
     title: 'How to Read a USAJOBS Job Announcement: Section-by-Section Guide',
     seoTitle: 'How to Read a USAJOBS Job Announcement',
@@ -293,6 +446,7 @@ const POSTS: BlogPost[] = [
     description:
       'Learn what the four Merit Hiring Plan essay prompts are designed to show, how agencies use the responses, and how to write concise, authentic answers.',
     date: '2026-08-06',
+    updatedDate: '2026-09-22',
     readingTime: 10,
     author: 'ResumeGov Editorial Team',
     tags: ['Merit Hiring Plan essays', 'federal application questions', 'USAJOBS', 'public service', 'federal hiring'],
@@ -395,7 +549,8 @@ const POSTS: BlogPost[] = [
 </ul>
 
 <h2>Where the essays fit in the full application</h2>
-<p>The essays do not replace the qualification evidence in your resume. Read the <a href="/blog/how-to-read-usajobs-job-announcement-2026">complete job announcement</a>, tailor your <a href="/blog/federal-resume-writing-guide-2026">two-page federal resume</a>, attach the required documents, and complete any assessment. You can then use <a href="/start">ResumeGov to check resume-to-announcement alignment</a>; the service does not evaluate political views or guarantee selection.</p>
+<p>The essays do not replace the qualification evidence in your resume. Read the <a href="/blog/how-to-read-usajobs-job-announcement-2026">complete job announcement</a>, tailor your <a href="/blog/federal-resume-writing-guide-2026">two-page federal resume</a>, compare it with our <a href="/federal-resume-examples">federal resume examples</a>, attach the required documents, and complete any assessment. You can then use <a href="/start">ResumeGov to check resume-to-announcement alignment</a>; the service does not evaluate political views or guarantee selection.</p>
+<p>For the current resume rules, review the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a>.</p>
 
 <h2>Official sources</h2>
 <ul>
@@ -940,10 +1095,12 @@ const POSTS: BlogPost[] = [
     description:
       'GS-5 through GS-15 each require different specialized experience. Learn how OPM evaluates your qualifications and how to write a resume that passes HR screening at every grade level.',
     date: '2025-08-15',
+    updatedDate: '2026-09-22',
     readingTime: 6,
     author: 'ResumeGov Editorial Team',
     tags: ['GS levels', 'OPM qualifications', 'specialized experience', 'USAJOBS', 'pay grade'],
     relatedSlugs: [
+      'gs-level-requirements-gs-5-through-gs-12',
       'federal-resume-2-page-limit-2025',
       'ksa-statements-complete-guide',
       'top-10-federal-resume-mistakes',
@@ -974,10 +1131,11 @@ const POSTS: BlogPost[] = [
 <h2>The GS Pay Scale: A Quick Orientation</h2>
 <p>The General Schedule (GS) pay system covers more than 1.5 million federal white-collar positions across 15 grade levels. Your resume must demonstrate eligibility for the <em>specific</em> grade level advertised — not just general competence. This is a binary determination: you either meet the qualification standard or you don't, and HR makes this call before any hiring manager sees your application.</p>
 <p>Understanding what OPM looks for at each grade level is the foundation of a successful federal application.</p>
+<p>For a compact comparison of GS-5 through GS-12 qualification paths, read our <a href="/blog/gs-level-requirements-gs-5-through-gs-12">GS level requirements guide</a>. The individual occupational standard and vacancy announcement control.</p>
 
 <h2>Grade Level Breakdown: What OPM Requires</h2>
 <h3>GS-5 through GS-7: Entry and Developmental Levels</h3>
-<p>At these levels, education often substitutes for experience. A bachelor's degree with a 3.0 GPA or a degree in a related field may satisfy the qualification standard. Work experience requirements focus on <em>general experience</em> rather than specialized experience, though any directly relevant work should still be prominently featured.</p>
+<p>Qualification paths vary by occupation and grade. Under OPM's general administrative and management standard, GS-5 may be reached through qualifying general experience or a bachelor's degree. GS-7 commonly requires specialized experience equivalent to GS-5, related graduate education, superior academic achievement, or an allowed combination. Check the announcement before choosing a grade.</p>
 
 <h3>GS-9 through GS-11: Journeyman Levels</h3>
 <p>These positions require either a master's degree/two years of graduate education <em>or</em> at least one year of specialized experience equivalent to the next lower grade. At GS-11, a Ph.D. or equivalent doctoral degree may substitute. Your resume must clearly show the nexus between your work and the specific duties in the vacancy announcement.</p>
@@ -1004,6 +1162,7 @@ const POSTS: BlogPost[] = [
 
 <h2>Matching Your Resume to the Specific Announcement</h2>
 <p>No two vacancy announcements are identical, even for positions with the same title and grade. Always tailor your resume to the specific announcement. Our compatibility scoring engine analyzes your resume against the exact qualification requirements in a target announcement, identifying gaps and suggesting specific language improvements before you apply.</p>
+<p>Review the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a>, compare your structure with our <a href="/federal-resume-examples">federal resume examples</a>, and <a href="/start">check your resume against the target announcement</a>.</p>
 `,
   },
 
@@ -1291,12 +1450,12 @@ const POSTS: BlogPost[] = [
 <p>Specialized experience is defined as experience that equipped the applicant with the particular knowledge, skills, and abilities to perform successfully in the duties of the target position at the required grade level. This is not a general assessment of capability — it is a documentation review. The resume must contain language that explicitly demonstrates the required experience using terminology traceable to the announcement.</p>
 <p>A common failure pattern: a financial analyst who managed agency budgets may possess the requisite skills for a GS-12 Budget Analyst position yet receive an Ineligible rating because the resume states “monitored spending” while the vacancy announcement requires “experience analyzing financial data using automated accounting systems to support budget formulation and justification.” The connection is not traceable. The requirement is treated as unmet.</p>
 <p>Grade-level equivalency is also a factor. The resume must demonstrate that the documented experience was performed at a complexity and scope consistent with the next lower GS grade. A GS-11 experience claim requires evidence of independent judgment, cross-organizational scope, and substantive technical output — not entry-level or developmental work supervised by a higher-grade employee.</p>
-<p>For practical guidance on structuring resume bullets to align with grade-level qualification language, see our article on <a href="/blog/how-to-target-gs-pay-grade-requirements-in-your-federal-resume">How to Target GS Pay Grade Requirements in Your Federal Resume</a>.</p>
+<p>For practical guidance on structuring resume bullets to align with grade-level qualification language, see our article on <a href="/blog/how-to-target-gs-pay-grades">How to Target GS Pay Grade Requirements in Your Federal Resume</a>.</p>
 
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
   <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check Your Resume Before HR Does</p>
   <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">ResumeGov analyzes compliance signals including word count limits, qualification alignment, and GS-level compatibility.</p>
-  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+  <a href="/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
 </div>
 
 <h2>Step 3 — 52-Week Time-in-Grade Verification</h2>
@@ -1446,7 +1605,7 @@ const POSTS: BlogPost[] = [
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
   <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Verify Your Time-in-Grade Compliance</p>
   <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">Confirm that your resume contains the date format and employment documentation required for time-in-grade verification before HR reviews your application.</p>
-  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Run Compliance Check — Free</a>
+  <a href="/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Run Compliance Check — Free</a>
 </div>
 
 <h2>What Happens If You Don\'t Meet the 52-Week Requirement?</h2>
@@ -1482,12 +1641,14 @@ const POSTS: BlogPost[] = [
     slug: 'specialized-experience-examples-federal-resume',
     title: 'Specialized Experience Examples for GS-7, GS-9, and GS-12 Federal Resumes',
     description:
-      'See real examples of specialized experience for GS-7, GS-9, and GS-12 roles and learn how HR evaluates qualification language.',
+      'See illustrative specialized experience statements for GS-7, GS-9, and GS-12 roles and learn how to document qualifying work.',
     date: '2026-01-25',
+    updatedDate: '2026-09-22',
     readingTime: 9,
     author: 'ResumeGov Editorial Team',
     tags: ['specialized experience', 'GS-7', 'GS-9', 'GS-12', 'federal resume examples', 'OPM qualifications'],
     relatedSlugs: [
+      'general-experience-vs-specialized-experience',
       'how-hr-screens-federal-resumes',
       'federal-time-in-grade-rules',
       'how-to-target-gs-pay-grades',
@@ -1523,6 +1684,7 @@ const POSTS: BlogPost[] = [
 <h2>What Counts as Specialized Experience Under OPM Rules?</h2>
 <p>Specialized experience is the cornerstone of federal qualification determinations. Under OPM qualification standards, it is defined as experience that has equipped the applicant with the particular knowledge, skills, and abilities to perform the specific duties of the target position successfully. This definition has two critical implications: the experience must be relevant to the <em>specific position</em>, and its documentation in the resume must be explicit enough to allow independent verification by an HR specialist.</p>
 <p>OPM requires that specialized experience be at a level equivalent to the next lower grade. For a GS-9 position, one year of qualifying experience at GS-7 equivalent is required. For GS-12, one year at GS-11 equivalent. For GS-13 and above, no education substitution is permitted — the experience must be present and documented.</p>
+<p>If the announcement asks for general experience instead, read the <a href="/blog/general-experience-vs-specialized-experience">general versus specialized experience guide</a>. The example statements below are illustrative writing examples, not actual applicants or a promise that a particular statement will qualify.</p>
 <p>Several categories of experience can satisfy the specialized experience requirement:</p>
 <ul>
   <li><strong>Direct federal civilian employment</strong> in a position with duties equivalent to the required grade</li>
@@ -1590,7 +1752,7 @@ const POSTS: BlogPost[] = [
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
   <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check If Your Specialized Experience Meets GS Standards</p>
   <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">Upload your resume and target vacancy announcement to verify that your specialized experience language satisfies the qualification requirements at your target grade level.</p>
-  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+  <a href="/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
 </div>
 
 <h2>How to Align Your Experience with Vacancy Language</h2>
@@ -1601,7 +1763,7 @@ const POSTS: BlogPost[] = [
   <li><strong>Draft experience bullets</strong> using the announcement\'s terminology, documenting the specific nature of the work, the tools or methods used, the scope of responsibility, and the measurable outcome.</li>
   <li><strong>Verify coverage</strong>: every required competency must be traceable to at least one specific bullet in the resume. If any required competency is not documented, the application is at risk of an Ineligible rating regardless of whether the experience technically exists.</li>
 </ol>
-<p>For guidance on the broader qualification framework that governs grade-level targeting, see our article on <a href="/blog/how-to-target-gs-pay-grade-requirements-in-your-federal-resume">targeting GS pay grade requirements in your federal resume</a>.</p>
+<p>For guidance on the broader qualification framework that governs grade-level targeting, see our article on <a href="/blog/how-to-target-gs-pay-grades">targeting GS pay grade requirements in your federal resume</a>.</p>
 
 <h2>How HR Interprets Specialized Experience</h2>
 <p>Understanding the HR review process is essential context for writing effective specialized experience statements. HR specialists do not evaluate resumes holistically. They apply a structured qualification standard to each application, comparing the resume\'s documented experience against a defined checklist of required competencies.</p>
@@ -1610,6 +1772,7 @@ const POSTS: BlogPost[] = [
 <p><strong>Scope and complexity documentation.</strong> The resume must demonstrate that the experience was performed at the appropriate grade-level equivalent. A GS-11 experience claim requires documented evidence of independent judgment, cross-organizational impact, and substantive technical output — not developmental or supporting work supervised by a higher-grade employee. The grade equivalency is inferred from the complexity indicators in the resume: dollar amounts, organizational scope, number of subordinates, policy-level versus operational work.</p>
 <p>For a detailed breakdown of each stage of the HR review — from minimum qualification verification through category rating — see our guide on <a href="/blog/how-hr-screens-federal-resumes">how HR reviews federal resumes</a> on USAJOBS.</p>
 <p>Additionally, for positions requiring time-in-grade documentation alongside specialized experience, review our analysis of <a href="/blog/federal-time-in-grade-rules">federal time-in-grade rules</a> to ensure your resume satisfies both qualification gates simultaneously.</p>
+<p>Check the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a>, review <a href="/federal-resume-examples">federal resume examples</a>, and <a href="/start">compare your draft with a target announcement</a>.</p>
 
 <hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
 <p style="font-size:0.8rem;color:#94a3b8">ResumeGov is an independent compliance tool and is not affiliated with USAJOBS or the U.S. Office of Personnel Management (OPM).</p>
@@ -1808,9 +1971,11 @@ const POSTS: BlogPost[] = [
   {
     slug: 'federal-resume-keywords',
     title: 'Federal Resume Keywords: How to Match Vacancy Announcement Language',
+    seoTitle: 'USAJOBS Resume Keywords: Federal Resume Guide',
     description:
       'Learn how to identify and integrate federal resume keywords from USAJOBS vacancy announcements. This guide explains keyword matching strategies that help HR verify specialized experience within the 2-page limit.',
     date: '2026-06-22',
+    updatedDate: '2026-09-22',
     readingTime: 9,
     author: 'ResumeGov Editorial Team',
     tags: ['federal resume keywords', 'USAJOBS keywords', 'vacancy announcement', 'keyword matching', 'specialized experience', 'HR screening', '2-page limit'],
@@ -1845,6 +2010,7 @@ const POSTS: BlogPost[] = [
     ],
     content: `
 <h1>Federal Resume Keywords: How to Match Vacancy Announcement Language</h1>
+<p>People also search for “USA jobs resume keywords,” “government resume keywords,” and “keywords for USAJOBS.” For each application, the useful terms come from that specific vacancy's Qualifications, Duties, and required competencies. A generic keyword list cannot establish that you qualify.</p>
 
 <p>Vacancy terminology helps reviewers connect your documented experience with the specialized-experience requirements. It is not a substitute for evidence: the resume must truthfully show what you did, at what level, for how long, and with what scope.</p>
 
@@ -2027,7 +2193,7 @@ const POSTS: BlogPost[] = [
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
   <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Check Your Keyword Coverage Before HR Does</p>
   <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">ResumeGov analyzes keyword alignment between your resume and the target vacancy announcement, identifying gaps and suggesting integration strategies.</p>
-  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
+  <a href="/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My Resume — Free</a>
 </div>
 
 <h2>Advanced Keyword Strategy for Competitive Positions</h2>
@@ -2078,6 +2244,7 @@ const POSTS: BlogPost[] = [
 </ol>
 
 <p>The federal hiring process is documentation-driven. Experience that is real but not documented with the correct keywords does not exist from HR's perspective. Before submitting any application, verify that your resume contains the specific vocabulary from the announcement and that each keyword appears in an appropriate evidentiary context.</p>
+<p>Use the official <a href="https://help.usajobs.gov/how-to/account/documents/resume">USAJOBS resume instructions</a>, review our <a href="/federal-resume-examples">federal resume examples</a>, and <a href="/start">check keyword coverage against your target announcement</a>.</p>
 
 <hr style="border:none;border-top:1px solid #e2e8f0;margin:40px 0 24px" />
 
@@ -2299,7 +2466,7 @@ const POSTS: BlogPost[] = [
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:36px 0;text-align:center">
   <p style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 8px">Verify Your GS‑12 Resume Compliance</p>
   <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px">ResumeGov analyzes your resume against GS‑12 vacancy announcements, identifying missing keywords, scope indicators, and documentation requirements.</p>
-  <a href="/" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My GS‑12 Resume — Free</a>
+  <a href="/start" style="display:inline-block;background:#0f172a;color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem">Analyze My GS‑12 Resume — Free</a>
 </div>
 
 <p>GS‑12 positions are competitive because they represent career‑level responsibility in the federal system. Your resume must prove not only that you performed the duties, but that you performed them at the GS‑12 scope and complexity level. Use this example as a template, then tailor it with announcement‑specific keywords and quantifiable outcomes.</p>
