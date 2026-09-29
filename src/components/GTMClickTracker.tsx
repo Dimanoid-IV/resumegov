@@ -21,6 +21,8 @@ export default function GTMClickTracker() {
         element_text: el.textContent?.trim(),
         element_href: (el as HTMLAnchorElement).href || undefined,
         cta_context: el.getAttribute('data-cta-context') || undefined,
+        location: el.getAttribute('data-cta-location') || undefined,
+        plan: el.getAttribute('data-cta-plan') || undefined,
       });
     }
 

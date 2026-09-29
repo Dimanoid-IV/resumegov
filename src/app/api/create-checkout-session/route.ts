@@ -4,6 +4,7 @@ import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
 import { getGAIdentifiersFromCookies } from '@/lib/ga-cookies';
+import { trackGA4Event } from '@/lib/gtag-server';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -147,6 +148,19 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    await trackGA4Event({
+      eventName: 'begin_checkout',
+      clientId: gaClientId || undefined,
+      sessionId: gaSessionId || undefined,
+      userId: user.id,
+      params: {
+        plan: planType,
+        value: (session.amount_total || 0) / 100,
+        currency: (session.currency || 'usd').toUpperCase(),
+        items: [{ item_id: planType, item_name: `ResumeGov ${planType}`, quantity: 1 }],
+      },
+    });
 
     return NextResponse.json({ url: session.url }, { status: 200 });
   } catch (error) {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { checkoutPath } from '@/lib/checkout-flow';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.resumegov.com';
 
@@ -124,6 +125,7 @@ function Hero() {
           <Link
             href="/start"
             data-gtm-event="cta_click"
+            data-cta-location="hero"
             className="inline-flex items-center justify-center px-6 py-3 bg-white text-slate-900 font-semibold rounded hover:bg-slate-100 transition-colors"
           >
             Get My Compliance Score — Free
@@ -448,17 +450,18 @@ function SampleReport() {
 // ─── Comparison Table ─────────────────────────────────────────────────────────
 
 function ComparisonTable() {
-  const rows: { feature: string; free: string | boolean; analyst: string | boolean; pro: string | boolean }[] = [
-    { feature: 'Resume analyses', free: '3 total', analyst: '3 credits', pro: 'Unlimited' },
-    { feature: 'Compatibility scoring (4-component)', free: true, analyst: true, pro: true },
-    { feature: 'Keyword gap report', free: true, analyst: true, pro: true },
-    { feature: 'Word count compliance check', free: true, analyst: true, pro: true },
-    { feature: 'Missing elements report', free: true, analyst: true, pro: true },
-    { feature: 'Vacancy-targeted, fact-checked rewrite', free: false, analyst: true, pro: true },
-    { feature: 'Qualification coverage %', free: false, analyst: true, pro: true },
-    { feature: 'KSA statement generation', free: false, analyst: false, pro: true },
-    { feature: 'Optimization history', free: false, analyst: false, pro: true },
-    { feature: 'Priority support', free: false, analyst: false, pro: true },
+  const rows: { feature: string; free: string | boolean; single: string | boolean; analyst: string | boolean; pro: string | boolean }[] = [
+    { feature: 'Resume analyses', free: '3 total', single: '3 total', analyst: '3 total', pro: 'Unlimited' },
+    { feature: 'Optimization credits', free: false, single: '1', analyst: '3', pro: 'Unlimited' },
+    { feature: 'Compatibility scoring (4-component)', free: true, single: true, analyst: true, pro: true },
+    { feature: 'Keyword gap report', free: true, single: true, analyst: true, pro: true },
+    { feature: 'Word count compliance check', free: true, single: true, analyst: true, pro: true },
+    { feature: 'Missing elements report', free: true, single: true, analyst: true, pro: true },
+    { feature: 'Vacancy-targeted, fact-checked rewrite', free: false, single: true, analyst: true, pro: true },
+    { feature: 'Qualification coverage %', free: false, single: true, analyst: true, pro: true },
+    { feature: 'KSA statement generation', free: false, single: false, analyst: false, pro: true },
+    { feature: 'Optimization history', free: false, single: false, analyst: false, pro: true },
+    { feature: 'Priority support', free: false, single: false, analyst: false, pro: true },
   ];
 
   function Cell({ val }: { val: string | boolean }) {
@@ -479,13 +482,14 @@ function ComparisonTable() {
           <h2 className="text-3xl font-bold text-slate-900 tracking-tight">What each plan includes.</h2>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b-2 border-slate-200">
                 <th className="text-left py-3 pr-6 font-medium text-slate-500 w-1/2">Feature</th>
                 <th className="text-center py-3 px-4 font-semibold text-slate-900">Free</th>
+                <th className="text-center py-3 px-4 font-semibold text-blue-700">Single</th>
                 <th className="text-center py-3 px-4 font-semibold text-slate-900">Analyst</th>
-                <th className="text-center py-3 px-4 font-semibold text-blue-700">Professional</th>
+                <th className="text-center py-3 px-4 font-semibold text-slate-900">Professional</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -493,6 +497,7 @@ function ComparisonTable() {
                 <tr key={row.feature} className="hover:bg-slate-50">
                   <td className="py-3 pr-6 text-slate-700">{row.feature}</td>
                   <td className="py-3 px-4 text-center"><Cell val={row.free} /></td>
+                  <td className="py-3 px-4 text-center"><Cell val={row.single} /></td>
                   <td className="py-3 px-4 text-center"><Cell val={row.analyst} /></td>
                   <td className="py-3 px-4 text-center"><Cell val={row.pro} /></td>
                 </tr>
@@ -515,6 +520,7 @@ function Pricing() {
       period: 'forever',
       description: 'For applicants exploring the tool before committing.',
       highlight: false,
+      plan: null,
       cta: 'Get started',
       ctaHref: '/start',
       features: [
@@ -531,9 +537,10 @@ function Pricing() {
       price: '$9.99',
       period: 'one-time',
       description: 'For one resume tailored to one vacancy announcement.',
-      highlight: false,
+      highlight: true,
+      plan: 'single',
       cta: 'Optimize once',
-      ctaHref: '/login',
+      ctaHref: checkoutPath('single'),
       features: [
         'Everything in Free',
         '1 optimization credit',
@@ -550,8 +557,9 @@ function Pricing() {
       period: 'one-time (3 credits)',
       description: 'For applicants targeting a specific vacancy announcement.',
       highlight: false,
+      plan: 'analyst',
       cta: 'Buy credits',
-      ctaHref: '/login',
+      ctaHref: checkoutPath('analyst'),
       features: [
         'Everything in Free',
         '3 optimization credits',
@@ -567,9 +575,10 @@ function Pricing() {
       price: '$29',
       period: '/ month',
       description: 'For active applicants submitting multiple USAJOBS applications under the September 2025 rule.',
-      highlight: true,
+      highlight: false,
+      plan: 'professional',
       cta: 'Start subscription',
-      ctaHref: '/login',
+      ctaHref: checkoutPath('professional'),
       features: [
         'Everything in Analyst',
         'Unlimited analyses',
@@ -602,7 +611,7 @@ function Pricing() {
                 <div className="flex items-center justify-between mb-1">
                   <span className={`font-semibold text-sm ${ plan.highlight ? 'text-slate-300' : 'text-slate-500'}`}>{plan.name}</span>
                   {plan.highlight && (
-                    <span className="text-xs font-mono bg-blue-700 text-white px-2 py-0.5 rounded">Most popular</span>
+                    <span className="text-xs font-mono bg-blue-700 text-white px-2 py-0.5 rounded">For one vacancy</span>
                   )}
                 </div>
                 <div className="flex items-baseline gap-1">
@@ -626,6 +635,9 @@ function Pricing() {
               )}
               <Link
                 href={plan.ctaHref}
+                data-gtm-event={plan.plan ? 'plan_selected' : 'cta_click'}
+                data-cta-location="pricing"
+                data-cta-plan={plan.plan ?? undefined}
                 className={`block text-center py-2.5 rounded font-semibold text-sm transition-colors ${
                   plan.highlight
                     ? 'bg-white text-slate-900 hover:bg-slate-100'

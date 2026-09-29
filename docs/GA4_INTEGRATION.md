@@ -60,13 +60,27 @@ Tracked on every route change via `components/Analytics.tsx`.
 **When:** Stripe confirms a completed checkout
 **Location:** `app/api/stripe/webhook/route.ts`
 **Parameters:**
-- transaction_id: Stripe payment or subscription reference
+- transaction_id: Stripe Checkout session ID
 - value: amount in major currency units
 - currency: 'USD'
 - plan: single, analyst, or professional
 - items: GA4 ecommerce item array
 
 The checkout captures the GA client and session identifiers before redirecting to Stripe. The webhook uses those identifiers so the server-confirmed purchase remains attached to the originating acquisition session.
+
+### Checkout funnel after the payment-flow repair
+
+| Event | Meaning | Source |
+| --- | --- | --- |
+| `plan_selected` | Visitor clicks a paid pricing option | Pricing page |
+| `begin_checkout` | An authenticated visitor receives a Stripe Checkout session | Checkout API |
+| `purchase` | Stripe confirms payment and the order is fulfilled once | Verified webhook |
+
+`checkout_started` is a legacy click event used by some results/dashboard buttons; it is **not** proof that a Stripe session was created. The success-page return is also not proof of payment. Use `purchase` and the `payments` table to count actual sales.
+
+In GA4 Admin → Events, mark `purchase` as a key event. Mark `begin_checkout` and `resume_analysis_completed` as key events only if you want those intermediate steps in the key-event reports; keep them distinct from revenue. Create an exploration funnel from `start_view` → `analysis_draft_ready` → `resume_analysis_completed` → `plan_selected` → `begin_checkout` → `purchase`, segmented by landing page and traffic source. Some users enter checkout from results rather than homepage pricing, so the plan-selection step may be absent for those paths.
+
+Server-side `begin_checkout` and `purchase` require `GA4_API_SECRET` in the production server environment and a GA client ID cookie. If either is absent, fulfillment still works but GA4 server events are skipped. Confirm the secret is configured and check the browser and GA4 DebugView/Realtime after deployment; do not infer payment failures solely from missing analytics events.
 
 Create the Measurement Protocol secret in the GA4 web data stream and store it only as `GA4_API_SECRET` in the server environment. Never expose this value with a `NEXT_PUBLIC_` prefix.
 

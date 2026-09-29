@@ -3,12 +3,13 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
 import { trackGA4Event } from '@/lib/gtag-server';
+import { paidCheckoutSession, subscriptionGrantsAccess, creditsAfterSubscriptionEnd } from '@/lib/checkout-events';
 import Stripe from 'stripe';
 
 /**
  * POST /api/stripe/webhook
  * Handles Stripe webhook events:
- * - payment_intent.succeeded: Add credits, record payment
+ * - checkout.session.completed / async_payment_succeeded: grant paid access
  * - payment_intent.payment_failed: Mark payment failed
  * - customer.subscription.created: Update user to subscription plan
  * - customer.subscription.updated: Update subscription status
@@ -42,88 +43,31 @@ export async function POST(request: NextRequest) {
 
     // Handle the event
     switch (event.type) {
-      case 'checkout.session.completed': {
-        const session = event.data.object as Stripe.Checkout.Session;
-        const userId = session.metadata?.userId;
-        const plan = session.metadata?.plan || 'analyst';
-        
-        if (userId) {
-          const paymentReference =
-            typeof session.payment_intent === 'string'
-              ? session.payment_intent
-              : typeof session.subscription === 'string'
-                ? session.subscription
-                : session.id;
+      case 'checkout.session.completed':
+      case 'checkout.session.async_payment_succeeded': {
+        const session = paidCheckoutSession(event.type, event.data.object as Stripe.Checkout.Session);
+        if (!session) {
+          console.log(`Checkout ${event.data.object.id} is not paid or lacks valid fulfillment metadata`);
+          break;
+        }
 
-          // Stripe retries webhook deliveries. Do not grant credits twice.
-          const { data: existingPayment } = await supabase
-            .from('payments')
-            .select('id')
-            .eq('stripe_payment_id', paymentReference)
-            .maybeSingle();
+        const userId = session.metadata!.userId!;
+        const plan = session.metadata!.plan!;
+        // The database function commits payment history and the credit grant in
+        // one transaction. A replay returns false without changing either row.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data: newlyFulfilled, error: fulfillmentError } = await (supabase as any).rpc(
+          'fulfill_checkout_session',
+          {
+            p_session_id: session.id,
+            p_user_id: userId,
+            p_plan: plan,
+            p_amount: session.amount_total || 0,
+          },
+        );
+        if (fulfillmentError) throw fulfillmentError;
 
-          if (existingPayment) {
-            console.log(`Checkout ${session.id} already processed`);
-            break;
-          }
-
-          // Record payment
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          await (supabase as any).from('payments').insert({
-            user_id: userId,
-            stripe_payment_id: paymentReference,
-            amount: session.amount_total || 0,
-            status: 'completed',
-          });
-
-          // Update user plan and credits based on purchased tier
-          let newPlanType: 'free' | 'basic' | 'pro' | 'enterprise' = 'basic';
-          let purchasedCredits = 1;
-
-          if (plan === 'professional') {
-            newPlanType = 'pro';
-            purchasedCredits = -1; // Unlimited for professional
-          } else if (plan === 'analyst') {
-            newPlanType = 'basic';
-            purchasedCredits = 3;
-          } else if (plan === 'single') {
-            newPlanType = 'basic';
-            purchasedCredits = 1;
-          }
-
-          const { data: currentProfile } = await supabase
-            .from('users')
-            .select('plan_type, credits_remaining')
-            .eq('id', userId)
-            .single();
-
-          const typedProfile = currentProfile as {
-            plan_type: 'free' | 'basic' | 'pro' | 'enterprise';
-            credits_remaining: number;
-          } | null;
-          const currentPlan = typedProfile?.plan_type ?? 'free';
-          const currentCredits = typedProfile?.credits_remaining ?? 0;
-          const newCredits =
-            purchasedCredits === -1 || currentCredits === -1
-              ? -1
-              : currentPlan === 'free'
-                ? purchasedCredits
-                : currentCredits + purchasedCredits;
-
-          if (currentCredits === -1) {
-            newPlanType = 'pro';
-          }
-
-          // Update user plan and credits
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          await (supabase as any)
-            .from('users')
-            .update({
-              plan_type: newPlanType,
-              credits_remaining: newCredits,
-            })
-            .eq('id', userId);
-
+        if (newlyFulfilled) {
           const amountInMajorUnits = (session.amount_total || 0) / 100;
           await trackGA4Event({
             eventName: 'purchase',
@@ -131,7 +75,7 @@ export async function POST(request: NextRequest) {
             sessionId: session.metadata?.gaSessionId || undefined,
             userId,
             params: {
-              transaction_id: paymentReference,
+              transaction_id: session.id,
               value: amountInMajorUnits,
               currency: (session.currency || 'usd').toUpperCase(),
               plan,
@@ -145,41 +89,25 @@ export async function POST(request: NextRequest) {
               ],
             },
           });
-
-          console.log(`Checkout completed for user ${userId}: plan ${plan}, new type: ${newPlanType}, credits: ${newCredits}`);
+          console.log(`Checkout ${session.id} fulfilled for plan ${plan}`);
+        } else {
+          console.log(`Checkout ${session.id} already fulfilled`);
         }
         break;
       }
 
       case 'payment_intent.succeeded': {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const customerId = paymentIntent.customer as string;
-        
-        if (!customerId) break;
-
-        // Find user by Stripe customer ID
-        const { data: userData } = await supabase
-          .from('users')
-          .select('id')
-          .eq('stripe_customer_id', customerId)
-          .single();
-
-        if (userData) {
-          const userId = (userData as { id: string }).id;
-          
-          // Record payment
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          await (supabase as any).from('payments').insert({
-            user_id: userId,
-            stripe_payment_id: paymentIntent.id,
-            amount: paymentIntent.amount,
-            status: 'completed',
-          });
-
-          console.log(`PaymentIntent ${paymentIntent.id} succeeded for user ${userId}`);
-        }
+        // Checkout session events are the source of truth for order history and
+        // credit fulfillment. Recording this PaymentIntent separately can race
+        // with the session event and suppress the credit grant.
+        console.log(`PaymentIntent ${paymentIntent.id} succeeded; awaiting Checkout session fulfillment`);
         break;
       }
+
+      case 'checkout.session.async_payment_failed':
+        console.warn(`Checkout ${event.data.object.id} asynchronous payment failed`);
+        break;
 
       case 'payment_intent.payment_failed': {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
@@ -214,6 +142,10 @@ export async function POST(request: NextRequest) {
       case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
+        if (!subscriptionGrantsAccess(subscription.status)) {
+          console.log(`Subscription ${subscription.id} is ${subscription.status}; no paid access granted`);
+          break;
+        }
         const customerId = subscription.customer as string;
 
         // Find user by Stripe customer ID
@@ -248,12 +180,15 @@ export async function POST(request: NextRequest) {
         // Find user by Stripe customer ID
         const { data: userData } = await supabase
           .from('users')
-          .select('id')
+          .select('id, credits_remaining')
           .eq('stripe_customer_id', customerId)
           .single();
 
         if (userData) {
-          const userId = (userData as { id: string }).id;
+          const { id: userId, credits_remaining: creditsRemaining } = userData as {
+            id: string;
+            credits_remaining: number;
+          };
           
           // Downgrade to free plan, keep remaining credits
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -261,6 +196,7 @@ export async function POST(request: NextRequest) {
             .from('users')
             .update({
               plan_type: 'free',
+              credits_remaining: creditsAfterSubscriptionEnd(creditsRemaining),
             })
             .eq('id', userId);
 

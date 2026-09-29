@@ -4,6 +4,8 @@ import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
 import { getGAIdentifiersFromCookies } from '@/lib/ga-cookies';
+import { loginPathForCheckout, type CheckoutPlan } from '@/lib/checkout-flow';
+import { trackGA4Event } from '@/lib/gtag-server';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
 
@@ -14,26 +16,24 @@ type UserRow = Database['public']['Tables']['users']['Row'];
  */
 export async function GET(request: NextRequest) {
   try {
-    const billing = getBillingConfig(request.nextUrl.origin);
+    const searchParams = request.nextUrl.searchParams;
+    const requestedPlan = searchParams.get('plan') || 'analyst';
+    const requestedAnalysisId = searchParams.get('analysisId');
+    const plan: CheckoutPlan = ['single', 'analyst', 'professional'].includes(requestedPlan)
+      ? requestedPlan as CheckoutPlan
+      : 'analyst';
     const supabase = await createClient();
     
     // Verify authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
-      // Redirect to login with return URL
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL(loginPathForCheckout(plan, requestedAnalysisId), request.url));
     }
 
-    // Get plan from query params
-    const searchParams = request.nextUrl.searchParams;
-    const requestedPlan = searchParams.get('plan') || 'analyst';
-    const requestedAnalysisId = searchParams.get('analysisId');
+    const billing = getBillingConfig(request.nextUrl.origin);
     const cookieAnalytics = getGAIdentifiersFromCookies(request);
     const gaClientId = searchParams.get('gaClientId')?.slice(0, 64) || cookieAnalytics.clientId || '';
     const gaSessionId = searchParams.get('gaSessionId')?.replace(/\D/g, '').slice(0, 24) || cookieAnalytics.sessionId || '';
-    const plan = ['single', 'analyst', 'professional'].includes(requestedPlan)
-      ? requestedPlan
-      : 'analyst';
     let analysisId: string | null = null;
     if (requestedAnalysisId) {
       const { data: ownedAnalysis } = await supabase
@@ -119,6 +119,19 @@ export async function GET(request: NextRequest) {
     if (!session.url) {
       return NextResponse.redirect(new URL('/dashboard?error=checkout_failed', request.url));
     }
+
+    await trackGA4Event({
+      eventName: 'begin_checkout',
+      clientId: gaClientId || undefined,
+      sessionId: gaSessionId || undefined,
+      userId: user.id,
+      params: {
+        plan,
+        value: (session.amount_total || 0) / 100,
+        currency: (session.currency || 'usd').toUpperCase(),
+        items: [{ item_id: plan, item_name: `ResumeGov ${plan}`, quantity: 1 }],
+      },
+    });
 
     // Redirect to Stripe Checkout
     return NextResponse.redirect(session.url);
