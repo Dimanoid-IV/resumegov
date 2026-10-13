@@ -16,13 +16,18 @@ CREATE TABLE public.users (
 
 CREATE TABLE public.payments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES public.users(id),
-  stripe_payment_id text NOT NULL UNIQUE,
-  amount integer NOT NULL,
-  status text NOT NULL
+  user_id uuid REFERENCES public.users(id),
+  -- Match the legacy production schema: the migration must establish uniqueness.
+  stripe_payment_id text,
+  amount integer,
+  status text DEFAULT 'pending',
+  created_at timestamptz DEFAULT now()
 );
 
 \ir ../supabase/migrations/011_atomic_checkout_fulfillment.sql
+\ir ../supabase/migrations/012_checkout_payment_reference_unique.sql
+-- Reapplying must be safe on an already-migrated schema.
+\ir ../supabase/migrations/012_checkout_payment_reference_unique.sql
 
 INSERT INTO public.users (id, email, plan_type, credits_remaining)
 VALUES ('03fc12f7-f4b1-4d4f-98aa-59d502870db5', 'buyer@example.com', 'free', 3);
@@ -65,5 +70,29 @@ BEGIN
   SELECT count(*) INTO payment_count FROM public.payments WHERE user_id = buyer;
   IF payment_count <> 3 THEN
     RAISE EXCEPTION 'one durable payment row is required per fulfilled session';
+  END IF;
+END $$;
+
+INSERT INTO public.users (id, email, plan_type, credits_remaining)
+VALUES ('60b8e85b-8b3a-466d-a46c-c437ac346c41', 'analyst@example.com', 'free', 3);
+
+DO $$
+DECLARE
+  buyer uuid := '60b8e85b-8b3a-466d-a46c-c437ac346c41';
+  credits integer;
+  plan text;
+BEGIN
+  IF NOT public.fulfill_checkout_session('cs_test_first_analyst', buyer, 'analyst', 1999) THEN
+    RAISE EXCEPTION 'first analyst checkout must be fulfilled';
+  END IF;
+  IF public.fulfill_checkout_session('cs_test_first_analyst', buyer, 'analyst', 1999) THEN
+    RAISE EXCEPTION 'analyst replay must not grant more credits';
+  END IF;
+  SELECT plan_type, credits_remaining INTO plan, credits FROM public.users WHERE id = buyer;
+  IF plan <> 'basic' OR credits <> 3 THEN
+    RAISE EXCEPTION 'first analyst checkout must grant three paid credits once';
+  END IF;
+  IF (SELECT count(*) FROM public.payments WHERE user_id = buyer) <> 1 THEN
+    RAISE EXCEPTION 'analyst checkout must have exactly one payment row';
   END IF;
 END $$;
