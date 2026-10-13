@@ -56,7 +56,7 @@ export default function ImproveResume({
       }
     } catch (error) {
       console.error('Optimization error:', error);
-      setMessage({ type: 'error', text: 'Something went wrong. Please try again. Your credit was not used.' });
+      setMessage({ type: 'error', text: 'We could not confirm the result. Refresh your dashboard to check for a saved resume before retrying.' });
     } finally {
       setLoading(false);
     }

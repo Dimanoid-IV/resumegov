@@ -1,0 +1,20 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {execFileSync} from 'node:child_process';
+const {createResumeDocxBlob}=await import('../../src/lib/downloadResumeDocx.ts');
+test('export uses readable text, US Letter pages and preserves resume facts',async()=>{
+  const blob=await createResumeDocxBlob('ALEX MORGAN\n## PROFESSIONAL EXPERIENCE\n- Improved reporting timeliness by 20%.\nEDUCATION\nBachelor of Arts, May 2015');
+  const directory=await mkdtemp(join(tmpdir(),'resumegov-docx-test-'));
+  const path=join(directory,'resume.docx');
+  await writeFile(path,Buffer.from(await blob.arrayBuffer()));
+  const document=execFileSync('unzip',['-p',path,'word/document.xml'],{encoding:'utf8'});
+  assert.ok(document.includes('20%'));
+  assert.ok(document.includes('May 2015'));
+  assert.ok(!document.includes('## PROFESSIONAL'));
+  assert.match(document, /w:sz w:val="21"/);
+  assert.match(document, /w:sz w:val="28"/);
+  assert.match(document, /w:pgSz[^>]*w:w="12240"[^>]*w:h="15840"/);
+});

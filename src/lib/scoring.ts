@@ -82,8 +82,7 @@ export function scoreResumeEvidence(input: EvidenceScoreInput): EvidenceScoreRes
   const requirementCap = specializedExperience.length > 0
     ? Math.max(0, 30 - Math.min(24, gaps * 6))
     : 15;
-  const lengthCap = wordCount < 250 ? 6 : wordCount < 500 ? 12 : wordCount < 750 ? 20 : 30;
-  const specializedScore = Math.min(aiSpecialized, requirementCap, lengthCap);
+  const specializedScore = Math.min(aiSpecialized, requirementCap);
 
   const complianceScore = calculateComplianceScore(preValidation.structure, wordCount);
   const achievementScore = calculateAchievementScore(
@@ -92,9 +91,6 @@ export function scoreResumeEvidence(input: EvidenceScoreInput): EvidenceScoreRes
   );
 
   let confidenceCap = 100;
-  if (wordCount < 250) confidenceCap = 45;
-  else if (wordCount < 500) confidenceCap = 58;
-  else if (wordCount < 750) confidenceCap = 72;
 
   if (!preValidation.structure.hasEmploymentDates || !preValidation.structure.hasHoursPerWeek) {
     confidenceCap = Math.min(confidenceCap, 79);

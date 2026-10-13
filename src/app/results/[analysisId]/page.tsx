@@ -84,7 +84,7 @@ function twoPageRisk(wordCount: number): {
   bg: string;
   border: string;
 } {
-  if (wordCount < 850) return { icon: '⚠', label: 'May Need More Detail', color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
+  if (wordCount < 850) return { icon: '↗', label: 'Verify Evidence and Pages', color: '#475569', bg: '#f8fafc', border: '#e2e8f0' };
   if (wordCount <= 1050) return { icon: '✓', label: 'Planning Range', color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' };
   if (wordCount <= 1100) return { icon: '⚠', label: 'Check Final Pages', color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
   return { icon: '✕', label: 'High Overflow Risk', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
@@ -181,7 +181,7 @@ export default async function ResultsPage({
   const { data: raw, error } = await admin
     .from('analyses')
     .select(
-      'id, user_id, compatibility_score, keyword_score, specialized_score, compliance_score, achievement_score, word_count, feedback_json, created_at'
+      'id, user_id, compatibility_score, keyword_score, specialized_score, compliance_score, achievement_score, word_count, risk_level, feedback_json, created_at'
     )
     .eq('id', analysisId)
     .eq('user_id', user.id)
@@ -477,7 +477,7 @@ export default async function ResultsPage({
               </h2>
               <p className="text-slate-400 text-sm mb-5 leading-relaxed">
                 {isOptimized
-                  ? `${optimization?.final_word_count ?? 0} words · ${optimization?.qualification_coverage_percent ?? 0}% supported requirement coverage · fact checked`
+                  ? `${optimization?.final_word_count ?? 0} words · ${optimization?.qualification_coverage_percent ?? 0}% requirement keyword coverage · AI fact checked — review before submitting`
                   : 'Reorder and rewrite your documented experience for this vacancy, preserve required federal fields, and flag facts that only you can supply.'}
               </p>
               {isOptimized && optimization ? (

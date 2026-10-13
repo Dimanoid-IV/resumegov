@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/gtag';
-import { clearAnalysisDraft, loadAnalysisDraft } from '@/lib/analysis-draft';
+import { clearAnalysisDraft, loadAnalysisDraft, saveAnalysisDraft } from '@/lib/analysis-draft';
 
 const FREE_LIMIT = 3;
 const MIN_RESUME_WORDS = 100;
@@ -78,7 +78,6 @@ export default function UploadPage() {
           resume_word_count: wordCount(draft.resumeText),
           vacancy_word_count: wordCount(draft.jobText),
         });
-        clearAnalysisDraft();
       }
 
       if (new URLSearchParams(window.location.search).get('auth') === 'success') {
@@ -171,7 +170,8 @@ export default function UploadPage() {
     trackEvent({ eventName: 'resume_analysis_started' });
 
     setLoading(true);
-
+    saveAnalysisDraft({resumeText,jobText,jobUrl,uploadedFileName,source:'upload'});
+    try {
     const res = await fetch('/api/free-analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -194,7 +194,14 @@ export default function UploadPage() {
       return;
     }
 
+    if (!data.analysisId) throw new Error('Missing result');
+    clearAnalysisDraft();
     router.push(`/results/${data.analysisId}`);
+    } catch {
+      setError('Could not confirm the analysis. Your inputs are preserved. Check your dashboard for a saved result before retrying.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   // ── Loading skeleton ──────────────────────────────────────────────────────

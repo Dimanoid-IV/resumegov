@@ -451,17 +451,15 @@ function SampleReport() {
 
 function ComparisonTable() {
   const rows: { feature: string; free: string | boolean; single: string | boolean; analyst: string | boolean; pro: string | boolean }[] = [
-    { feature: 'Resume analyses', free: '3 total', single: '3 total', analyst: '3 total', pro: 'Unlimited' },
+    { feature: 'Resume analyses', free: '3 total', single: 'Unlimited', analyst: 'Unlimited', pro: 'Unlimited' },
     { feature: 'Optimization credits', free: false, single: '1', analyst: '3', pro: 'Unlimited' },
     { feature: 'Compatibility scoring (4-component)', free: true, single: true, analyst: true, pro: true },
     { feature: 'Keyword gap report', free: true, single: true, analyst: true, pro: true },
-    { feature: 'Word count compliance check', free: true, single: true, analyst: true, pro: true },
+    { feature: 'Word count and page-planning guidance', free: true, single: true, analyst: true, pro: true },
     { feature: 'Missing elements report', free: true, single: true, analyst: true, pro: true },
     { feature: 'Vacancy-targeted, fact-checked rewrite', free: false, single: true, analyst: true, pro: true },
-    { feature: 'Qualification coverage %', free: false, single: true, analyst: true, pro: true },
-    { feature: 'KSA statement generation', free: false, single: false, analyst: false, pro: true },
-    { feature: 'Optimization history', free: false, single: false, analyst: false, pro: true },
-    { feature: 'Priority support', free: false, single: false, analyst: false, pro: true },
+    { feature: 'Requirement keyword coverage %', free: false, single: true, analyst: true, pro: true },
+    { feature: 'Saved rewrites and DOCX downloads', free: false, single: true, analyst: true, pro: true },
   ];
 
   function Cell({ val }: { val: string | boolean }) {
@@ -546,7 +544,7 @@ function Pricing() {
         '1 optimization credit',
         'Vacancy-targeted rewrite',
         'Independent factual-safety check',
-        'Qualification coverage report',
+        'Requirement keyword coverage report',
         'Download optimized DOCX',
       ],
       footnote: 'No subscription.',
@@ -565,7 +563,7 @@ function Pricing() {
         '3 optimization credits',
         'Vacancy-targeted rewrites',
         'Independent factual-safety checks',
-        'Qualification coverage report',
+        'Requirement keyword coverage report',
         'Two-page formatting risk guidance',
       ],
       footnote: 'Credits do not expire.',
@@ -583,9 +581,8 @@ function Pricing() {
         'Everything in Analyst',
         'Unlimited analyses',
         'Unlimited optimizations',
-        'KSA statement generation',
         'Optimization history',
-        'Priority support',
+        'Re-download saved resumes',
       ],
       footnote: 'Cancel anytime.',
     },

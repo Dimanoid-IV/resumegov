@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Local Superdesign working context
 /.superdesign/
+.qa-output/

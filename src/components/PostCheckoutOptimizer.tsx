@@ -7,7 +7,7 @@ import { trackEvent } from '@/lib/gtag';
 export default function PostCheckoutOptimizer({ analysisId }: { analysisId: string }) {
   const router = useRouter();
   const started = useRef(false);
-  const [status, setStatus] = useState('Payment received. Preparing your tailored resume…');
+  const [status, setStatus] = useState('Checking your credit and preparing your tailored resume…');
   const [error, setError] = useState('');
   const [issues, setIssues] = useState<string[]>([]);
 
@@ -42,7 +42,7 @@ export default function PostCheckoutOptimizer({ analysisId }: { analysisId: stri
         // Stripe can redirect before the webhook grants the credit. Retry only
         // that transient state; factual-safety and generation failures stop.
         if (response.status === 403 && attempt < 9) {
-          setStatus('Payment confirmed. Activating your credit…');
+          setStatus('Waiting for payment processing to activate your credit…');
           await new Promise(resolve => window.setTimeout(resolve, 1500));
           continue;
         }
@@ -54,7 +54,10 @@ export default function PostCheckoutOptimizer({ analysisId }: { analysisId: stri
       }
     }
 
-    void run();
+    void run().catch(() => {
+      setError('We could not confirm your result. Refresh the dashboard to check your saved resume, then retry if needed.');
+      trackEvent({ eventName: 'resume_optimization_failed', analysis_id: analysisId });
+    });
   }, [analysisId, router]);
 
   return (

@@ -103,10 +103,10 @@ export function validatePreAI(resumeText: string, jobText: string): PreAIValidat
   // Word count check
   const wordCount = countWords(resumeText);
   if (wordCount > WORD_COUNT_HARD_MAX) {
-    warnings.push(`Resume exceeds hard limit (${wordCount}/${WORD_COUNT_HARD_MAX} words)`);
+    warnings.push(`Long resume (${wordCount} words): check the exported document against the announcement's page limit. Word count alone cannot determine compliance.`);
   }
   if (wordCount < WORD_COUNT_MIN_ACCEPTABLE) {
-    warnings.push(`Resume may be too short (${wordCount} words, minimum ${WORD_COUNT_MIN_ACCEPTABLE})`);
+    warnings.push(`Concise resume (${wordCount} words): verify that required experience is demonstrated. There is no universal federal resume minimum word count.`);
   }
 
   // Structure validation (simplified regex-based detection)

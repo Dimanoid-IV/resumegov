@@ -107,6 +107,7 @@ export async function POST(request: NextRequest) {
     };
     const plan = configuredPrices[planId as PriceKey];
     const isSubscription = planId === 'subscription';
+    const canonicalPlan = isSubscription ? 'professional' : planId === 'pack3' ? 'analyst' : 'single';
 
     // Create or retrieve Stripe customer
     let customerId = userProfile?.stripe_customer_id;
@@ -138,10 +139,11 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: isSubscription ? 'subscription' : 'payment',
-      success_url: `${billing.siteUrl}/dashboard?success=true&plan=${planId}`,
+      success_url: `${billing.siteUrl}/dashboard?upgraded=true&plan=${canonicalPlan}`,
       cancel_url: `${billing.siteUrl}/dashboard?canceled=true`,
       metadata: {
         userId: user.id,
+        plan: canonicalPlan,
         planId,
         credits: plan.credits,
       },

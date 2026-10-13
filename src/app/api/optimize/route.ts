@@ -30,6 +30,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required field: analysisId' }, { status: 400 });
     }
 
+    // Authorize before reading cached resume text through the service client.
+    const { data: analysis, error: analysisError } = await db
+      .from('analyses')
+      .select('resume_id, job_post_id')
+      .eq('id', analysisId)
+      .eq('user_id', user.id)
+      .single();
+    if (analysisError || !analysis) {
+      return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
+    }
+
     const { data: existing } = await db
       .from('optimizations')
       .select('compressed_resume_text, final_word_count, qualification_coverage_percent')
@@ -61,17 +72,6 @@ export async function POST(request: NextRequest) {
     const hasCredits = profile.credits_remaining === -1 || profile.credits_remaining > 0;
     if (!paidPlan || !hasCredits) {
       return NextResponse.json({ error: 'No optimization credits available.' }, { status: 403 });
-    }
-
-    const { data: analysis, error: analysisError } = await db
-      .from('analyses')
-      .select('resume_id, job_post_id')
-      .eq('id', analysisId)
-      .eq('user_id', user.id)
-      .single();
-
-    if (analysisError || !analysis) {
-      return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
     }
 
     const [{ data: resume }, { data: jobPost }] = await Promise.all([
@@ -139,7 +139,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'The draft failed the factual-safety check. No credit was used.',
-          verification_issues: verification.data?.unsupported_claims?.slice(0, 5) || [],
+          verification_issues: [
+            ...(verification.data?.unsupported_claims || []),
+            ...(verification.data?.lost_critical_facts || []),
+          ].slice(0, 5),
         },
         { status: 422 }
       );
@@ -170,12 +173,13 @@ export async function POST(request: NextRequest) {
       coverageRequirements
     );
 
-    const { error: insertError } = await db.from('optimizations').insert({
-      analysis_id: analysisId,
-      compressed_resume_text: finalTailored.tailored_resume_text,
-      qualification_coverage_percent: coverage,
-      final_word_count: finalTailored.final_word_count,
-      ksa_text: JSON.stringify({
+    const { data: saved, error: saveError } = await db.rpc('save_optimization_and_charge', {
+      p_user_id: user.id,
+      p_analysis_id: analysisId,
+      p_text: finalTailored.tailored_resume_text,
+      p_coverage: coverage,
+      p_word_count: finalTailored.final_word_count,
+      p_details: JSON.stringify({
         change_summary: finalTailored.change_summary,
         matched_requirements: finalTailored.matched_requirements,
         unresolved_gaps: finalTailored.unresolved_gaps,
@@ -186,16 +190,16 @@ export async function POST(request: NextRequest) {
       }),
     });
 
-    if (insertError) {
-      throw insertError;
+    if (saveError) {
+      if (saveError.code === 'P0001') {
+        return NextResponse.json({ error: 'No optimization credits available. No credit was used.' }, { status: 403 });
+      }
+      if (saveError.code === 'P0002') {
+        return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
+      }
+      throw saveError;
     }
-
-    if (profile.credits_remaining > 0) {
-      await db
-        .from('users')
-        .update({ credits_remaining: profile.credits_remaining - 1 })
-        .eq('id', user.id);
-    }
+    if (!saved) throw new Error('Optimization was not saved');
 
     await db.from('ai_usage_logs').insert({
       user_id: user.id,
@@ -207,11 +211,12 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      tailored_resume_text: finalTailored.tailored_resume_text,
-      compressed_resume_text: finalTailored.tailored_resume_text,
+      tailored_resume_text: saved.compressed_resume_text,
+      compressed_resume_text: saved.compressed_resume_text,
       original_word_count: finalTailored.original_word_count,
-      final_word_count: finalTailored.final_word_count,
-      qualification_coverage_percent: coverage,
+      final_word_count: saved.final_word_count,
+      qualification_coverage_percent: saved.qualification_coverage_percent,
+      reused: saved.reused,
       change_summary: finalTailored.change_summary,
       matched_requirements: finalTailored.matched_requirements,
       unresolved_gaps: finalTailored.unresolved_gaps,

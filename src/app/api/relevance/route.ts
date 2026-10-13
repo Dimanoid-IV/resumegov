@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { filterRelevance, RelevanceAnalysis } from '@/lib/ai';
+import { filterRelevance } from '@/lib/ai';
 
 // Bullet evaluation output
 interface BulletEvaluation {
@@ -33,6 +33,9 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const { resumeId, jobPostId, threshold = 5 } = body as RelevanceFilterInput;
+    if (!Number.isFinite(threshold) || threshold < 0 || threshold > 10) {
+      return NextResponse.json({error:'Threshold must be between 0 and 10'},{status:400});
+    }
 
     if (!resumeId || !jobPostId) {
       return NextResponse.json(
@@ -46,6 +49,7 @@ export async function POST(request: NextRequest) {
       .from('resumes')
       .select('original_text')
       .eq('id', resumeId)
+      .eq('user_id', user.id)
       .single();
 
     if (resumeError || !resumeData) {
@@ -56,6 +60,7 @@ export async function POST(request: NextRequest) {
       .from('job_posts')
       .select('parsed_json')
       .eq('id', jobPostId)
+      .eq('user_id', user.id)
       .single();
 
     if (jobError || !jobPostData) {
@@ -65,8 +70,8 @@ export async function POST(request: NextRequest) {
     const resumeText = (resumeData as { original_text: string }).original_text;
     const parsedJson = (jobPostData as { parsed_json: Record<string, unknown> }).parsed_json || {};
     
-    const requiredQualifications = (parsedJson.mandatory_elements as string[]) || [];
-    const specializedExperience = (parsedJson.required_specialized_experience as string[]) || [];
+    const requiredQualifications = (parsedJson.required_qualifications as string[]) || (parsedJson.mandatory_elements as string[]) || [];
+    const specializedExperience = (parsedJson.specialized_experience as string[]) || (parsedJson.required_specialized_experience as string[]) || [];
 
     // Extract bullets from resume text
     const bullets = extractBullets(resumeText);
@@ -99,7 +104,7 @@ export async function POST(request: NextRequest) {
       const relevanceData = result.data;
 
       // Map AI results to bullet evaluations
-      evaluations = bullets.map((bullet, index) => {
+      evaluations = bullets.map((bullet) => {
         // Check if this bullet is a direct match
         const isMatch = relevanceData.matching_qualifications.some(
           match => bullet.toLowerCase().includes(match.toLowerCase())
@@ -114,7 +119,7 @@ export async function POST(request: NextRequest) {
         let keep = true;
 
         if (isMatch) {
-          score = 8 + Math.floor(Math.random() * 3); // 8-10
+          score = 9;
           keep = true;
         } else if (partialMatch) {
           score = Math.round(partialMatch.confidence / 10);
@@ -129,7 +134,7 @@ export async function POST(request: NextRequest) {
             score = 6; // Give benefit of doubt for compliance
             keep = true;
           } else {
-            score = Math.floor(Math.random() * 5); // 0-4 for non-relevant
+            score = 0; // No explicit matching evidence, not a randomized score.
             keep = score >= threshold;
           }
         }

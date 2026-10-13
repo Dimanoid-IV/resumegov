@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getStripe } from '@/lib/stripe';
+import { resolveRefundPaymentIntent } from '@/lib/refund-reference';
 
 /**
  * POST /api/admin/refund
@@ -64,10 +65,14 @@ export async function POST(request: NextRequest) {
 
     // Issue refund via Stripe
     const stripe = getStripe();
+    const paymentIntent = await resolveRefundPaymentIntent({
+      retrieveSession: id => stripe.checkout.sessions.retrieve(id),
+      retrieveInvoice: id => stripe.invoices.retrieve(id, { expand: ['payments'] }),
+    }, p.stripe_payment_id);
     const refund = await stripe.refunds.create({
-      payment_intent: p.stripe_payment_id,
+      payment_intent: paymentIntent,
       reason: 'requested_by_customer',
-    });
+    }, { idempotencyKey: `resumegov-refund-${p.id}` });
 
     if (refund.status !== 'succeeded' && refund.status !== 'pending') {
       return NextResponse.json(
@@ -78,10 +83,11 @@ export async function POST(request: NextRequest) {
 
     // Update payment status in DB
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (admin as any)
+    const { error: updateError } = await (admin as any)
       .from('payments')
       .update({ status: 'refunded' })
       .eq('id', paymentId);
+    if (updateError) throw updateError;
 
     return NextResponse.json({
       success: true,

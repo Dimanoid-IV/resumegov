@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --test tests/*.test.mjs"
+    "test": "npm run test:unit && npm run test:routes",
+    "test:unit": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:routes": "node --import tsx --experimental-test-module-mocks --test tests/routes/*.test.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.11",
@@ -32,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.2.12",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

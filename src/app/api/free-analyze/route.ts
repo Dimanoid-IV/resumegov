@@ -3,7 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { parseJobPosting } from '@/lib/ai/jobParser';
 import { analyzeResume } from '@/lib/ai/resumeAnalyzer';
-import { validatePreAI, validatePostAI } from '@/lib/ruleEngine';
+import { validatePreAI } from '@/lib/ruleEngine';
+import { analysisRisk } from '@/lib/analysis-risk';
 import { scoreResumeEvidence } from '@/lib/scoring';
 
 // ─── Regulatory constants ─────────────────────────────────────────────────────
@@ -240,14 +241,6 @@ export async function POST(request: NextRequest) {
 
     const aiData = analysisResult.data;
 
-    // ── POST-AI VALIDATION (Rule Engine) ─────────────────────────────────────
-    const postValidation = validatePostAI({
-      originalText: safeResume,
-      compressedText: safeResume, // Using original for free analysis
-      specializedExperienceStatements: parsedJob.specialized_experience || [],
-      extractedKeywords: parsedJob.keywords || [],
-    });
-
     const evidenceScores = scoreResumeEvidence({
       resumeText: safeResume,
       keywords: parsedJob.keywords || [],
@@ -277,11 +270,11 @@ export async function POST(request: NextRequest) {
         compliance_score: persistedComplianceScore,
         achievement_score: persistedAchievementScore,
         word_count: wordCount,
-        word_count_original: postValidation.wordCount.original,
-        word_count_final: postValidation.wordCount.final,
-        coverage_original: postValidation.coverage.percentage,
-        coverage_final: postValidation.coverage.percentage,
-        risk_level: postValidation.riskLevel,
+        word_count_original: wordCount,
+        word_count_final: wordCount,
+        coverage_original: evidenceScores.keywordCoveragePercent,
+        coverage_final: evidenceScores.keywordCoveragePercent,
+        risk_level: analysisRisk({gaps: aiData.feedback?.qualification_gaps || [], complianceScore: persistedComplianceScore, specializedScore: persistedSpecializedScore}),
         feedback_json: {
           missing_elements: aiData.feedback?.qualification_gaps || [],
           weak_bullets: aiData.feedback?.improvements || [],
@@ -291,7 +284,7 @@ export async function POST(request: NextRequest) {
           rewrite_preview: aiData.feedback?.rewrite_preview || null,
           keyword_coverage_percent: evidenceScores.keywordCoveragePercent,
           score_confidence_cap: evidenceScores.confidenceCap,
-          rule_engine_warnings: [...preValidation.warnings, ...postValidation.warnings],
+          rule_engine_warnings: preValidation.warnings,
         },
       })
       .select('id')
