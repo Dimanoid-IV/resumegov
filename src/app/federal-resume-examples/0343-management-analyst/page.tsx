@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "0343 Management Analyst Federal Resume Example | ResumeGov",
@@ -41,6 +42,8 @@ export default function ManagementAnalystResumeExample() {
             <li className="text-gray-900 font-medium">0343 Management Analyst Resume Example</li>
           </ol>
         </nav>
+
+        <ResumeRuleNotice />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">0343 Management Analyst Federal Resume Example</h1>
@@ -52,7 +55,7 @@ export default function ManagementAnalystResumeExample() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Overview</h2>
           <div className="space-y-4 text-gray-700">
             <p>Management Analysts in federal service conduct comprehensive organizational studies, analyze business processes, and develop recommendations that improve operational efficiency and effectiveness. Your resume must demonstrate proficiency in qualitative and quantitative analysis, project management, data visualization, stakeholder facilitation, and report writing. Highlight experience with process improvement methodologies such as Lean Six Sigma, change management initiatives, performance measurement systems, and strategic planning processes. Federal agencies value Management Analysts who can translate complex data into actionable insights that drive decision-making and mission achievement.</p>
-            <p>Include detailed examples of studies you conducted, analyses you performed, recommendations you developed, and the measurable outcomes that resulted from your work. Use metrics such as cost savings achieved, time reductions realized, process steps eliminated, error rates decreased, or stakeholder satisfaction improved. Document your experience working with cross-functional teams, facilitating workshops, conducting interviews, and presenting findings to executive leadership. Federal resumes for 0343 positions typically run five to seven pages with comprehensive detail about your analytical projects and organizational impact.</p>
+            <p>Include detailed examples of studies you conducted, analyses you performed, recommendations you developed, and the measurable outcomes that resulted from your work. Use metrics such as cost savings achieved, time reductions realized, process steps eliminated, error rates decreased, or stakeholder satisfaction improved. Document your experience working with cross-functional teams, facilitating workshops, conducting interviews, and presenting findings to executive leadership. For USAJOBS applications, keep your resume to two pages or less and focus on the analytical projects and results most relevant to the announcement.</p>
           </div>
         </section>
         <section className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -117,11 +120,7 @@ export default function ManagementAnalystResumeExample() {
             <a href="/federal-resume-examples/0510-accountant/" className="text-blue-600 hover:underline">→ 0510 Accountant Resume Example</a>
           </div>
         </section>
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your 0343 Management Analyst Resume</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume for 0343 Management Analyst positions.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:0343" />
       </div>
     </main>
   );

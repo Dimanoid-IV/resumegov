@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "./ExampleActions";
 
 export const metadata: Metadata = {
   title: "Federal Resume Examples by GS Level & Series | ResumeGov",
@@ -83,13 +84,15 @@ export default function FederalResumeExamplesHub() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Federal Resume Examples
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Explore our comprehensive collection of federal resume examples tailored to specific GS levels and occupational series. Each example demonstrates the proper format, required elements, and specialized content that federal hiring managers expect. Use these templates as a foundation to craft your own winning federal resume that passes HR screening and lands you interviews.
+            Explore our comprehensive collection of federal resume examples tailored to specific GS levels and occupational series. Each example illustrates ways to describe relevant experience for a GS level or occupational series. Adapt the examples to your actual work and the specific USAJOBS announcement; no example can guarantee a referral or interview.
           </p>
         </div>
 
@@ -160,32 +163,19 @@ export default function FederalResumeExamplesHub() {
               <strong>2. Customize for Your Position:</strong> Use the examples that match your target GS level or job series as a starting point. Adapt the language, keywords, and accomplishments to reflect your own experience and the specific requirements of the job announcement.
             </p>
             <p>
-              <strong>3. Include All Required Elements:</strong> Federal resumes must include personal information, job information, work experience with specific details (hours per week, salary, supervisor contact), education, and any relevant certifications or training.
+              <strong>3. Include All Required Elements:</strong> Include the contact details, relevant work history, dates (month and year), hours per week, and qualifications requested in the announcement. Salary and supervisor contact are not generally required in the resume; follow any additional instructions in the vacancy.
             </p>
             <p>
               <strong>4. Quantify Your Achievements:</strong> Notice how each example uses specific numbers, percentages, and measurable outcomes to demonstrate impact. Follow this pattern when describing your own accomplishments.
             </p>
             <p>
-              <strong>5. Use Keywords from the Job Announcement:</strong> Federal HR specialists use keyword matching to screen resumes. Incorporate terminology and requirements directly from the USAJobs posting you're applying to.
+              <strong>5. Use Keywords from the Job Announcement:</strong> Use the announcement's terminology where it accurately reflects your experience. Show evidence for the required qualifications rather than adding keywords you cannot support.
             </p>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">
-            Ready to Build Your Federal Resume?
-          </h2>
-          <p className="text-lg mb-6 text-blue-100">
-            Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume in minutes. Our platform ensures your resume meets all federal formatting requirements and includes the keywords that get you noticed.
-          </p>
-          <a
-            href="/builder"
-            className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            Start Building Your Resume
-          </a>
-        </section>
+        <ResumeExampleCTA source="examples:hub" />
       </div>
     </main>
   );

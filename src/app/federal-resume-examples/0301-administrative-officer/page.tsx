@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "0301 Administrative Officer Federal Resume Example | ResumeGov",
@@ -41,6 +42,8 @@ export default function AdministrativeOfficerResumeExample() {
             <li className="text-gray-900 font-medium">0301 Administrative Officer Resume Example</li>
           </ol>
         </nav>
+
+        <ResumeRuleNotice />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">0301 Administrative Officer Federal Resume Example</h1>
@@ -52,7 +55,7 @@ export default function AdministrativeOfficerResumeExample() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Overview</h2>
           <div className="space-y-4 text-gray-700">
             <p>Federal Administrative Officers perform diverse functions including office management, staff supervision, policy implementation, budget monitoring, procurement coordination, records management, and executive support. Your resume must demonstrate proficiency in organizational management, human resources administration, financial management, and operational planning. Highlight experience supervising administrative staff, developing office procedures, coordinating with multiple divisions, managing contracts and purchases, and implementing process improvements that enhanced operational efficiency.</p>
-            <p>Include specific examples of administrative programs you managed, staff you supervised, procedures you developed, and operational challenges you resolved. Quantify achievements using metrics such as number of staff supervised, budget amounts managed, processes streamlined, cost savings achieved, or satisfaction ratings improved. Federal resumes for 0301 positions typically run four to six pages and must prominently display supervisory experience, knowledge of federal regulations, and proficiency with office management systems and software applications.</p>
+            <p>Include specific examples of administrative programs you managed, staff you supervised, procedures you developed, and operational challenges you resolved. Quantify achievements using metrics such as number of staff supervised, budget amounts managed, processes streamlined, cost savings achieved, or satisfaction ratings improved. For USAJOBS applications, keep your resume to two pages or less and prioritize the administrative experience and skills required by the announcement.</p>
           </div>
         </section>
         <section className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -117,11 +120,7 @@ export default function AdministrativeOfficerResumeExample() {
             <a href="/federal-resume-examples/0510-accountant/" className="text-blue-600 hover:underline">→ 0510 Accountant Resume Example</a>
           </div>
         </section>
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your 0301 Administrative Officer Resume</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume for 0301 Administrative Officer positions.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:0301" />
       </div>
     </main>
   );

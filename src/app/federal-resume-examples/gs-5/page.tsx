@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "GS-5 Federal Resume Example | ResumeGov",
@@ -50,6 +51,8 @@ export default function GS5ResumeExample() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         {/* JSON-LD Schema */}
         <script
           type="application/ld+json"
@@ -62,7 +65,7 @@ export default function GS5ResumeExample() {
             GS-5 Federal Resume Example
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            The GS-5 level represents entry-level federal positions typically filled by recent college graduates or candidates with minimal professional experience. A successful GS-5 federal resume must emphasize academic achievements, relevant coursework, internships, volunteer work, and transferable skills. Federal resumes at this level require more detail than private sector resumes, including specific hours worked, supervisor information, and comprehensive job duties. This example demonstrates how to present limited professional experience in a way that highlights your potential and readiness for federal service.
+            The GS-5 level represents entry-level federal positions typically filled by recent college graduates or candidates with minimal professional experience. A successful GS-5 federal resume must emphasize academic achievements, relevant coursework, internships, volunteer work, and transferable skills. Federal resumes at this level require more detail than private sector resumes, including dates, hours per week, and relevant duties and accomplishments. This example demonstrates how to present limited professional experience in a way that highlights your potential and readiness for federal service.
           </p>
         </div>
 
@@ -73,13 +76,13 @@ export default function GS5ResumeExample() {
           </h2>
           <div className="space-y-4 text-gray-700">
             <p>
-              GS-5 positions are the starting point for many federal careers. These roles are designed for individuals who have completed a bachelor's degree or have a combination of education and general experience. The Office of Personnel Management (OPM) defines GS-5 qualification standards that require either 60 semester hours of college education or three years of general work experience demonstrating basic office skills.
+              GS-5 positions are the starting point for many federal careers. For many roles, OPM standards allow a relevant bachelor's degree or one year of specialized experience equivalent to GS-4. Always check the specific occupational standard and vacancy for the qualification requirements that apply.
             </p>
             <p>
               When crafting your GS-5 federal resume, focus on demonstrating your ability to learn quickly, follow instructions, work independently, and contribute to team objectives. Federal agencies value candidates who show initiative, adaptability, and a commitment to public service. Your resume should clearly document how your academic background, internships, part-time work, or volunteer activities have prepared you for the responsibilities of a GS-5 position.
             </p>
             <p>
-              Unlike private sector resumes that are typically one to two pages, federal resumes for GS-5 positions should be three to five pages long. This extended length allows you to provide the detailed information that HR specialists need to determine your eligibility. Include specific metrics wherever possible, such as the number of people you assisted, projects you contributed to, or processes you improved during internships or volunteer roles.
+              For USAJOBS applications, keep your resume to two pages or less while making your most relevant experience easy to verify. Include specific metrics wherever possible, such as the number of people you assisted, projects you contributed to, or processes you improved during internships or volunteer roles.
             </p>
             <p>
               Key elements that must appear in your GS-5 federal resume include: personal contact information, job announcement number and title, work experience with dates and hours per week, education with GPA if above 3.0, relevant training and certifications, and any veterans' preference or special hiring authority eligibility. Missing any of these elements can result in your resume being rated ineligible during the initial HR review.
@@ -207,7 +210,7 @@ export default function GS5ResumeExample() {
             {[
               {
                 title: "Missing Required Information",
-                description: "Failing to include hours per week, dates of employment, supervisor contact information, or salary for each position. Federal resumes require this level of detail to verify experience qualifications."
+                description: "Failing to include hours per week, month-and-year employment dates, or enough detail to verify relevant experience. Check the announcement for any additional requirements."
               },
               {
                 title: "Insufficient Education Documentation",
@@ -260,20 +263,7 @@ export default function GS5ResumeExample() {
         </section>
 
         {/* Soft CTA */}
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">
-            Build Your GS-5 Federal Resume Today
-          </h2>
-          <p className="text-lg mb-6 text-blue-100">
-            Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume tailored to GS-5 positions. Our platform ensures your resume includes all required elements and passes HR screening.
-          </p>
-          <a
-            href="/builder"
-            className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            Start Building Your Resume
-          </a>
-        </section>
+        <ResumeExampleCTA source="examples:gs5" />
       </div>
     </main>
   );

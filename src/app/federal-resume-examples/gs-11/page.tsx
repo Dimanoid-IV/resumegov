@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "GS-11 Federal Resume Example | ResumeGov",
@@ -42,6 +43,8 @@ export default function GS11ResumeExample() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -64,7 +67,7 @@ export default function GS11ResumeExample() {
               Use the Challenge-Action-Result (CAR) or Situation-Task-Action-Result (STAR) format extensively throughout your resume to provide context for your accomplishments. Each major bullet point should describe a specific challenge you faced, the actions you took to address it, and the measurable results you achieved. Quantify your impact using metrics such as cost savings, time reductions, efficiency improvements, error rate reductions, or service delivery enhancements. GS-11 resumes should demonstrate not just that you performed your duties, but that you excelled in ways that made meaningful contributions to your organization's mission.
             </p>
             <p>
-              Federal resumes for GS-11 positions typically run six to eight pages or longer, reflecting the comprehensive detail required to document extensive specialized experience. Include complete work history with all required elements, advanced education and professional development, relevant certifications and training, technical competencies and specialized skills, publications or presentations if applicable, awards or recognition received, and any special hiring authorities. The depth and specificity of your resume directly determine whether you are rated among the best qualified candidates and selected for interviews by hiring managers.
+              For USAJOBS applications, keep your resume to two pages or less. Select the strongest evidence of specialized experience and measurable results for the particular announcement, with month-and-year dates and hours per week. A clear, relevant resume helps reviewers assess your qualifications but does not determine selection by itself.
             </p>
           </div>
         </section>
@@ -157,11 +160,7 @@ export default function GS11ResumeExample() {
           </div>
         </section>
 
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your GS-11 Federal Resume Today</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume tailored to GS-11 positions. Our platform ensures your resume includes all required elements and passes HR screening.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:gs11" />
       </div>
     </main>
   );

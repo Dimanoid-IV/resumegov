@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "2210 IT Specialist Federal Resume Example | ResumeGov",
@@ -42,6 +43,8 @@ export default function ITSpecialistResumeExample() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -64,7 +67,7 @@ export default function ITSpecialistResumeExample() {
               Your experience section should emphasize IT projects where you designed, implemented, or maintained systems that supported agency missions. Use the Challenge-Action-Result format to describe how you solved technical problems, improved system performance, enhanced security posture, or reduced operational costs. Quantify your achievements with metrics such as system uptime percentages, number of users supported, data volumes managed, security incidents prevented, or cost savings achieved through technology optimization. Federal agencies value IT professionals who can translate technical expertise into mission outcomes.
             </p>
             <p>
-              Federal resumes for 2210 positions typically run five to eight pages, reflecting the comprehensive technical detail required. Include complete work history with all required elements, education with IT-related coursework, professional certifications, technical skills inventory, security clearance information, project portfolio highlights, and any specialized training such as Cybersecurity Workforce Framework (CyberSeek) alignment. Thorough documentation of your IT expertise ensures you are rated fully qualified and competitive for referral to hiring managers.
+              For USAJOBS applications, keep your resume to two pages or less. Select the technical projects, certifications, and relevant experience that best match the announcement, with month-and-year dates and hours per week. Describe the specific systems, scope, and outcomes you can substantiate; eligibility and referral depend on the agency's review.
             </p>
           </div>
         </section>
@@ -157,11 +160,7 @@ export default function ITSpecialistResumeExample() {
           </div>
         </section>
 
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your 2210 IT Specialist Resume Today</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume tailored to 2210 IT Specialist positions. Our platform ensures your resume highlights the right technical skills and certifications.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:2210" />
       </div>
     </main>
   );
