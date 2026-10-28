@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "0510 Accountant Federal Resume Example | ResumeGov",
@@ -41,6 +42,8 @@ export default function AccountantResumeExample() {
             <li className="text-gray-900 font-medium">0510 Accountant Resume Example</li>
           </ol>
         </nav>
+
+        <ResumeRuleNotice />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">0510 Accountant Federal Resume Example</h1>
@@ -52,7 +55,7 @@ export default function AccountantResumeExample() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Overview</h2>
           <div className="space-y-4 text-gray-700">
             <p>Federal Accountants perform a wide range of financial functions including general ledger accounting, financial statement preparation, cost analysis, audit coordination, budget execution monitoring, and compliance with federal financial regulations (FASAB, OMB Circulars, Anti-Deficiency Act). Your resume must demonstrate proficiency in governmental accounting standards, financial systems (SAP, Oracle, PeopleSoft), data analysis, and regulatory compliance. Highlight experience with financial reporting cycles, audit preparation and response, internal controls assessment, and process improvement initiatives that enhanced financial accuracy or efficiency.</p>
-            <p>Include specific examples of financial statements you prepared, audits you conducted or coordinated, cost analyses you performed, and compliance issues you resolved. Quantify achievements using metrics such as dollar amounts managed, audit findings resolved, error rates reduced, reporting time decreased, or cost savings identified. Federal resumes for 0510 positions typically run five to seven pages and must prominently display professional certifications, education with accounting coursework, and detailed technical competencies in governmental accounting standards and financial systems.</p>
+            <p>Include specific examples of financial statements you prepared, audits you conducted or coordinated, cost analyses you performed, and compliance issues you resolved. Quantify achievements using metrics such as dollar amounts managed, audit findings resolved, error rates reduced, reporting time decreased, or cost savings identified. For USAJOBS applications, keep your resume to two pages or less and prioritize the accounting experience, coursework, and certifications required by the announcement.</p>
           </div>
         </section>
         <section className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -117,11 +120,7 @@ export default function AccountantResumeExample() {
             <a href="/federal-resume-examples/0301-administrative-officer/" className="text-blue-600 hover:underline">→ 0301 Administrative Officer Resume Example</a>
           </div>
         </section>
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your 0510 Accountant Resume</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume for 0510 Accountant positions.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:0510" />
       </div>
     </main>
   );

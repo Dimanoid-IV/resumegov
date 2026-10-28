@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "GS-9 Federal Resume Example | ResumeGov",
@@ -42,12 +43,14 @@ export default function GS9ResumeExample() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">GS-9 Federal Resume Example</h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            GS-9 positions represent mid-level federal roles that typically require a master's degree or higher, or two full years of progressively responsible specialized experience equivalent to GS-7 level work. These positions demand demonstrated expertise in your field, the ability to work independently on complex assignments, and a track record of meaningful contributions. This comprehensive federal resume example shows candidates with advanced degrees or significant professional experience how to effectively document their qualifications for GS-9 positions, emphasizing analytical capabilities, project leadership, and subject matter expertise that federal agencies seek.
+            GS-9 positions represent mid-level federal roles that may accept a relevant master's degree or one year of specialized experience equivalent to GS-7 level work. The applicable standard depends on the occupation and job announcement. This example shows how candidates can document relevant qualifications, analytical capabilities, and project outcomes.
           </p>
         </div>
 
@@ -55,16 +58,16 @@ export default function GS9ResumeExample() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Overview of GS-9 Federal Resume Requirements</h2>
           <div className="space-y-4 text-gray-700">
             <p>
-              GS-9 positions occupy a critical tier in the federal employment structure, serving as the bridge between entry-level professional work and full performance-level positions. Qualification standards require either a master's or graduate degree from an accredited institution, or two years of progressively responsible specialized experience that demonstrates your ability to handle assignments at the full performance level. Some positions may accept a combination of graduate education and experience, so carefully review the specific announcement requirements.
+              For many GS-9 positions, the OPM standard allows a relevant master's degree or two years of graduate education, or one year of specialized experience equivalent to GS-7. Some occupations have different rules or allow a combination of education and experience, so carefully review the specific announcement.
             </p>
             <p>
               Your GS-9 federal resume must clearly demonstrate advanced knowledge in your occupational field. If qualifying through education, detail your graduate coursework, thesis or dissertation research, publications, teaching assistantships, and academic honors. Explain how your advanced study directly prepares you for the specific duties outlined in the job announcement. Federal agencies value candidates who can apply theoretical knowledge to practical problems and contribute innovative solutions to complex challenges.
             </p>
             <p>
-              If qualifying through experience, your resume must show clear progression of responsibility and complexity over at least two years. Document projects where you worked independently, made recommendations that were implemented, supervised or trained other staff, or developed new procedures or programs. Use the Challenge-Action-Result (CAR) format to describe your accomplishments, providing context for the problems you faced, the specific actions you took, and the measurable outcomes you achieved. This narrative approach helps HR specialists understand the depth and breadth of your expertise.
+              If qualifying through experience, show one year of specialized experience equivalent to GS-7 when that is what the announcement requires. Document relevant projects where you worked independently, made recommendations, or developed procedures. Use the Challenge-Action-Result (CAR) format to explain your actions and measurable outcomes.
             </p>
             <p>
-              Federal resumes for GS-9 positions typically run five to seven pages, reflecting the extensive detail required at this level. Include comprehensive work history with all required elements, complete education documentation including graduate-level achievements, professional certifications, technical competencies, publications or presentations if applicable, and any veterans' preference or special hiring authority eligibility. The thoroughness of your resume directly impacts your ability to be rated fully qualified and referred to hiring managers.
+              For USAJOBS applications, keep your resume to two pages or less. Prioritize the experience, education, and accomplishments that directly support the announcement's specialized experience and other qualifications. Include month-and-year dates and hours per week so reviewers can assess your experience.
             </p>
           </div>
         </section>
@@ -131,7 +134,7 @@ export default function GS9ResumeExample() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Common Reasons GS-9 Resumes Are Rejected</h2>
           <div className="space-y-4">
             {[
-              { title: "Insufficient Demonstration of Progressive Responsibility", description: "Failing to show clear advancement in complexity and independence over two years of experience. GS-9 requires evidence that you can work at the full performance level without extensive supervision." },
+              { title: "Insufficient Demonstration of Specialized Experience", description: "Failing to show the specialized experience and level of responsibility required by the announcement. Describe relevant work and its scope so reviewers can assess your qualifications." },
               { title: "Inadequate Graduate Education Documentation", description: "Not providing detailed information about master's level coursework, thesis research, publications, or academic achievements. For education-qualified candidates, this section must demonstrate advanced expertise." },
               { title: "Lack of Quantifiable Impact", description: "Describing responsibilities without measurable outcomes. GS-9 candidates must show concrete evidence of their contributions through metrics, percentages, dollar amounts, or other quantifiable results." },
               { title: "Failure to Address All Specialized Experience Factors", description: "GS-9 announcements typically list 4-6 specialized experience requirements. Your resume must explicitly address each factor, or you will be rated ineligible regardless of your overall qualifications." },
@@ -156,11 +159,7 @@ export default function GS9ResumeExample() {
           </div>
         </section>
 
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your GS-9 Federal Resume Today</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume tailored to GS-9 positions. Our platform ensures your resume includes all required elements and passes HR screening.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:gs9" />
       </div>
     </main>
   );

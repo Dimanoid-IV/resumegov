@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ResumeExampleCTA, ResumeRuleNotice } from "../ExampleActions";
 
 export const metadata: Metadata = {
   title: "GS-7 Federal Resume Example | ResumeGov",
@@ -49,6 +50,8 @@ export default function GS7ResumeExample() {
           </ol>
         </nav>
 
+        <ResumeRuleNotice />
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
@@ -71,7 +74,7 @@ export default function GS7ResumeExample() {
               If you are qualifying based on specialized experience, your resume must document at least one year of work experience that demonstrates your ability to perform the duties of the GS-7 position. This experience should show progression from GS-5 level responsibilities, increased independence, more complex assignments, and demonstrated competence in your field. Include specific examples of projects you led, problems you solved, and measurable improvements you achieved in your previous role.
             </p>
             <p>
-              Federal resumes for GS-7 positions should be four to six pages in length, providing comprehensive detail about your qualifications. Include all required elements: complete work history with supervisor information, detailed education section with GPA and honors, relevant training and certifications, technical skills, and any special hiring authorities that apply. The additional detail distinguishes federal resumes from their private sector counterparts and ensures HR specialists can properly evaluate your eligibility.
+              For USAJOBS applications, keep the resume to two pages or less. Include relevant work history with month-and-year dates and hours per week, plus education, training, and any special hiring authority that applies. Prioritize evidence for the specific announcement over exhaustive background detail.
             </p>
           </div>
         </section>
@@ -163,11 +166,7 @@ export default function GS7ResumeExample() {
           </div>
         </section>
 
-        <section className="bg-blue-600 rounded-lg shadow-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Build Your GS-7 Federal Resume Today</h2>
-          <p className="text-lg mb-6 text-blue-100">Use our AI-powered federal resume builder to create a professional, USAJobs-optimized resume tailored to GS-7 positions. Our platform ensures your resume includes all required elements and passes HR screening.</p>
-          <a href="/builder" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">Start Building Your Resume</a>
-        </section>
+        <ResumeExampleCTA source="examples:gs7" />
       </div>
     </main>
   );
