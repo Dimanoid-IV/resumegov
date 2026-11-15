@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
@@ -36,12 +37,17 @@ export async function GET(request: NextRequest) {
     const gaSessionId = searchParams.get('gaSessionId')?.replace(/\D/g, '').slice(0, 24) || cookieAnalytics.sessionId || '';
     let analysisId: string | null = null;
     if (requestedAnalysisId) {
-      const { data: ownedAnalysis } = await supabase
+      // Match dashboard reads, but never trust the requested analysis ID alone.
+      const { data: ownedAnalysis, error: analysisError } = await createAdminClient()
         .from('analyses')
         .select('id')
         .eq('id', requestedAnalysisId)
         .eq('user_id', user.id)
         .maybeSingle();
+      if (analysisError) {
+        console.error('[checkout] Analysis lookup failed', { code: analysisError.code });
+        return NextResponse.redirect(new URL('/dashboard?error=checkout_unavailable', request.url));
+      }
       if (!ownedAnalysis) {
         return NextResponse.redirect(new URL('/dashboard?error=analysis_not_found', request.url));
       }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { Database } from '@/types/database';
 import { getStripe } from '@/lib/stripe';
 import { getBillingConfig } from '@/lib/billing-env';
@@ -44,14 +45,19 @@ export async function POST(request: NextRequest) {
     const gaSessionId = bodySessionId?.replace(/\D/g, '').slice(0, 24) || cookieAnalytics.sessionId || '';
     let analysisId: string | null = null;
     if (requestedAnalysisId) {
-      const { data: ownedAnalysis } = await supabase
+      // Authenticate above, then require both the analysis ID and its owner.
+      const { data: ownedAnalysis, error: analysisError } = await createAdminClient()
         .from('analyses')
         .select('id')
         .eq('id', requestedAnalysisId)
         .eq('user_id', user.id)
         .maybeSingle();
+      if (analysisError) {
+        console.error('[checkout] Analysis lookup failed', { code: analysisError.code });
+        return NextResponse.json({ error: 'Checkout is temporarily unavailable. Please try again.', code: 'CHECKOUT_UNAVAILABLE' }, { status: 503 });
+      }
       if (!ownedAnalysis) {
-        return NextResponse.json({ error: 'Analysis not found' }, { status: 404 });
+        return NextResponse.json({ error: 'This analysis is no longer available. Refresh your dashboard and try again.', code: 'ANALYSIS_NOT_FOUND' }, { status: 404 });
       }
       analysisId = requestedAnalysisId;
     }
