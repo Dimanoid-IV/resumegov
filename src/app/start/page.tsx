@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { loadAnalysisDraft, saveAnalysisDraft } from '@/lib/analysis-draft';
 import { trackEvent } from '@/lib/gtag';
+import { authErrorMessage } from '@/lib/auth-return';
 
 type Stage = 'documents' | 'email' | 'sent';
 
@@ -54,7 +55,7 @@ export default function StartPage() {
       setSource(sourceParam);
       trackEvent({ eventName: 'start_view', source: sourceParam });
       if (errorParam) {
-        setErrorMsg(decodeURIComponent(errorParam));
+        setErrorMsg(authErrorMessage(errorParam));
         setStage(existingDraft ? 'email' : 'documents');
       }
     }, 0);

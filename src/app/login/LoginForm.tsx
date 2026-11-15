@@ -3,14 +3,15 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
+import { authErrorMessage } from '@/lib/auth-return';
 
 type Tab = 'password' | 'magic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function LoginForm({ nextPath }: { nextPath: string }) {
+export default function LoginForm({ nextPath, initialError }: { nextPath: string; initialError?: string }) {
   const checkoutIntent = nextPath.startsWith('/api/checkout?');
-  const [tab, setTab] = useState<Tab>(checkoutIntent ? 'magic' : 'password');
+  const [tab, setTab] = useState<Tab>(checkoutIntent || initialError ? 'magic' : 'password');
 
   // Password tab
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ export default function LoginForm({ nextPath }: { nextPath: string }) {
   const [magicSent, setMagicSent] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(initialError ? authErrorMessage(initialError) : null);
   const supabase = createClient();
 
   // ── Password sign-in ────────────────────────────────────────────────────
